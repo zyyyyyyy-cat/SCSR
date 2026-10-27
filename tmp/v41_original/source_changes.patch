@@ -1,0 +1,386 @@
+--- original/WHU/train.py
++++ WHU/train.py
+@@ -131,6 +131,13 @@
+ 
+     loss_func, center_criterion = make_loss(cfg, num_classes=num_classes)
+ 
++    if cfg.SCSR_V41.ENABLED:
++        from utils.scsr_v41_runtime import calibrate_before_optimizer
++        calibrate_before_optimizer(cfg, model, train_loader, args.local_rank, logger)
++    if rank == 0:
++        with open(os.path.join(output_dir or '.', 'config_merged.yml'), 'w', encoding='utf-8') as stream:
++            stream.write(cfg.dump())
++
+     optimizer, optimizer_center = make_optimizer(cfg, model, center_criterion)
+ 
+     scheduler = create_scheduler(cfg, optimizer)
+--- original/WHU/config/defaults.py
++++ WHU/config/defaults.py
+@@ -202,3 +202,30 @@
+ # ---------------------------------------------------------------------------- #
+ # Path to checkpoint and saved log of trained model
+ _C.OUTPUT_DIR = ""
++
++# SCSR-V4.1 is opt-in. UAD.yml and the original training path stay disabled.
++_C.SCSR_V41 = CN()
++_C.SCSR_V41.ENABLED = False
++_C.SCSR_V41.TARGET_MODALITY = 'Thermal'
++_C.SCSR_V41.INSERT_AT_BLOCK = 7
++_C.SCSR_V41.INSERT_POSITION = 'norm1_after_before_attention'
++_C.SCSR_V41.WAVELET = 'haar'
++_C.SCSR_V41.LEVELS = 1
++_C.SCSR_V41.EMBED_DIM = 768
++_C.SCSR_V41.GRID_H = 16
++_C.SCSR_V41.GRID_W = 8
++_C.SCSR_V41.LL_CONDITION_DIM = 16
++_C.SCSR_V41.HF_SIGNED_DIM = 4
++_C.SCSR_V41.CONDITION_HIDDEN_DIM = 32
++_C.SCSR_V41.LOW_RANK = 4
++_C.SCSR_V41.GATE_AMPLITUDE = 0.2
++_C.SCSR_V41.U_INIT_STD = 0.5
++_C.SCSR_V41.CONDITION_OUTPUT_INIT_STD = 0.02
++_C.SCSR_V41.SCSR_WEIGHT_DECAY = 0.0
++_C.SCSR_V41.SCSR_LR_MULTIPLIER = 1.0
++_C.SCSR_V41.EPS = 1e-6
++# Logging controls do not change optimization. Expensive paired probes are sparse.
++_C.SCSR_V41.DIAGNOSTIC_PERIOD = 50
++_C.SCSR_V41.EARLY_UPDATES = 200
++_C.SCSR_V41.PREFLIGHT_UPDATES = 0  # Optional stop after N successful steps, keeping the 120-epoch scheduler.
++_C.TEST.SCSR_V41_RUNTIME_ENABLED = True
+--- original/WHU/model/make_model.py
++++ WHU/model/make_model.py
+@@ -34,6 +34,8 @@
+         self.neck = cfg.MODEL.NECK
+         self.neck_feat = cfg.TEST.NECK_FEAT
+         self.in_planes = 768
++        self.cfg = cfg.clone()
++        self.modalities = tuple(cfg.DATASETS.MODALITIES)
+ 
+         print('using Transformer_type: {} as a backbone'.format(cfg.MODEL.TRANSFORMER_TYPE))
+ 
+@@ -49,7 +51,8 @@
+         self.base=factory[cfg.MODEL.TRANSFORMER_TYPE](img_size=cfg.INPUT.SIZE_TRAIN, sie_xishu=cfg.MODEL.SIE_COE,
+                                                         camera=camera_num, view=view_num, stride_size=cfg.MODEL.STRIDE_SIZE, drop_path_rate=cfg.MODEL.DROP_PATH,
+                                                         drop_rate= cfg.MODEL.DROP_OUT,
+-                                                        attn_drop_rate=cfg.MODEL.ATT_DROP_RATE)
++                                                        attn_drop_rate=cfg.MODEL.ATT_DROP_RATE,
++                                                        scsr_cfg=cfg.SCSR_V41, modalities=self.modalities)
+ 
+         if pretrain_choice == 'imagenet':
+             self.base.load_param(model_path)
+@@ -64,15 +67,26 @@
+         self.bottleneck.bias.requires_grad_(False)
+         self.bottleneck.apply(weights_init_kaiming)
+         
+-    def forward(self, x=None, label=None, camids=None, mode=0):
++    def forward(self, x=None, label=None, camids=None, mode=0, modal_ids=None):
+         if mode==0:
++            if self.base.scsr_v41 is not None:
++                if not isinstance(x, (tuple, list)) or len(x) != len(self.modalities):
++                    raise ValueError('PKM groups must follow DATASETS.MODALITIES without reordering')
++                sizes = [images.shape[0] for images in x]
++                if len(set(sizes)) != 1 or (label is not None and len(label) != sizes[0]):
++                    raise ValueError('PKM requires equally sized, identity-aligned modality groups')
++                expected = torch.cat([torch.full((size,), index + 1, dtype=torch.long, device=x[0].device)
++                                      for index, size in enumerate(sizes)])
++                if modal_ids is not None and not torch.equal(modal_ids, expected):
++                    raise ValueError('Training sensor IDs contradict PKM modality order')
++                modal_ids = expected
+             x = torch.cat(list(x), dim=0)
+-            global_feat = self.base(x)
++            global_feat = self.base(x, modal_label=modal_ids)
+             feat = self.bottleneck(global_feat)
+             cls_score = self.classifier(feat)
+             return cls_score, global_feat, feat
+         else:
+-            global_feat = self.base(x)
++            global_feat = self.base(x, modal_label=modal_ids)
+             feat = self.bottleneck(global_feat)
+             if self.neck_feat == 'after':
+                 return feat
+@@ -81,6 +95,10 @@
+ 
+ 
+     def load_param(self, trained_path):
++        if self.base.scsr_v41 is not None:
++            from utils.scsr_v41_checkpoint import load_v41
++            load_v41(self, trained_path, include_classifier=False)
++            return
+         param_dict = torch.load(trained_path)
+         for i in param_dict:
+             if 'classifier' in i:
+@@ -89,6 +107,10 @@
+         print('Loading pretrained model from {}'.format(trained_path))
+ 
+     def load_param_finetune(self, model_path):
++        if self.base.scsr_v41 is not None:
++            from utils.scsr_v41_checkpoint import load_v41
++            load_v41(self, model_path, include_classifier=True)
++            return
+         param_dict = torch.load(model_path)
+         for i in param_dict:
+             self.state_dict()[i].copy_(param_dict[i])
+--- original/WHU/model/backbones/vit_pytorch.py
++++ WHU/model/backbones/vit_pytorch.py
+@@ -150,6 +150,24 @@
+ 
+     def forward(self, x):
+         x = x + self.drop_path(self.attn(self.norm1(x)))
++        x = x + self.drop_path(self.mlp(self.norm2(x)))
++        return x
++
++
++class AttentionInputBlock(Block):
++    """Only blocks[6] uses this subclass; its original residual is untouched."""
++
++    def forward(self, x, token_modulator=None, modal_ids=None, observer=None):
++        if token_modulator is None and observer is None:
++            return super().forward(x)
++        z = self.norm1(x)
++        updated = token_modulator(z, modal_ids) if token_modulator is not None else z
++        attention = self.attn(updated)
++        if observer is not None:
++            observer('block7_norm1', z)
++            observer('block7_attention_input', updated)
++            observer('block7_attention_output', attention)
++        x = x + self.drop_path(attention)
+         x = x + self.drop_path(self.mlp(self.norm2(x)))
+         return x
+ 
+@@ -239,7 +257,8 @@
+     """
+     def __init__(self, img_size=224, patch_size=16, stride_size=16, in_chans=3, num_classes=1000, embed_dim=768, depth=12,
+                  num_heads=12, mlp_ratio=4., qkv_bias=False, qk_scale=None, drop_rate=0., attn_drop_rate=0., camera=0, view=0,
+-                 drop_path_rate=0., ics_embedding=False, norm_layer=nn.LayerNorm, local_feature=False, sie_xishu=1.0, hw_ratio=1):
++                 drop_path_rate=0., ics_embedding=False, norm_layer=nn.LayerNorm, local_feature=False, sie_xishu=1.0, hw_ratio=1,
++                 scsr_cfg=None, modalities=()):
+         super().__init__()
+         self.num_classes = num_classes
+         self.num_features = self.embed_dim = embed_dim  # num_features for consistency with other models
+@@ -280,7 +299,7 @@
+         dpr = [x.item() for x in torch.linspace(0, drop_path_rate, depth)]  # stochastic depth decay rule
+ 
+         self.blocks = nn.ModuleList([
+-            Block(
++            (AttentionInputBlock if scsr_cfg is not None and scsr_cfg.ENABLED and i == 6 else Block)(
+                 dim=embed_dim, num_heads=num_heads, mlp_ratio=mlp_ratio, qkv_bias=qkv_bias, qk_scale=qk_scale,
+                 drop=drop_rate, attn_drop=attn_drop_rate, drop_path=dpr[i], norm_layer=norm_layer)
+             for i in range(depth)])
+@@ -293,6 +312,19 @@
+         trunc_normal_(self.pos_embed, std=.02)
+ 
+         self.apply(self._init_weights)
++
++        self.scsr_v41 = None
++        self.scsr_runtime_enabled = True
++        self.diagnostic_callback = None
++        if scsr_cfg is not None and scsr_cfg.ENABLED:
++            if (depth != 12 or embed_dim != 768 or ics_embedding or local_feature or
++                    tuple(img_size) != (256, 128) or self.patch_embed.num_y != 16 or self.patch_embed.num_x != 8):
++                raise ValueError('V4.1 requires original ViT-B/16, 256x128, non-overlapping 16x8 grid')
++            from ..scsr_v41 import SCSRV41
++            # Module creation must not change the original outer classifier RNG.
++            # Preserve CPU RNG only: these new parameters are constructed on CPU.
++            with torch.random.fork_rng(devices=[]):
++                self.scsr_v41 = SCSRV41(scsr_cfg, modalities)
+ 
+     def _init_weights(self, m):
+         if isinstance(m, nn.Linear):
+@@ -333,12 +365,23 @@
+ 
+         x = self.pos_drop(x)
+  
+-        for blk in self.blocks:
+-            x = blk(x)
++        for index, blk in enumerate(self.blocks):
++            if self.scsr_v41 is not None and index == 6:
++                if self.training and not self.scsr_runtime_enabled:
++                    raise RuntimeError('SCSR OFF is an evaluation-only same-checkpoint diagnostic')
++                modulator = self.scsr_v41 if self.scsr_runtime_enabled else None
++                x = blk(x, modulator, modal_id, self.diagnostic_callback)
++            else:
++                x = blk(x)
++            if self.diagnostic_callback is not None and index + 1 in (6, 7, 9, 12):
++                self.diagnostic_callback('block_{}'.format(index + 1), x)
+ 
+         x = self.norm(x)
+ 
+-        return x[:, 0]
++        result = x[:, 0]
++        if self.diagnostic_callback is not None:
++            self.diagnostic_callback('final_cls', result)
++        return result
+ 
+     def forward(self, x, cam_label=None, modal_label=None, view_label=None):
+         x = self.forward_features(x, cam_label, modal_label, view_label)
+@@ -354,6 +397,8 @@
+             param_dict = param_dict['model']
+         if 'state_dict' in param_dict:
+             param_dict = param_dict['state_dict']
++        if self.scsr_v41 is not None and any(k.startswith(('base.', 'module.base.')) or 'scsr' in k.lower() for k in param_dict):
++            raise ValueError('V4.1 formal training must start from the UAD ImageNet pretrain, not trained UAD/V3/V4.1 weights')
+         if 'teacher' in param_dict: ### for dino
+             obj = param_dict["teacher"]
+             print('Convert dino model......')
+--- original/WHU/processor/processor.py
++++ WHU/processor/processor.py
+@@ -8,6 +8,7 @@
+ from torch.cuda import amp
+ import torch.distributed as dist
+ import torch.nn.functional as F
++from utils.scsr_v41_checkpoint import save_metadata
+ 
+ 
+ def PCA(feat, target, num_modalities, group_size=4):
+@@ -161,6 +162,14 @@
+         )
+ 
+     group_size = cfg.DATALOADER.NUM_INSTANCE
++    attempts, updates, skipped = 0, 0, 0
++    monitor = None
++    if model_meta.base.scsr_v41 is not None:
++        if not model_meta.base.scsr_v41.calibrated:
++            raise RuntimeError('Run V4.1 calibration before constructing the optimizer')
++        if is_main:
++            from utils.scsr_v41_monitor import TrainingMonitor
++            monitor = TrainingMonitor(cfg, model_meta, logger)
+ 
+     for epoch in range(1, epochs + 1):
+         start_time = time.time()
+@@ -174,6 +183,10 @@
+ 
+         n_iter = 0
+         for n_iter, (imgs, vid, camids) in enumerate(train_loader):
++            attempts += 1
++            diagnostic_step = monitor is not None and monitor.selected(attempts, updates)
++            if model_meta.base.scsr_v41 is not None:
++                model_meta.base.scsr_v41.collect_stats = diagnostic_step
+             optimizer.zero_grad()
+             optimizer_center.zero_grad()
+ 
+@@ -218,13 +231,35 @@
+ 
+             scaler.scale(loss).backward()
+             scaler.unscale_(optimizer)
++            if diagnostic_step:
++                monitor.snapshot()
++                monitor.gradients()
+             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
++            if diagnostic_step:
++                monitor.gradients(post_clip=True)
++            scale_before = scaler.get_scale()
+             scaler.step(optimizer)
+             scaler.update()
++            scale_after = scaler.get_scale()
++            # Single optimizer: scale decrease means GradScaler skipped its step.
++            # Works on PyTorch 1.12 without optimizer post-step hooks.
++            did_step = scale_after >= scale_before
++            updates += int(did_step)
++            skipped += int(not did_step)
+ 
+             if use_aux_modules:
+                 with torch.no_grad():
+                     proto_bank.update(ids, g_cent, ddp=cfg.MODEL.DIST_TRAIN)
++
++            if diagnostic_step:
++                monitor.record(epoch, n_iter + 1, attempts, updates, skipped,
++                               did_step, scale_before, scale_after, imgs,
++                               loss_values=dict(CE=float(il.detach()), WRT=float(tl.detach()),
++                                                ProCA=float(loss_pca.detach()) if use_aux_modules else None,
++                                                GPD=float(loss_gpd.detach()) if use_aux_modules else None,
++                                                total=float(loss.detach())))
++            if model_meta.base.scsr_v41 is not None:
++                model_meta.base.scsr_v41.collect_stats = False
+ 
+             acc = (cls_score.max(1)[1] == target_rep).float().mean()
+             loss_meter.update(loss.item(), target.shape[0])
+@@ -247,7 +282,20 @@
+                 metrics_str = ', '.join(metrics)
+                 logger.info(f'Epoch[{epoch}] {metrics_str}')
+ 
++            if (model_meta.base.scsr_v41 is not None and cfg.SCSR_V41.PREFLIGHT_UPDATES > 0
++                    and updates >= cfg.SCSR_V41.PREFLIGHT_UPDATES):
++                if is_main:
++                    path = os.path.join(cfg.OUTPUT_DIR, 'transformer_preflight_{}.pth'.format(updates))
++                    torch.save(model_meta.state_dict(), path)
++                    save_metadata(model_meta, path, epoch, updates, skipped)
++                    logger.info('V4.1 preflight complete after %d actual updates; full scheduler unchanged; %s', updates, path)
++                if dist_on:
++                    dist.barrier()
++                return
++
+         end_time = time.time()
++        if is_main:
++            logger.info('Actual optimizer updates: %d; AMP skipped: %d; attempted: %d', updates, skipped, attempts)
+         time_per_batch = (end_time - start_time) / (n_iter + 1)
+         if dist_on:
+             if is_main:
+@@ -272,6 +320,8 @@
+                         cfg.OUTPUT_DIR, cfg.MODEL.NAME + '_{}.pth'.format(epoch)
+                     ),
+                 )
++                save_metadata(model_to_save, os.path.join(cfg.OUTPUT_DIR, cfg.MODEL.NAME + '_{}.pth'.format(epoch)),
++                              epoch, updates, skipped)
+ 
+         if epoch % eval_period == 0:
+             model.eval()
+@@ -298,7 +348,8 @@
+                 for img, vid, camid, camidt, modid, _ in val_loader:
+                     with torch.no_grad():
+                         img = img.to(device)
+-                        feat = eval_model(img, mode=mode)
++                        sensor_ids = torch.as_tensor(modid, dtype=torch.long, device=img.device)
++                        feat = eval_model(img, mode=mode, modal_ids=sensor_ids)
+                         evaluator.update((feat, vid, camid, modid), mode)
+ 
+             evaluator.split_all()
+@@ -344,6 +395,8 @@
+         model.to(device)
+ 
+     model.eval()
++    model_meta = model.module if hasattr(model, 'module') else model
++    model_meta.base.scsr_runtime_enabled = cfg.TEST.SCSR_V41_RUNTIME_ENABLED
+     img_path_list = []
+     for mode, (val_loader, num_query) in enumerate(zip(val_loaders, num_querys), start=1):
+         evaluator.set_query_num(mode, num_query)
+@@ -352,7 +405,8 @@
+             with torch.no_grad():
+                 img = img.to(device)
+ 
+-                feat = model(img, mode=mode)
++                sensor_ids = torch.as_tensor(modid, dtype=torch.long, device=img.device)
++                feat = model(img, mode=mode, modal_ids=sensor_ids)
+                 evaluator.update((feat, vid, camid, modid), mode)
+                 img_path_list.extend(imgpath)
+ 
+--- original/WHU/solver/make_optimizer.py
++++ WHU/solver/make_optimizer.py
+@@ -3,8 +3,12 @@
+ 
+ def make_optimizer(cfg, model, center_criterion):
+     params = []
++    scsr_params = []
+     for key, value in model.named_parameters():
+         if not value.requires_grad:
++            continue
++        if key.startswith('base.scsr_v41.'):
++            scsr_params.append(value)
+             continue
+         lr = cfg.SOLVER.BASE_LR
+         weight_decay = cfg.SOLVER.WEIGHT_DECAY
+@@ -18,6 +22,15 @@
+ 
+         params += [{"params": [value], "lr": lr, "weight_decay": weight_decay}]
+ 
++    if scsr_params:
++        params.append({"params": scsr_params,
++                       "lr": cfg.SOLVER.BASE_LR * cfg.SCSR_V41.SCSR_LR_MULTIPLIER,
++                       "weight_decay": cfg.SCSR_V41.SCSR_WEIGHT_DECAY,
++                       "name": 'SCSR-V4.1'})
++    flat = [id(p) for group in params for p in group['params']]
++    if len(flat) != len(set(flat)) or set(flat) != {id(p) for p in model.parameters() if p.requires_grad}:
++        raise RuntimeError('Optimizer must contain each trainable parameter exactly once')
++
+     if cfg.SOLVER.OPTIMIZER_NAME == 'SGD':
+         optimizer = getattr(torch.optim, cfg.SOLVER.OPTIMIZER_NAME)(params, momentum=cfg.SOLVER.MOMENTUM)
+     elif cfg.SOLVER.OPTIMIZER_NAME == 'AdamW':

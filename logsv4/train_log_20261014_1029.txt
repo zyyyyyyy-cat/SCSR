@@ -1,0 +1,1549 @@
+2026-10-14 10:29:22,406 transreid INFO: Saving model in the path :./logs/SCSR_V41_1000_DDP
+2026-10-14 10:29:22,407 transreid INFO: Namespace(config_file='configs/SCSR_V41.yml', local_rank=0, opts=['MODEL.DIST_TRAIN', 'True', 'DATASETS.DATASET_DIR', 'WHU-MARS', 'DATASETS.FILTER_GD', 'False', 'SOLVER.IMS_PER_BATCH', '256', 'SOLVER.BASE_LR', '0.032', 'SCSR_V41.PREFLIGHT_UPDATES', '0', 'OUTPUT_DIR', './logs/SCSR_V41_1000_DDP'])
+2026-10-14 10:29:22,407 transreid INFO: DDP initialized with 4 processes; global sampler batch=256, per-GPU sampler batch=64, actual images per GPU=192
+2026-10-14 10:29:22,407 transreid INFO: Loaded configuration file configs/SCSR_V41.yml
+2026-10-14 10:29:22,407 transreid INFO: Running with config:
+DATALOADER:
+  NUM_INSTANCE: 4
+  NUM_WORKERS: 8
+  SAMPLER: PKM
+DATASETS:
+  DATASET_DIR: WHU-MARS
+  FILTER_GD: False
+  MODALITIES: ('RGB', 'IR', 'Thermal')
+  NAMES: WHU-MARS
+  ROOT_DIR: /project/code/data
+INPUT:
+  PADDING: 10
+  PIXEL_MEAN: [0.5, 0.5, 0.5]
+  PIXEL_STD: [0.5, 0.5, 0.5]
+  PROB: 0.5
+  RE_PROB: 0.5
+  SIZE_TEST: [256, 128]
+  SIZE_TRAIN: [256, 128]
+MODEL:
+  ATT_DROP_RATE: 0.0
+  COS_LAYER: False
+  DEVICE: cuda
+  DEVICE_ID: 0
+  DEVIDE_LENGTH: 4
+  DIST_TRAIN: True
+  DROP_OUT: 0.0
+  DROP_PATH: 0.1
+  GPD_MOMENTUM: 0.2
+  ID_LOSS_TYPE: softmax
+  ID_LOSS_WEIGHT: 1.0
+  IF_LABELSMOOTH: off
+  IF_WITH_CENTER: no
+  JPM: False
+  LAST_STRIDE: 1
+  METRIC_LOSS_TYPE: wrt
+  NAME: transformer
+  NECK: bnneck
+  NO_MARGIN: True
+  PCA_LOSS_WEIGHT: 0.01
+  PRETRAIN_CHOICE: imagenet
+  PRETRAIN_PATH: jx_vit_base_p16_224-80ecf9dd.pth
+  RE_ARRANGE: True
+  SHIFT_NUM: 5
+  SHUFFLE_GROUP: 2
+  SIE_CAMERA: False
+  SIE_COE: 3.0
+  SIE_VIEW: False
+  STRIDE_SIZE: [16, 16]
+  TRANSFORMER_TYPE: vit_base_in
+  TRIPLET_LOSS_WEIGHT: 1.0
+OUTPUT_DIR: ./logs/SCSR_V41_1000_DDP
+SCSR_V41:
+  CONDITION_HIDDEN_DIM: 32
+  CONDITION_OUTPUT_INIT_STD: 0.02
+  DIAGNOSTIC_PERIOD: 50
+  EARLY_UPDATES: 200
+  EMBED_DIM: 768
+  ENABLED: True
+  EPS: 1e-06
+  GATE_AMPLITUDE: 0.2
+  GRID_H: 16
+  GRID_W: 8
+  HF_SIGNED_DIM: 4
+  INSERT_AT_BLOCK: 7
+  INSERT_POSITION: norm1_after_before_attention
+  LEVELS: 1
+  LL_CONDITION_DIM: 16
+  LOW_RANK: 4
+  PREFLIGHT_UPDATES: 0
+  SCSR_LR_MULTIPLIER: 1.0
+  SCSR_WEIGHT_DECAY: 0.0
+  TARGET_MODALITY: Thermal
+  U_INIT_STD: 0.5
+  WAVELET: haar
+SOLVER:
+  BASE_LR: 0.032
+  BIAS_LR_FACTOR: 2
+  CENTER_LOSS_WEIGHT: 0.0005
+  CENTER_LR: 0.5
+  CHECKPOINT_PERIOD: 120
+  COSINE_MARGIN: 0.5
+  COSINE_SCALE: 30
+  EVAL_PERIOD: 10
+  GAMMA: 0.1
+  IMS_PER_BATCH: 256
+  LARGE_FC_LR: False
+  LOG_PERIOD: 50
+  LOSS_TYPE: base+pca+gpd
+  MARGIN: 0.3
+  MAX_EPOCHS: 120
+  MOMENTUM: 0.9
+  OPTIMIZER_NAME: SGD
+  SEED: 1234
+  STEPS: (40, 70)
+  WARMUP_EPOCHS: 5
+  WARMUP_FACTOR: 0.01
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0.0001
+TEST:
+  DETAILED_DOMAIN_EVAL: False
+  DIST_MAT: dist_mat.npy
+  EVAL: False
+  FEAT_NORM: yes
+  IMS_PER_BATCH: 512
+  NECK_FEAT: before
+  RE_RANKING: False
+  SCSR_V41_RUNTIME_ENABLED: True
+  TOP_K_EVAL: 0
+  WEIGHT: 
+2026-10-14 10:29:32,071 transreid INFO: SCSR-V4.1 initial calibration rank 0: global={'v_rms': 0.07499999861349836, 't_rms': 0.07510885895909576}, output factor=3.730580, r_attn=8.743066e-03
+2026-10-14 10:29:32,088 transreid.train INFO: start training
+2026-10-14 10:29:32,090 transreid.train INFO: Using 4 GPUs for DDP training
+2026-10-14 10:29:32,140 transreid.train INFO: Feature dimension: 768; identities: 500
+2026-10-14 10:29:38,929 transreid.train INFO: SCSR-V4.1 updates=0 skipped=1 V_RMS=0.07590 T_RMS=0.07608 r_attn=8.989e-03 U_step=0.000e+00
+2026-10-14 10:29:39,569 transreid.train INFO: SCSR-V4.1 updates=1 skipped=1 V_RMS=0.07525 T_RMS=0.07524 r_attn=8.784e-03 U_step=2.394e-09
+2026-10-14 10:29:40,267 transreid.train INFO: SCSR-V4.1 updates=2 skipped=1 V_RMS=0.07382 T_RMS=0.07382 r_attn=8.686e-03 U_step=5.141e-09
+2026-10-14 10:30:09,666 transreid.train INFO: SCSR-V4.1 updates=46 skipped=4 V_RMS=0.06735 T_RMS=0.06738 r_attn=8.113e-03 U_step=1.762e-08
+2026-10-14 10:30:09,667 transreid.train INFO: Epoch[1] Iteration[50/114] Loss: 25.240, Acc: 0.002, Base Lr: 6.66e-03
+2026-10-14 10:30:09,667 transreid.train INFO: Epoch[1] 6.213, 12.642, 0.174, 6.383
+2026-10-14 10:30:41,172 transreid.train INFO: SCSR-V4.1 updates=96 skipped=4 V_RMS=0.06673 T_RMS=0.06682 r_attn=7.965e-03 U_step=8.181e-09
+2026-10-14 10:30:41,173 transreid.train INFO: Epoch[1] Iteration[100/114] Loss: 19.084, Acc: 0.016, Base Lr: 6.66e-03
+2026-10-14 10:30:41,173 transreid.train INFO: Epoch[1] 6.188, 6.856, 0.109, 6.038
+2026-10-14 10:30:49,813 transreid.train INFO: Actual optimizer updates: 110; AMP skipped: 4; attempted: 114
+2026-10-14 10:30:49,813 transreid.train INFO: Epoch 1 done. Time per batch: 0.681[s] Total: 77.7[s]
+2026-10-14 10:31:16,310 transreid.train INFO: SCSR-V4.1 updates=146 skipped=4 V_RMS=0.07356 T_RMS=0.07378 r_attn=8.811e-03 U_step=1.924e-08
+2026-10-14 10:31:24,902 transreid.train INFO: Epoch[2] Iteration[50/114] Loss: 13.031, Acc: 0.022, Base Lr: 1.30e-02
+2026-10-14 10:31:24,902 transreid.train INFO: Epoch[2] 5.997, 0.839, 0.068, 6.193
+2026-10-14 10:31:47,497 transreid.train INFO: SCSR-V4.1 updates=196 skipped=4 V_RMS=0.06801 T_RMS=0.06808 r_attn=8.052e-03 U_step=1.491e-08
+2026-10-14 10:31:50,091 transreid.train INFO: SCSR-V4.1 updates=200 skipped=4 V_RMS=0.06933 T_RMS=0.06940 r_attn=8.115e-03 U_step=1.425e-08
+2026-10-14 10:31:56,157 transreid.train INFO: Epoch[2] Iteration[100/114] Loss: 11.993, Acc: 0.040, Base Lr: 1.30e-02
+2026-10-14 10:31:56,157 transreid.train INFO: Epoch[2] 5.757, 0.786, 0.094, 5.450
+2026-10-14 10:32:04,742 transreid.train INFO: Actual optimizer updates: 224; AMP skipped: 4; attempted: 228
+2026-10-14 10:32:04,742 transreid.train INFO: Epoch 2 done. Time per batch: 0.657[s] Total: 74.9[s]
+2026-10-14 10:32:21,777 transreid.train INFO: SCSR-V4.1 updates=246 skipped=4 V_RMS=0.07299 T_RMS=0.07317 r_attn=8.785e-03 U_step=2.152e-08
+2026-10-14 10:32:39,396 transreid.train INFO: Epoch[3] Iteration[50/114] Loss: 11.297, Acc: 0.044, Base Lr: 1.93e-02
+2026-10-14 10:32:39,396 transreid.train INFO: Epoch[3] 5.449, 0.738, 0.172, 5.108
+2026-10-14 10:32:53,237 transreid.train INFO: SCSR-V4.1 updates=296 skipped=4 V_RMS=0.06749 T_RMS=0.06739 r_attn=7.649e-03 U_step=2.422e-08
+2026-10-14 10:33:10,757 transreid.train INFO: Epoch[3] Iteration[100/114] Loss: 10.157, Acc: 0.091, Base Lr: 1.93e-02
+2026-10-14 10:33:10,757 transreid.train INFO: Epoch[3] 5.108, 0.695, 0.204, 4.351
+2026-10-14 10:33:19,224 transreid.train INFO: Actual optimizer updates: 338; AMP skipped: 4; attempted: 342
+2026-10-14 10:33:19,225 transreid.train INFO: Epoch 3 done. Time per batch: 0.653[s] Total: 74.5[s]
+2026-10-14 10:33:27,558 transreid.train INFO: SCSR-V4.1 updates=346 skipped=4 V_RMS=0.07193 T_RMS=0.07205 r_attn=7.985e-03 U_step=2.026e-08
+2026-10-14 10:33:53,383 transreid.train INFO: Epoch[4] Iteration[50/115] Loss: 9.866, Acc: 0.085, Base Lr: 2.57e-02
+2026-10-14 10:33:53,384 transreid.train INFO: Epoch[4] 4.994, 0.694, 0.256, 4.175
+2026-10-14 10:33:58,334 transreid.train INFO: SCSR-V4.1 updates=396 skipped=4 V_RMS=0.07054 T_RMS=0.07051 r_attn=7.805e-03 U_step=3.728e-08
+2026-10-14 10:34:24,831 transreid.train INFO: Epoch[4] Iteration[100/115] Loss: 8.727, Acc: 0.156, Base Lr: 2.57e-02
+2026-10-14 10:34:24,832 transreid.train INFO: Epoch[4] 4.534, 0.652, 0.268, 3.538
+2026-10-14 10:34:29,719 transreid.train INFO: SCSR-V4.1 updates=446 skipped=4 V_RMS=0.06915 T_RMS=0.06909 r_attn=7.869e-03 U_step=3.796e-08
+2026-10-14 10:34:34,286 transreid.train INFO: Actual optimizer updates: 453; AMP skipped: 4; attempted: 457
+2026-10-14 10:34:34,287 transreid.train INFO: Epoch 4 done. Time per batch: 0.653[s] Total: 75.1[s]
+2026-10-14 10:35:04,454 transreid.train INFO: SCSR-V4.1 updates=496 skipped=4 V_RMS=0.07277 T_RMS=0.07265 r_attn=8.060e-03 U_step=4.807e-08
+2026-10-14 10:35:08,862 transreid.train INFO: Epoch[5] Iteration[50/114] Loss: 8.484, Acc: 0.153, Base Lr: 3.19e-02
+2026-10-14 10:35:08,863 transreid.train INFO: Epoch[5] 4.426, 0.660, 0.291, 3.395
+2026-10-14 10:35:35,624 transreid.train INFO: SCSR-V4.1 updates=546 skipped=4 V_RMS=0.07010 T_RMS=0.06980 r_attn=7.969e-03 U_step=4.653e-08
+2026-10-14 10:35:39,856 transreid.train INFO: Epoch[5] Iteration[100/114] Loss: 7.401, Acc: 0.259, Base Lr: 3.19e-02
+2026-10-14 10:35:39,856 transreid.train INFO: Epoch[5] 3.896, 0.618, 0.288, 2.884
+2026-10-14 10:35:48,452 transreid.train INFO: Actual optimizer updates: 567; AMP skipped: 4; attempted: 571
+2026-10-14 10:35:48,452 transreid.train INFO: Epoch 5 done. Time per batch: 0.651[s] Total: 74.2[s]
+2026-10-14 10:36:10,423 transreid.train INFO: SCSR-V4.1 updates=596 skipped=4 V_RMS=0.07326 T_RMS=0.07319 r_attn=7.948e-03 U_step=4.725e-08
+2026-10-14 10:36:23,477 transreid.train INFO: Epoch[6] Iteration[50/114] Loss: 7.234, Acc: 0.246, Base Lr: 3.18e-02
+2026-10-14 10:36:23,477 transreid.train INFO: Epoch[6] 3.841, 0.599, 0.315, 2.791
+2026-10-14 10:36:41,429 transreid.train INFO: SCSR-V4.1 updates=646 skipped=4 V_RMS=0.07021 T_RMS=0.07008 r_attn=7.927e-03 U_step=5.688e-08
+2026-10-14 10:36:54,716 transreid.train INFO: Epoch[6] Iteration[100/114] Loss: 6.363, Acc: 0.341, Base Lr: 3.18e-02
+2026-10-14 10:36:54,716 transreid.train INFO: Epoch[6] 3.355, 0.575, 0.300, 2.430
+2026-10-14 10:37:03,307 transreid.train INFO: Actual optimizer updates: 681; AMP skipped: 4; attempted: 685
+2026-10-14 10:37:03,307 transreid.train INFO: Epoch 6 done. Time per batch: 0.657[s] Total: 74.9[s]
+2026-10-14 10:37:16,200 transreid.train INFO: SCSR-V4.1 updates=696 skipped=4 V_RMS=0.06939 T_RMS=0.06945 r_attn=7.687e-03 U_step=4.932e-08
+2026-10-14 10:37:37,856 transreid.train INFO: Epoch[7] Iteration[50/114] Loss: 6.367, Acc: 0.315, Base Lr: 3.17e-02
+2026-10-14 10:37:37,857 transreid.train INFO: Epoch[7] 3.346, 0.579, 0.319, 2.438
+2026-10-14 10:37:47,190 transreid.train INFO: SCSR-V4.1 updates=746 skipped=4 V_RMS=0.06909 T_RMS=0.06896 r_attn=7.568e-03 U_step=6.031e-08
+2026-10-14 10:38:09,499 transreid.train INFO: Epoch[7] Iteration[100/114] Loss: 5.588, Acc: 0.417, Base Lr: 3.17e-02
+2026-10-14 10:38:09,500 transreid.train INFO: Epoch[7] 2.896, 0.555, 0.303, 2.135
+2026-10-14 10:38:18,056 transreid.train INFO: Actual optimizer updates: 795; AMP skipped: 4; attempted: 799
+2026-10-14 10:38:18,056 transreid.train INFO: Epoch 7 done. Time per batch: 0.656[s] Total: 74.7[s]
+2026-10-14 10:38:22,612 transreid.train INFO: SCSR-V4.1 updates=796 skipped=4 V_RMS=0.07344 T_RMS=0.07342 r_attn=7.963e-03 U_step=6.226e-08
+2026-10-14 10:38:54,861 transreid.train INFO: Epoch[8] Iteration[50/114] Loss: 5.705, Acc: 0.386, Base Lr: 3.17e-02
+2026-10-14 10:38:54,861 transreid.train INFO: Epoch[8] 2.992, 0.555, 0.324, 2.155
+2026-10-14 10:38:55,566 transreid.train INFO: SCSR-V4.1 updates=846 skipped=4 V_RMS=0.07523 T_RMS=0.07527 r_attn=8.260e-03 U_step=6.056e-08
+2026-10-14 10:39:28,106 transreid.train INFO: Epoch[8] Iteration[100/114] Loss: 4.936, Acc: 0.489, Base Lr: 3.17e-02
+2026-10-14 10:39:28,106 transreid.train INFO: Epoch[8] 2.524, 0.530, 0.309, 1.879
+2026-10-14 10:39:28,858 transreid.train INFO: SCSR-V4.1 updates=896 skipped=4 V_RMS=0.06991 T_RMS=0.06995 r_attn=7.804e-03 U_step=6.893e-08
+2026-10-14 10:39:37,148 transreid.train INFO: Actual optimizer updates: 909; AMP skipped: 4; attempted: 913
+2026-10-14 10:39:37,148 transreid.train INFO: Epoch 8 done. Time per batch: 0.694[s] Total: 79.1[s]
+2026-10-14 10:40:05,575 transreid.train INFO: SCSR-V4.1 updates=946 skipped=4 V_RMS=0.07469 T_RMS=0.07482 r_attn=7.767e-03 U_step=6.976e-08
+2026-10-14 10:40:14,240 transreid.train INFO: Epoch[9] Iteration[50/114] Loss: 4.996, Acc: 0.456, Base Lr: 3.16e-02
+2026-10-14 10:40:14,240 transreid.train INFO: Epoch[9] 2.564, 0.523, 0.327, 1.906
+2026-10-14 10:40:38,886 transreid.train INFO: SCSR-V4.1 updates=996 skipped=4 V_RMS=0.07277 T_RMS=0.07283 r_attn=7.994e-03 U_step=6.284e-08
+2026-10-14 10:40:47,622 transreid.train INFO: Epoch[9] Iteration[100/114] Loss: 4.356, Acc: 0.551, Base Lr: 3.16e-02
+2026-10-14 10:40:47,622 transreid.train INFO: Epoch[9] 2.173, 0.503, 0.308, 1.677
+2026-10-14 10:40:56,572 transreid.train INFO: Actual optimizer updates: 1023; AMP skipped: 4; attempted: 1027
+2026-10-14 10:40:56,572 transreid.train INFO: Epoch 9 done. Time per batch: 0.697[s] Total: 79.4[s]
+2026-10-14 10:41:16,238 transreid.train INFO: SCSR-V4.1 updates=1046 skipped=4 V_RMS=0.07392 T_RMS=0.07390 r_attn=7.926e-03 U_step=5.932e-08
+2026-10-14 10:41:33,981 transreid.train INFO: Epoch[10] Iteration[50/114] Loss: 4.603, Acc: 0.506, Base Lr: 3.15e-02
+2026-10-14 10:41:33,981 transreid.train INFO: Epoch[10] 2.332, 0.517, 0.318, 1.751
+2026-10-14 10:41:49,136 transreid.train INFO: SCSR-V4.1 updates=1096 skipped=4 V_RMS=0.07287 T_RMS=0.07289 r_attn=8.072e-03 U_step=7.169e-08
+2026-10-14 10:42:07,305 transreid.train INFO: Epoch[10] Iteration[100/114] Loss: 3.955, Acc: 0.600, Base Lr: 3.15e-02
+2026-10-14 10:42:07,306 transreid.train INFO: Epoch[10] 1.939, 0.489, 0.306, 1.523
+2026-10-14 10:42:16,259 transreid.train INFO: Actual optimizer updates: 1137; AMP skipped: 4; attempted: 1141
+2026-10-14 10:42:16,260 transreid.train INFO: Epoch 10 done. Time per batch: 0.699[s] Total: 79.7[s]
+2026-10-14 10:43:16,606 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 10:43:22,023 transreid.train INFO: The test feature is normalized
+2026-10-14 10:43:22,101 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 10:44:41,030 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 10:44:49,338 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 26.09%, mAP: 16.12%, mINP: 2.71%
+2026-10-14 10:44:57,358 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 14.99%, mAP: 8.77%, mINP: 1.24%
+2026-10-14 10:45:05,315 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 3.98%, mAP: 2.84%, mINP: 0.58%
+2026-10-14 10:45:13,553 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 13.58%, mAP: 8.45%, mINP: 1.41%
+2026-10-14 10:45:21,460 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 17.10%, mAP: 9.60%, mINP: 1.43%
+2026-10-14 10:45:29,129 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 3.37%, mAP: 2.50%, mINP: 0.57%
+2026-10-14 10:45:36,781 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 3.79%, mAP: 2.77%, mINP: 0.65%
+2026-10-14 10:45:44,586 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 3.93%, mAP: 2.49%, mINP: 0.56%
+2026-10-14 10:45:52,227 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 10.40%, mAP: 6.71%, mINP: 1.08%
+2026-10-14 10:45:52,227 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 10:45:52,227 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 10:45:52,227 transreid.train INFO:   NIR->RGB    13.58%   8.45%   1.41%
+2026-10-14 10:45:52,227 transreid.train INFO:   TIR->RGB     3.79%   2.77%   0.65%
+2026-10-14 10:45:52,228 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 10:45:52,228 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 10:45:52,228 transreid.train INFO:     RGB     RGB  26.09%  16.12%   2.71%
+2026-10-14 10:45:52,228 transreid.train INFO:     RGB     NIR  14.99%   8.77%   1.24%
+2026-10-14 10:45:52,228 transreid.train INFO:     RGB     TIR   3.98%   2.84%   0.58%
+2026-10-14 10:45:52,228 transreid.train INFO:     NIR     RGB  13.58%   8.45%   1.41%
+2026-10-14 10:45:52,228 transreid.train INFO:     NIR     NIR  17.10%   9.60%   1.43%
+2026-10-14 10:45:52,228 transreid.train INFO:     NIR     TIR   3.37%   2.50%   0.57%
+2026-10-14 10:45:52,228 transreid.train INFO:     TIR     RGB   3.79%   2.77%   0.65%
+2026-10-14 10:45:52,228 transreid.train INFO:     TIR     NIR   3.93%   2.49%   0.56%
+2026-10-14 10:45:52,228 transreid.train INFO:     TIR     TIR  10.40%   6.71%   1.08%
+2026-10-14 10:45:52,229 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 10:46:04,391 transreid.train INFO:   A->G -> mAP: 7.93%, Rank-1: 24.37%, Rank-10: 50.00%
+2026-10-14 10:46:16,094 transreid.train INFO:   G->A -> mAP: 9.75%, Rank-1: 25.57%, Rank-10: 51.29%
+2026-10-14 10:46:16,130 transreid.train INFO: Validation Results - Epoch: 10
+2026-10-14 10:46:16,131 transreid.train INFO: mAP: 5.82%
+2026-10-14 10:46:16,131 transreid.train INFO: CMC curve, Rank-1 : 17.81%
+2026-10-14 10:46:16,131 transreid.train INFO: CMC curve, Rank-5 : 31.12%
+2026-10-14 10:46:16,131 transreid.train INFO: CMC curve, Rank-10: 38.86%
+2026-10-14 10:46:26,053 transreid.train INFO: SCSR-V4.1 updates=1146 skipped=4 V_RMS=0.07377 T_RMS=0.07372 r_attn=7.882e-03 U_step=5.129e-08
+2026-10-14 10:46:50,082 transreid.train INFO: Epoch[11] Iteration[50/114] Loss: 4.061, Acc: 0.565, Base Lr: 3.13e-02
+2026-10-14 10:46:50,082 transreid.train INFO: Epoch[11] 2.016, 0.488, 0.321, 1.554
+2026-10-14 10:46:55,348 transreid.train INFO: SCSR-V4.1 updates=1196 skipped=4 V_RMS=0.07283 T_RMS=0.07268 r_attn=7.768e-03 U_step=6.929e-08
+2026-10-14 10:47:19,907 transreid.train INFO: Epoch[11] Iteration[100/114] Loss: 3.542, Acc: 0.646, Base Lr: 3.13e-02
+2026-10-14 10:47:19,907 transreid.train INFO: Epoch[11] 1.700, 0.468, 0.306, 1.371
+2026-10-14 10:47:24,849 transreid.train INFO: SCSR-V4.1 updates=1246 skipped=4 V_RMS=0.07327 T_RMS=0.07331 r_attn=7.960e-03 U_step=7.093e-08
+2026-10-14 10:47:28,275 transreid.train INFO: Actual optimizer updates: 1251; AMP skipped: 4; attempted: 1255
+2026-10-14 10:47:28,275 transreid.train INFO: Epoch 11 done. Time per batch: 0.633[s] Total: 72.1[s]
+2026-10-14 10:48:04,390 transreid.train INFO: SCSR-V4.1 updates=1296 skipped=4 V_RMS=0.07683 T_RMS=0.07685 r_attn=8.488e-03 U_step=7.373e-08
+2026-10-14 10:48:08,012 transreid.train INFO: Epoch[12] Iteration[50/115] Loss: 3.694, Acc: 0.614, Base Lr: 3.12e-02
+2026-10-14 10:48:08,013 transreid.train INFO: Epoch[12] 1.791, 0.467, 0.317, 1.433
+2026-10-14 10:48:39,243 transreid.train INFO: SCSR-V4.1 updates=1346 skipped=4 V_RMS=0.07480 T_RMS=0.07484 r_attn=8.273e-03 U_step=7.134e-08
+2026-10-14 10:48:42,320 transreid.train INFO: Epoch[12] Iteration[100/115] Loss: 3.257, Acc: 0.677, Base Lr: 3.12e-02
+2026-10-14 10:48:42,320 transreid.train INFO: Epoch[12] 1.536, 0.451, 0.305, 1.267
+2026-10-14 10:48:52,875 transreid.train INFO: Actual optimizer updates: 1366; AMP skipped: 4; attempted: 1370
+2026-10-14 10:48:52,876 transreid.train INFO: Epoch 12 done. Time per batch: 0.736[s] Total: 84.6[s]
+2026-10-14 10:49:19,330 transreid.train INFO: SCSR-V4.1 updates=1396 skipped=4 V_RMS=0.07828 T_RMS=0.07828 r_attn=8.392e-03 U_step=7.214e-08
+2026-10-14 10:49:33,071 transreid.train INFO: Epoch[13] Iteration[50/114] Loss: 3.619, Acc: 0.636, Base Lr: 3.11e-02
+2026-10-14 10:49:33,071 transreid.train INFO: Epoch[13] 1.675, 0.468, 0.313, 1.473
+2026-10-14 10:49:53,795 transreid.train INFO: SCSR-V4.1 updates=1446 skipped=4 V_RMS=0.07601 T_RMS=0.07603 r_attn=8.327e-03 U_step=7.024e-08
+2026-10-14 10:50:07,896 transreid.train INFO: Epoch[13] Iteration[100/114] Loss: 3.147, Acc: 0.695, Base Lr: 3.11e-02
+2026-10-14 10:50:07,897 transreid.train INFO: Epoch[13] 1.433, 0.448, 0.307, 1.262
+2026-10-14 10:50:17,929 transreid.train INFO: Actual optimizer updates: 1480; AMP skipped: 4; attempted: 1484
+2026-10-14 10:50:17,930 transreid.train INFO: Epoch 13 done. Time per batch: 0.746[s] Total: 85.1[s]
+2026-10-14 10:50:34,135 transreid.train INFO: SCSR-V4.1 updates=1496 skipped=4 V_RMS=0.07690 T_RMS=0.07694 r_attn=8.299e-03 U_step=6.995e-08
+2026-10-14 10:50:57,432 transreid.train INFO: Epoch[14] Iteration[50/114] Loss: 3.129, Acc: 0.677, Base Lr: 3.09e-02
+2026-10-14 10:50:57,433 transreid.train INFO: Epoch[14] 1.475, 0.436, 0.313, 1.215
+2026-10-14 10:51:08,744 transreid.train INFO: SCSR-V4.1 updates=1546 skipped=4 V_RMS=0.07416 T_RMS=0.07417 r_attn=8.343e-03 U_step=6.575e-08
+2026-10-14 10:51:32,371 transreid.train INFO: Epoch[14] Iteration[100/114] Loss: 2.779, Acc: 0.727, Base Lr: 3.09e-02
+2026-10-14 10:51:32,371 transreid.train INFO: Epoch[14] 1.270, 0.424, 0.304, 1.082
+2026-10-14 10:51:42,343 transreid.train INFO: Actual optimizer updates: 1594; AMP skipped: 4; attempted: 1598
+2026-10-14 10:51:42,343 transreid.train INFO: Epoch 14 done. Time per batch: 0.740[s] Total: 84.4[s]
+2026-10-14 10:51:49,377 transreid.train INFO: SCSR-V4.1 updates=1596 skipped=4 V_RMS=0.07484 T_RMS=0.07487 r_attn=8.369e-03 U_step=6.695e-08
+2026-10-14 10:52:22,803 transreid.train INFO: Epoch[15] Iteration[50/115] Loss: 2.848, Acc: 0.718, Base Lr: 3.08e-02
+2026-10-14 10:52:22,804 transreid.train INFO: Epoch[15] 1.306, 0.424, 0.314, 1.115
+2026-10-14 10:52:24,353 transreid.train INFO: SCSR-V4.1 updates=1646 skipped=4 V_RMS=0.07525 T_RMS=0.07535 r_attn=8.382e-03 U_step=7.767e-08
+2026-10-14 10:52:58,066 transreid.train INFO: Epoch[15] Iteration[100/115] Loss: 2.527, Acc: 0.762, Base Lr: 3.08e-02
+2026-10-14 10:52:58,067 transreid.train INFO: Epoch[15] 1.124, 0.412, 0.302, 0.988
+2026-10-14 10:52:59,508 transreid.train INFO: SCSR-V4.1 updates=1696 skipped=4 V_RMS=0.07318 T_RMS=0.07316 r_attn=7.946e-03 U_step=7.674e-08
+2026-10-14 10:53:08,517 transreid.train INFO: Actual optimizer updates: 1709; AMP skipped: 4; attempted: 1713
+2026-10-14 10:53:08,517 transreid.train INFO: Epoch 15 done. Time per batch: 0.749[s] Total: 86.2[s]
+2026-10-14 10:53:39,361 transreid.train INFO: SCSR-V4.1 updates=1746 skipped=4 V_RMS=0.07568 T_RMS=0.07583 r_attn=8.386e-03 U_step=7.226e-08
+2026-10-14 10:53:48,114 transreid.train INFO: Epoch[16] Iteration[50/115] Loss: 2.804, Acc: 0.725, Base Lr: 3.06e-02
+2026-10-14 10:53:48,114 transreid.train INFO: Epoch[16] 1.249, 0.422, 0.311, 1.130
+2026-10-14 10:54:14,304 transreid.train INFO: SCSR-V4.1 updates=1796 skipped=4 V_RMS=0.07358 T_RMS=0.07369 r_attn=8.150e-03 U_step=7.925e-08
+2026-10-14 10:54:23,348 transreid.train INFO: Epoch[16] Iteration[100/115] Loss: 2.472, Acc: 0.768, Base Lr: 3.06e-02
+2026-10-14 10:54:23,349 transreid.train INFO: Epoch[16] 1.074, 0.408, 0.300, 0.987
+2026-10-14 10:54:33,974 transreid.train INFO: Actual optimizer updates: 1824; AMP skipped: 4; attempted: 1828
+2026-10-14 10:54:33,975 transreid.train INFO: Epoch 16 done. Time per batch: 0.743[s] Total: 85.5[s]
+2026-10-14 10:54:54,440 transreid.train INFO: SCSR-V4.1 updates=1846 skipped=4 V_RMS=0.07202 T_RMS=0.07198 r_attn=7.854e-03 U_step=7.353e-08
+2026-10-14 10:55:14,343 transreid.train INFO: Epoch[17] Iteration[50/114] Loss: 2.588, Acc: 0.747, Base Lr: 3.04e-02
+2026-10-14 10:55:14,343 transreid.train INFO: Epoch[17] 1.153, 0.409, 0.311, 1.023
+2026-10-14 10:55:29,715 transreid.train INFO: SCSR-V4.1 updates=1896 skipped=4 V_RMS=0.07611 T_RMS=0.07647 r_attn=8.410e-03 U_step=7.073e-08
+2026-10-14 10:55:49,672 transreid.train INFO: Epoch[17] Iteration[100/114] Loss: 2.298, Acc: 0.787, Base Lr: 3.04e-02
+2026-10-14 10:55:49,672 transreid.train INFO: Epoch[17] 0.994, 0.394, 0.300, 0.907
+2026-10-14 10:55:59,629 transreid.train INFO: Actual optimizer updates: 1938; AMP skipped: 4; attempted: 1942
+2026-10-14 10:55:59,629 transreid.train INFO: Epoch 17 done. Time per batch: 0.751[s] Total: 85.7[s]
+2026-10-14 10:56:10,610 transreid.train INFO: SCSR-V4.1 updates=1946 skipped=4 V_RMS=0.07445 T_RMS=0.07453 r_attn=8.004e-03 U_step=6.481e-08
+2026-10-14 10:56:40,222 transreid.train INFO: Epoch[18] Iteration[50/114] Loss: 2.418, Acc: 0.772, Base Lr: 3.03e-02
+2026-10-14 10:56:40,223 transreid.train INFO: Epoch[18] 1.062, 0.404, 0.312, 0.948
+2026-10-14 10:56:46,045 transreid.train INFO: SCSR-V4.1 updates=1996 skipped=4 V_RMS=0.07528 T_RMS=0.07531 r_attn=8.438e-03 U_step=7.410e-08
+2026-10-14 10:57:16,514 transreid.train INFO: Epoch[18] Iteration[100/114] Loss: 2.104, Acc: 0.810, Base Lr: 3.03e-02
+2026-10-14 10:57:16,515 transreid.train INFO: Epoch[18] 0.895, 0.384, 0.298, 0.822
+2026-10-14 10:57:21,821 transreid.train INFO: SCSR-V4.1 updates=2046 skipped=4 V_RMS=0.07760 T_RMS=0.07779 r_attn=8.545e-03 U_step=8.392e-08
+2026-10-14 10:57:26,435 transreid.train INFO: Actual optimizer updates: 2052; AMP skipped: 4; attempted: 2056
+2026-10-14 10:57:26,436 transreid.train INFO: Epoch 18 done. Time per batch: 0.761[s] Total: 86.8[s]
+2026-10-14 10:58:03,801 transreid.train INFO: SCSR-V4.1 updates=2096 skipped=4 V_RMS=0.07403 T_RMS=0.07397 r_attn=8.022e-03 U_step=7.112e-08
+2026-10-14 10:58:08,173 transreid.train INFO: Epoch[19] Iteration[50/114] Loss: 2.210, Acc: 0.796, Base Lr: 3.01e-02
+2026-10-14 10:58:08,174 transreid.train INFO: Epoch[19] 0.951, 0.385, 0.312, 0.871
+2026-10-14 10:58:38,875 transreid.train INFO: SCSR-V4.1 updates=2146 skipped=4 V_RMS=0.07265 T_RMS=0.07269 r_attn=7.844e-03 U_step=7.246e-08
+2026-10-14 10:58:42,857 transreid.train INFO: Epoch[19] Iteration[100/114] Loss: 1.947, Acc: 0.825, Base Lr: 3.01e-02
+2026-10-14 10:58:42,857 transreid.train INFO: Epoch[19] 0.822, 0.366, 0.300, 0.756
+2026-10-14 10:58:52,953 transreid.train INFO: Actual optimizer updates: 2166; AMP skipped: 4; attempted: 2170
+2026-10-14 10:58:52,953 transreid.train INFO: Epoch 19 done. Time per batch: 0.759[s] Total: 86.5[s]
+2026-10-14 10:59:18,419 transreid.train INFO: SCSR-V4.1 updates=2196 skipped=4 V_RMS=0.07656 T_RMS=0.07662 r_attn=8.582e-03 U_step=7.045e-08
+2026-10-14 10:59:32,117 transreid.train INFO: Epoch[20] Iteration[50/114] Loss: 2.019, Acc: 0.819, Base Lr: 2.99e-02
+2026-10-14 10:59:32,117 transreid.train INFO: Epoch[20] 0.849, 0.371, 0.306, 0.796
+2026-10-14 10:59:52,889 transreid.train INFO: SCSR-V4.1 updates=2246 skipped=4 V_RMS=0.07831 T_RMS=0.07840 r_attn=8.482e-03 U_step=7.662e-08
+2026-10-14 11:00:06,580 transreid.train INFO: Epoch[20] Iteration[100/114] Loss: 1.854, Acc: 0.836, Base Lr: 2.99e-02
+2026-10-14 11:00:06,580 transreid.train INFO: Epoch[20] 0.765, 0.361, 0.297, 0.724
+2026-10-14 11:00:16,480 transreid.train INFO: Actual optimizer updates: 2280; AMP skipped: 4; attempted: 2284
+2026-10-14 11:00:16,480 transreid.train INFO: Epoch 20 done. Time per batch: 0.733[s] Total: 83.5[s]
+2026-10-14 11:01:19,513 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 11:01:21,442 transreid.train INFO: The test feature is normalized
+2026-10-14 11:01:21,484 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 11:03:08,950 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 11:03:17,201 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 32.69%, mAP: 20.49%, mINP: 3.66%
+2026-10-14 11:03:25,813 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 18.59%, mAP: 11.30%, mINP: 1.46%
+2026-10-14 11:03:34,605 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 5.29%, mAP: 3.85%, mINP: 0.69%
+2026-10-14 11:03:43,463 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 17.80%, mAP: 11.34%, mINP: 1.80%
+2026-10-14 11:03:52,336 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 21.92%, mAP: 12.47%, mINP: 1.56%
+2026-10-14 11:04:01,079 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 5.43%, mAP: 3.52%, mINP: 0.70%
+2026-10-14 11:04:10,639 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 4.50%, mAP: 3.55%, mINP: 0.73%
+2026-10-14 11:04:19,118 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 4.92%, mAP: 3.24%, mINP: 0.63%
+2026-10-14 11:04:27,545 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 14.52%, mAP: 9.59%, mINP: 1.49%
+2026-10-14 11:04:27,545 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 11:04:27,545 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 11:04:27,545 transreid.train INFO:   NIR->RGB    17.80%  11.34%   1.80%
+2026-10-14 11:04:27,545 transreid.train INFO:   TIR->RGB     4.50%   3.55%   0.73%
+2026-10-14 11:04:27,545 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 11:04:27,545 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 11:04:27,545 transreid.train INFO:     RGB     RGB  32.69%  20.49%   3.66%
+2026-10-14 11:04:27,545 transreid.train INFO:     RGB     NIR  18.59%  11.30%   1.46%
+2026-10-14 11:04:27,545 transreid.train INFO:     RGB     TIR   5.29%   3.85%   0.69%
+2026-10-14 11:04:27,545 transreid.train INFO:     NIR     RGB  17.80%  11.34%   1.80%
+2026-10-14 11:04:27,546 transreid.train INFO:     NIR     NIR  21.92%  12.47%   1.56%
+2026-10-14 11:04:27,546 transreid.train INFO:     NIR     TIR   5.43%   3.52%   0.70%
+2026-10-14 11:04:27,546 transreid.train INFO:     TIR     RGB   4.50%   3.55%   0.73%
+2026-10-14 11:04:27,546 transreid.train INFO:     TIR     NIR   4.92%   3.24%   0.63%
+2026-10-14 11:04:27,546 transreid.train INFO:     TIR     TIR  14.52%   9.59%   1.49%
+2026-10-14 11:04:27,546 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 11:04:40,457 transreid.train INFO:   A->G -> mAP: 9.67%, Rank-1: 28.30%, Rank-10: 55.70%
+2026-10-14 11:04:53,938 transreid.train INFO:   G->A -> mAP: 11.54%, Rank-1: 27.74%, Rank-10: 54.66%
+2026-10-14 11:04:53,968 transreid.train INFO: Validation Results - Epoch: 20
+2026-10-14 11:04:53,968 transreid.train INFO: mAP: 7.79%
+2026-10-14 11:04:53,969 transreid.train INFO: CMC curve, Rank-1 : 22.50%
+2026-10-14 11:04:53,969 transreid.train INFO: CMC curve, Rank-5 : 37.83%
+2026-10-14 11:04:53,969 transreid.train INFO: CMC curve, Rank-10: 45.09%
+2026-10-14 11:05:11,006 transreid.train INFO: SCSR-V4.1 updates=2296 skipped=4 V_RMS=0.07744 T_RMS=0.07755 r_attn=8.421e-03 U_step=7.317e-08
+2026-10-14 11:05:35,047 transreid.train INFO: Epoch[21] Iteration[50/114] Loss: 2.012, Acc: 0.821, Base Lr: 2.96e-02
+2026-10-14 11:05:35,047 transreid.train INFO: Epoch[21] 0.841, 0.374, 0.306, 0.794
+2026-10-14 11:05:46,488 transreid.train INFO: SCSR-V4.1 updates=2346 skipped=4 V_RMS=0.07755 T_RMS=0.07774 r_attn=8.640e-03 U_step=8.074e-08
+2026-10-14 11:06:10,989 transreid.train INFO: Epoch[21] Iteration[100/114] Loss: 1.789, Acc: 0.845, Base Lr: 2.96e-02
+2026-10-14 11:06:10,990 transreid.train INFO: Epoch[21] 0.733, 0.357, 0.299, 0.697
+2026-10-14 11:06:21,705 transreid.train INFO: Actual optimizer updates: 2394; AMP skipped: 4; attempted: 2398
+2026-10-14 11:06:21,705 transreid.train INFO: Epoch 21 done. Time per batch: 0.768[s] Total: 87.6[s]
+2026-10-14 11:06:28,553 transreid.train INFO: SCSR-V4.1 updates=2396 skipped=4 V_RMS=0.07886 T_RMS=0.07906 r_attn=8.804e-03 U_step=7.533e-08
+2026-10-14 11:07:02,638 transreid.train INFO: Epoch[22] Iteration[50/114] Loss: 1.859, Acc: 0.832, Base Lr: 2.94e-02
+2026-10-14 11:07:02,638 transreid.train INFO: Epoch[22] 0.758, 0.351, 0.301, 0.747
+2026-10-14 11:07:04,245 transreid.train INFO: SCSR-V4.1 updates=2446 skipped=4 V_RMS=0.07800 T_RMS=0.07819 r_attn=8.465e-03 U_step=7.374e-08
+2026-10-14 11:07:39,583 transreid.train INFO: Epoch[22] Iteration[100/114] Loss: 1.668, Acc: 0.854, Base Lr: 2.94e-02
+2026-10-14 11:07:39,584 transreid.train INFO: Epoch[22] 0.671, 0.339, 0.291, 0.655
+2026-10-14 11:07:40,875 transreid.train INFO: SCSR-V4.1 updates=2496 skipped=4 V_RMS=0.07864 T_RMS=0.07881 r_attn=8.674e-03 U_step=8.216e-08
+2026-10-14 11:07:49,855 transreid.train INFO: Actual optimizer updates: 2508; AMP skipped: 4; attempted: 2512
+2026-10-14 11:07:49,855 transreid.train INFO: Epoch 22 done. Time per batch: 0.773[s] Total: 88.1[s]
+2026-10-14 11:08:23,270 transreid.train INFO: SCSR-V4.1 updates=2546 skipped=4 V_RMS=0.07446 T_RMS=0.07444 r_attn=8.071e-03 U_step=7.687e-08
+2026-10-14 11:08:31,484 transreid.train INFO: Epoch[23] Iteration[50/114] Loss: 1.732, Acc: 0.849, Base Lr: 2.92e-02
+2026-10-14 11:08:31,484 transreid.train INFO: Epoch[23] 0.707, 0.342, 0.300, 0.680
+2026-10-14 11:08:59,958 transreid.train INFO: SCSR-V4.1 updates=2596 skipped=4 V_RMS=0.07903 T_RMS=0.07914 r_attn=8.520e-03 U_step=8.289e-08
+2026-10-14 11:09:08,432 transreid.train INFO: Epoch[23] Iteration[100/114] Loss: 1.552, Acc: 0.868, Base Lr: 2.92e-02
+2026-10-14 11:09:08,432 transreid.train INFO: Epoch[23] 0.621, 0.330, 0.292, 0.598
+2026-10-14 11:09:18,661 transreid.train INFO: Actual optimizer updates: 2622; AMP skipped: 4; attempted: 2626
+2026-10-14 11:09:18,661 transreid.train INFO: Epoch 23 done. Time per batch: 0.779[s] Total: 88.8[s]
+2026-10-14 11:09:41,229 transreid.train INFO: SCSR-V4.1 updates=2646 skipped=4 V_RMS=0.07690 T_RMS=0.07715 r_attn=8.523e-03 U_step=7.474e-08
+2026-10-14 11:09:59,259 transreid.train INFO: Epoch[24] Iteration[50/114] Loss: 1.652, Acc: 0.853, Base Lr: 2.90e-02
+2026-10-14 11:09:59,260 transreid.train INFO: Epoch[24] 0.675, 0.342, 0.305, 0.633
+2026-10-14 11:10:16,643 transreid.train INFO: SCSR-V4.1 updates=2696 skipped=4 V_RMS=0.07388 T_RMS=0.07406 r_attn=8.282e-03 U_step=7.530e-08
+2026-10-14 11:10:34,883 transreid.train INFO: Epoch[24] Iteration[100/114] Loss: 1.499, Acc: 0.871, Base Lr: 2.90e-02
+2026-10-14 11:10:34,883 transreid.train INFO: Epoch[24] 0.599, 0.330, 0.296, 0.567
+2026-10-14 11:10:44,980 transreid.train INFO: Actual optimizer updates: 2736; AMP skipped: 4; attempted: 2740
+2026-10-14 11:10:44,980 transreid.train INFO: Epoch 24 done. Time per batch: 0.757[s] Total: 86.3[s]
+2026-10-14 11:10:57,463 transreid.train INFO: SCSR-V4.1 updates=2746 skipped=4 V_RMS=0.07643 T_RMS=0.07655 r_attn=8.223e-03 U_step=6.675e-08
+2026-10-14 11:11:24,942 transreid.train INFO: Epoch[25] Iteration[50/114] Loss: 1.647, Acc: 0.858, Base Lr: 2.87e-02
+2026-10-14 11:11:24,942 transreid.train INFO: Epoch[25] 0.663, 0.333, 0.302, 0.648
+2026-10-14 11:11:32,102 transreid.train INFO: SCSR-V4.1 updates=2796 skipped=4 V_RMS=0.07411 T_RMS=0.07410 r_attn=8.080e-03 U_step=7.566e-08
+2026-10-14 11:12:00,258 transreid.train INFO: Epoch[25] Iteration[100/114] Loss: 1.440, Acc: 0.878, Base Lr: 2.87e-02
+2026-10-14 11:12:00,259 transreid.train INFO: Epoch[25] 0.567, 0.315, 0.292, 0.555
+2026-10-14 11:12:07,047 transreid.train INFO: SCSR-V4.1 updates=2846 skipped=4 V_RMS=0.08107 T_RMS=0.08147 r_attn=8.926e-03 U_step=9.067e-08
+2026-10-14 11:12:10,492 transreid.train INFO: Actual optimizer updates: 2850; AMP skipped: 4; attempted: 2854
+2026-10-14 11:12:10,492 transreid.train INFO: Epoch 25 done. Time per batch: 0.750[s] Total: 85.5[s]
+2026-10-14 11:12:48,901 transreid.train INFO: SCSR-V4.1 updates=2896 skipped=4 V_RMS=0.07610 T_RMS=0.07600 r_attn=8.394e-03 U_step=7.620e-08
+2026-10-14 11:12:51,269 transreid.train INFO: Epoch[26] Iteration[50/115] Loss: 1.588, Acc: 0.863, Base Lr: 2.84e-02
+2026-10-14 11:12:51,270 transreid.train INFO: Epoch[26] 0.639, 0.334, 0.299, 0.612
+2026-10-14 11:13:24,282 transreid.train INFO: SCSR-V4.1 updates=2946 skipped=4 V_RMS=0.08149 T_RMS=0.08189 r_attn=8.909e-03 U_step=7.711e-08
+2026-10-14 11:13:26,625 transreid.train INFO: Epoch[26] Iteration[100/115] Loss: 1.403, Acc: 0.882, Base Lr: 2.84e-02
+2026-10-14 11:13:26,626 transreid.train INFO: Epoch[26] 0.551, 0.312, 0.289, 0.537
+2026-10-14 11:13:37,516 transreid.train INFO: Actual optimizer updates: 2965; AMP skipped: 4; attempted: 2969
+2026-10-14 11:13:37,517 transreid.train INFO: Epoch 26 done. Time per batch: 0.757[s] Total: 87.0[s]
+2026-10-14 11:14:04,541 transreid.train INFO: SCSR-V4.1 updates=2996 skipped=4 V_RMS=0.07588 T_RMS=0.07612 r_attn=8.372e-03 U_step=7.792e-08
+2026-10-14 11:14:17,862 transreid.train INFO: Epoch[27] Iteration[50/114] Loss: 1.514, Acc: 0.867, Base Lr: 2.82e-02
+2026-10-14 11:14:17,863 transreid.train INFO: Epoch[27] 0.610, 0.323, 0.300, 0.577
+2026-10-14 11:14:39,850 transreid.train INFO: SCSR-V4.1 updates=3046 skipped=4 V_RMS=0.07941 T_RMS=0.07964 r_attn=8.666e-03 U_step=8.251e-08
+2026-10-14 11:14:53,046 transreid.train INFO: Epoch[27] Iteration[100/114] Loss: 1.354, Acc: 0.885, Base Lr: 2.82e-02
+2026-10-14 11:14:53,047 transreid.train INFO: Epoch[27] 0.529, 0.309, 0.289, 0.513
+2026-10-14 11:15:03,366 transreid.train INFO: Actual optimizer updates: 3079; AMP skipped: 4; attempted: 3083
+2026-10-14 11:15:03,367 transreid.train INFO: Epoch 27 done. Time per batch: 0.753[s] Total: 85.8[s]
+2026-10-14 11:15:20,924 transreid.train INFO: SCSR-V4.1 updates=3096 skipped=4 V_RMS=0.07449 T_RMS=0.07457 r_attn=8.207e-03 U_step=6.964e-08
+2026-10-14 11:15:43,774 transreid.train INFO: Epoch[28] Iteration[50/114] Loss: 1.348, Acc: 0.885, Base Lr: 2.79e-02
+2026-10-14 11:15:43,774 transreid.train INFO: Epoch[28] 0.531, 0.304, 0.291, 0.511
+2026-10-14 11:15:55,610 transreid.train INFO: SCSR-V4.1 updates=3146 skipped=4 V_RMS=0.07587 T_RMS=0.07588 r_attn=8.215e-03 U_step=6.883e-08
+2026-10-14 11:16:18,807 transreid.train INFO: Epoch[28] Iteration[100/114] Loss: 1.231, Acc: 0.897, Base Lr: 2.79e-02
+2026-10-14 11:16:18,807 transreid.train INFO: Epoch[28] 0.474, 0.294, 0.283, 0.461
+2026-10-14 11:16:28,838 transreid.train INFO: Actual optimizer updates: 3193; AMP skipped: 4; attempted: 3197
+2026-10-14 11:16:28,839 transreid.train INFO: Epoch 28 done. Time per batch: 0.750[s] Total: 85.5[s]
+2026-10-14 11:16:36,513 transreid.train INFO: SCSR-V4.1 updates=3196 skipped=4 V_RMS=0.07519 T_RMS=0.07524 r_attn=8.275e-03 U_step=6.806e-08
+2026-10-14 11:17:09,101 transreid.train INFO: Epoch[29] Iteration[50/114] Loss: 1.338, Acc: 0.884, Base Lr: 2.76e-02
+2026-10-14 11:17:09,101 transreid.train INFO: Epoch[29] 0.527, 0.297, 0.291, 0.511
+2026-10-14 11:17:11,232 transreid.train INFO: SCSR-V4.1 updates=3246 skipped=4 V_RMS=0.07869 T_RMS=0.07887 r_attn=8.487e-03 U_step=7.841e-08
+2026-10-14 11:17:43,700 transreid.train INFO: Epoch[29] Iteration[100/114] Loss: 1.190, Acc: 0.900, Base Lr: 2.76e-02
+2026-10-14 11:17:43,701 transreid.train INFO: Epoch[29] 0.456, 0.285, 0.284, 0.446
+2026-10-14 11:17:45,585 transreid.train INFO: SCSR-V4.1 updates=3296 skipped=4 V_RMS=0.07615 T_RMS=0.07623 r_attn=8.202e-03 U_step=8.136e-08
+2026-10-14 11:17:53,704 transreid.train INFO: Actual optimizer updates: 3307; AMP skipped: 4; attempted: 3311
+2026-10-14 11:17:53,705 transreid.train INFO: Epoch 29 done. Time per batch: 0.744[s] Total: 84.9[s]
+2026-10-14 11:18:26,380 transreid.train INFO: SCSR-V4.1 updates=3346 skipped=4 V_RMS=0.07445 T_RMS=0.07465 r_attn=7.926e-03 U_step=6.649e-08
+2026-10-14 11:18:34,728 transreid.train INFO: Epoch[30] Iteration[50/114] Loss: 1.259, Acc: 0.892, Base Lr: 2.73e-02
+2026-10-14 11:18:34,728 transreid.train INFO: Epoch[30] 0.486, 0.292, 0.289, 0.479
+2026-10-14 11:19:02,822 transreid.train INFO: SCSR-V4.1 updates=3396 skipped=4 V_RMS=0.07674 T_RMS=0.07690 r_attn=8.210e-03 U_step=6.980e-08
+2026-10-14 11:19:10,693 transreid.train INFO: Epoch[30] Iteration[100/114] Loss: 1.150, Acc: 0.903, Base Lr: 2.73e-02
+2026-10-14 11:19:10,693 transreid.train INFO: Epoch[30] 0.435, 0.284, 0.282, 0.429
+2026-10-14 11:19:21,104 transreid.train INFO: Actual optimizer updates: 3421; AMP skipped: 4; attempted: 3425
+2026-10-14 11:19:21,105 transreid.train INFO: Epoch 30 done. Time per batch: 0.767[s] Total: 87.4[s]
+2026-10-14 11:20:27,382 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 11:20:28,875 transreid.train INFO: The test feature is normalized
+2026-10-14 11:20:28,926 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 11:22:13,948 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 11:22:22,623 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 35.18%, mAP: 22.54%, mINP: 3.98%
+2026-10-14 11:22:31,575 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 21.69%, mAP: 12.76%, mINP: 1.73%
+2026-10-14 11:22:40,046 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 5.06%, mAP: 4.28%, mINP: 0.85%
+2026-10-14 11:22:48,374 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 19.72%, mAP: 12.61%, mINP: 2.12%
+2026-10-14 11:22:56,592 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 22.95%, mAP: 13.73%, mINP: 1.88%
+2026-10-14 11:23:05,435 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 4.40%, mAP: 3.80%, mINP: 0.78%
+2026-10-14 11:23:13,478 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 5.25%, mAP: 4.06%, mINP: 0.90%
+2026-10-14 11:23:22,155 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 5.95%, mAP: 3.67%, mINP: 0.73%
+2026-10-14 11:23:30,502 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 15.97%, mAP: 10.96%, mINP: 1.79%
+2026-10-14 11:23:30,503 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 11:23:30,503 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 11:23:30,503 transreid.train INFO:   NIR->RGB    19.72%  12.61%   2.12%
+2026-10-14 11:23:30,503 transreid.train INFO:   TIR->RGB     5.25%   4.06%   0.90%
+2026-10-14 11:23:30,503 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 11:23:30,503 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 11:23:30,503 transreid.train INFO:     RGB     RGB  35.18%  22.54%   3.98%
+2026-10-14 11:23:30,503 transreid.train INFO:     RGB     NIR  21.69%  12.76%   1.73%
+2026-10-14 11:23:30,504 transreid.train INFO:     RGB     TIR   5.06%   4.28%   0.85%
+2026-10-14 11:23:30,504 transreid.train INFO:     NIR     RGB  19.72%  12.61%   2.12%
+2026-10-14 11:23:30,504 transreid.train INFO:     NIR     NIR  22.95%  13.73%   1.88%
+2026-10-14 11:23:30,504 transreid.train INFO:     NIR     TIR   4.40%   3.80%   0.78%
+2026-10-14 11:23:30,504 transreid.train INFO:     TIR     RGB   5.25%   4.06%   0.90%
+2026-10-14 11:23:30,504 transreid.train INFO:     TIR     NIR   5.95%   3.67%   0.73%
+2026-10-14 11:23:30,504 transreid.train INFO:     TIR     TIR  15.97%  10.96%   1.79%
+2026-10-14 11:23:30,505 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 11:23:44,656 transreid.train INFO:   A->G -> mAP: 10.44%, Rank-1: 29.63%, Rank-10: 56.52%
+2026-10-14 11:23:57,614 transreid.train INFO:   G->A -> mAP: 11.98%, Rank-1: 29.97%, Rank-10: 55.18%
+2026-10-14 11:23:57,629 transreid.train INFO: Validation Results - Epoch: 30
+2026-10-14 11:23:57,629 transreid.train INFO: mAP: 8.76%
+2026-10-14 11:23:57,629 transreid.train INFO: CMC curve, Rank-1 : 24.89%
+2026-10-14 11:23:57,629 transreid.train INFO: CMC curve, Rank-5 : 40.69%
+2026-10-14 11:23:57,629 transreid.train INFO: CMC curve, Rank-10: 48.68%
+2026-10-14 11:24:20,293 transreid.train INFO: SCSR-V4.1 updates=3446 skipped=4 V_RMS=0.07321 T_RMS=0.07326 r_attn=7.882e-03 U_step=7.690e-08
+2026-10-14 11:24:40,094 transreid.train INFO: Epoch[31] Iteration[50/114] Loss: 1.180, Acc: 0.901, Base Lr: 2.70e-02
+2026-10-14 11:24:40,094 transreid.train INFO: Epoch[31] 0.457, 0.287, 0.290, 0.433
+2026-10-14 11:25:00,718 transreid.train INFO: SCSR-V4.1 updates=3496 skipped=4 V_RMS=0.07820 T_RMS=0.07826 r_attn=8.407e-03 U_step=7.455e-08
+2026-10-14 11:25:21,518 transreid.train INFO: Epoch[31] Iteration[100/114] Loss: 1.098, Acc: 0.911, Base Lr: 2.70e-02
+2026-10-14 11:25:21,518 transreid.train INFO: Epoch[31] 0.417, 0.276, 0.282, 0.402
+2026-10-14 11:25:32,009 transreid.train INFO: Actual optimizer updates: 3535; AMP skipped: 4; attempted: 3539
+2026-10-14 11:25:32,009 transreid.train INFO: Epoch 31 done. Time per batch: 0.826[s] Total: 94.2[s]
+2026-10-14 11:25:44,805 transreid.train INFO: SCSR-V4.1 updates=3546 skipped=4 V_RMS=0.07860 T_RMS=0.07879 r_attn=8.586e-03 U_step=6.554e-08
+2026-10-14 11:26:15,362 transreid.train INFO: Epoch[32] Iteration[50/113] Loss: 1.188, Acc: 0.903, Base Lr: 2.67e-02
+2026-10-14 11:26:15,362 transreid.train INFO: Epoch[32] 0.455, 0.284, 0.289, 0.447
+2026-10-14 11:26:24,149 transreid.train INFO: SCSR-V4.1 updates=3596 skipped=4 V_RMS=0.07867 T_RMS=0.07883 r_attn=8.528e-03 U_step=7.382e-08
+2026-10-14 11:26:56,509 transreid.train INFO: Epoch[32] Iteration[100/113] Loss: 1.056, Acc: 0.916, Base Lr: 2.67e-02
+2026-10-14 11:26:56,509 transreid.train INFO: Epoch[32] 0.394, 0.269, 0.278, 0.390
+2026-10-14 11:27:04,592 transreid.train INFO: SCSR-V4.1 updates=3646 skipped=4 V_RMS=0.07514 T_RMS=0.07539 r_attn=8.114e-03 U_step=7.534e-08
+2026-10-14 11:27:06,828 transreid.train INFO: Actual optimizer updates: 3648; AMP skipped: 4; attempted: 3652
+2026-10-14 11:27:06,829 transreid.train INFO: Epoch 32 done. Time per batch: 0.839[s] Total: 94.8[s]
+2026-10-14 11:27:46,950 transreid.train INFO: SCSR-V4.1 updates=3696 skipped=4 V_RMS=0.07215 T_RMS=0.07213 r_attn=7.775e-03 U_step=6.145e-08
+2026-10-14 11:27:48,523 transreid.train INFO: Epoch[33] Iteration[50/114] Loss: 1.148, Acc: 0.902, Base Lr: 2.64e-02
+2026-10-14 11:27:48,524 transreid.train INFO: Epoch[33] 0.443, 0.279, 0.285, 0.423
+2026-10-14 11:28:26,686 transreid.train INFO: SCSR-V4.1 updates=3746 skipped=4 V_RMS=0.07386 T_RMS=0.07387 r_attn=8.155e-03 U_step=7.653e-08
+2026-10-14 11:28:27,997 transreid.train INFO: Epoch[33] Iteration[100/114] Loss: 1.027, Acc: 0.915, Base Lr: 2.64e-02
+2026-10-14 11:28:27,997 transreid.train INFO: Epoch[33] 0.386, 0.263, 0.275, 0.375
+2026-10-14 11:28:38,836 transreid.train INFO: Actual optimizer updates: 3762; AMP skipped: 4; attempted: 3766
+2026-10-14 11:28:38,837 transreid.train INFO: Epoch 33 done. Time per batch: 0.807[s] Total: 92.0[s]
+2026-10-14 11:29:08,881 transreid.train INFO: SCSR-V4.1 updates=3796 skipped=4 V_RMS=0.07735 T_RMS=0.07741 r_attn=8.445e-03 U_step=6.884e-08
+2026-10-14 11:29:20,290 transreid.train INFO: Epoch[34] Iteration[50/114] Loss: 1.107, Acc: 0.907, Base Lr: 2.61e-02
+2026-10-14 11:29:20,290 transreid.train INFO: Epoch[34] 0.426, 0.272, 0.283, 0.406
+2026-10-14 11:29:45,001 transreid.train INFO: SCSR-V4.1 updates=3846 skipped=4 V_RMS=0.07503 T_RMS=0.07504 r_attn=8.346e-03 U_step=6.942e-08
+2026-10-14 11:29:56,264 transreid.train INFO: Epoch[34] Iteration[100/114] Loss: 0.996, Acc: 0.919, Base Lr: 2.61e-02
+2026-10-14 11:29:56,265 transreid.train INFO: Epoch[34] 0.375, 0.256, 0.273, 0.362
+2026-10-14 11:30:06,354 transreid.train INFO: Actual optimizer updates: 3876; AMP skipped: 4; attempted: 3880
+2026-10-14 11:30:06,354 transreid.train INFO: Epoch 34 done. Time per batch: 0.768[s] Total: 87.5[s]
+2026-10-14 11:30:26,128 transreid.train INFO: SCSR-V4.1 updates=3896 skipped=4 V_RMS=0.07331 T_RMS=0.07344 r_attn=7.934e-03 U_step=6.212e-08
+2026-10-14 11:30:47,188 transreid.train INFO: Epoch[35] Iteration[50/115] Loss: 1.042, Acc: 0.916, Base Lr: 2.58e-02
+2026-10-14 11:30:47,189 transreid.train INFO: Epoch[35] 0.391, 0.266, 0.281, 0.382
+2026-10-14 11:31:01,221 transreid.train INFO: SCSR-V4.1 updates=3946 skipped=4 V_RMS=0.07486 T_RMS=0.07500 r_attn=8.143e-03 U_step=7.392e-08
+2026-10-14 11:31:22,217 transreid.train INFO: Epoch[35] Iteration[100/115] Loss: 0.952, Acc: 0.924, Base Lr: 2.58e-02
+2026-10-14 11:31:22,218 transreid.train INFO: Epoch[35] 0.352, 0.254, 0.273, 0.344
+2026-10-14 11:31:33,214 transreid.train INFO: Actual optimizer updates: 3991; AMP skipped: 4; attempted: 3995
+2026-10-14 11:31:33,215 transreid.train INFO: Epoch 35 done. Time per batch: 0.755[s] Total: 86.9[s]
+2026-10-14 11:31:42,053 transreid.train INFO: SCSR-V4.1 updates=3996 skipped=4 V_RMS=0.07261 T_RMS=0.07248 r_attn=7.960e-03 U_step=6.442e-08
+2026-10-14 11:32:13,502 transreid.train INFO: Epoch[36] Iteration[50/115] Loss: 1.012, Acc: 0.916, Base Lr: 2.54e-02
+2026-10-14 11:32:13,502 transreid.train INFO: Epoch[36] 0.388, 0.259, 0.279, 0.363
+2026-10-14 11:32:16,958 transreid.train INFO: SCSR-V4.1 updates=4046 skipped=4 V_RMS=0.07815 T_RMS=0.07821 r_attn=8.523e-03 U_step=6.970e-08
+2026-10-14 11:32:48,222 transreid.train INFO: Epoch[36] Iteration[100/115] Loss: 0.907, Acc: 0.928, Base Lr: 2.54e-02
+2026-10-14 11:32:48,223 transreid.train INFO: Epoch[36] 0.337, 0.244, 0.270, 0.323
+2026-10-14 11:32:51,181 transreid.train INFO: SCSR-V4.1 updates=4096 skipped=4 V_RMS=0.07868 T_RMS=0.07901 r_attn=8.636e-03 U_step=7.281e-08
+2026-10-14 11:32:58,242 transreid.train INFO: Actual optimizer updates: 4106; AMP skipped: 4; attempted: 4110
+2026-10-14 11:32:58,242 transreid.train INFO: Epoch 36 done. Time per batch: 0.739[s] Total: 85.0[s]
+2026-10-14 11:33:28,466 transreid.train INFO: SCSR-V4.1 updates=4146 skipped=4 V_RMS=0.07559 T_RMS=0.07561 r_attn=7.965e-03 U_step=5.978e-08
+2026-10-14 11:33:34,346 transreid.train INFO: Epoch[37] Iteration[50/114] Loss: 0.983, Acc: 0.919, Base Lr: 2.51e-02
+2026-10-14 11:33:34,347 transreid.train INFO: Epoch[37] 0.370, 0.257, 0.277, 0.353
+2026-10-14 11:33:58,064 transreid.train INFO: SCSR-V4.1 updates=4196 skipped=4 V_RMS=0.07806 T_RMS=0.07828 r_attn=8.390e-03 U_step=6.882e-08
+2026-10-14 11:34:04,210 transreid.train INFO: Epoch[37] Iteration[100/114] Loss: 0.906, Acc: 0.928, Base Lr: 2.51e-02
+2026-10-14 11:34:04,210 transreid.train INFO: Epoch[37] 0.333, 0.245, 0.268, 0.325
+2026-10-14 11:34:12,931 transreid.train INFO: Actual optimizer updates: 4220; AMP skipped: 4; attempted: 4224
+2026-10-14 11:34:12,931 transreid.train INFO: Epoch 37 done. Time per batch: 0.655[s] Total: 74.7[s]
+2026-10-14 11:34:33,036 transreid.train INFO: SCSR-V4.1 updates=4246 skipped=4 V_RMS=0.07895 T_RMS=0.07934 r_attn=8.441e-03 U_step=6.700e-08
+2026-10-14 11:34:47,362 transreid.train INFO: Epoch[38] Iteration[50/115] Loss: 0.961, Acc: 0.920, Base Lr: 2.47e-02
+2026-10-14 11:34:47,362 transreid.train INFO: Epoch[38] 0.363, 0.248, 0.274, 0.347
+2026-10-14 11:35:02,917 transreid.train INFO: SCSR-V4.1 updates=4296 skipped=4 V_RMS=0.07894 T_RMS=0.07910 r_attn=8.344e-03 U_step=6.541e-08
+2026-10-14 11:35:17,417 transreid.train INFO: Epoch[38] Iteration[100/115] Loss: 0.867, Acc: 0.931, Base Lr: 2.47e-02
+2026-10-14 11:35:17,417 transreid.train INFO: Epoch[38] 0.320, 0.237, 0.265, 0.307
+2026-10-14 11:35:26,515 transreid.train INFO: Actual optimizer updates: 4335; AMP skipped: 4; attempted: 4339
+2026-10-14 11:35:26,515 transreid.train INFO: Epoch 38 done. Time per batch: 0.640[s] Total: 73.6[s]
+2026-10-14 11:35:37,514 transreid.train INFO: SCSR-V4.1 updates=4346 skipped=4 V_RMS=0.07540 T_RMS=0.07551 r_attn=8.021e-03 U_step=6.673e-08
+2026-10-14 11:36:00,536 transreid.train INFO: Epoch[39] Iteration[50/114] Loss: 0.903, Acc: 0.926, Base Lr: 2.44e-02
+2026-10-14 11:36:00,536 transreid.train INFO: Epoch[39] 0.341, 0.242, 0.273, 0.317
+2026-10-14 11:36:07,060 transreid.train INFO: SCSR-V4.1 updates=4396 skipped=4 V_RMS=0.07435 T_RMS=0.07443 r_attn=8.144e-03 U_step=6.730e-08
+2026-10-14 11:36:31,408 transreid.train INFO: Epoch[39] Iteration[100/114] Loss: 0.820, Acc: 0.934, Base Lr: 2.44e-02
+2026-10-14 11:36:31,408 transreid.train INFO: Epoch[39] 0.301, 0.230, 0.262, 0.287
+2026-10-14 11:36:37,613 transreid.train INFO: SCSR-V4.1 updates=4446 skipped=4 V_RMS=0.07751 T_RMS=0.07764 r_attn=8.376e-03 U_step=6.893e-08
+2026-10-14 11:36:39,997 transreid.train INFO: Actual optimizer updates: 4449; AMP skipped: 4; attempted: 4453
+2026-10-14 11:36:39,997 transreid.train INFO: Epoch 39 done. Time per batch: 0.645[s] Total: 73.5[s]
+2026-10-14 11:37:12,592 transreid.train INFO: SCSR-V4.1 updates=4496 skipped=4 V_RMS=0.07854 T_RMS=0.07873 r_attn=8.635e-03 U_step=6.451e-08
+2026-10-14 11:37:14,432 transreid.train INFO: Epoch[40] Iteration[50/114] Loss: 0.914, Acc: 0.925, Base Lr: 2.40e-02
+2026-10-14 11:37:14,432 transreid.train INFO: Epoch[40] 0.338, 0.245, 0.273, 0.328
+2026-10-14 11:37:43,533 transreid.train INFO: SCSR-V4.1 updates=4546 skipped=4 V_RMS=0.07641 T_RMS=0.07658 r_attn=8.367e-03 U_step=6.463e-08
+2026-10-14 11:37:45,326 transreid.train INFO: Epoch[40] Iteration[100/114] Loss: 0.810, Acc: 0.935, Base Lr: 2.40e-02
+2026-10-14 11:37:45,326 transreid.train INFO: Epoch[40] 0.293, 0.229, 0.262, 0.285
+2026-10-14 11:37:53,958 transreid.train INFO: Actual optimizer updates: 4563; AMP skipped: 4; attempted: 4567
+2026-10-14 11:37:53,958 transreid.train INFO: Epoch 40 done. Time per batch: 0.649[s] Total: 74.0[s]
+2026-10-14 11:39:21,681 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 11:39:23,013 transreid.train INFO: The test feature is normalized
+2026-10-14 11:39:23,056 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 11:40:41,534 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 11:40:49,810 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 36.35%, mAP: 22.79%, mINP: 3.99%
+2026-10-14 11:40:57,859 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 22.11%, mAP: 12.83%, mINP: 1.71%
+2026-10-14 11:41:05,800 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 5.62%, mAP: 4.22%, mINP: 0.84%
+2026-10-14 11:41:13,659 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 20.75%, mAP: 13.09%, mINP: 2.12%
+2026-10-14 11:41:21,412 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 23.23%, mAP: 14.08%, mINP: 1.89%
+2026-10-14 11:41:29,237 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 4.78%, mAP: 3.83%, mINP: 0.79%
+2026-10-14 11:41:37,190 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 5.53%, mAP: 4.45%, mINP: 0.96%
+2026-10-14 11:41:45,172 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 6.14%, mAP: 3.90%, mINP: 0.75%
+2026-10-14 11:41:53,063 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 17.00%, mAP: 11.40%, mINP: 1.91%
+2026-10-14 11:41:53,063 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 11:41:53,063 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 11:41:53,063 transreid.train INFO:   NIR->RGB    20.75%  13.09%   2.12%
+2026-10-14 11:41:53,063 transreid.train INFO:   TIR->RGB     5.53%   4.45%   0.96%
+2026-10-14 11:41:53,064 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 11:41:53,064 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 11:41:53,064 transreid.train INFO:     RGB     RGB  36.35%  22.79%   3.99%
+2026-10-14 11:41:53,064 transreid.train INFO:     RGB     NIR  22.11%  12.83%   1.71%
+2026-10-14 11:41:53,064 transreid.train INFO:     RGB     TIR   5.62%   4.22%   0.84%
+2026-10-14 11:41:53,064 transreid.train INFO:     NIR     RGB  20.75%  13.09%   2.12%
+2026-10-14 11:41:53,064 transreid.train INFO:     NIR     NIR  23.23%  14.08%   1.89%
+2026-10-14 11:41:53,064 transreid.train INFO:     NIR     TIR   4.78%   3.83%   0.79%
+2026-10-14 11:41:53,064 transreid.train INFO:     TIR     RGB   5.53%   4.45%   0.96%
+2026-10-14 11:41:53,064 transreid.train INFO:     TIR     NIR   6.14%   3.90%   0.75%
+2026-10-14 11:41:53,064 transreid.train INFO:     TIR     TIR  17.00%  11.40%   1.91%
+2026-10-14 11:41:53,064 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 11:42:05,392 transreid.train INFO:   A->G -> mAP: 10.42%, Rank-1: 29.56%, Rank-10: 58.22%
+2026-10-14 11:42:17,389 transreid.train INFO:   G->A -> mAP: 12.20%, Rank-1: 30.02%, Rank-10: 53.62%
+2026-10-14 11:42:17,400 transreid.train INFO: Validation Results - Epoch: 40
+2026-10-14 11:42:17,400 transreid.train INFO: mAP: 9.00%
+2026-10-14 11:42:17,400 transreid.train INFO: CMC curve, Rank-1 : 25.40%
+2026-10-14 11:42:17,400 transreid.train INFO: CMC curve, Rank-5 : 41.73%
+2026-10-14 11:42:17,400 transreid.train INFO: CMC curve, Rank-10: 50.09%
+2026-10-14 11:42:50,546 transreid.train INFO: SCSR-V4.1 updates=4596 skipped=4 V_RMS=0.07455 T_RMS=0.07460 r_attn=8.284e-03 U_step=6.542e-08
+2026-10-14 11:43:01,898 transreid.train INFO: Epoch[41] Iteration[50/114] Loss: 0.844, Acc: 0.932, Base Lr: 2.37e-02
+2026-10-14 11:43:01,899 transreid.train INFO: Epoch[41] 0.307, 0.233, 0.271, 0.302
+2026-10-14 11:43:22,148 transreid.train INFO: SCSR-V4.1 updates=4646 skipped=4 V_RMS=0.07965 T_RMS=0.07992 r_attn=8.495e-03 U_step=6.324e-08
+2026-10-14 11:43:32,014 transreid.train INFO: Epoch[41] Iteration[100/114] Loss: 0.766, Acc: 0.938, Base Lr: 2.37e-02
+2026-10-14 11:43:32,014 transreid.train INFO: Epoch[41] 0.275, 0.219, 0.261, 0.271
+2026-10-14 11:43:40,567 transreid.train INFO: Actual optimizer updates: 4677; AMP skipped: 4; attempted: 4681
+2026-10-14 11:43:40,568 transreid.train INFO: Epoch 41 done. Time per batch: 0.728[s] Total: 83.0[s]
+2026-10-14 11:43:56,522 transreid.train INFO: SCSR-V4.1 updates=4696 skipped=4 V_RMS=0.07590 T_RMS=0.07597 r_attn=8.028e-03 U_step=6.437e-08
+2026-10-14 11:44:16,184 transreid.train INFO: Epoch[42] Iteration[50/114] Loss: 0.849, Acc: 0.933, Base Lr: 2.33e-02
+2026-10-14 11:44:16,184 transreid.train INFO: Epoch[42] 0.310, 0.238, 0.270, 0.298
+2026-10-14 11:44:28,182 transreid.train INFO: SCSR-V4.1 updates=4746 skipped=4 V_RMS=0.07643 T_RMS=0.07650 r_attn=8.329e-03 U_step=6.014e-08
+2026-10-14 11:44:47,546 transreid.train INFO: Epoch[42] Iteration[100/114] Loss: 0.754, Acc: 0.942, Base Lr: 2.33e-02
+2026-10-14 11:44:47,546 transreid.train INFO: Epoch[42] 0.270, 0.223, 0.259, 0.259
+2026-10-14 11:44:56,611 transreid.train INFO: Actual optimizer updates: 4791; AMP skipped: 4; attempted: 4795
+2026-10-14 11:44:56,611 transreid.train INFO: Epoch 42 done. Time per batch: 0.667[s] Total: 76.0[s]
+2026-10-14 11:45:05,208 transreid.train INFO: SCSR-V4.1 updates=4796 skipped=4 V_RMS=0.07867 T_RMS=0.07883 r_attn=8.500e-03 U_step=5.678e-08
+2026-10-14 11:45:32,504 transreid.train INFO: Epoch[43] Iteration[50/114] Loss: 0.822, Acc: 0.933, Base Lr: 2.29e-02
+2026-10-14 11:45:32,504 transreid.train INFO: Epoch[43] 0.303, 0.223, 0.265, 0.294
+2026-10-14 11:45:35,529 transreid.train INFO: SCSR-V4.1 updates=4846 skipped=4 V_RMS=0.07661 T_RMS=0.07669 r_attn=8.552e-03 U_step=6.135e-08
+2026-10-14 11:46:12,620 transreid.train INFO: Epoch[43] Iteration[100/114] Loss: 0.740, Acc: 0.941, Base Lr: 2.29e-02
+2026-10-14 11:46:12,620 transreid.train INFO: Epoch[43] 0.266, 0.213, 0.257, 0.258
+2026-10-14 11:46:17,744 transreid.train INFO: SCSR-V4.1 updates=4896 skipped=4 V_RMS=0.07551 T_RMS=0.07557 r_attn=8.254e-03 U_step=6.938e-08
+2026-10-14 11:46:27,334 transreid.train INFO: Actual optimizer updates: 4905; AMP skipped: 4; attempted: 4909
+2026-10-14 11:46:27,334 transreid.train INFO: Epoch 43 done. Time per batch: 0.796[s] Total: 90.7[s]
+2026-10-14 11:47:13,417 transreid.train INFO: SCSR-V4.1 updates=4946 skipped=4 V_RMS=0.07507 T_RMS=0.07488 r_attn=8.086e-03 U_step=6.744e-08
+2026-10-14 11:47:22,334 transreid.train INFO: Epoch[44] Iteration[50/115] Loss: 0.814, Acc: 0.937, Base Lr: 2.25e-02
+2026-10-14 11:47:22,334 transreid.train INFO: Epoch[44] 0.294, 0.229, 0.262, 0.288
+2026-10-14 11:48:03,228 transreid.train INFO: SCSR-V4.1 updates=4996 skipped=4 V_RMS=0.07833 T_RMS=0.07845 r_attn=8.603e-03 U_step=7.136e-08
+2026-10-14 11:48:12,146 transreid.train INFO: Epoch[44] Iteration[100/115] Loss: 0.717, Acc: 0.946, Base Lr: 2.25e-02
+2026-10-14 11:48:12,147 transreid.train INFO: Epoch[44] 0.254, 0.212, 0.253, 0.248
+2026-10-14 11:48:27,691 transreid.train INFO: Actual optimizer updates: 5020; AMP skipped: 4; attempted: 5024
+2026-10-14 11:48:27,691 transreid.train INFO: Epoch 44 done. Time per batch: 1.047[s] Total: 120.4[s]
+2026-10-14 11:48:58,645 transreid.train INFO: SCSR-V4.1 updates=5046 skipped=4 V_RMS=0.07675 T_RMS=0.07676 r_attn=8.324e-03 U_step=5.623e-08
+2026-10-14 11:49:22,796 transreid.train INFO: Epoch[45] Iteration[50/114] Loss: 0.790, Acc: 0.934, Base Lr: 2.21e-02
+2026-10-14 11:49:22,796 transreid.train INFO: Epoch[45] 0.290, 0.221, 0.265, 0.277
+2026-10-14 11:49:49,140 transreid.train INFO: SCSR-V4.1 updates=5096 skipped=4 V_RMS=0.07731 T_RMS=0.07732 r_attn=8.309e-03 U_step=6.246e-08
+2026-10-14 11:50:13,063 transreid.train INFO: Epoch[45] Iteration[100/114] Loss: 0.710, Acc: 0.943, Base Lr: 2.21e-02
+2026-10-14 11:50:13,063 transreid.train INFO: Epoch[45] 0.255, 0.207, 0.257, 0.244
+2026-10-14 11:50:27,696 transreid.train INFO: Actual optimizer updates: 5134; AMP skipped: 4; attempted: 5138
+2026-10-14 11:50:27,697 transreid.train INFO: Epoch 45 done. Time per batch: 1.053[s] Total: 120.0[s]
+2026-10-14 11:50:44,685 transreid.train INFO: SCSR-V4.1 updates=5146 skipped=4 V_RMS=0.07671 T_RMS=0.07682 r_attn=8.262e-03 U_step=5.401e-08
+2026-10-14 11:51:14,574 transreid.train INFO: Epoch[46] Iteration[50/114] Loss: 0.765, Acc: 0.940, Base Lr: 2.18e-02
+2026-10-14 11:51:14,574 transreid.train INFO: Epoch[46] 0.274, 0.222, 0.262, 0.266
+2026-10-14 11:51:21,639 transreid.train INFO: SCSR-V4.1 updates=5196 skipped=4 V_RMS=0.07718 T_RMS=0.07735 r_attn=8.283e-03 U_step=5.551e-08
+2026-10-14 11:51:44,306 transreid.train INFO: Epoch[46] Iteration[100/114] Loss: 0.693, Acc: 0.945, Base Lr: 2.18e-02
+2026-10-14 11:51:44,306 transreid.train INFO: Epoch[46] 0.246, 0.207, 0.252, 0.237
+2026-10-14 11:51:51,205 transreid.train INFO: SCSR-V4.1 updates=5246 skipped=4 V_RMS=0.07829 T_RMS=0.07852 r_attn=8.474e-03 U_step=6.731e-08
+2026-10-14 11:51:53,070 transreid.train INFO: Actual optimizer updates: 5248; AMP skipped: 4; attempted: 5252
+2026-10-14 11:51:53,071 transreid.train INFO: Epoch 46 done. Time per batch: 0.749[s] Total: 85.4[s]
+2026-10-14 11:52:26,759 transreid.train INFO: SCSR-V4.1 updates=5296 skipped=4 V_RMS=0.07588 T_RMS=0.07599 r_attn=8.145e-03 U_step=6.061e-08
+2026-10-14 11:52:27,947 transreid.train INFO: Epoch[47] Iteration[50/114] Loss: 0.712, Acc: 0.944, Base Lr: 2.14e-02
+2026-10-14 11:52:27,948 transreid.train INFO: Epoch[47] 0.257, 0.206, 0.257, 0.246
+2026-10-14 11:52:56,423 transreid.train INFO: SCSR-V4.1 updates=5346 skipped=4 V_RMS=0.07821 T_RMS=0.07847 r_attn=8.391e-03 U_step=5.931e-08
+2026-10-14 11:52:57,565 transreid.train INFO: Epoch[47] Iteration[100/114] Loss: 0.648, Acc: 0.949, Base Lr: 2.14e-02
+2026-10-14 11:52:57,565 transreid.train INFO: Epoch[47] 0.228, 0.197, 0.249, 0.220
+2026-10-14 11:53:06,448 transreid.train INFO: Actual optimizer updates: 5362; AMP skipped: 4; attempted: 5366
+2026-10-14 11:53:06,449 transreid.train INFO: Epoch 47 done. Time per batch: 0.644[s] Total: 73.4[s]
+2026-10-14 11:53:32,509 transreid.train INFO: SCSR-V4.1 updates=5396 skipped=4 V_RMS=0.08087 T_RMS=0.08108 r_attn=8.625e-03 U_step=5.837e-08
+2026-10-14 11:53:42,023 transreid.train INFO: Epoch[48] Iteration[50/115] Loss: 0.682, Acc: 0.948, Base Lr: 2.10e-02
+2026-10-14 11:53:42,023 transreid.train INFO: Epoch[48] 0.242, 0.203, 0.254, 0.234
+2026-10-14 11:54:06,337 transreid.train INFO: SCSR-V4.1 updates=5446 skipped=4 V_RMS=0.07781 T_RMS=0.07804 r_attn=8.478e-03 U_step=5.166e-08
+2026-10-14 11:54:19,992 transreid.train INFO: Epoch[48] Iteration[100/115] Loss: 0.629, Acc: 0.952, Base Lr: 2.10e-02
+2026-10-14 11:54:19,992 transreid.train INFO: Epoch[48] 0.221, 0.194, 0.246, 0.212
+2026-10-14 11:54:33,410 transreid.train INFO: Actual optimizer updates: 5477; AMP skipped: 4; attempted: 5481
+2026-10-14 11:54:33,410 transreid.train INFO: Epoch 48 done. Time per batch: 0.756[s] Total: 87.0[s]
+2026-10-14 11:54:54,706 transreid.train INFO: SCSR-V4.1 updates=5496 skipped=4 V_RMS=0.07468 T_RMS=0.07494 r_attn=8.306e-03 U_step=5.526e-08
+2026-10-14 11:55:21,294 transreid.train INFO: Epoch[49] Iteration[50/115] Loss: 0.677, Acc: 0.948, Base Lr: 2.06e-02
+2026-10-14 11:55:21,294 transreid.train INFO: Epoch[49] 0.243, 0.205, 0.255, 0.226
+2026-10-14 11:55:37,579 transreid.train INFO: SCSR-V4.1 updates=5546 skipped=4 V_RMS=0.07484 T_RMS=0.07477 r_attn=8.084e-03 U_step=5.356e-08
+2026-10-14 11:56:04,067 transreid.train INFO: Epoch[49] Iteration[100/115] Loss: 0.624, Acc: 0.952, Base Lr: 2.06e-02
+2026-10-14 11:56:04,067 transreid.train INFO: Epoch[49] 0.219, 0.193, 0.247, 0.210
+2026-10-14 11:56:17,549 transreid.train INFO: Actual optimizer updates: 5592; AMP skipped: 4; attempted: 5596
+2026-10-14 11:56:17,549 transreid.train INFO: Epoch 49 done. Time per batch: 0.906[s] Total: 104.1[s]
+2026-10-14 11:56:26,006 transreid.train INFO: SCSR-V4.1 updates=5596 skipped=4 V_RMS=0.07187 T_RMS=0.07189 r_attn=7.751e-03 U_step=5.650e-08
+2026-10-14 11:57:05,557 transreid.train INFO: Epoch[50] Iteration[50/114] Loss: 0.639, Acc: 0.953, Base Lr: 2.02e-02
+2026-10-14 11:57:05,557 transreid.train INFO: Epoch[50] 0.225, 0.201, 0.251, 0.210
+2026-10-14 11:57:09,099 transreid.train INFO: SCSR-V4.1 updates=5646 skipped=4 V_RMS=0.07521 T_RMS=0.07535 r_attn=8.115e-03 U_step=5.892e-08
+2026-10-14 11:57:48,358 transreid.train INFO: Epoch[50] Iteration[100/114] Loss: 0.584, Acc: 0.957, Base Lr: 2.02e-02
+2026-10-14 11:57:48,358 transreid.train INFO: Epoch[50] 0.200, 0.188, 0.243, 0.193
+2026-10-14 11:57:51,815 transreid.train INFO: SCSR-V4.1 updates=5696 skipped=4 V_RMS=0.07692 T_RMS=0.07688 r_attn=8.238e-03 U_step=5.443e-08
+2026-10-14 11:58:00,987 transreid.train INFO: Actual optimizer updates: 5706; AMP skipped: 4; attempted: 5710
+2026-10-14 11:58:00,988 transreid.train INFO: Epoch 50 done. Time per batch: 0.907[s] Total: 103.4[s]
+2026-10-14 11:59:40,176 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 11:59:41,307 transreid.train INFO: The test feature is normalized
+2026-10-14 11:59:41,364 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 12:01:16,327 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 12:01:26,990 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 37.75%, mAP: 24.06%, mINP: 4.43%
+2026-10-14 12:01:36,671 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 24.26%, mAP: 14.10%, mINP: 1.81%
+2026-10-14 12:01:45,515 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 6.09%, mAP: 4.81%, mINP: 0.91%
+2026-10-14 12:01:54,081 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 22.15%, mAP: 13.75%, mINP: 2.38%
+2026-10-14 12:02:02,866 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 25.39%, mAP: 14.72%, mINP: 2.01%
+2026-10-14 12:02:11,374 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 5.62%, mAP: 4.30%, mINP: 0.83%
+2026-10-14 12:02:20,025 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 6.00%, mAP: 4.81%, mINP: 1.02%
+2026-10-14 12:02:30,247 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 6.46%, mAP: 4.20%, mINP: 0.77%
+2026-10-14 12:02:41,094 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 17.70%, mAP: 11.97%, mINP: 1.92%
+2026-10-14 12:02:41,094 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 12:02:41,094 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 12:02:41,094 transreid.train INFO:   NIR->RGB    22.15%  13.75%   2.38%
+2026-10-14 12:02:41,094 transreid.train INFO:   TIR->RGB     6.00%   4.81%   1.02%
+2026-10-14 12:02:41,094 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 12:02:41,095 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 12:02:41,095 transreid.train INFO:     RGB     RGB  37.75%  24.06%   4.43%
+2026-10-14 12:02:41,095 transreid.train INFO:     RGB     NIR  24.26%  14.10%   1.81%
+2026-10-14 12:02:41,095 transreid.train INFO:     RGB     TIR   6.09%   4.81%   0.91%
+2026-10-14 12:02:41,095 transreid.train INFO:     NIR     RGB  22.15%  13.75%   2.38%
+2026-10-14 12:02:41,095 transreid.train INFO:     NIR     NIR  25.39%  14.72%   2.01%
+2026-10-14 12:02:41,095 transreid.train INFO:     NIR     TIR   5.62%   4.30%   0.83%
+2026-10-14 12:02:41,095 transreid.train INFO:     TIR     RGB   6.00%   4.81%   1.02%
+2026-10-14 12:02:41,095 transreid.train INFO:     TIR     NIR   6.46%   4.20%   0.77%
+2026-10-14 12:02:41,095 transreid.train INFO:     TIR     TIR  17.70%  11.97%   1.92%
+2026-10-14 12:02:41,096 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 12:02:55,012 transreid.train INFO:   A->G -> mAP: 10.81%, Rank-1: 32.30%, Rank-10: 57.41%
+2026-10-14 12:03:07,457 transreid.train INFO:   G->A -> mAP: 12.75%, Rank-1: 29.24%, Rank-10: 54.50%
+2026-10-14 12:03:07,470 transreid.train INFO: Validation Results - Epoch: 50
+2026-10-14 12:03:07,470 transreid.train INFO: mAP: 9.62%
+2026-10-14 12:03:07,471 transreid.train INFO: CMC curve, Rank-1 : 26.60%
+2026-10-14 12:03:07,471 transreid.train INFO: CMC curve, Rank-5 : 43.09%
+2026-10-14 12:03:07,471 transreid.train INFO: CMC curve, Rank-10: 51.35%
+2026-10-14 12:03:36,415 transreid.train INFO: SCSR-V4.1 updates=5746 skipped=4 V_RMS=0.07600 T_RMS=0.07611 r_attn=7.975e-03 U_step=4.880e-08
+2026-10-14 12:03:42,400 transreid.train INFO: Epoch[51] Iteration[50/114] Loss: 0.677, Acc: 0.946, Base Lr: 1.98e-02
+2026-10-14 12:03:42,401 transreid.train INFO: Epoch[51] 0.245, 0.202, 0.253, 0.228
+2026-10-14 12:04:06,589 transreid.train INFO: SCSR-V4.1 updates=5796 skipped=4 V_RMS=0.07802 T_RMS=0.07821 r_attn=8.409e-03 U_step=5.403e-08
+2026-10-14 12:04:12,411 transreid.train INFO: Epoch[51] Iteration[100/114] Loss: 0.609, Acc: 0.954, Base Lr: 1.98e-02
+2026-10-14 12:04:12,411 transreid.train INFO: Epoch[51] 0.213, 0.191, 0.244, 0.203
+2026-10-14 12:04:21,219 transreid.train INFO: Actual optimizer updates: 5820; AMP skipped: 4; attempted: 5824
+2026-10-14 12:04:21,219 transreid.train INFO: Epoch 51 done. Time per batch: 0.645[s] Total: 73.5[s]
+2026-10-14 12:04:41,790 transreid.train INFO: SCSR-V4.1 updates=5846 skipped=4 V_RMS=0.07863 T_RMS=0.07873 r_attn=8.618e-03 U_step=5.117e-08
+2026-10-14 12:04:55,750 transreid.train INFO: Epoch[52] Iteration[50/114] Loss: 0.641, Acc: 0.953, Base Lr: 1.94e-02
+2026-10-14 12:04:55,750 transreid.train INFO: Epoch[52] 0.224, 0.200, 0.249, 0.214
+2026-10-14 12:05:11,195 transreid.train INFO: SCSR-V4.1 updates=5896 skipped=4 V_RMS=0.07779 T_RMS=0.07808 r_attn=8.320e-03 U_step=5.196e-08
+2026-10-14 12:05:25,348 transreid.train INFO: Epoch[52] Iteration[100/114] Loss: 0.584, Acc: 0.956, Base Lr: 1.94e-02
+2026-10-14 12:05:25,348 transreid.train INFO: Epoch[52] 0.203, 0.185, 0.240, 0.194
+2026-10-14 12:05:34,337 transreid.train INFO: Actual optimizer updates: 5934; AMP skipped: 4; attempted: 5938
+2026-10-14 12:05:34,337 transreid.train INFO: Epoch 52 done. Time per batch: 0.641[s] Total: 73.1[s]
+2026-10-14 12:05:47,647 transreid.train INFO: SCSR-V4.1 updates=5946 skipped=4 V_RMS=0.07618 T_RMS=0.07641 r_attn=8.220e-03 U_step=4.908e-08
+2026-10-14 12:06:10,222 transreid.train INFO: Epoch[53] Iteration[50/115] Loss: 0.605, Acc: 0.957, Base Lr: 1.89e-02
+2026-10-14 12:06:10,222 transreid.train INFO: Epoch[53] 0.207, 0.197, 0.250, 0.199
+2026-10-14 12:06:17,246 transreid.train INFO: SCSR-V4.1 updates=5996 skipped=4 V_RMS=0.07935 T_RMS=0.07944 r_attn=8.363e-03 U_step=5.169e-08
+2026-10-14 12:06:39,605 transreid.train INFO: Epoch[53] Iteration[100/115] Loss: 0.558, Acc: 0.959, Base Lr: 1.89e-02
+2026-10-14 12:06:39,605 transreid.train INFO: Epoch[53] 0.191, 0.184, 0.240, 0.181
+2026-10-14 12:06:46,439 transreid.train INFO: SCSR-V4.1 updates=6045 skipped=5 V_RMS=0.07728 T_RMS=0.07734 r_attn=8.515e-03 U_step=5.229e-08
+2026-10-14 12:06:49,519 transreid.train INFO: Actual optimizer updates: 6048; AMP skipped: 5; attempted: 6053
+2026-10-14 12:06:49,520 transreid.train INFO: Epoch 53 done. Time per batch: 0.654[s] Total: 75.2[s]
+2026-10-14 12:07:34,953 transreid.train INFO: SCSR-V4.1 updates=6095 skipped=5 V_RMS=0.07664 T_RMS=0.07683 r_attn=8.264e-03 U_step=4.758e-08
+2026-10-14 12:07:37,485 transreid.train INFO: Epoch[54] Iteration[50/115] Loss: 0.608, Acc: 0.955, Base Lr: 1.85e-02
+2026-10-14 12:07:37,485 transreid.train INFO: Epoch[54] 0.217, 0.187, 0.245, 0.201
+2026-10-14 12:08:17,340 transreid.train INFO: SCSR-V4.1 updates=6145 skipped=5 V_RMS=0.07946 T_RMS=0.07963 r_attn=8.549e-03 U_step=5.388e-08
+2026-10-14 12:08:19,821 transreid.train INFO: Epoch[54] Iteration[100/115] Loss: 0.565, Acc: 0.959, Base Lr: 1.85e-02
+2026-10-14 12:08:19,822 transreid.train INFO: Epoch[54] 0.198, 0.179, 0.238, 0.186
+2026-10-14 12:08:33,887 transreid.train INFO: Actual optimizer updates: 6163; AMP skipped: 5; attempted: 6168
+2026-10-14 12:08:33,887 transreid.train INFO: Epoch 54 done. Time per batch: 0.908[s] Total: 104.4[s]
+2026-10-14 12:09:07,584 transreid.train INFO: SCSR-V4.1 updates=6195 skipped=5 V_RMS=0.08088 T_RMS=0.08109 r_attn=8.796e-03 U_step=5.279e-08
+2026-10-14 12:09:22,805 transreid.train INFO: Epoch[55] Iteration[50/114] Loss: 0.611, Acc: 0.952, Base Lr: 1.81e-02
+2026-10-14 12:09:22,805 transreid.train INFO: Epoch[55] 0.217, 0.190, 0.245, 0.201
+2026-10-14 12:09:49,643 transreid.train INFO: SCSR-V4.1 updates=6245 skipped=5 V_RMS=0.07700 T_RMS=0.07707 r_attn=8.119e-03 U_step=5.172e-08
+2026-10-14 12:10:04,684 transreid.train INFO: Epoch[55] Iteration[100/114] Loss: 0.552, Acc: 0.957, Base Lr: 1.81e-02
+2026-10-14 12:10:04,684 transreid.train INFO: Epoch[55] 0.193, 0.178, 0.237, 0.178
+2026-10-14 12:10:17,126 transreid.train INFO: Actual optimizer updates: 6277; AMP skipped: 5; attempted: 6282
+2026-10-14 12:10:17,127 transreid.train INFO: Epoch 55 done. Time per batch: 0.906[s] Total: 103.2[s]
+2026-10-14 12:10:38,064 transreid.train INFO: SCSR-V4.1 updates=6295 skipped=5 V_RMS=0.07760 T_RMS=0.07778 r_attn=8.439e-03 U_step=4.441e-08
+2026-10-14 12:11:05,332 transreid.train INFO: Epoch[56] Iteration[50/114] Loss: 0.595, Acc: 0.958, Base Lr: 1.77e-02
+2026-10-14 12:11:05,332 transreid.train INFO: Epoch[56] 0.208, 0.189, 0.246, 0.195
+2026-10-14 12:11:20,800 transreid.train INFO: SCSR-V4.1 updates=6345 skipped=5 V_RMS=0.07623 T_RMS=0.07630 r_attn=8.232e-03 U_step=4.731e-08
+2026-10-14 12:11:48,113 transreid.train INFO: Epoch[56] Iteration[100/114] Loss: 0.538, Acc: 0.961, Base Lr: 1.77e-02
+2026-10-14 12:11:48,113 transreid.train INFO: Epoch[56] 0.185, 0.176, 0.236, 0.174
+2026-10-14 12:12:00,886 transreid.train INFO: Actual optimizer updates: 6391; AMP skipped: 5; attempted: 6396
+2026-10-14 12:12:00,887 transreid.train INFO: Epoch 56 done. Time per batch: 0.910[s] Total: 103.8[s]
+2026-10-14 12:12:09,738 transreid.train INFO: SCSR-V4.1 updates=6395 skipped=5 V_RMS=0.07356 T_RMS=0.07348 r_attn=8.051e-03 U_step=4.922e-08
+2026-10-14 12:12:49,003 transreid.train INFO: Epoch[57] Iteration[50/114] Loss: 0.591, Acc: 0.956, Base Lr: 1.73e-02
+2026-10-14 12:12:49,004 transreid.train INFO: Epoch[57] 0.209, 0.185, 0.243, 0.194
+2026-10-14 12:12:52,305 transreid.train INFO: SCSR-V4.1 updates=6445 skipped=5 V_RMS=0.07542 T_RMS=0.07543 r_attn=8.058e-03 U_step=4.990e-08
+2026-10-14 12:13:31,292 transreid.train INFO: Epoch[57] Iteration[100/114] Loss: 0.536, Acc: 0.960, Base Lr: 1.73e-02
+2026-10-14 12:13:31,293 transreid.train INFO: Epoch[57] 0.187, 0.175, 0.234, 0.172
+2026-10-14 12:13:34,728 transreid.train INFO: SCSR-V4.1 updates=6495 skipped=5 V_RMS=0.07922 T_RMS=0.07938 r_attn=8.483e-03 U_step=4.690e-08
+2026-10-14 12:13:44,072 transreid.train INFO: Actual optimizer updates: 6505; AMP skipped: 5; attempted: 6510
+2026-10-14 12:13:44,072 transreid.train INFO: Epoch 57 done. Time per batch: 0.905[s] Total: 103.2[s]
+2026-10-14 12:14:23,614 transreid.train INFO: SCSR-V4.1 updates=6545 skipped=5 V_RMS=0.07812 T_RMS=0.07836 r_attn=8.484e-03 U_step=4.448e-08
+2026-10-14 12:14:32,130 transreid.train INFO: Epoch[58] Iteration[50/114] Loss: 0.605, Acc: 0.951, Base Lr: 1.69e-02
+2026-10-14 12:14:32,130 transreid.train INFO: Epoch[58] 0.223, 0.184, 0.244, 0.196
+2026-10-14 12:14:57,045 transreid.train INFO: SCSR-V4.1 updates=6595 skipped=5 V_RMS=0.07678 T_RMS=0.07687 r_attn=8.438e-03 U_step=4.983e-08
+2026-10-14 12:15:02,843 transreid.train INFO: Epoch[58] Iteration[100/114] Loss: 0.542, Acc: 0.957, Base Lr: 1.69e-02
+2026-10-14 12:15:02,843 transreid.train INFO: Epoch[58] 0.194, 0.171, 0.234, 0.175
+2026-10-14 12:15:11,674 transreid.train INFO: Actual optimizer updates: 6619; AMP skipped: 5; attempted: 6624
+2026-10-14 12:15:11,675 transreid.train INFO: Epoch 58 done. Time per batch: 0.768[s] Total: 87.6[s]
+2026-10-14 12:15:32,934 transreid.train INFO: SCSR-V4.1 updates=6645 skipped=5 V_RMS=0.07583 T_RMS=0.07587 r_attn=8.116e-03 U_step=4.357e-08
+2026-10-14 12:15:47,070 transreid.train INFO: Epoch[59] Iteration[50/114] Loss: 0.551, Acc: 0.959, Base Lr: 1.64e-02
+2026-10-14 12:15:47,070 transreid.train INFO: Epoch[59] 0.197, 0.177, 0.239, 0.174
+2026-10-14 12:16:02,460 transreid.train INFO: SCSR-V4.1 updates=6695 skipped=5 V_RMS=0.07741 T_RMS=0.07758 r_attn=8.415e-03 U_step=4.544e-08
+2026-10-14 12:16:16,567 transreid.train INFO: Epoch[59] Iteration[100/114] Loss: 0.489, Acc: 0.965, Base Lr: 1.64e-02
+2026-10-14 12:16:16,568 transreid.train INFO: Epoch[59] 0.170, 0.164, 0.231, 0.153
+2026-10-14 12:16:25,495 transreid.train INFO: Actual optimizer updates: 6733; AMP skipped: 5; attempted: 6738
+2026-10-14 12:16:25,496 transreid.train INFO: Epoch 59 done. Time per batch: 0.648[s] Total: 73.8[s]
+2026-10-14 12:16:38,917 transreid.train INFO: SCSR-V4.1 updates=6745 skipped=5 V_RMS=0.07540 T_RMS=0.07553 r_attn=8.051e-03 U_step=4.376e-08
+2026-10-14 12:17:01,911 transreid.train INFO: Epoch[60] Iteration[50/114] Loss: 0.548, Acc: 0.958, Base Lr: 1.60e-02
+2026-10-14 12:17:01,911 transreid.train INFO: Epoch[60] 0.195, 0.173, 0.239, 0.178
+2026-10-14 12:17:09,049 transreid.train INFO: SCSR-V4.1 updates=6795 skipped=5 V_RMS=0.07696 T_RMS=0.07701 r_attn=8.140e-03 U_step=4.232e-08
+2026-10-14 12:17:34,154 transreid.train INFO: Epoch[60] Iteration[100/114] Loss: 0.493, Acc: 0.963, Base Lr: 1.60e-02
+2026-10-14 12:17:34,155 transreid.train INFO: Epoch[60] 0.172, 0.163, 0.230, 0.157
+2026-10-14 12:17:44,466 transreid.train INFO: SCSR-V4.1 updates=6845 skipped=5 V_RMS=0.07673 T_RMS=0.07682 r_attn=8.298e-03 U_step=4.275e-08
+2026-10-14 12:17:46,937 transreid.train INFO: Actual optimizer updates: 6847; AMP skipped: 5; attempted: 6852
+2026-10-14 12:17:46,938 transreid.train INFO: Epoch 60 done. Time per batch: 0.714[s] Total: 81.4[s]
+2026-10-14 12:18:49,198 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 12:19:30,918 transreid.train INFO: The test feature is normalized
+2026-10-14 12:19:30,950 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 12:20:57,412 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 12:21:05,930 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 38.45%, mAP: 24.47%, mINP: 4.52%
+2026-10-14 12:21:14,039 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 24.40%, mAP: 14.37%, mINP: 1.91%
+2026-10-14 12:21:22,943 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 6.98%, mAP: 4.98%, mINP: 0.96%
+2026-10-14 12:21:31,380 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 21.50%, mAP: 14.12%, mINP: 2.48%
+2026-10-14 12:21:40,463 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 26.14%, mAP: 15.39%, mINP: 2.17%
+2026-10-14 12:21:48,995 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.28%, mAP: 4.51%, mINP: 0.90%
+2026-10-14 12:21:57,466 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 6.14%, mAP: 4.90%, mINP: 1.07%
+2026-10-14 12:22:05,447 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 6.46%, mAP: 4.35%, mINP: 0.83%
+2026-10-14 12:22:13,434 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 18.97%, mAP: 12.37%, mINP: 1.99%
+2026-10-14 12:22:13,434 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 12:22:13,434 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 12:22:13,434 transreid.train INFO:   NIR->RGB    21.50%  14.12%   2.48%
+2026-10-14 12:22:13,434 transreid.train INFO:   TIR->RGB     6.14%   4.90%   1.07%
+2026-10-14 12:22:13,434 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 12:22:13,434 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 12:22:13,435 transreid.train INFO:     RGB     RGB  38.45%  24.47%   4.52%
+2026-10-14 12:22:13,435 transreid.train INFO:     RGB     NIR  24.40%  14.37%   1.91%
+2026-10-14 12:22:13,435 transreid.train INFO:     RGB     TIR   6.98%   4.98%   0.96%
+2026-10-14 12:22:13,435 transreid.train INFO:     NIR     RGB  21.50%  14.12%   2.48%
+2026-10-14 12:22:13,435 transreid.train INFO:     NIR     NIR  26.14%  15.39%   2.17%
+2026-10-14 12:22:13,435 transreid.train INFO:     NIR     TIR   6.28%   4.51%   0.90%
+2026-10-14 12:22:13,435 transreid.train INFO:     TIR     RGB   6.14%   4.90%   1.07%
+2026-10-14 12:22:13,435 transreid.train INFO:     TIR     NIR   6.46%   4.35%   0.83%
+2026-10-14 12:22:13,435 transreid.train INFO:     TIR     TIR  18.97%  12.37%   1.99%
+2026-10-14 12:22:13,435 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 12:22:26,371 transreid.train INFO:   A->G -> mAP: 11.03%, Rank-1: 31.11%, Rank-10: 57.85%
+2026-10-14 12:22:39,394 transreid.train INFO:   G->A -> mAP: 12.62%, Rank-1: 29.09%, Rank-10: 55.07%
+2026-10-14 12:22:39,408 transreid.train INFO: Validation Results - Epoch: 60
+2026-10-14 12:22:39,408 transreid.train INFO: mAP: 9.91%
+2026-10-14 12:22:39,408 transreid.train INFO: CMC curve, Rank-1 : 27.53%
+2026-10-14 12:22:39,408 transreid.train INFO: CMC curve, Rank-5 : 43.73%
+2026-10-14 12:22:39,408 transreid.train INFO: CMC curve, Rank-10: 52.29%
+2026-10-14 12:23:13,316 transreid.train INFO: SCSR-V4.1 updates=6895 skipped=5 V_RMS=0.07752 T_RMS=0.07749 r_attn=8.265e-03 U_step=3.861e-08
+2026-10-14 12:23:14,478 transreid.train INFO: Epoch[61] Iteration[50/114] Loss: 0.562, Acc: 0.956, Base Lr: 1.56e-02
+2026-10-14 12:23:14,479 transreid.train INFO: Epoch[61] 0.204, 0.179, 0.239, 0.177
+2026-10-14 12:23:43,260 transreid.train INFO: SCSR-V4.1 updates=6945 skipped=5 V_RMS=0.07970 T_RMS=0.07968 r_attn=8.477e-03 U_step=4.499e-08
+2026-10-14 12:23:44,386 transreid.train INFO: Epoch[61] Iteration[100/114] Loss: 0.493, Acc: 0.962, Base Lr: 1.56e-02
+2026-10-14 12:23:44,387 transreid.train INFO: Epoch[61] 0.173, 0.163, 0.229, 0.155
+2026-10-14 12:23:53,308 transreid.train INFO: Actual optimizer updates: 6961; AMP skipped: 5; attempted: 6966
+2026-10-14 12:23:53,308 transreid.train INFO: Epoch 61 done. Time per batch: 0.646[s] Total: 73.7[s]
+2026-10-14 12:24:19,125 transreid.train INFO: SCSR-V4.1 updates=6995 skipped=5 V_RMS=0.07634 T_RMS=0.07647 r_attn=8.290e-03 U_step=3.973e-08
+2026-10-14 12:24:28,585 transreid.train INFO: Epoch[62] Iteration[50/114] Loss: 0.513, Acc: 0.962, Base Lr: 1.52e-02
+2026-10-14 12:24:28,585 transreid.train INFO: Epoch[62] 0.181, 0.170, 0.235, 0.160
+2026-10-14 12:24:48,905 transreid.train INFO: SCSR-V4.1 updates=7045 skipped=5 V_RMS=0.07688 T_RMS=0.07693 r_attn=8.149e-03 U_step=3.961e-08
+2026-10-14 12:24:58,564 transreid.train INFO: Epoch[62] Iteration[100/114] Loss: 0.477, Acc: 0.966, Base Lr: 1.52e-02
+2026-10-14 12:24:58,564 transreid.train INFO: Epoch[62] 0.165, 0.160, 0.226, 0.149
+2026-10-14 12:25:07,544 transreid.train INFO: Actual optimizer updates: 7075; AMP skipped: 5; attempted: 7080
+2026-10-14 12:25:07,544 transreid.train INFO: Epoch 62 done. Time per batch: 0.651[s] Total: 74.2[s]
+2026-10-14 12:25:29,345 transreid.train INFO: SCSR-V4.1 updates=7095 skipped=5 V_RMS=0.07814 T_RMS=0.07815 r_attn=8.343e-03 U_step=4.034e-08
+2026-10-14 12:25:55,603 transreid.train INFO: Epoch[63] Iteration[50/114] Loss: 0.525, Acc: 0.962, Base Lr: 1.48e-02
+2026-10-14 12:25:55,603 transreid.train INFO: Epoch[63] 0.188, 0.170, 0.236, 0.165
+2026-10-14 12:26:13,211 transreid.train INFO: SCSR-V4.1 updates=7145 skipped=5 V_RMS=0.07877 T_RMS=0.07903 r_attn=8.605e-03 U_step=3.980e-08
+2026-10-14 12:26:39,672 transreid.train INFO: Epoch[63] Iteration[100/114] Loss: 0.474, Acc: 0.966, Base Lr: 1.48e-02
+2026-10-14 12:26:39,673 transreid.train INFO: Epoch[63] 0.165, 0.160, 0.226, 0.147
+2026-10-14 12:26:52,511 transreid.train INFO: Actual optimizer updates: 7189; AMP skipped: 5; attempted: 7194
+2026-10-14 12:26:52,511 transreid.train INFO: Epoch 63 done. Time per batch: 0.921[s] Total: 105.0[s]
+2026-10-14 12:27:02,626 transreid.train INFO: SCSR-V4.1 updates=7195 skipped=5 V_RMS=0.07768 T_RMS=0.07767 r_attn=8.388e-03 U_step=3.630e-08
+2026-10-14 12:27:41,291 transreid.train INFO: Epoch[64] Iteration[50/115] Loss: 0.508, Acc: 0.962, Base Lr: 1.44e-02
+2026-10-14 12:27:41,291 transreid.train INFO: Epoch[64] 0.178, 0.166, 0.231, 0.162
+2026-10-14 12:27:46,642 transreid.train INFO: SCSR-V4.1 updates=7245 skipped=5 V_RMS=0.07935 T_RMS=0.07959 r_attn=8.467e-03 U_step=3.500e-08
+2026-10-14 12:28:25,424 transreid.train INFO: Epoch[64] Iteration[100/115] Loss: 0.468, Acc: 0.965, Base Lr: 1.44e-02
+2026-10-14 12:28:25,425 transreid.train INFO: Epoch[64] 0.162, 0.155, 0.224, 0.149
+2026-10-14 12:28:30,696 transreid.train INFO: SCSR-V4.1 updates=7295 skipped=5 V_RMS=0.07882 T_RMS=0.07897 r_attn=8.454e-03 U_step=4.296e-08
+2026-10-14 12:28:39,299 transreid.train INFO: Actual optimizer updates: 7304; AMP skipped: 5; attempted: 7309
+2026-10-14 12:28:39,299 transreid.train INFO: Epoch 64 done. Time per batch: 0.929[s] Total: 106.8[s]
+2026-10-14 12:29:20,204 transreid.train INFO: SCSR-V4.1 updates=7345 skipped=5 V_RMS=0.08022 T_RMS=0.08061 r_attn=8.778e-03 U_step=4.362e-08
+2026-10-14 12:29:28,124 transreid.train INFO: Epoch[65] Iteration[50/114] Loss: 0.481, Acc: 0.964, Base Lr: 1.39e-02
+2026-10-14 12:29:28,125 transreid.train INFO: Epoch[65] 0.170, 0.159, 0.231, 0.150
+2026-10-14 12:30:04,073 transreid.train INFO: SCSR-V4.1 updates=7395 skipped=5 V_RMS=0.07828 T_RMS=0.07842 r_attn=8.537e-03 U_step=3.808e-08
+2026-10-14 12:30:11,953 transreid.train INFO: Epoch[65] Iteration[100/114] Loss: 0.449, Acc: 0.966, Base Lr: 1.39e-02
+2026-10-14 12:30:11,954 transreid.train INFO: Epoch[65] 0.156, 0.150, 0.223, 0.141
+2026-10-14 12:30:24,899 transreid.train INFO: Actual optimizer updates: 7418; AMP skipped: 5; attempted: 7423
+2026-10-14 12:30:24,900 transreid.train INFO: Epoch 65 done. Time per batch: 0.926[s] Total: 105.6[s]
+2026-10-14 12:30:53,581 transreid.train INFO: SCSR-V4.1 updates=7445 skipped=5 V_RMS=0.07604 T_RMS=0.07614 r_attn=8.141e-03 U_step=3.447e-08
+2026-10-14 12:31:13,787 transreid.train INFO: Epoch[66] Iteration[50/114] Loss: 0.494, Acc: 0.963, Base Lr: 1.35e-02
+2026-10-14 12:31:13,787 transreid.train INFO: Epoch[66] 0.174, 0.162, 0.229, 0.155
+2026-10-14 12:31:37,664 transreid.train INFO: SCSR-V4.1 updates=7495 skipped=5 V_RMS=0.07996 T_RMS=0.08019 r_attn=8.692e-03 U_step=3.575e-08
+2026-10-14 12:31:57,617 transreid.train INFO: Epoch[66] Iteration[100/114] Loss: 0.451, Acc: 0.967, Base Lr: 1.35e-02
+2026-10-14 12:31:57,618 transreid.train INFO: Epoch[66] 0.155, 0.153, 0.221, 0.141
+2026-10-14 12:32:10,285 transreid.train INFO: Actual optimizer updates: 7532; AMP skipped: 5; attempted: 7537
+2026-10-14 12:32:10,286 transreid.train INFO: Epoch 66 done. Time per batch: 0.924[s] Total: 105.4[s]
+2026-10-14 12:32:27,337 transreid.train INFO: SCSR-V4.1 updates=7545 skipped=5 V_RMS=0.07524 T_RMS=0.07518 r_attn=8.052e-03 U_step=3.199e-08
+2026-10-14 12:32:51,833 transreid.train INFO: Epoch[67] Iteration[50/114] Loss: 0.463, Acc: 0.968, Base Lr: 1.31e-02
+2026-10-14 12:32:51,833 transreid.train INFO: Epoch[67] 0.158, 0.158, 0.229, 0.144
+2026-10-14 12:32:59,892 transreid.train INFO: SCSR-V4.1 updates=7595 skipped=5 V_RMS=0.07991 T_RMS=0.08020 r_attn=8.711e-03 U_step=3.229e-08
+2026-10-14 12:33:22,683 transreid.train INFO: Epoch[67] Iteration[100/114] Loss: 0.434, Acc: 0.969, Base Lr: 1.31e-02
+2026-10-14 12:33:22,683 transreid.train INFO: Epoch[67] 0.147, 0.151, 0.221, 0.134
+2026-10-14 12:33:30,287 transreid.train INFO: SCSR-V4.1 updates=7645 skipped=5 V_RMS=0.07760 T_RMS=0.07771 r_attn=8.465e-03 U_step=3.654e-08
+2026-10-14 12:33:31,744 transreid.train INFO: Actual optimizer updates: 7646; AMP skipped: 5; attempted: 7651
+2026-10-14 12:33:31,745 transreid.train INFO: Epoch 67 done. Time per batch: 0.715[s] Total: 81.5[s]
+2026-10-14 12:34:08,165 transreid.train INFO: SCSR-V4.1 updates=7695 skipped=5 V_RMS=0.07619 T_RMS=0.07646 r_attn=8.003e-03 U_step=3.620e-08
+2026-10-14 12:34:08,787 transreid.train INFO: Epoch[68] Iteration[50/114] Loss: 0.478, Acc: 0.966, Base Lr: 1.27e-02
+2026-10-14 12:34:08,788 transreid.train INFO: Epoch[68] 0.166, 0.160, 0.227, 0.151
+2026-10-14 12:34:38,546 transreid.train INFO: SCSR-V4.1 updates=7745 skipped=5 V_RMS=0.07549 T_RMS=0.07563 r_attn=8.210e-03 U_step=3.464e-08
+2026-10-14 12:34:39,090 transreid.train INFO: Epoch[68] Iteration[100/114] Loss: 0.433, Acc: 0.969, Base Lr: 1.27e-02
+2026-10-14 12:34:39,091 transreid.train INFO: Epoch[68] 0.148, 0.149, 0.221, 0.135
+2026-10-14 12:34:48,449 transreid.train INFO: Actual optimizer updates: 7760; AMP skipped: 5; attempted: 7765
+2026-10-14 12:34:48,449 transreid.train INFO: Epoch 68 done. Time per batch: 0.673[s] Total: 76.7[s]
+2026-10-14 12:35:16,662 transreid.train INFO: SCSR-V4.1 updates=7795 skipped=5 V_RMS=0.07518 T_RMS=0.07516 r_attn=8.136e-03 U_step=2.944e-08
+2026-10-14 12:35:26,034 transreid.train INFO: Epoch[69] Iteration[50/114] Loss: 0.458, Acc: 0.966, Base Lr: 1.23e-02
+2026-10-14 12:35:26,034 transreid.train INFO: Epoch[69] 0.164, 0.150, 0.225, 0.141
+2026-10-14 12:35:49,855 transreid.train INFO: SCSR-V4.1 updates=7845 skipped=5 V_RMS=0.07921 T_RMS=0.07945 r_attn=8.414e-03 U_step=2.998e-08
+2026-10-14 12:35:59,115 transreid.train INFO: Epoch[69] Iteration[100/114] Loss: 0.414, Acc: 0.969, Base Lr: 1.23e-02
+2026-10-14 12:35:59,115 transreid.train INFO: Epoch[69] 0.145, 0.142, 0.217, 0.125
+2026-10-14 12:36:08,437 transreid.train INFO: Actual optimizer updates: 7874; AMP skipped: 5; attempted: 7879
+2026-10-14 12:36:08,437 transreid.train INFO: Epoch 69 done. Time per batch: 0.702[s] Total: 80.0[s]
+2026-10-14 12:36:28,073 transreid.train INFO: SCSR-V4.1 updates=7895 skipped=5 V_RMS=0.07986 T_RMS=0.08008 r_attn=8.583e-03 U_step=3.235e-08
+2026-10-14 12:36:46,215 transreid.train INFO: Epoch[70] Iteration[50/114] Loss: 0.459, Acc: 0.967, Base Lr: 1.19e-02
+2026-10-14 12:36:46,215 transreid.train INFO: Epoch[70] 0.161, 0.157, 0.228, 0.139
+2026-10-14 12:36:59,603 transreid.train INFO: SCSR-V4.1 updates=7945 skipped=5 V_RMS=0.07584 T_RMS=0.07593 r_attn=8.173e-03 U_step=3.189e-08
+2026-10-14 12:37:18,255 transreid.train INFO: Epoch[70] Iteration[100/114] Loss: 0.403, Acc: 0.971, Base Lr: 1.19e-02
+2026-10-14 12:37:18,255 transreid.train INFO: Epoch[70] 0.136, 0.144, 0.219, 0.121
+2026-10-14 12:37:27,966 transreid.train INFO: Actual optimizer updates: 7988; AMP skipped: 5; attempted: 7993
+2026-10-14 12:37:27,967 transreid.train INFO: Epoch 70 done. Time per batch: 0.698[s] Total: 79.5[s]
+2026-10-14 12:38:35,105 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 12:38:36,378 transreid.train INFO: The test feature is normalized
+2026-10-14 12:38:36,409 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 12:40:11,163 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 12:40:20,707 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 39.91%, mAP: 24.77%, mINP: 4.65%
+2026-10-14 12:40:30,669 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 24.36%, mAP: 14.70%, mINP: 1.99%
+2026-10-14 12:40:40,232 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 6.18%, mAP: 5.03%, mINP: 0.95%
+2026-10-14 12:40:49,095 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 21.36%, mAP: 14.30%, mINP: 2.51%
+2026-10-14 12:40:58,165 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 25.15%, mAP: 15.38%, mINP: 2.16%
+2026-10-14 12:41:07,312 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.00%, mAP: 4.65%, mINP: 0.85%
+2026-10-14 12:41:16,529 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 6.98%, mAP: 5.14%, mINP: 1.11%
+2026-10-14 12:41:25,335 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 6.79%, mAP: 4.59%, mINP: 0.82%
+2026-10-14 12:41:34,409 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 19.02%, mAP: 12.58%, mINP: 1.99%
+2026-10-14 12:41:34,409 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 12:41:34,409 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 12:41:34,409 transreid.train INFO:   NIR->RGB    21.36%  14.30%   2.51%
+2026-10-14 12:41:34,409 transreid.train INFO:   TIR->RGB     6.98%   5.14%   1.11%
+2026-10-14 12:41:34,410 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 12:41:34,410 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 12:41:34,410 transreid.train INFO:     RGB     RGB  39.91%  24.77%   4.65%
+2026-10-14 12:41:34,410 transreid.train INFO:     RGB     NIR  24.36%  14.70%   1.99%
+2026-10-14 12:41:34,410 transreid.train INFO:     RGB     TIR   6.18%   5.03%   0.95%
+2026-10-14 12:41:34,410 transreid.train INFO:     NIR     RGB  21.36%  14.30%   2.51%
+2026-10-14 12:41:34,410 transreid.train INFO:     NIR     NIR  25.15%  15.38%   2.16%
+2026-10-14 12:41:34,410 transreid.train INFO:     NIR     TIR   6.00%   4.65%   0.85%
+2026-10-14 12:41:34,410 transreid.train INFO:     TIR     RGB   6.98%   5.14%   1.11%
+2026-10-14 12:41:34,410 transreid.train INFO:     TIR     NIR   6.79%   4.59%   0.82%
+2026-10-14 12:41:34,410 transreid.train INFO:     TIR     TIR  19.02%  12.58%   1.99%
+2026-10-14 12:41:34,412 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 12:41:49,470 transreid.train INFO:   A->G -> mAP: 11.02%, Rank-1: 30.74%, Rank-10: 57.56%
+2026-10-14 12:42:03,248 transreid.train INFO:   G->A -> mAP: 12.68%, Rank-1: 28.67%, Rank-10: 53.99%
+2026-10-14 12:42:03,271 transreid.train INFO: Validation Results - Epoch: 70
+2026-10-14 12:42:03,271 transreid.train INFO: mAP: 10.06%
+2026-10-14 12:42:03,271 transreid.train INFO: CMC curve, Rank-1 : 27.76%
+2026-10-14 12:42:03,271 transreid.train INFO: CMC curve, Rank-5 : 44.29%
+2026-10-14 12:42:03,271 transreid.train INFO: CMC curve, Rank-10: 52.49%
+2026-10-14 12:42:14,550 transreid.train INFO: SCSR-V4.1 updates=7995 skipped=5 V_RMS=0.07756 T_RMS=0.07756 r_attn=8.165e-03 U_step=2.895e-08
+2026-10-14 12:42:41,568 transreid.train INFO: Epoch[71] Iteration[50/114] Loss: 0.444, Acc: 0.966, Base Lr: 1.15e-02
+2026-10-14 12:42:41,568 transreid.train INFO: Epoch[71] 0.157, 0.147, 0.224, 0.138
+2026-10-14 12:42:46,040 transreid.train INFO: SCSR-V4.1 updates=8045 skipped=5 V_RMS=0.07861 T_RMS=0.07890 r_attn=8.420e-03 U_step=2.947e-08
+2026-10-14 12:43:12,891 transreid.train INFO: Epoch[71] Iteration[100/114] Loss: 0.419, Acc: 0.970, Base Lr: 1.15e-02
+2026-10-14 12:43:12,891 transreid.train INFO: Epoch[71] 0.144, 0.143, 0.218, 0.130
+2026-10-14 12:43:17,164 transreid.train INFO: SCSR-V4.1 updates=8095 skipped=5 V_RMS=0.07991 T_RMS=0.08014 r_attn=8.623e-03 U_step=2.908e-08
+2026-10-14 12:43:22,377 transreid.train INFO: Actual optimizer updates: 8102; AMP skipped: 5; attempted: 8107
+2026-10-14 12:43:22,377 transreid.train INFO: Epoch 71 done. Time per batch: 0.692[s] Total: 78.9[s]
+2026-10-14 12:43:55,329 transreid.train INFO: SCSR-V4.1 updates=8145 skipped=5 V_RMS=0.07891 T_RMS=0.07922 r_attn=8.684e-03 U_step=3.276e-08
+2026-10-14 12:43:59,606 transreid.train INFO: Epoch[72] Iteration[50/114] Loss: 0.444, Acc: 0.967, Base Lr: 1.11e-02
+2026-10-14 12:43:59,606 transreid.train INFO: Epoch[72] 0.156, 0.150, 0.224, 0.136
+2026-10-14 12:44:25,918 transreid.train INFO: SCSR-V4.1 updates=8195 skipped=5 V_RMS=0.08688 T_RMS=0.08721 r_attn=9.170e-03 U_step=3.168e-08
+2026-10-14 12:44:30,202 transreid.train INFO: Epoch[72] Iteration[100/114] Loss: 0.420, Acc: 0.969, Base Lr: 1.11e-02
+2026-10-14 12:44:30,202 transreid.train INFO: Epoch[72] 0.144, 0.144, 0.217, 0.129
+2026-10-14 12:44:39,705 transreid.train INFO: Actual optimizer updates: 8216; AMP skipped: 5; attempted: 8221
+2026-10-14 12:44:39,705 transreid.train INFO: Epoch 72 done. Time per batch: 0.678[s] Total: 77.3[s]
+2026-10-14 12:45:04,512 transreid.train INFO: SCSR-V4.1 updates=8245 skipped=5 V_RMS=0.07978 T_RMS=0.07989 r_attn=8.430e-03 U_step=2.562e-08
+2026-10-14 12:45:17,265 transreid.train INFO: Epoch[73] Iteration[50/114] Loss: 0.441, Acc: 0.967, Base Lr: 1.07e-02
+2026-10-14 12:45:17,266 transreid.train INFO: Epoch[73] 0.151, 0.157, 0.223, 0.130
+2026-10-14 12:45:34,692 transreid.train INFO: SCSR-V4.1 updates=8295 skipped=5 V_RMS=0.07509 T_RMS=0.07526 r_attn=8.207e-03 U_step=2.614e-08
+2026-10-14 12:45:47,318 transreid.train INFO: Epoch[73] Iteration[100/114] Loss: 0.401, Acc: 0.972, Base Lr: 1.07e-02
+2026-10-14 12:45:47,318 transreid.train INFO: Epoch[73] 0.135, 0.144, 0.216, 0.120
+2026-10-14 12:45:56,915 transreid.train INFO: Actual optimizer updates: 8330; AMP skipped: 5; attempted: 8335
+2026-10-14 12:45:56,916 transreid.train INFO: Epoch 73 done. Time per batch: 0.677[s] Total: 77.2[s]
+2026-10-14 12:46:12,580 transreid.train INFO: SCSR-V4.1 updates=8345 skipped=5 V_RMS=0.07405 T_RMS=0.07406 r_attn=7.956e-03 U_step=2.361e-08
+2026-10-14 12:46:33,843 transreid.train INFO: Epoch[74] Iteration[50/114] Loss: 0.425, Acc: 0.971, Base Lr: 1.03e-02
+2026-10-14 12:46:33,843 transreid.train INFO: Epoch[74] 0.144, 0.149, 0.223, 0.130
+2026-10-14 12:46:43,139 transreid.train INFO: SCSR-V4.1 updates=8394 skipped=6 V_RMS=0.07749 T_RMS=0.07735 r_attn=8.330e-03 U_step=2.714e-08
+2026-10-14 12:47:04,418 transreid.train INFO: Epoch[74] Iteration[100/114] Loss: 0.390, Acc: 0.973, Base Lr: 1.03e-02
+2026-10-14 12:47:04,418 transreid.train INFO: Epoch[74] 0.132, 0.138, 0.214, 0.118
+2026-10-14 12:47:13,645 transreid.train INFO: Actual optimizer updates: 8443; AMP skipped: 6; attempted: 8449
+2026-10-14 12:47:13,646 transreid.train INFO: Epoch 74 done. Time per batch: 0.673[s] Total: 76.7[s]
+2026-10-14 12:47:21,537 transreid.train INFO: SCSR-V4.1 updates=8444 skipped=6 V_RMS=0.07800 T_RMS=0.07807 r_attn=8.279e-03 U_step=2.549e-08
+2026-10-14 12:47:51,622 transreid.train INFO: Epoch[75] Iteration[50/114] Loss: 0.444, Acc: 0.967, Base Lr: 9.92e-03
+2026-10-14 12:47:51,622 transreid.train INFO: Epoch[75] 0.156, 0.153, 0.224, 0.133
+2026-10-14 12:47:52,243 transreid.train INFO: SCSR-V4.1 updates=8494 skipped=6 V_RMS=0.07339 T_RMS=0.07337 r_attn=7.793e-03 U_step=2.434e-08
+2026-10-14 12:48:22,049 transreid.train INFO: Epoch[75] Iteration[100/114] Loss: 0.401, Acc: 0.971, Base Lr: 9.92e-03
+2026-10-14 12:48:22,050 transreid.train INFO: Epoch[75] 0.138, 0.140, 0.215, 0.121
+2026-10-14 12:48:22,617 transreid.train INFO: SCSR-V4.1 updates=8544 skipped=6 V_RMS=0.08090 T_RMS=0.08111 r_attn=8.648e-03 U_step=2.670e-08
+2026-10-14 12:48:31,586 transreid.train INFO: Actual optimizer updates: 8557; AMP skipped: 6; attempted: 8563
+2026-10-14 12:48:31,587 transreid.train INFO: Epoch 75 done. Time per batch: 0.684[s] Total: 77.9[s]
+2026-10-14 12:49:01,292 transreid.train INFO: SCSR-V4.1 updates=8594 skipped=6 V_RMS=0.07351 T_RMS=0.07354 r_attn=7.846e-03 U_step=2.120e-08
+2026-10-14 12:49:09,291 transreid.train INFO: Epoch[76] Iteration[50/114] Loss: 0.424, Acc: 0.969, Base Lr: 9.54e-03
+2026-10-14 12:49:09,291 transreid.train INFO: Epoch[76] 0.150, 0.147, 0.223, 0.126
+2026-10-14 12:49:32,411 transreid.train INFO: SCSR-V4.1 updates=8644 skipped=6 V_RMS=0.08419 T_RMS=0.08448 r_attn=8.963e-03 U_step=2.328e-08
+2026-10-14 12:49:40,468 transreid.train INFO: Epoch[76] Iteration[100/114] Loss: 0.383, Acc: 0.971, Base Lr: 9.54e-03
+2026-10-14 12:49:40,469 transreid.train INFO: Epoch[76] 0.133, 0.135, 0.214, 0.113
+2026-10-14 12:49:49,799 transreid.train INFO: Actual optimizer updates: 8671; AMP skipped: 6; attempted: 8677
+2026-10-14 12:49:49,802 transreid.train INFO: Epoch 76 done. Time per batch: 0.686[s] Total: 78.2[s]
+2026-10-14 12:50:10,144 transreid.train INFO: SCSR-V4.1 updates=8694 skipped=6 V_RMS=0.07709 T_RMS=0.07730 r_attn=8.565e-03 U_step=1.921e-08
+2026-10-14 12:50:27,548 transreid.train INFO: Epoch[77] Iteration[50/114] Loss: 0.441, Acc: 0.968, Base Lr: 9.16e-03
+2026-10-14 12:50:27,549 transreid.train INFO: Epoch[77] 0.153, 0.150, 0.224, 0.136
+2026-10-14 12:50:42,359 transreid.train INFO: SCSR-V4.1 updates=8744 skipped=6 V_RMS=0.07835 T_RMS=0.07857 r_attn=8.463e-03 U_step=2.356e-08
+2026-10-14 12:50:59,427 transreid.train INFO: Epoch[77] Iteration[100/114] Loss: 0.398, Acc: 0.972, Base Lr: 9.16e-03
+2026-10-14 12:50:59,427 transreid.train INFO: Epoch[77] 0.135, 0.138, 0.214, 0.123
+2026-10-14 12:51:08,930 transreid.train INFO: Actual optimizer updates: 8785; AMP skipped: 6; attempted: 8791
+2026-10-14 12:51:08,930 transreid.train INFO: Epoch 77 done. Time per batch: 0.694[s] Total: 79.1[s]
+2026-10-14 12:51:21,165 transreid.train INFO: SCSR-V4.1 updates=8794 skipped=6 V_RMS=0.07874 T_RMS=0.07886 r_attn=8.420e-03 U_step=2.294e-08
+2026-10-14 12:51:47,142 transreid.train INFO: Epoch[78] Iteration[50/115] Loss: 0.423, Acc: 0.969, Base Lr: 8.78e-03
+2026-10-14 12:51:47,142 transreid.train INFO: Epoch[78] 0.151, 0.143, 0.220, 0.127
+2026-10-14 12:51:52,749 transreid.train INFO: SCSR-V4.1 updates=8844 skipped=6 V_RMS=0.07980 T_RMS=0.07993 r_attn=8.639e-03 U_step=2.148e-08
+2026-10-14 12:52:18,894 transreid.train INFO: Epoch[78] Iteration[100/115] Loss: 0.386, Acc: 0.971, Base Lr: 8.78e-03
+2026-10-14 12:52:18,894 transreid.train INFO: Epoch[78] 0.135, 0.134, 0.212, 0.115
+2026-10-14 12:52:24,199 transreid.train INFO: SCSR-V4.1 updates=8894 skipped=6 V_RMS=0.08047 T_RMS=0.08078 r_attn=8.664e-03 U_step=2.358e-08
+2026-10-14 12:52:28,839 transreid.train INFO: Actual optimizer updates: 8900; AMP skipped: 6; attempted: 8906
+2026-10-14 12:52:28,839 transreid.train INFO: Epoch 78 done. Time per batch: 0.695[s] Total: 79.9[s]
+2026-10-14 12:53:03,839 transreid.train INFO: SCSR-V4.1 updates=8944 skipped=6 V_RMS=0.07792 T_RMS=0.07800 r_attn=8.393e-03 U_step=2.073e-08
+2026-10-14 12:53:07,556 transreid.train INFO: Epoch[79] Iteration[50/114] Loss: 0.406, Acc: 0.970, Base Lr: 8.41e-03
+2026-10-14 12:53:07,556 transreid.train INFO: Epoch[79] 0.143, 0.144, 0.220, 0.117
+2026-10-14 12:53:35,228 transreid.train INFO: SCSR-V4.1 updates=8994 skipped=6 V_RMS=0.08232 T_RMS=0.08262 r_attn=8.938e-03 U_step=2.174e-08
+2026-10-14 12:53:39,007 transreid.train INFO: Epoch[79] Iteration[100/114] Loss: 0.376, Acc: 0.971, Base Lr: 8.41e-03
+2026-10-14 12:53:39,007 transreid.train INFO: Epoch[79] 0.129, 0.134, 0.211, 0.111
+2026-10-14 12:53:48,243 transreid.train INFO: Actual optimizer updates: 9014; AMP skipped: 6; attempted: 9020
+2026-10-14 12:53:48,243 transreid.train INFO: Epoch 79 done. Time per batch: 0.697[s] Total: 79.4[s]
+2026-10-14 12:54:13,889 transreid.train INFO: SCSR-V4.1 updates=9044 skipped=6 V_RMS=0.07815 T_RMS=0.07826 r_attn=8.417e-03 U_step=2.110e-08
+2026-10-14 12:54:26,560 transreid.train INFO: Epoch[80] Iteration[50/115] Loss: 0.429, Acc: 0.968, Base Lr: 8.05e-03
+2026-10-14 12:54:26,560 transreid.train INFO: Epoch[80] 0.153, 0.144, 0.220, 0.130
+2026-10-14 12:54:45,524 transreid.train INFO: SCSR-V4.1 updates=9094 skipped=6 V_RMS=0.07769 T_RMS=0.07797 r_attn=8.342e-03 U_step=1.907e-08
+2026-10-14 12:54:58,297 transreid.train INFO: Epoch[80] Iteration[100/115] Loss: 0.371, Acc: 0.973, Base Lr: 8.05e-03
+2026-10-14 12:54:58,297 transreid.train INFO: Epoch[80] 0.129, 0.131, 0.211, 0.110
+2026-10-14 12:55:08,304 transreid.train INFO: Actual optimizer updates: 9129; AMP skipped: 6; attempted: 9135
+2026-10-14 12:55:08,306 transreid.train INFO: Epoch 80 done. Time per batch: 0.696[s] Total: 80.1[s]
+2026-10-14 12:56:12,716 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 12:56:14,188 transreid.train INFO: The test feature is normalized
+2026-10-14 12:56:14,232 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 12:57:37,850 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 12:57:46,778 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 40.23%, mAP: 25.35%, mINP: 4.70%
+2026-10-14 12:57:55,419 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 25.34%, mAP: 15.16%, mINP: 2.09%
+2026-10-14 12:58:04,188 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 7.26%, mAP: 5.24%, mINP: 1.06%
+2026-10-14 12:58:12,948 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 23.00%, mAP: 14.87%, mINP: 2.63%
+2026-10-14 12:58:21,696 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 26.60%, mAP: 15.99%, mINP: 2.25%
+2026-10-14 12:58:30,297 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.37%, mAP: 4.86%, mINP: 0.93%
+2026-10-14 12:58:39,053 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 7.12%, mAP: 5.36%, mINP: 1.15%
+2026-10-14 12:58:47,761 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 6.89%, mAP: 4.72%, mINP: 0.88%
+2026-10-14 12:58:56,185 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 19.67%, mAP: 12.73%, mINP: 2.11%
+2026-10-14 12:58:56,185 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 12:58:56,185 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 12:58:56,185 transreid.train INFO:   NIR->RGB    23.00%  14.87%   2.63%
+2026-10-14 12:58:56,185 transreid.train INFO:   TIR->RGB     7.12%   5.36%   1.15%
+2026-10-14 12:58:56,185 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 12:58:56,185 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 12:58:56,185 transreid.train INFO:     RGB     RGB  40.23%  25.35%   4.70%
+2026-10-14 12:58:56,185 transreid.train INFO:     RGB     NIR  25.34%  15.16%   2.09%
+2026-10-14 12:58:56,186 transreid.train INFO:     RGB     TIR   7.26%   5.24%   1.06%
+2026-10-14 12:58:56,186 transreid.train INFO:     NIR     RGB  23.00%  14.87%   2.63%
+2026-10-14 12:58:56,186 transreid.train INFO:     NIR     NIR  26.60%  15.99%   2.25%
+2026-10-14 12:58:56,186 transreid.train INFO:     NIR     TIR   6.37%   4.86%   0.93%
+2026-10-14 12:58:56,186 transreid.train INFO:     TIR     RGB   7.12%   5.36%   1.15%
+2026-10-14 12:58:56,186 transreid.train INFO:     TIR     NIR   6.89%   4.72%   0.88%
+2026-10-14 12:58:56,186 transreid.train INFO:     TIR     TIR  19.67%  12.73%   2.11%
+2026-10-14 12:58:56,186 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 12:59:09,420 transreid.train INFO:   A->G -> mAP: 10.94%, Rank-1: 30.37%, Rank-10: 56.96%
+2026-10-14 12:59:22,194 transreid.train INFO:   G->A -> mAP: 12.80%, Rank-1: 29.14%, Rank-10: 55.23%
+2026-10-14 12:59:22,209 transreid.train INFO: Validation Results - Epoch: 80
+2026-10-14 12:59:22,209 transreid.train INFO: mAP: 10.39%
+2026-10-14 12:59:22,209 transreid.train INFO: CMC curve, Rank-1 : 28.60%
+2026-10-14 12:59:22,209 transreid.train INFO: CMC curve, Rank-5 : 44.78%
+2026-10-14 12:59:22,210 transreid.train INFO: CMC curve, Rank-10: 53.43%
+2026-10-14 12:59:38,023 transreid.train INFO: SCSR-V4.1 updates=9144 skipped=6 V_RMS=0.08041 T_RMS=0.08053 r_attn=8.600e-03 U_step=1.795e-08
+2026-10-14 13:00:00,303 transreid.train INFO: Epoch[81] Iteration[50/114] Loss: 0.395, Acc: 0.971, Base Lr: 7.69e-03
+2026-10-14 13:00:00,303 transreid.train INFO: Epoch[81] 0.138, 0.138, 0.216, 0.117
+2026-10-14 13:00:09,764 transreid.train INFO: SCSR-V4.1 updates=9194 skipped=6 V_RMS=0.08063 T_RMS=0.08089 r_attn=8.835e-03 U_step=1.912e-08
+2026-10-14 13:00:32,240 transreid.train INFO: Epoch[81] Iteration[100/114] Loss: 0.364, Acc: 0.973, Base Lr: 7.69e-03
+2026-10-14 13:00:32,241 transreid.train INFO: Epoch[81] 0.125, 0.129, 0.208, 0.107
+2026-10-14 13:00:41,606 transreid.train INFO: Actual optimizer updates: 9243; AMP skipped: 6; attempted: 9249
+2026-10-14 13:00:41,606 transreid.train INFO: Epoch 81 done. Time per batch: 0.695[s] Total: 79.2[s]
+2026-10-14 13:00:47,871 transreid.train INFO: SCSR-V4.1 updates=9244 skipped=6 V_RMS=0.07826 T_RMS=0.07831 r_attn=8.470e-03 U_step=1.776e-08
+2026-10-14 13:01:19,239 transreid.train INFO: Epoch[82] Iteration[50/114] Loss: 0.397, Acc: 0.971, Base Lr: 7.34e-03
+2026-10-14 13:01:19,240 transreid.train INFO: Epoch[82] 0.141, 0.139, 0.216, 0.115
+2026-10-14 13:01:19,858 transreid.train INFO: SCSR-V4.1 updates=9294 skipped=6 V_RMS=0.07738 T_RMS=0.07764 r_attn=8.248e-03 U_step=1.514e-08
+2026-10-14 13:01:51,255 transreid.train INFO: Epoch[82] Iteration[100/114] Loss: 0.361, Acc: 0.974, Base Lr: 7.34e-03
+2026-10-14 13:01:51,255 transreid.train INFO: Epoch[82] 0.124, 0.129, 0.208, 0.106
+2026-10-14 13:01:51,947 transreid.train INFO: SCSR-V4.1 updates=9344 skipped=6 V_RMS=0.08120 T_RMS=0.08145 r_attn=8.811e-03 U_step=1.894e-08
+2026-10-14 13:02:00,770 transreid.train INFO: Actual optimizer updates: 9357; AMP skipped: 6; attempted: 9363
+2026-10-14 13:02:00,771 transreid.train INFO: Epoch 82 done. Time per batch: 0.694[s] Total: 79.2[s]
+2026-10-14 13:02:30,420 transreid.train INFO: SCSR-V4.1 updates=9394 skipped=6 V_RMS=0.07711 T_RMS=0.07717 r_attn=8.244e-03 U_step=1.520e-08
+2026-10-14 13:02:38,659 transreid.train INFO: Epoch[83] Iteration[50/114] Loss: 0.398, Acc: 0.971, Base Lr: 6.99e-03
+2026-10-14 13:02:38,660 transreid.train INFO: Epoch[83] 0.139, 0.138, 0.215, 0.119
+2026-10-14 13:03:02,294 transreid.train INFO: SCSR-V4.1 updates=9444 skipped=6 V_RMS=0.08046 T_RMS=0.08065 r_attn=8.594e-03 U_step=1.476e-08
+2026-10-14 13:03:10,517 transreid.train INFO: Epoch[83] Iteration[100/114] Loss: 0.355, Acc: 0.975, Base Lr: 6.99e-03
+2026-10-14 13:03:10,517 transreid.train INFO: Epoch[83] 0.122, 0.126, 0.206, 0.105
+2026-10-14 13:03:20,059 transreid.train INFO: Actual optimizer updates: 9471; AMP skipped: 6; attempted: 9477
+2026-10-14 13:03:20,059 transreid.train INFO: Epoch 83 done. Time per batch: 0.696[s] Total: 79.3[s]
+2026-10-14 13:03:40,877 transreid.train INFO: SCSR-V4.1 updates=9494 skipped=6 V_RMS=0.07597 T_RMS=0.07605 r_attn=8.139e-03 U_step=1.642e-08
+2026-10-14 13:03:57,908 transreid.train INFO: Epoch[84] Iteration[50/114] Loss: 0.368, Acc: 0.974, Base Lr: 6.65e-03
+2026-10-14 13:03:57,908 transreid.train INFO: Epoch[84] 0.126, 0.131, 0.213, 0.109
+2026-10-14 13:04:12,573 transreid.train INFO: SCSR-V4.1 updates=9544 skipped=6 V_RMS=0.07867 T_RMS=0.07890 r_attn=8.586e-03 U_step=1.656e-08
+2026-10-14 13:04:30,084 transreid.train INFO: Epoch[84] Iteration[100/114] Loss: 0.344, Acc: 0.975, Base Lr: 6.65e-03
+2026-10-14 13:04:30,084 transreid.train INFO: Epoch[84] 0.117, 0.123, 0.205, 0.101
+2026-10-14 13:04:39,356 transreid.train INFO: Actual optimizer updates: 9585; AMP skipped: 6; attempted: 9591
+2026-10-14 13:04:39,356 transreid.train INFO: Epoch 84 done. Time per batch: 0.696[s] Total: 79.3[s]
+2026-10-14 13:04:51,502 transreid.train INFO: SCSR-V4.1 updates=9594 skipped=6 V_RMS=0.07847 T_RMS=0.07859 r_attn=8.608e-03 U_step=1.375e-08
+2026-10-14 13:05:17,821 transreid.train INFO: Epoch[85] Iteration[50/114] Loss: 0.373, Acc: 0.973, Base Lr: 6.31e-03
+2026-10-14 13:05:17,822 transreid.train INFO: Epoch[85] 0.131, 0.133, 0.215, 0.107
+2026-10-14 13:05:23,746 transreid.train INFO: SCSR-V4.1 updates=9644 skipped=6 V_RMS=0.07713 T_RMS=0.07733 r_attn=8.446e-03 U_step=1.398e-08
+2026-10-14 13:05:50,259 transreid.train INFO: Epoch[85] Iteration[100/114] Loss: 0.338, Acc: 0.975, Base Lr: 6.31e-03
+2026-10-14 13:05:50,259 transreid.train INFO: Epoch[85] 0.115, 0.124, 0.206, 0.097
+2026-10-14 13:05:55,847 transreid.train INFO: SCSR-V4.1 updates=9694 skipped=6 V_RMS=0.08201 T_RMS=0.08236 r_attn=8.968e-03 U_step=1.809e-08
+2026-10-14 13:06:00,099 transreid.train INFO: Actual optimizer updates: 9699; AMP skipped: 6; attempted: 9705
+2026-10-14 13:06:00,099 transreid.train INFO: Epoch 85 done. Time per batch: 0.708[s] Total: 80.7[s]
+2026-10-14 13:06:35,071 transreid.train INFO: SCSR-V4.1 updates=9744 skipped=6 V_RMS=0.07479 T_RMS=0.07488 r_attn=8.013e-03 U_step=1.259e-08
+2026-10-14 13:06:38,331 transreid.train INFO: Epoch[86] Iteration[50/114] Loss: 0.387, Acc: 0.971, Base Lr: 5.98e-03
+2026-10-14 13:06:38,331 transreid.train INFO: Epoch[86] 0.137, 0.136, 0.212, 0.112
+2026-10-14 13:07:06,962 transreid.train INFO: SCSR-V4.1 updates=9794 skipped=6 V_RMS=0.07701 T_RMS=0.07720 r_attn=8.285e-03 U_step=1.391e-08
+2026-10-14 13:07:10,084 transreid.train INFO: Epoch[86] Iteration[100/114] Loss: 0.346, Acc: 0.974, Base Lr: 5.98e-03
+2026-10-14 13:07:10,085 transreid.train INFO: Epoch[86] 0.120, 0.125, 0.204, 0.100
+2026-10-14 13:07:19,545 transreid.train INFO: Actual optimizer updates: 9813; AMP skipped: 6; attempted: 9819
+2026-10-14 13:07:19,546 transreid.train INFO: Epoch 86 done. Time per batch: 0.697[s] Total: 79.4[s]
+2026-10-14 13:07:45,564 transreid.train INFO: SCSR-V4.1 updates=9844 skipped=6 V_RMS=0.07381 T_RMS=0.07390 r_attn=7.977e-03 U_step=1.304e-08
+2026-10-14 13:07:57,794 transreid.train INFO: Epoch[87] Iteration[50/114] Loss: 0.385, Acc: 0.972, Base Lr: 5.66e-03
+2026-10-14 13:07:57,794 transreid.train INFO: Epoch[87] 0.138, 0.134, 0.214, 0.111
+2026-10-14 13:08:17,590 transreid.train INFO: SCSR-V4.1 updates=9894 skipped=6 V_RMS=0.07783 T_RMS=0.07801 r_attn=8.411e-03 U_step=1.263e-08
+2026-10-14 13:08:29,779 transreid.train INFO: Epoch[87] Iteration[100/114] Loss: 0.350, Acc: 0.975, Base Lr: 5.66e-03
+2026-10-14 13:08:29,779 transreid.train INFO: Epoch[87] 0.122, 0.125, 0.205, 0.101
+2026-10-14 13:08:39,324 transreid.train INFO: Actual optimizer updates: 9927; AMP skipped: 6; attempted: 9933
+2026-10-14 13:08:39,325 transreid.train INFO: Epoch 87 done. Time per batch: 0.700[s] Total: 79.8[s]
+2026-10-14 13:08:55,972 transreid.train INFO: SCSR-V4.1 updates=9944 skipped=6 V_RMS=0.07670 T_RMS=0.07698 r_attn=8.349e-03 U_step=1.090e-08
+2026-10-14 13:09:16,958 transreid.train INFO: Epoch[88] Iteration[50/114] Loss: 0.377, Acc: 0.972, Base Lr: 5.35e-03
+2026-10-14 13:09:16,959 transreid.train INFO: Epoch[88] 0.134, 0.131, 0.214, 0.110
+2026-10-14 13:09:27,818 transreid.train INFO: SCSR-V4.1 updates=9994 skipped=6 V_RMS=0.07952 T_RMS=0.07979 r_attn=8.561e-03 U_step=1.285e-08
+2026-10-14 13:09:48,914 transreid.train INFO: Epoch[88] Iteration[100/114] Loss: 0.352, Acc: 0.974, Base Lr: 5.35e-03
+2026-10-14 13:09:48,914 transreid.train INFO: Epoch[88] 0.123, 0.123, 0.207, 0.104
+2026-10-14 13:09:58,612 transreid.train INFO: Actual optimizer updates: 10041; AMP skipped: 6; attempted: 10047
+2026-10-14 13:09:58,612 transreid.train INFO: Epoch 88 done. Time per batch: 0.695[s] Total: 79.3[s]
+2026-10-14 13:10:05,817 transreid.train INFO: SCSR-V4.1 updates=10044 skipped=6 V_RMS=0.07578 T_RMS=0.07584 r_attn=8.300e-03 U_step=1.093e-08
+2026-10-14 13:10:35,871 transreid.train INFO: Epoch[89] Iteration[50/114] Loss: 0.359, Acc: 0.975, Base Lr: 5.04e-03
+2026-10-14 13:10:35,871 transreid.train INFO: Epoch[89] 0.124, 0.133, 0.212, 0.100
+2026-10-14 13:10:37,882 transreid.train INFO: SCSR-V4.1 updates=10094 skipped=6 V_RMS=0.07557 T_RMS=0.07557 r_attn=8.158e-03 U_step=1.097e-08
+2026-10-14 13:11:07,855 transreid.train INFO: Epoch[89] Iteration[100/114] Loss: 0.329, Acc: 0.977, Base Lr: 5.04e-03
+2026-10-14 13:11:07,855 transreid.train INFO: Epoch[89] 0.112, 0.121, 0.204, 0.094
+2026-10-14 13:11:09,550 transreid.train INFO: SCSR-V4.1 updates=10144 skipped=6 V_RMS=0.07825 T_RMS=0.07842 r_attn=8.448e-03 U_step=1.162e-08
+2026-10-14 13:11:17,069 transreid.train INFO: Actual optimizer updates: 10155; AMP skipped: 6; attempted: 10161
+2026-10-14 13:11:17,069 transreid.train INFO: Epoch 89 done. Time per batch: 0.688[s] Total: 78.5[s]
+2026-10-14 13:11:48,056 transreid.train INFO: SCSR-V4.1 updates=10194 skipped=6 V_RMS=0.07504 T_RMS=0.07515 r_attn=8.174e-03 U_step=9.345e-09
+2026-10-14 13:11:55,084 transreid.train INFO: Epoch[90] Iteration[50/114] Loss: 0.361, Acc: 0.973, Base Lr: 4.74e-03
+2026-10-14 13:11:55,085 transreid.train INFO: Epoch[90] 0.125, 0.129, 0.208, 0.105
+2026-10-14 13:12:20,231 transreid.train INFO: SCSR-V4.1 updates=10244 skipped=6 V_RMS=0.07735 T_RMS=0.07754 r_attn=8.359e-03 U_step=9.731e-09
+2026-10-14 13:12:27,194 transreid.train INFO: Epoch[90] Iteration[100/114] Loss: 0.336, Acc: 0.974, Base Lr: 4.74e-03
+2026-10-14 13:12:27,194 transreid.train INFO: Epoch[90] 0.115, 0.122, 0.202, 0.097
+2026-10-14 13:12:36,513 transreid.train INFO: Actual optimizer updates: 10269; AMP skipped: 6; attempted: 10275
+2026-10-14 13:12:36,513 transreid.train INFO: Epoch 90 done. Time per batch: 0.697[s] Total: 79.4[s]
+2026-10-14 13:13:40,561 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 13:13:41,791 transreid.train INFO: The test feature is normalized
+2026-10-14 13:13:41,827 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 13:15:03,565 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 13:15:11,996 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 40.98%, mAP: 26.07%, mINP: 4.99%
+2026-10-14 13:15:20,404 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 26.37%, mAP: 15.69%, mINP: 2.20%
+2026-10-14 13:15:28,669 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 7.26%, mAP: 5.45%, mINP: 1.06%
+2026-10-14 13:15:36,805 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 24.40%, mAP: 15.44%, mINP: 2.75%
+2026-10-14 13:15:45,040 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 27.82%, mAP: 16.48%, mINP: 2.33%
+2026-10-14 13:15:53,252 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.28%, mAP: 4.99%, mINP: 0.95%
+2026-10-14 13:16:01,394 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 7.78%, mAP: 5.64%, mINP: 1.25%
+2026-10-14 13:16:09,300 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 8.15%, mAP: 5.13%, mINP: 0.97%
+2026-10-14 13:16:17,619 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 20.23%, mAP: 13.09%, mINP: 2.17%
+2026-10-14 13:16:17,619 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 13:16:17,619 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 13:16:17,619 transreid.train INFO:   NIR->RGB    24.40%  15.44%   2.75%
+2026-10-14 13:16:17,619 transreid.train INFO:   TIR->RGB     7.78%   5.64%   1.25%
+2026-10-14 13:16:17,619 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 13:16:17,619 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 13:16:17,619 transreid.train INFO:     RGB     RGB  40.98%  26.07%   4.99%
+2026-10-14 13:16:17,619 transreid.train INFO:     RGB     NIR  26.37%  15.69%   2.20%
+2026-10-14 13:16:17,619 transreid.train INFO:     RGB     TIR   7.26%   5.45%   1.06%
+2026-10-14 13:16:17,619 transreid.train INFO:     NIR     RGB  24.40%  15.44%   2.75%
+2026-10-14 13:16:17,619 transreid.train INFO:     NIR     NIR  27.82%  16.48%   2.33%
+2026-10-14 13:16:17,620 transreid.train INFO:     NIR     TIR   6.28%   4.99%   0.95%
+2026-10-14 13:16:17,620 transreid.train INFO:     TIR     RGB   7.78%   5.64%   1.25%
+2026-10-14 13:16:17,620 transreid.train INFO:     TIR     NIR   8.15%   5.13%   0.97%
+2026-10-14 13:16:17,620 transreid.train INFO:     TIR     TIR  20.23%  13.09%   2.17%
+2026-10-14 13:16:17,620 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 13:16:30,603 transreid.train INFO:   A->G -> mAP: 11.37%, Rank-1: 31.04%, Rank-10: 57.26%
+2026-10-14 13:16:43,301 transreid.train INFO:   G->A -> mAP: 13.14%, Rank-1: 30.02%, Rank-10: 54.55%
+2026-10-14 13:16:43,316 transreid.train INFO: Validation Results - Epoch: 90
+2026-10-14 13:16:43,317 transreid.train INFO: mAP: 10.77%
+2026-10-14 13:16:43,317 transreid.train INFO: CMC curve, Rank-1 : 29.16%
+2026-10-14 13:16:43,317 transreid.train INFO: CMC curve, Rank-5 : 45.50%
+2026-10-14 13:16:43,317 transreid.train INFO: CMC curve, Rank-10: 53.33%
+2026-10-14 13:17:04,819 transreid.train INFO: SCSR-V4.1 updates=10294 skipped=6 V_RMS=0.07451 T_RMS=0.07465 r_attn=7.978e-03 U_step=1.055e-08
+2026-10-14 13:17:20,653 transreid.train INFO: Epoch[91] Iteration[50/114] Loss: 0.358, Acc: 0.975, Base Lr: 4.45e-03
+2026-10-14 13:17:20,653 transreid.train INFO: Epoch[91] 0.126, 0.129, 0.212, 0.100
+2026-10-14 13:17:36,728 transreid.train INFO: SCSR-V4.1 updates=10344 skipped=6 V_RMS=0.07435 T_RMS=0.07456 r_attn=8.075e-03 U_step=1.180e-08
+2026-10-14 13:17:52,746 transreid.train INFO: Epoch[91] Iteration[100/114] Loss: 0.332, Acc: 0.977, Base Lr: 4.45e-03
+2026-10-14 13:17:52,746 transreid.train INFO: Epoch[91] 0.113, 0.120, 0.203, 0.096
+2026-10-14 13:18:02,483 transreid.train INFO: Actual optimizer updates: 10383; AMP skipped: 6; attempted: 10389
+2026-10-14 13:18:02,484 transreid.train INFO: Epoch 91 done. Time per batch: 0.693[s] Total: 78.9[s]
+2026-10-14 13:18:15,171 transreid.train INFO: SCSR-V4.1 updates=10394 skipped=6 V_RMS=0.07463 T_RMS=0.07473 r_attn=7.935e-03 U_step=8.342e-09
+2026-10-14 13:18:40,105 transreid.train INFO: Epoch[92] Iteration[50/114] Loss: 0.346, Acc: 0.975, Base Lr: 4.17e-03
+2026-10-14 13:18:40,105 transreid.train INFO: Epoch[92] 0.120, 0.126, 0.209, 0.098
+2026-10-14 13:18:47,229 transreid.train INFO: SCSR-V4.1 updates=10444 skipped=6 V_RMS=0.07762 T_RMS=0.07784 r_attn=8.416e-03 U_step=8.476e-09
+2026-10-14 13:19:12,324 transreid.train INFO: Epoch[92] Iteration[100/114] Loss: 0.321, Acc: 0.977, Base Lr: 4.17e-03
+2026-10-14 13:19:12,325 transreid.train INFO: Epoch[92] 0.110, 0.118, 0.202, 0.092
+2026-10-14 13:19:19,040 transreid.train INFO: SCSR-V4.1 updates=10494 skipped=6 V_RMS=0.08023 T_RMS=0.08040 r_attn=8.695e-03 U_step=9.491e-09
+2026-10-14 13:19:21,739 transreid.train INFO: Actual optimizer updates: 10497; AMP skipped: 6; attempted: 10503
+2026-10-14 13:19:21,739 transreid.train INFO: Epoch 92 done. Time per batch: 0.695[s] Total: 79.3[s]
+2026-10-14 13:19:57,218 transreid.train INFO: SCSR-V4.1 updates=10544 skipped=6 V_RMS=0.07712 T_RMS=0.07727 r_attn=8.275e-03 U_step=7.486e-09
+2026-10-14 13:19:59,231 transreid.train INFO: Epoch[93] Iteration[50/114] Loss: 0.376, Acc: 0.973, Base Lr: 3.89e-03
+2026-10-14 13:19:59,232 transreid.train INFO: Epoch[93] 0.134, 0.135, 0.212, 0.104
+2026-10-14 13:20:29,454 transreid.train INFO: SCSR-V4.1 updates=10594 skipped=6 V_RMS=0.08060 T_RMS=0.08085 r_attn=8.666e-03 U_step=7.592e-09
+2026-10-14 13:20:31,243 transreid.train INFO: Epoch[93] Iteration[100/114] Loss: 0.326, Acc: 0.977, Base Lr: 3.89e-03
+2026-10-14 13:20:31,244 transreid.train INFO: Epoch[93] 0.112, 0.122, 0.203, 0.091
+2026-10-14 13:20:40,769 transreid.train INFO: Actual optimizer updates: 10611; AMP skipped: 6; attempted: 10617
+2026-10-14 13:20:40,770 transreid.train INFO: Epoch 93 done. Time per batch: 0.693[s] Total: 79.0[s]
+2026-10-14 13:21:07,577 transreid.train INFO: SCSR-V4.1 updates=10644 skipped=6 V_RMS=0.07833 T_RMS=0.07850 r_attn=8.465e-03 U_step=6.646e-09
+2026-10-14 13:21:18,410 transreid.train INFO: Epoch[94] Iteration[50/114] Loss: 0.342, Acc: 0.975, Base Lr: 3.62e-03
+2026-10-14 13:21:18,410 transreid.train INFO: Epoch[94] 0.119, 0.128, 0.209, 0.093
+2026-10-14 13:21:39,236 transreid.train INFO: SCSR-V4.1 updates=10693 skipped=7 V_RMS=0.08003 T_RMS=0.08039 r_attn=8.620e-03 U_step=7.285e-09
+2026-10-14 13:21:50,265 transreid.train INFO: Epoch[94] Iteration[100/114] Loss: 0.315, Acc: 0.977, Base Lr: 3.62e-03
+2026-10-14 13:21:50,265 transreid.train INFO: Epoch[94] 0.107, 0.118, 0.201, 0.088
+2026-10-14 13:21:59,948 transreid.train INFO: Actual optimizer updates: 10724; AMP skipped: 7; attempted: 10731
+2026-10-14 13:21:59,949 transreid.train INFO: Epoch 94 done. Time per batch: 0.695[s] Total: 79.2[s]
+2026-10-14 13:22:17,112 transreid.train INFO: SCSR-V4.1 updates=10743 skipped=7 V_RMS=0.07740 T_RMS=0.07750 r_attn=8.178e-03 U_step=6.122e-09
+2026-10-14 13:22:36,999 transreid.train INFO: Epoch[95] Iteration[50/114] Loss: 0.344, Acc: 0.976, Base Lr: 3.36e-03
+2026-10-14 13:22:36,999 transreid.train INFO: Epoch[95] 0.123, 0.122, 0.207, 0.096
+2026-10-14 13:22:49,221 transreid.train INFO: SCSR-V4.1 updates=10793 skipped=7 V_RMS=0.07661 T_RMS=0.07673 r_attn=8.311e-03 U_step=6.886e-09
+2026-10-14 13:23:09,090 transreid.train INFO: Epoch[95] Iteration[100/114] Loss: 0.315, Acc: 0.978, Base Lr: 3.36e-03
+2026-10-14 13:23:09,090 transreid.train INFO: Epoch[95] 0.109, 0.114, 0.200, 0.090
+2026-10-14 13:23:18,675 transreid.train INFO: Actual optimizer updates: 10838; AMP skipped: 7; attempted: 10845
+2026-10-14 13:23:18,675 transreid.train INFO: Epoch 95 done. Time per batch: 0.691[s] Total: 78.7[s]
+2026-10-14 13:23:27,377 transreid.train INFO: SCSR-V4.1 updates=10843 skipped=7 V_RMS=0.07536 T_RMS=0.07557 r_attn=7.996e-03 U_step=5.860e-09
+2026-10-14 13:23:56,063 transreid.train INFO: Epoch[96] Iteration[50/115] Loss: 0.355, Acc: 0.974, Base Lr: 3.11e-03
+2026-10-14 13:23:56,063 transreid.train INFO: Epoch[96] 0.126, 0.125, 0.210, 0.101
+2026-10-14 13:23:59,312 transreid.train INFO: SCSR-V4.1 updates=10893 skipped=7 V_RMS=0.07628 T_RMS=0.07639 r_attn=8.311e-03 U_step=5.847e-09
+2026-10-14 13:24:28,555 transreid.train INFO: Epoch[96] Iteration[100/115] Loss: 0.317, Acc: 0.978, Base Lr: 3.11e-03
+2026-10-14 13:24:28,555 transreid.train INFO: Epoch[96] 0.109, 0.116, 0.200, 0.090
+2026-10-14 13:24:31,642 transreid.train INFO: SCSR-V4.1 updates=10943 skipped=7 V_RMS=0.07760 T_RMS=0.07770 r_attn=8.147e-03 U_step=6.552e-09
+2026-10-14 13:24:38,687 transreid.train INFO: Actual optimizer updates: 10953; AMP skipped: 7; attempted: 10960
+2026-10-14 13:24:38,688 transreid.train INFO: Epoch 96 done. Time per batch: 0.696[s] Total: 80.0[s]
+2026-10-14 13:25:09,505 transreid.train INFO: SCSR-V4.1 updates=10993 skipped=7 V_RMS=0.07664 T_RMS=0.07678 r_attn=8.208e-03 U_step=7.119e-09
+2026-10-14 13:25:15,735 transreid.train INFO: Epoch[97] Iteration[50/115] Loss: 0.350, Acc: 0.974, Base Lr: 2.87e-03
+2026-10-14 13:25:15,735 transreid.train INFO: Epoch[97] 0.127, 0.126, 0.209, 0.095
+2026-10-14 13:25:41,043 transreid.train INFO: SCSR-V4.1 updates=11043 skipped=7 V_RMS=0.07998 T_RMS=0.08026 r_attn=8.436e-03 U_step=5.377e-09
+2026-10-14 13:25:47,364 transreid.train INFO: Epoch[97] Iteration[100/115] Loss: 0.321, Acc: 0.976, Base Lr: 2.87e-03
+2026-10-14 13:25:47,364 transreid.train INFO: Epoch[97] 0.113, 0.116, 0.201, 0.090
+2026-10-14 13:25:57,345 transreid.train INFO: Actual optimizer updates: 11068; AMP skipped: 7; attempted: 11075
+2026-10-14 13:25:57,345 transreid.train INFO: Epoch 97 done. Time per batch: 0.684[s] Total: 78.7[s]
+2026-10-14 13:26:19,333 transreid.train INFO: SCSR-V4.1 updates=11093 skipped=7 V_RMS=0.07708 T_RMS=0.07719 r_attn=8.251e-03 U_step=5.428e-09
+2026-10-14 13:26:35,281 transreid.train INFO: Epoch[98] Iteration[50/115] Loss: 0.344, Acc: 0.978, Base Lr: 2.64e-03
+2026-10-14 13:26:35,282 transreid.train INFO: Epoch[98] 0.118, 0.127, 0.207, 0.097
+2026-10-14 13:26:51,137 transreid.train INFO: SCSR-V4.1 updates=11143 skipped=7 V_RMS=0.07556 T_RMS=0.07567 r_attn=8.250e-03 U_step=4.373e-09
+2026-10-14 13:27:07,135 transreid.train INFO: Epoch[98] Iteration[100/115] Loss: 0.330, Acc: 0.977, Base Lr: 2.64e-03
+2026-10-14 13:27:07,135 transreid.train INFO: Epoch[98] 0.113, 0.119, 0.200, 0.096
+2026-10-14 13:27:17,067 transreid.train INFO: Actual optimizer updates: 11183; AMP skipped: 7; attempted: 11190
+2026-10-14 13:27:17,068 transreid.train INFO: Epoch 98 done. Time per batch: 0.693[s] Total: 79.7[s]
+2026-10-14 13:27:29,894 transreid.train INFO: SCSR-V4.1 updates=11193 skipped=7 V_RMS=0.07688 T_RMS=0.07690 r_attn=8.374e-03 U_step=4.237e-09
+2026-10-14 13:27:55,510 transreid.train INFO: Epoch[99] Iteration[50/115] Loss: 0.341, Acc: 0.977, Base Lr: 2.42e-03
+2026-10-14 13:27:55,511 transreid.train INFO: Epoch[99] 0.119, 0.125, 0.208, 0.095
+2026-10-14 13:28:01,912 transreid.train INFO: SCSR-V4.1 updates=11243 skipped=7 V_RMS=0.07801 T_RMS=0.07815 r_attn=8.402e-03 U_step=4.557e-09
+2026-10-14 13:28:27,865 transreid.train INFO: Epoch[99] Iteration[100/115] Loss: 0.313, Acc: 0.977, Base Lr: 2.42e-03
+2026-10-14 13:28:27,865 transreid.train INFO: Epoch[99] 0.107, 0.116, 0.199, 0.088
+2026-10-14 13:28:33,807 transreid.train INFO: SCSR-V4.1 updates=11292 skipped=8 V_RMS=0.07922 T_RMS=0.07944 r_attn=8.658e-03 U_step=5.108e-09
+2026-10-14 13:28:37,869 transreid.train INFO: Actual optimizer updates: 11297; AMP skipped: 8; attempted: 11305
+2026-10-14 13:28:37,869 transreid.train INFO: Epoch 99 done. Time per batch: 0.703[s] Total: 80.8[s]
+2026-10-14 13:29:12,069 transreid.train INFO: SCSR-V4.1 updates=11342 skipped=8 V_RMS=0.07862 T_RMS=0.07886 r_attn=8.381e-03 U_step=3.267e-09
+2026-10-14 13:29:15,322 transreid.train INFO: Epoch[100] Iteration[50/114] Loss: 0.347, Acc: 0.976, Base Lr: 2.20e-03
+2026-10-14 13:29:15,322 transreid.train INFO: Epoch[100] 0.123, 0.127, 0.208, 0.094
+2026-10-14 13:29:44,595 transreid.train INFO: SCSR-V4.1 updates=11392 skipped=8 V_RMS=0.07948 T_RMS=0.07982 r_attn=8.538e-03 U_step=3.762e-09
+2026-10-14 13:29:47,766 transreid.train INFO: Epoch[100] Iteration[100/114] Loss: 0.313, Acc: 0.978, Base Lr: 2.20e-03
+2026-10-14 13:29:47,766 transreid.train INFO: Epoch[100] 0.108, 0.117, 0.201, 0.086
+2026-10-14 13:29:57,117 transreid.train INFO: Actual optimizer updates: 11411; AMP skipped: 8; attempted: 11419
+2026-10-14 13:29:57,117 transreid.train INFO: Epoch 100 done. Time per batch: 0.695[s] Total: 79.2[s]
+2026-10-14 13:30:59,861 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 13:31:01,852 transreid.train INFO: The test feature is normalized
+2026-10-14 13:31:01,909 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 13:32:26,987 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 13:32:35,107 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 40.66%, mAP: 26.08%, mINP: 4.91%
+2026-10-14 13:32:43,271 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 25.85%, mAP: 15.71%, mINP: 2.17%
+2026-10-14 13:32:51,570 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 7.78%, mAP: 5.54%, mINP: 1.08%
+2026-10-14 13:32:59,789 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 23.19%, mAP: 15.37%, mINP: 2.75%
+2026-10-14 13:33:07,948 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 27.26%, mAP: 16.40%, mINP: 2.31%
+2026-10-14 13:33:16,075 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.65%, mAP: 5.03%, mINP: 0.99%
+2026-10-14 13:33:24,083 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 7.45%, mAP: 5.78%, mINP: 1.27%
+2026-10-14 13:33:32,479 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 7.68%, mAP: 5.11%, mINP: 0.97%
+2026-10-14 13:33:40,425 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 20.33%, mAP: 13.35%, mINP: 2.23%
+2026-10-14 13:33:40,425 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 13:33:40,425 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 13:33:40,425 transreid.train INFO:   NIR->RGB    23.19%  15.37%   2.75%
+2026-10-14 13:33:40,425 transreid.train INFO:   TIR->RGB     7.45%   5.78%   1.27%
+2026-10-14 13:33:40,426 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 13:33:40,426 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 13:33:40,426 transreid.train INFO:     RGB     RGB  40.66%  26.08%   4.91%
+2026-10-14 13:33:40,426 transreid.train INFO:     RGB     NIR  25.85%  15.71%   2.17%
+2026-10-14 13:33:40,426 transreid.train INFO:     RGB     TIR   7.78%   5.54%   1.08%
+2026-10-14 13:33:40,426 transreid.train INFO:     NIR     RGB  23.19%  15.37%   2.75%
+2026-10-14 13:33:40,426 transreid.train INFO:     NIR     NIR  27.26%  16.40%   2.31%
+2026-10-14 13:33:40,426 transreid.train INFO:     NIR     TIR   6.65%   5.03%   0.99%
+2026-10-14 13:33:40,426 transreid.train INFO:     TIR     RGB   7.45%   5.78%   1.27%
+2026-10-14 13:33:40,426 transreid.train INFO:     TIR     NIR   7.68%   5.11%   0.97%
+2026-10-14 13:33:40,426 transreid.train INFO:     TIR     TIR  20.33%  13.35%   2.23%
+2026-10-14 13:33:40,426 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 13:33:53,353 transreid.train INFO:   A->G -> mAP: 11.30%, Rank-1: 30.15%, Rank-10: 57.04%
+2026-10-14 13:34:05,655 transreid.train INFO:   G->A -> mAP: 13.05%, Rank-1: 29.71%, Rank-10: 53.93%
+2026-10-14 13:34:05,668 transreid.train INFO: Validation Results - Epoch: 100
+2026-10-14 13:34:05,668 transreid.train INFO: mAP: 10.80%
+2026-10-14 13:34:05,668 transreid.train INFO: CMC curve, Rank-1 : 28.98%
+2026-10-14 13:34:05,668 transreid.train INFO: CMC curve, Rank-5 : 45.84%
+2026-10-14 13:34:05,668 transreid.train INFO: CMC curve, Rank-10: 53.27%
+2026-10-14 13:34:31,372 transreid.train INFO: SCSR-V4.1 updates=11442 skipped=8 V_RMS=0.07829 T_RMS=0.07839 r_attn=8.393e-03 U_step=3.319e-09
+2026-10-14 13:34:43,381 transreid.train INFO: Epoch[101] Iteration[50/115] Loss: 0.347, Acc: 0.976, Base Lr: 2.00e-03
+2026-10-14 13:34:43,382 transreid.train INFO: Epoch[101] 0.121, 0.125, 0.208, 0.099
+2026-10-14 13:35:03,131 transreid.train INFO: SCSR-V4.1 updates=11492 skipped=8 V_RMS=0.07896 T_RMS=0.07921 r_attn=8.653e-03 U_step=3.943e-09
+2026-10-14 13:35:15,358 transreid.train INFO: Epoch[101] Iteration[100/115] Loss: 0.315, Acc: 0.977, Base Lr: 2.00e-03
+2026-10-14 13:35:15,359 transreid.train INFO: Epoch[101] 0.108, 0.114, 0.198, 0.090
+2026-10-14 13:35:25,278 transreid.train INFO: Actual optimizer updates: 11526; AMP skipped: 8; attempted: 11534
+2026-10-14 13:35:25,279 transreid.train INFO: Epoch 101 done. Time per batch: 0.690[s] Total: 79.4[s]
+2026-10-14 13:35:41,233 transreid.train INFO: SCSR-V4.1 updates=11542 skipped=8 V_RMS=0.07848 T_RMS=0.07872 r_attn=8.598e-03 U_step=2.860e-09
+2026-10-14 13:36:03,068 transreid.train INFO: Epoch[102] Iteration[50/114] Loss: 0.363, Acc: 0.973, Base Lr: 1.80e-03
+2026-10-14 13:36:03,068 transreid.train INFO: Epoch[102] 0.127, 0.132, 0.209, 0.102
+2026-10-14 13:36:13,380 transreid.train INFO: SCSR-V4.1 updates=11592 skipped=8 V_RMS=0.07607 T_RMS=0.07621 r_attn=8.162e-03 U_step=2.751e-09
+2026-10-14 13:36:34,899 transreid.train INFO: Epoch[102] Iteration[100/114] Loss: 0.323, Acc: 0.977, Base Lr: 1.80e-03
+2026-10-14 13:36:34,900 transreid.train INFO: Epoch[102] 0.110, 0.120, 0.200, 0.091
+2026-10-14 13:36:44,635 transreid.train INFO: Actual optimizer updates: 11640; AMP skipped: 8; attempted: 11648
+2026-10-14 13:36:44,635 transreid.train INFO: Epoch 102 done. Time per batch: 0.696[s] Total: 79.4[s]
+2026-10-14 13:36:51,212 transreid.train INFO: SCSR-V4.1 updates=11642 skipped=8 V_RMS=0.07610 T_RMS=0.07638 r_attn=8.258e-03 U_step=2.458e-09
+2026-10-14 13:37:21,819 transreid.train INFO: Epoch[103] Iteration[50/114] Loss: 0.366, Acc: 0.972, Base Lr: 1.62e-03
+2026-10-14 13:37:21,819 transreid.train INFO: Epoch[103] 0.132, 0.127, 0.208, 0.105
+2026-10-14 13:37:23,184 transreid.train INFO: SCSR-V4.1 updates=11692 skipped=8 V_RMS=0.07887 T_RMS=0.07900 r_attn=8.116e-03 U_step=2.440e-09
+2026-10-14 13:37:53,577 transreid.train INFO: Epoch[103] Iteration[100/114] Loss: 0.329, Acc: 0.974, Base Lr: 1.62e-03
+2026-10-14 13:37:53,577 transreid.train INFO: Epoch[103] 0.116, 0.116, 0.199, 0.095
+2026-10-14 13:37:54,724 transreid.train INFO: SCSR-V4.1 updates=11742 skipped=8 V_RMS=0.08067 T_RMS=0.08094 r_attn=8.636e-03 U_step=3.529e-09
+2026-10-14 13:38:02,683 transreid.train INFO: Actual optimizer updates: 11754; AMP skipped: 8; attempted: 11762
+2026-10-14 13:38:02,683 transreid.train INFO: Epoch 103 done. Time per batch: 0.685[s] Total: 78.0[s]
+2026-10-14 13:38:33,259 transreid.train INFO: SCSR-V4.1 updates=11792 skipped=8 V_RMS=0.07780 T_RMS=0.07787 r_attn=8.267e-03 U_step=2.202e-09
+2026-10-14 13:38:40,861 transreid.train INFO: Epoch[104] Iteration[50/115] Loss: 0.358, Acc: 0.974, Base Lr: 1.44e-03
+2026-10-14 13:38:40,861 transreid.train INFO: Epoch[104] 0.127, 0.126, 0.208, 0.103
+2026-10-14 13:39:05,064 transreid.train INFO: SCSR-V4.1 updates=11842 skipped=8 V_RMS=0.07525 T_RMS=0.07532 r_attn=8.128e-03 U_step=1.862e-09
+2026-10-14 13:39:12,703 transreid.train INFO: Epoch[104] Iteration[100/115] Loss: 0.321, Acc: 0.977, Base Lr: 1.44e-03
+2026-10-14 13:39:12,703 transreid.train INFO: Epoch[104] 0.112, 0.115, 0.199, 0.092
+2026-10-14 13:39:22,466 transreid.train INFO: Actual optimizer updates: 11869; AMP skipped: 8; attempted: 11877
+2026-10-14 13:39:22,466 transreid.train INFO: Epoch 104 done. Time per batch: 0.694[s] Total: 79.8[s]
+2026-10-14 13:39:42,991 transreid.train INFO: SCSR-V4.1 updates=11892 skipped=8 V_RMS=0.07615 T_RMS=0.07618 r_attn=8.005e-03 U_step=1.533e-09
+2026-10-14 13:39:59,996 transreid.train INFO: Epoch[105] Iteration[50/114] Loss: 0.339, Acc: 0.976, Base Lr: 1.28e-03
+2026-10-14 13:39:59,997 transreid.train INFO: Epoch[105] 0.118, 0.126, 0.205, 0.093
+2026-10-14 13:40:14,599 transreid.train INFO: SCSR-V4.1 updates=11942 skipped=8 V_RMS=0.07935 T_RMS=0.07963 r_attn=8.784e-03 U_step=1.833e-09
+2026-10-14 13:40:31,447 transreid.train INFO: Epoch[105] Iteration[100/114] Loss: 0.312, Acc: 0.978, Base Lr: 1.28e-03
+2026-10-14 13:40:31,447 transreid.train INFO: Epoch[105] 0.106, 0.115, 0.198, 0.088
+2026-10-14 13:40:40,692 transreid.train INFO: Actual optimizer updates: 11983; AMP skipped: 8; attempted: 11991
+2026-10-14 13:40:40,692 transreid.train INFO: Epoch 105 done. Time per batch: 0.686[s] Total: 78.2[s]
+2026-10-14 13:40:51,655 transreid.train INFO: SCSR-V4.1 updates=11992 skipped=8 V_RMS=0.07456 T_RMS=0.07478 r_attn=8.093e-03 U_step=1.505e-09
+2026-10-14 13:41:17,590 transreid.train INFO: Epoch[106] Iteration[50/114] Loss: 0.329, Acc: 0.977, Base Lr: 1.12e-03
+2026-10-14 13:41:17,591 transreid.train INFO: Epoch[106] 0.116, 0.120, 0.206, 0.090
+2026-10-14 13:41:23,370 transreid.train INFO: SCSR-V4.1 updates=12042 skipped=8 V_RMS=0.07412 T_RMS=0.07432 r_attn=7.925e-03 U_step=1.194e-09
+2026-10-14 13:41:49,467 transreid.train INFO: Epoch[106] Iteration[100/114] Loss: 0.297, Acc: 0.979, Base Lr: 1.12e-03
+2026-10-14 13:41:49,467 transreid.train INFO: Epoch[106] 0.102, 0.111, 0.198, 0.082
+2026-10-14 13:41:54,762 transreid.train INFO: SCSR-V4.1 updates=12092 skipped=8 V_RMS=0.07876 T_RMS=0.07894 r_attn=8.588e-03 U_step=1.783e-09
+2026-10-14 13:41:58,557 transreid.train INFO: Actual optimizer updates: 12097; AMP skipped: 8; attempted: 12105
+2026-10-14 13:41:58,557 transreid.train INFO: Epoch 106 done. Time per batch: 0.683[s] Total: 77.9[s]
+2026-10-14 13:42:32,797 transreid.train INFO: SCSR-V4.1 updates=12142 skipped=8 V_RMS=0.07732 T_RMS=0.07753 r_attn=8.395e-03 U_step=1.157e-09
+2026-10-14 13:42:36,044 transreid.train INFO: Epoch[107] Iteration[50/115] Loss: 0.320, Acc: 0.977, Base Lr: 9.80e-04
+2026-10-14 13:42:36,045 transreid.train INFO: Epoch[107] 0.111, 0.118, 0.204, 0.089
+2026-10-14 13:43:04,714 transreid.train INFO: SCSR-V4.1 updates=12192 skipped=8 V_RMS=0.08065 T_RMS=0.08088 r_attn=8.595e-03 U_step=1.212e-09
+2026-10-14 13:43:07,960 transreid.train INFO: Epoch[107] Iteration[100/115] Loss: 0.308, Acc: 0.977, Base Lr: 9.80e-04
+2026-10-14 13:43:07,960 transreid.train INFO: Epoch[107] 0.106, 0.113, 0.198, 0.087
+2026-10-14 13:43:18,022 transreid.train INFO: Actual optimizer updates: 12212; AMP skipped: 8; attempted: 12220
+2026-10-14 13:43:18,022 transreid.train INFO: Epoch 107 done. Time per batch: 0.691[s] Total: 79.5[s]
+2026-10-14 13:43:42,785 transreid.train INFO: SCSR-V4.1 updates=12242 skipped=8 V_RMS=0.07494 T_RMS=0.07510 r_attn=8.142e-03 U_step=1.096e-09
+2026-10-14 13:43:55,435 transreid.train INFO: Epoch[108] Iteration[50/115] Loss: 0.326, Acc: 0.978, Base Lr: 8.46e-04
+2026-10-14 13:43:55,436 transreid.train INFO: Epoch[108] 0.112, 0.122, 0.206, 0.089
+2026-10-14 13:44:14,676 transreid.train INFO: SCSR-V4.1 updates=12292 skipped=8 V_RMS=0.07613 T_RMS=0.07624 r_attn=8.201e-03 U_step=9.899e-10
+2026-10-14 13:44:27,517 transreid.train INFO: Epoch[108] Iteration[100/115] Loss: 0.306, Acc: 0.979, Base Lr: 8.46e-04
+2026-10-14 13:44:27,518 transreid.train INFO: Epoch[108] 0.103, 0.117, 0.198, 0.084
+2026-10-14 13:44:37,608 transreid.train INFO: Actual optimizer updates: 12327; AMP skipped: 8; attempted: 12335
+2026-10-14 13:44:37,608 transreid.train INFO: Epoch 108 done. Time per batch: 0.692[s] Total: 79.6[s]
+2026-10-14 13:44:52,601 transreid.train INFO: SCSR-V4.1 updates=12342 skipped=8 V_RMS=0.07246 T_RMS=0.07256 r_attn=7.843e-03 U_step=8.471e-10
+2026-10-14 13:45:14,859 transreid.train INFO: Epoch[109] Iteration[50/114] Loss: 0.324, Acc: 0.976, Base Lr: 7.22e-04
+2026-10-14 13:45:14,859 transreid.train INFO: Epoch[109] 0.115, 0.121, 0.204, 0.086
+2026-10-14 13:45:24,603 transreid.train INFO: SCSR-V4.1 updates=12392 skipped=8 V_RMS=0.07973 T_RMS=0.08005 r_attn=8.666e-03 U_step=8.115e-10
+2026-10-14 13:45:46,866 transreid.train INFO: Epoch[109] Iteration[100/114] Loss: 0.300, Acc: 0.978, Base Lr: 7.22e-04
+2026-10-14 13:45:46,867 transreid.train INFO: Epoch[109] 0.104, 0.111, 0.197, 0.083
+2026-10-14 13:45:56,466 transreid.train INFO: Actual optimizer updates: 12441; AMP skipped: 8; attempted: 12449
+2026-10-14 13:45:56,467 transreid.train INFO: Epoch 109 done. Time per batch: 0.692[s] Total: 78.9[s]
+2026-10-14 13:46:02,555 transreid.train INFO: SCSR-V4.1 updates=12442 skipped=8 V_RMS=0.07554 T_RMS=0.07573 r_attn=8.131e-03 U_step=7.026e-10
+2026-10-14 13:46:33,870 transreid.train INFO: Epoch[110] Iteration[50/114] Loss: 0.341, Acc: 0.976, Base Lr: 6.08e-04
+2026-10-14 13:46:33,870 transreid.train INFO: Epoch[110] 0.120, 0.125, 0.206, 0.094
+2026-10-14 13:46:34,526 transreid.train INFO: SCSR-V4.1 updates=12492 skipped=8 V_RMS=0.07553 T_RMS=0.07572 r_attn=8.068e-03 U_step=5.738e-10
+2026-10-14 13:47:05,805 transreid.train INFO: Epoch[110] Iteration[100/114] Loss: 0.294, Acc: 0.980, Base Lr: 6.08e-04
+2026-10-14 13:47:05,805 transreid.train INFO: Epoch[110] 0.100, 0.111, 0.197, 0.081
+2026-10-14 13:47:06,421 transreid.train INFO: SCSR-V4.1 updates=12542 skipped=8 V_RMS=0.07821 T_RMS=0.07845 r_attn=8.409e-03 U_step=7.915e-10
+2026-10-14 13:47:15,176 transreid.train INFO: Actual optimizer updates: 12555; AMP skipped: 8; attempted: 12563
+2026-10-14 13:47:15,177 transreid.train INFO: Epoch 110 done. Time per batch: 0.690[s] Total: 78.7[s]
+2026-10-14 13:48:17,789 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 13:48:20,584 transreid.train INFO: The test feature is normalized
+2026-10-14 13:48:20,634 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 13:49:49,770 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 13:49:58,129 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 41.03%, mAP: 26.46%, mINP: 5.02%
+2026-10-14 13:50:06,485 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 26.28%, mAP: 15.99%, mINP: 2.25%
+2026-10-14 13:50:14,713 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 7.59%, mAP: 5.60%, mINP: 1.09%
+2026-10-14 13:50:23,022 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 24.22%, mAP: 15.71%, mINP: 2.84%
+2026-10-14 13:50:31,100 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 27.78%, mAP: 16.76%, mINP: 2.41%
+2026-10-14 13:50:38,886 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.70%, mAP: 5.12%, mINP: 1.03%
+2026-10-14 13:50:46,495 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 7.87%, mAP: 5.89%, mINP: 1.30%
+2026-10-14 13:50:53,837 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 8.10%, mAP: 5.23%, mINP: 0.98%
+2026-10-14 13:51:00,934 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 20.89%, mAP: 13.48%, mINP: 2.22%
+2026-10-14 13:51:00,934 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 13:51:00,934 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 13:51:00,935 transreid.train INFO:   NIR->RGB    24.22%  15.71%   2.84%
+2026-10-14 13:51:00,935 transreid.train INFO:   TIR->RGB     7.87%   5.89%   1.30%
+2026-10-14 13:51:00,935 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 13:51:00,935 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 13:51:00,935 transreid.train INFO:     RGB     RGB  41.03%  26.46%   5.02%
+2026-10-14 13:51:00,935 transreid.train INFO:     RGB     NIR  26.28%  15.99%   2.25%
+2026-10-14 13:51:00,935 transreid.train INFO:     RGB     TIR   7.59%   5.60%   1.09%
+2026-10-14 13:51:00,935 transreid.train INFO:     NIR     RGB  24.22%  15.71%   2.84%
+2026-10-14 13:51:00,935 transreid.train INFO:     NIR     NIR  27.78%  16.76%   2.41%
+2026-10-14 13:51:00,935 transreid.train INFO:     NIR     TIR   6.70%   5.12%   1.03%
+2026-10-14 13:51:00,935 transreid.train INFO:     TIR     RGB   7.87%   5.89%   1.30%
+2026-10-14 13:51:00,935 transreid.train INFO:     TIR     NIR   8.10%   5.23%   0.98%
+2026-10-14 13:51:00,935 transreid.train INFO:     TIR     TIR  20.89%  13.48%   2.22%
+2026-10-14 13:51:00,936 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 13:51:12,438 transreid.train INFO:   A->G -> mAP: 11.36%, Rank-1: 31.19%, Rank-10: 58.15%
+2026-10-14 13:51:25,759 transreid.train INFO:   G->A -> mAP: 13.16%, Rank-1: 29.92%, Rank-10: 54.30%
+2026-10-14 13:51:25,776 transreid.train INFO: Validation Results - Epoch: 110
+2026-10-14 13:51:25,777 transreid.train INFO: mAP: 10.99%
+2026-10-14 13:51:25,777 transreid.train INFO: CMC curve, Rank-1 : 29.59%
+2026-10-14 13:51:25,777 transreid.train INFO: CMC curve, Rank-5 : 46.42%
+2026-10-14 13:51:25,777 transreid.train INFO: CMC curve, Rank-10: 54.33%
+2026-10-14 13:51:52,143 transreid.train INFO: SCSR-V4.1 updates=12592 skipped=8 V_RMS=0.07632 T_RMS=0.07642 r_attn=8.141e-03 U_step=4.689e-10
+2026-10-14 13:51:59,965 transreid.train INFO: Epoch[111] Iteration[50/114] Loss: 0.340, Acc: 0.977, Base Lr: 5.05e-04
+2026-10-14 13:51:59,966 transreid.train INFO: Epoch[111] 0.118, 0.128, 0.207, 0.093
+2026-10-14 13:52:22,244 transreid.train INFO: SCSR-V4.1 updates=12642 skipped=8 V_RMS=0.08233 T_RMS=0.08266 r_attn=8.744e-03 U_step=5.319e-10
+2026-10-14 13:52:29,945 transreid.train INFO: Epoch[111] Iteration[100/114] Loss: 0.311, Acc: 0.978, Base Lr: 5.05e-04
+2026-10-14 13:52:29,945 transreid.train INFO: Epoch[111] 0.106, 0.117, 0.199, 0.086
+2026-10-14 13:52:38,613 transreid.train INFO: Actual optimizer updates: 12669; AMP skipped: 8; attempted: 12677
+2026-10-14 13:52:38,613 transreid.train INFO: Epoch 111 done. Time per batch: 0.637[s] Total: 72.6[s]
+2026-10-14 13:52:57,343 transreid.train INFO: SCSR-V4.1 updates=12692 skipped=8 V_RMS=0.07466 T_RMS=0.07462 r_attn=7.917e-03 U_step=4.621e-10
+2026-10-14 13:53:13,537 transreid.train INFO: Epoch[112] Iteration[50/114] Loss: 0.335, Acc: 0.975, Base Lr: 4.13e-04
+2026-10-14 13:53:13,537 transreid.train INFO: Epoch[112] 0.118, 0.121, 0.208, 0.093
+2026-10-14 13:53:27,310 transreid.train INFO: SCSR-V4.1 updates=12742 skipped=8 V_RMS=0.07672 T_RMS=0.07694 r_attn=8.213e-03 U_step=2.581e-10
+2026-10-14 13:53:43,613 transreid.train INFO: Epoch[112] Iteration[100/114] Loss: 0.297, Acc: 0.978, Base Lr: 4.13e-04
+2026-10-14 13:53:43,613 transreid.train INFO: Epoch[112] 0.101, 0.111, 0.198, 0.082
+2026-10-14 13:53:52,365 transreid.train INFO: Actual optimizer updates: 12783; AMP skipped: 8; attempted: 12791
+2026-10-14 13:53:52,365 transreid.train INFO: Epoch 112 done. Time per batch: 0.647[s] Total: 73.8[s]
+2026-10-14 13:54:03,176 transreid.train INFO: SCSR-V4.1 updates=12792 skipped=8 V_RMS=0.07471 T_RMS=0.07490 r_attn=8.141e-03 U_step=2.619e-10
+2026-10-14 13:54:27,614 transreid.train INFO: Epoch[113] Iteration[50/114] Loss: 0.348, Acc: 0.975, Base Lr: 3.31e-04
+2026-10-14 13:54:27,614 transreid.train INFO: Epoch[113] 0.126, 0.122, 0.205, 0.098
+2026-10-14 13:54:32,980 transreid.train INFO: SCSR-V4.1 updates=12842 skipped=8 V_RMS=0.07680 T_RMS=0.07708 r_attn=8.389e-03 U_step=3.544e-10
+2026-10-14 13:54:57,770 transreid.train INFO: Epoch[113] Iteration[100/114] Loss: 0.304, Acc: 0.979, Base Lr: 3.31e-04
+2026-10-14 13:54:57,770 transreid.train INFO: Epoch[113] 0.105, 0.112, 0.197, 0.085
+2026-10-14 13:55:02,758 transreid.train INFO: SCSR-V4.1 updates=12892 skipped=8 V_RMS=0.07813 T_RMS=0.07835 r_attn=8.440e-03 U_step=3.235e-10
+2026-10-14 13:55:06,236 transreid.train INFO: Actual optimizer updates: 12897; AMP skipped: 8; attempted: 12905
+2026-10-14 13:55:06,237 transreid.train INFO: Epoch 113 done. Time per batch: 0.648[s] Total: 73.9[s]
+2026-10-14 13:55:38,429 transreid.train INFO: SCSR-V4.1 updates=12942 skipped=8 V_RMS=0.07885 T_RMS=0.07908 r_attn=8.331e-03 U_step=2.627e-10
+2026-10-14 13:55:41,634 transreid.train INFO: Epoch[114] Iteration[50/114] Loss: 0.314, Acc: 0.977, Base Lr: 2.61e-04
+2026-10-14 13:55:41,634 transreid.train INFO: Epoch[114] 0.111, 0.114, 0.202, 0.086
+2026-10-14 13:56:08,867 transreid.train INFO: SCSR-V4.1 updates=12992 skipped=8 V_RMS=0.07698 T_RMS=0.07708 r_attn=8.203e-03 U_step=1.568e-10
+2026-10-14 13:56:11,760 transreid.train INFO: Epoch[114] Iteration[100/114] Loss: 0.300, Acc: 0.978, Base Lr: 2.61e-04
+2026-10-14 13:56:11,760 transreid.train INFO: Epoch[114] 0.103, 0.110, 0.196, 0.085
+2026-10-14 13:56:20,277 transreid.train INFO: Actual optimizer updates: 13011; AMP skipped: 8; attempted: 13019
+2026-10-14 13:56:20,277 transreid.train INFO: Epoch 114 done. Time per batch: 0.649[s] Total: 74.0[s]
+2026-10-14 13:56:43,841 transreid.train INFO: SCSR-V4.1 updates=13042 skipped=8 V_RMS=0.07687 T_RMS=0.07699 r_attn=8.336e-03 U_step=1.054e-10
+2026-10-14 13:56:55,205 transreid.train INFO: Epoch[115] Iteration[50/114] Loss: 0.315, Acc: 0.976, Base Lr: 2.01e-04
+2026-10-14 13:56:55,205 transreid.train INFO: Epoch[115] 0.112, 0.116, 0.206, 0.086
+2026-10-14 13:57:13,847 transreid.train INFO: SCSR-V4.1 updates=13092 skipped=8 V_RMS=0.07828 T_RMS=0.07848 r_attn=8.529e-03 U_step=1.765e-10
+2026-10-14 13:57:25,248 transreid.train INFO: Epoch[115] Iteration[100/114] Loss: 0.299, Acc: 0.978, Base Lr: 2.01e-04
+2026-10-14 13:57:25,248 transreid.train INFO: Epoch[115] 0.103, 0.111, 0.197, 0.084
+2026-10-14 13:57:33,880 transreid.train INFO: Actual optimizer updates: 13125; AMP skipped: 8; attempted: 13133
+2026-10-14 13:57:33,880 transreid.train INFO: Epoch 115 done. Time per batch: 0.646[s] Total: 73.6[s]
+2026-10-14 13:57:49,969 transreid.train INFO: SCSR-V4.1 updates=13142 skipped=8 V_RMS=0.08067 T_RMS=0.08088 r_attn=8.680e-03 U_step=5.126e-11
+2026-10-14 13:58:09,602 transreid.train INFO: Epoch[116] Iteration[50/114] Loss: 0.347, Acc: 0.975, Base Lr: 1.51e-04
+2026-10-14 13:58:09,602 transreid.train INFO: Epoch[116] 0.123, 0.125, 0.206, 0.097
+2026-10-14 13:58:19,767 transreid.train INFO: SCSR-V4.1 updates=13192 skipped=8 V_RMS=0.07531 T_RMS=0.07535 r_attn=8.172e-03 U_step=6.400e-11
+2026-10-14 13:58:39,475 transreid.train INFO: Epoch[116] Iteration[100/114] Loss: 0.313, Acc: 0.977, Base Lr: 1.51e-04
+2026-10-14 13:58:39,475 transreid.train INFO: Epoch[116] 0.110, 0.115, 0.198, 0.086
+2026-10-14 13:58:48,051 transreid.train INFO: Actual optimizer updates: 13239; AMP skipped: 8; attempted: 13247
+2026-10-14 13:58:48,052 transreid.train INFO: Epoch 116 done. Time per batch: 0.651[s] Total: 74.2[s]
+2026-10-14 13:58:55,312 transreid.train INFO: SCSR-V4.1 updates=13242 skipped=8 V_RMS=0.07722 T_RMS=0.07729 r_attn=8.212e-03 U_step=3.786e-11
+2026-10-14 13:59:23,884 transreid.train INFO: Epoch[117] Iteration[50/114] Loss: 0.310, Acc: 0.978, Base Lr: 1.13e-04
+2026-10-14 13:59:23,884 transreid.train INFO: Epoch[117] 0.107, 0.116, 0.203, 0.085
+2026-10-14 13:59:25,699 transreid.train INFO: SCSR-V4.1 updates=13292 skipped=8 V_RMS=0.07459 T_RMS=0.07466 r_attn=8.111e-03 U_step=8.985e-11
+2026-10-14 13:59:54,433 transreid.train INFO: Epoch[117] Iteration[100/114] Loss: 0.295, Acc: 0.979, Base Lr: 1.13e-04
+2026-10-14 13:59:54,433 transreid.train INFO: Epoch[117] 0.100, 0.111, 0.196, 0.082
+2026-10-14 13:59:56,127 transreid.train INFO: SCSR-V4.1 updates=13342 skipped=8 V_RMS=0.07485 T_RMS=0.07500 r_attn=8.300e-03 U_step=4.841e-11
+2026-10-14 14:00:02,998 transreid.train INFO: Actual optimizer updates: 13353; AMP skipped: 8; attempted: 13361
+2026-10-14 14:00:02,998 transreid.train INFO: Epoch 117 done. Time per batch: 0.657[s] Total: 74.9[s]
+2026-10-14 14:00:31,662 transreid.train INFO: SCSR-V4.1 updates=13392 skipped=8 V_RMS=0.07810 T_RMS=0.07837 r_attn=8.445e-03 U_step=1.675e-11
+2026-10-14 14:00:38,464 transreid.train INFO: Epoch[118] Iteration[50/115] Loss: 0.315, Acc: 0.977, Base Lr: 8.59e-05
+2026-10-14 14:00:38,465 transreid.train INFO: Epoch[118] 0.111, 0.119, 0.206, 0.084
+2026-10-14 14:01:02,349 transreid.train INFO: SCSR-V4.1 updates=13442 skipped=8 V_RMS=0.07753 T_RMS=0.07778 r_attn=8.247e-03 U_step=4.408e-11
+2026-10-14 14:01:09,045 transreid.train INFO: Epoch[118] Iteration[100/115] Loss: 0.297, Acc: 0.979, Base Lr: 8.59e-05
+2026-10-14 14:01:09,046 transreid.train INFO: Epoch[118] 0.103, 0.111, 0.197, 0.081
+2026-10-14 14:01:18,376 transreid.train INFO: Actual optimizer updates: 13468; AMP skipped: 8; attempted: 13476
+2026-10-14 14:01:18,376 transreid.train INFO: Epoch 118 done. Time per batch: 0.655[s] Total: 75.4[s]
+2026-10-14 14:01:38,154 transreid.train INFO: SCSR-V4.1 updates=13492 skipped=8 V_RMS=0.07782 T_RMS=0.07802 r_attn=8.469e-03 U_step=2.421e-11
+2026-10-14 14:01:54,035 transreid.train INFO: Epoch[119] Iteration[50/114] Loss: 0.345, Acc: 0.974, Base Lr: 6.95e-05
+2026-10-14 14:01:54,036 transreid.train INFO: Epoch[119] 0.125, 0.123, 0.205, 0.095
+2026-10-14 14:02:08,910 transreid.train INFO: SCSR-V4.1 updates=13542 skipped=8 V_RMS=0.07773 T_RMS=0.07791 r_attn=8.366e-03 U_step=1.362e-11
+2026-10-14 14:02:25,080 transreid.train INFO: Epoch[119] Iteration[100/114] Loss: 0.304, Acc: 0.978, Base Lr: 6.95e-05
+2026-10-14 14:02:25,080 transreid.train INFO: Epoch[119] 0.106, 0.112, 0.197, 0.084
+2026-10-14 14:02:33,844 transreid.train INFO: Actual optimizer updates: 13582; AMP skipped: 8; attempted: 13590
+2026-10-14 14:02:33,844 transreid.train INFO: Epoch 119 done. Time per batch: 0.662[s] Total: 75.5[s]
+2026-10-14 14:02:44,984 transreid.train INFO: SCSR-V4.1 updates=13592 skipped=8 V_RMS=0.07485 T_RMS=0.07497 r_attn=7.950e-03 U_step=2.192e-11
+2026-10-14 14:03:09,281 transreid.train INFO: Epoch[120] Iteration[50/114] Loss: 0.315, Acc: 0.977, Base Lr: 6.40e-05
+2026-10-14 14:03:09,281 transreid.train INFO: Epoch[120] 0.111, 0.119, 0.204, 0.084
+2026-10-14 14:03:15,414 transreid.train INFO: SCSR-V4.1 updates=13642 skipped=8 V_RMS=0.07700 T_RMS=0.07716 r_attn=8.292e-03 U_step=1.474e-11
+2026-10-14 14:03:39,805 transreid.train INFO: Epoch[120] Iteration[100/114] Loss: 0.289, Acc: 0.979, Base Lr: 6.40e-05
+2026-10-14 14:03:39,805 transreid.train INFO: Epoch[120] 0.099, 0.110, 0.197, 0.078
+2026-10-14 14:03:45,478 transreid.train INFO: SCSR-V4.1 updates=13692 skipped=8 V_RMS=0.07711 T_RMS=0.07735 r_attn=8.427e-03 U_step=1.481e-11
+2026-10-14 14:03:48,372 transreid.train INFO: Actual optimizer updates: 13696; AMP skipped: 8; attempted: 13704
+2026-10-14 14:03:48,372 transreid.train INFO: Epoch 120 done. Time per batch: 0.654[s] Total: 74.5[s]
+2026-10-14 14:04:50,702 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-14 14:04:52,031 transreid.train INFO: The test feature is normalized
+2026-10-14 14:04:52,073 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-14 14:06:21,397 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-14 14:06:29,968 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 41.41%, mAP: 26.52%, mINP: 5.03%
+2026-10-14 14:06:38,678 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 26.70%, mAP: 16.05%, mINP: 2.26%
+2026-10-14 14:06:47,179 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 7.49%, mAP: 5.59%, mINP: 1.10%
+2026-10-14 14:06:55,345 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 23.89%, mAP: 15.78%, mINP: 2.87%
+2026-10-14 14:07:04,633 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 27.68%, mAP: 16.83%, mINP: 2.40%
+2026-10-14 14:07:12,940 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.74%, mAP: 5.15%, mINP: 1.03%
+2026-10-14 14:07:21,237 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 7.73%, mAP: 5.90%, mINP: 1.30%
+2026-10-14 14:07:29,397 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 8.06%, mAP: 5.25%, mINP: 0.99%
+2026-10-14 14:07:37,345 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 21.03%, mAP: 13.53%, mINP: 2.25%
+2026-10-14 14:07:37,346 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-14 14:07:37,346 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-14 14:07:37,346 transreid.train INFO:   NIR->RGB    23.89%  15.78%   2.87%
+2026-10-14 14:07:37,346 transreid.train INFO:   TIR->RGB     7.73%   5.90%   1.30%
+2026-10-14 14:07:37,346 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-14 14:07:37,346 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-14 14:07:37,346 transreid.train INFO:     RGB     RGB  41.41%  26.52%   5.03%
+2026-10-14 14:07:37,346 transreid.train INFO:     RGB     NIR  26.70%  16.05%   2.26%
+2026-10-14 14:07:37,346 transreid.train INFO:     RGB     TIR   7.49%   5.59%   1.10%
+2026-10-14 14:07:37,346 transreid.train INFO:     NIR     RGB  23.89%  15.78%   2.87%
+2026-10-14 14:07:37,346 transreid.train INFO:     NIR     NIR  27.68%  16.83%   2.40%
+2026-10-14 14:07:37,346 transreid.train INFO:     NIR     TIR   6.74%   5.15%   1.03%
+2026-10-14 14:07:37,346 transreid.train INFO:     TIR     RGB   7.73%   5.90%   1.30%
+2026-10-14 14:07:37,346 transreid.train INFO:     TIR     NIR   8.06%   5.25%   0.99%
+2026-10-14 14:07:37,346 transreid.train INFO:     TIR     TIR  21.03%  13.53%   2.25%
+2026-10-14 14:07:37,347 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-14 14:07:50,095 transreid.train INFO:   A->G -> mAP: 11.35%, Rank-1: 31.04%, Rank-10: 58.52%
+2026-10-14 14:08:02,972 transreid.train INFO:   G->A -> mAP: 13.13%, Rank-1: 29.55%, Rank-10: 54.19%
+2026-10-14 14:08:02,984 transreid.train INFO: Validation Results - Epoch: 120
+2026-10-14 14:08:02,984 transreid.train INFO: mAP: 11.02%
+2026-10-14 14:08:02,984 transreid.train INFO: CMC curve, Rank-1 : 29.54%
+2026-10-14 14:08:02,984 transreid.train INFO: CMC curve, Rank-5 : 46.71%
+2026-10-14 14:08:02,985 transreid.train INFO: CMC curve, Rank-10: 54.57%

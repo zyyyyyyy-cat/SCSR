@@ -1,0 +1,9 @@
+test_03_modalities_bounds_dtype (test_scsr_v41.V41Tests) ... ok
+test_04_block_residual_and_runtime_guard (test_scsr_v41.V41Tests) ... ok
+test_09_ranking_protocol_and_old_syntax (test_scsr_v41.V41Tests) ... ok
+test_10_amp_overflow_diagnostic_serialization (test_scsr_v41.V41Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 3.456s
+
+OK

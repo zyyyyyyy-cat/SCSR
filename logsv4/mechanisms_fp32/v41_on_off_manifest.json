@@ -1,0 +1,186 @@
+{
+  "identity": {
+    "version": "v41-mechanism-cache-1",
+    "checkpoint_sha256": "ae92f99119999498354ace3f216b6ac0d012cee18a1d944eb7669ac5e4afffda",
+    "checkpoint_metadata_sha256": "2e9e79accc30f6765776e4bba4790b7b07947a1c60fd44e614d3cabfaa20acac",
+    "query_order_sha256": "81f9108650b38aa262ba9196a4cdd32f95db9d7a2e1c9a5506d3f89d6886b213",
+    "gallery_order_sha256": "fdc89c61817f46a65b06efcaaf61f7b9a784b440ea3a341a0f7d3ddb681229b4",
+    "query_count": 6405,
+    "gallery_count": 93609,
+    "model": {
+      "version": "SCSR-V4.1",
+      "architecture": {
+        "ENABLED": true,
+        "TARGET_MODALITY": "Thermal",
+        "INSERT_AT_BLOCK": 7,
+        "INSERT_POSITION": "norm1_after_before_attention",
+        "WAVELET": "haar",
+        "LEVELS": 1,
+        "EMBED_DIM": 768,
+        "GRID_H": 16,
+        "GRID_W": 8,
+        "LL_CONDITION_DIM": 16,
+        "HF_SIGNED_DIM": 4,
+        "CONDITION_HIDDEN_DIM": 32,
+        "LOW_RANK": 4,
+        "GATE_AMPLITUDE": 0.2,
+        "U_INIT_STD": 0.5,
+        "CONDITION_OUTPUT_INIT_STD": 0.02,
+        "SCSR_WEIGHT_DECAY": 0.0,
+        "SCSR_LR_MULTIPLIER": 1.0,
+        "EPS": 1e-06
+      },
+      "modalities": [
+        "RGB",
+        "IR",
+        "Thermal"
+      ],
+      "backbone": "vit_base_in",
+      "input_size": [
+        256,
+        128
+      ],
+      "stride": [
+        16,
+        16
+      ]
+    },
+    "pixel_mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "pixel_std": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "test_size": [
+      256,
+      128
+    ],
+    "neck_feat": "before",
+    "amp": false,
+    "tf32": false,
+    "extraction_batch_size": 16,
+    "torch": "1.12.1+cu113",
+    "backend": {
+      "device_type": "cuda",
+      "cuda": "11.3",
+      "cudnn": 8302,
+      "gpu": "NVIDIA GeForce RTX 3090"
+    },
+    "feature": "L2 normalized FP32 cache of 768D pre-BN CLS",
+    "feature_source_hashes": {
+      "model/make_model.py": "2e8d47656c0788680996fac5f0a1277f0e544c7aa5615ca75592f187bb339e69",
+      "model/backbones/vit_pytorch.py": "75f418eccba901c2b2d72b1e385b74b25dff9b880487770f69252de80c06c926",
+      "model/scsr_v41.py": "a54cfcc687631b38f6b38b9ed3e015a178c71ad84edb6182aa9874a3241a4b57",
+      "diagnostics/data.py": "59d8280b189f0efa08b9fbb27e623a02369e1f930ec89ef45bfaa2e5b48dd24c"
+    }
+  },
+  "cache": {
+    "path": "/project/code/WHU_base/WHU_Fre+NS+PFESA+SFP_SCSR/SCSR_v4/logs/SCSR_V41_1000_DDP/mechanisms_fp32/v41_feature_cache.pth",
+    "reused": false,
+    "sha256": "f4c30e05207e338f5cd41aa410b0b0cec2ea5907b4a24ff5dd5095394e152733",
+    "identity": {
+      "version": "v41-mechanism-cache-1",
+      "checkpoint_sha256": "ae92f99119999498354ace3f216b6ac0d012cee18a1d944eb7669ac5e4afffda",
+      "checkpoint_metadata_sha256": "2e9e79accc30f6765776e4bba4790b7b07947a1c60fd44e614d3cabfaa20acac",
+      "query_order_sha256": "81f9108650b38aa262ba9196a4cdd32f95db9d7a2e1c9a5506d3f89d6886b213",
+      "gallery_order_sha256": "fdc89c61817f46a65b06efcaaf61f7b9a784b440ea3a341a0f7d3ddb681229b4",
+      "query_count": 6405,
+      "gallery_count": 93609,
+      "model": {
+        "version": "SCSR-V4.1",
+        "architecture": {
+          "ENABLED": true,
+          "TARGET_MODALITY": "Thermal",
+          "INSERT_AT_BLOCK": 7,
+          "INSERT_POSITION": "norm1_after_before_attention",
+          "WAVELET": "haar",
+          "LEVELS": 1,
+          "EMBED_DIM": 768,
+          "GRID_H": 16,
+          "GRID_W": 8,
+          "LL_CONDITION_DIM": 16,
+          "HF_SIGNED_DIM": 4,
+          "CONDITION_HIDDEN_DIM": 32,
+          "LOW_RANK": 4,
+          "GATE_AMPLITUDE": 0.2,
+          "U_INIT_STD": 0.5,
+          "CONDITION_OUTPUT_INIT_STD": 0.02,
+          "SCSR_WEIGHT_DECAY": 0.0,
+          "SCSR_LR_MULTIPLIER": 1.0,
+          "EPS": 1e-06
+        },
+        "modalities": [
+          "RGB",
+          "IR",
+          "Thermal"
+        ],
+        "backbone": "vit_base_in",
+        "input_size": [
+          256,
+          128
+        ],
+        "stride": [
+          16,
+          16
+        ]
+      },
+      "pixel_mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "pixel_std": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "test_size": [
+        256,
+        128
+      ],
+      "neck_feat": "before",
+      "amp": false,
+      "tf32": false,
+      "extraction_batch_size": 16,
+      "torch": "1.12.1+cu113",
+      "backend": {
+        "device_type": "cuda",
+        "cuda": "11.3",
+        "cudnn": 8302,
+        "gpu": "NVIDIA GeForce RTX 3090"
+      },
+      "feature": "L2 normalized FP32 cache of 768D pre-BN CLS",
+      "feature_source_hashes": {
+        "model/make_model.py": "2e8d47656c0788680996fac5f0a1277f0e544c7aa5615ca75592f187bb339e69",
+        "model/backbones/vit_pytorch.py": "75f418eccba901c2b2d72b1e385b74b25dff9b880487770f69252de80c06c926",
+        "model/scsr_v41.py": "a54cfcc687631b38f6b38b9ed3e015a178c71ad84edb6182aa9874a3241a4b57",
+        "diagnostics/data.py": "59d8280b189f0efa08b9fbb27e623a02369e1f930ec89ef45bfaa2e5b48dd24c"
+      }
+    }
+  },
+  "combinations": {
+    "A": "Query OFF / Gallery OFF",
+    "B": "Query ON / Gallery ON",
+    "C": "Query ON / Gallery OFF",
+    "D": "Query OFF / Gallery ON"
+  },
+  "summary": {
+    "valid_queries": 6405,
+    "invalid_queries": 0,
+    "rank1_gallery_changed": 12,
+    "rank1_identity_changed": 8,
+    "ranking_changed": 6405,
+    "correct_to_correct": 1891,
+    "correct_to_wrong": 0,
+    "wrong_to_correct": 1,
+    "wrong_to_wrong": 4513
+  },
+  "complete_gallery": true,
+  "top_k": 0,
+  "margin": "nearest negative squared distance minus nearest positive squared distance",
+  "fixed_anchors": "A and B selected neighbors both measured/ranked in both states"
+}

@@ -1,0 +1,62 @@
+test_192_image_feature_contract (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+D:\CODE\Doing\WHU_base\SCSR\WHU\model\scsr.py:21: FutureWarning: `torch.cpu.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cpu', args...)` instead.
+  return autocast(enabled=False) if autocast is not None else nullcontext()
+ok
+test_checkpoint_roundtrip_and_mismatch (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+Loading SCSR model from C:\Users\GX\AppData\Local\Temp\tmp2luat8wi\model.pth
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+ok
+test_frozen_smooth_formula_ratios_and_radial_gradients (test_scsr.SCSRTests) ... ok
+test_haar_inverse_energy_signed_orientation (test_scsr.SCSRTests) ... ok
+test_l6_route_cls_and_batch_order (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+D:\CODE\Doing\WHU_base\SCSR\WHU\model\scsr.py:21: FutureWarning: `torch.cpu.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cpu', args...)` instead.
+  return autocast(enabled=False) if autocast is not None else nullcontext()
+ok
+test_mapping_invalid_ids_and_inference_mode (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+ok
+test_no_unified_autocast_dependency (test_scsr.SCSRTests) ... ok
+test_original_backbone_and_initialized_full_vit_equivalence (test_scsr.SCSRTests) ... using stride: 16, and patch number is num_y16 * num_x8
+using stride: 16, and patch number is num_y16 * num_x8
+using stride: 16, and patch number is num_y16 * num_x8
+ok
+test_parameters_identity_and_gradient_startup (test_scsr.SCSRTests) ... ok
+test_training_checkpoint_validation_with_legacy_optimizer (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+D:\CODE\Doing\WHU_base\SCSR\WHU\tests\test_scsr.py:242: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  GradScaler=lambda: torch.cuda.amp.GradScaler(enabled=False),
+Note: number of gallery samples is quite small, got 30
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+Loading SCSR model from C:\Users\GX\AppData\Local\Temp\tmpfh4d6q26\transformer_1.pth
+ok
+test_uad_losses_reach_scsr_and_optimizer_policy (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+ok
+test_zero_ll_bound_and_amp_dtype (test_scsr.SCSRTests) ... D:\CODE\Doing\WHU_base\SCSR\WHU\tests\test_scsr.py:107: FutureWarning: `torch.cpu.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cpu', args...)` instead.
+  context = autocast(dtype=torch.bfloat16) if autocast is not None else nullcontext()
+ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 29.882s
+
+OK
+
+Supplementary audit: Python3.8 syntax accepted in 10 files; PCA/GPD/PrototypeBank AST unchanged; legacy torch.load fallback passed.

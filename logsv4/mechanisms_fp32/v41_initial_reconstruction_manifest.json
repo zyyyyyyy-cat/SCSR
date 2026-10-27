@@ -1,0 +1,94 @@
+{
+  "status": "ready",
+  "exact_original_initialization": false,
+  "note": "No initial tensor hash was recorded by the original training code",
+  "control_type": "reconstructed_initial_control",
+  "model_seed": 1234,
+  "output_scale_factor": 3.730579689694057,
+  "measured_output_std": 0.07494654506444931,
+  "recorded_output_std": 0.07494654506444931,
+  "norm_reference_available": true,
+  "norm_checks": [
+    {
+      "parameter": "U",
+      "reconstructed_norm": 47.80118179321289,
+      "reference_norm": 47.80117416381836,
+      "matches": true
+    },
+    {
+      "parameter": "ll_proj.weight",
+      "reconstructed_norm": 4.001381874084473,
+      "reference_norm": 4.001381874084473,
+      "matches": true
+    },
+    {
+      "parameter": "hf_proj.0.weight",
+      "reconstructed_norm": 2.024860143661499,
+      "reference_norm": 2.024860382080078,
+      "matches": true
+    },
+    {
+      "parameter": "hf_proj.1.weight",
+      "reconstructed_norm": 1.9697822332382202,
+      "reference_norm": 1.9697821140289307,
+      "matches": true
+    },
+    {
+      "parameter": "hf_proj.2.weight",
+      "reconstructed_norm": 2.004929780960083,
+      "reference_norm": 2.004929780960083,
+      "matches": true
+    },
+    {
+      "parameter": "spatial.weight",
+      "reconstructed_norm": 5.654813289642334,
+      "reference_norm": 5.654812812805176,
+      "matches": true
+    },
+    {
+      "parameter": "output.weight",
+      "reconstructed_norm": 1.4687079191207886,
+      "reference_norm": 1.4687079191207886,
+      "matches": true
+    }
+  ],
+  "initial_tensor_sha256": "2c51ce9210c7167062d2c77e8546046adcb0589400bbed17f6bd162fdd0184bf",
+  "initialization_record_sources": [
+    {
+      "path": "logs/SCSR_V41_1000_DDP/scsr_v41_init_rank0.json",
+      "sha256": "1e8f5daafcc9b20fa15a9c2938e49f02650b1096b373d6a02c0b5bbd5b442e78"
+    },
+    {
+      "path": "logs/SCSR_V41_1000_DDP/scsr_v41_init_rank1.json",
+      "sha256": "3cd122fcf0bf8be903dfe75a8a39a0195b0def0243c0191635cce4a405a732c8"
+    },
+    {
+      "path": "logs/SCSR_V41_1000_DDP/scsr_v41_init_rank2.json",
+      "sha256": "c0e311f4611e23e075bb99d26f757915a2b8347223749cfcbe05d307276b39a0"
+    },
+    {
+      "path": "logs/SCSR_V41_1000_DDP/scsr_v41_init_rank3.json",
+      "sha256": "a96ff072e2913c6a2668d086f5eed94d7fa7b45cc700ebe9d143535ab3e947f1"
+    }
+  ],
+  "zero_update_reference_path": "logs/SCSR_V41_1000_DDP/scsr_v41_training_diagnostics.jsonl",
+  "zero_update_reference_sha256": "5e29024d03ab1fcae13943a38f8d3e9c4e5d0910fb7fbcfea3448fe437277118",
+  "statistical_checks_do_not_prove_elementwise_identity": true,
+  "reconstructed_pretrain_load_skipped_because_it_consumes_no_rng": true,
+  "checkpoint_sha256": "ae92f99119999498354ace3f216b6ac0d012cee18a1d944eb7669ac5e4afffda",
+  "fixed_sample_order_sha256": "dd6e9f8cfe14ee48453b56ae43e8773fccc48b6f7fd94db6234bde7d1a2a4020",
+  "source_sha256": {
+    "model/make_model.py": "2e8d47656c0788680996fac5f0a1277f0e544c7aa5615ca75592f187bb339e69",
+    "model/backbones/vit_pytorch.py": "75f418eccba901c2b2d72b1e385b74b25dff9b880487770f69252de80c06c926",
+    "model/scsr_v41.py": "a54cfcc687631b38f6b38b9ed3e015a178c71ad84edb6182aa9874a3241a4b57"
+  },
+  "torch": "1.12.1+cu113",
+  "precision": "FP32",
+  "groups": {
+    "A": "trained U / trained condition",
+    "B": "initial U / initial condition",
+    "C": "initial U / trained condition",
+    "D": "trained U / initial condition"
+  },
+  "semantics": "all groups keep the same final epoch-120 backbone; no independent initialization-model baseline"
+}

@@ -1,0 +1,17 @@
+{
+  "experiment": 5,
+  "status": "not_run",
+  "outputs": [
+    "frequency_loss_gradient.csv",
+    "frequency_gradient_alignment.csv",
+    "frequency_margin_sensitivity.csv"
+  ],
+  "uad_checkpoint_sha256": "9bb3d547b98f80a685a47e1dee1bb633fdadf910d4319912f054db0f63f0b0e9",
+  "fixed_train_split_sha256": "84b619c8c8f7a8898c74f4771ee9c9f24ac96ec09722e23056dd9d67034424a8",
+  "seed": 1234,
+  "precision": "FP32",
+  "haar_precision": "FP32",
+  "optimizer_step": false,
+  "automatic_test_selection": false,
+  "formal_test_confirmation": "not_applicable"
+}

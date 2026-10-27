@@ -1,0 +1,2608 @@
+{
+  "status": "complete",
+  "started_utc": "2026-10-13T12:13:00.978805+00:00",
+  "checkpoint": "/project/code/WHU_base/WHU_Fre+NS+PFESA+SFP_SCSR/logs/SCSR_1000_DDP/transformer_120.pth",
+  "checkpoint_sha256": "534a97d712cab8475a2e7531e47b1173f9ea97141a12caaf3c2f06d09201d505",
+  "checkpoint_epoch_from_filename": 120,
+  "checkpoint_epoch_is_model_metadata": false,
+  "checkpoint_config": "/project/code/WHU_base/WHU_Fre+NS+PFESA+SFP_SCSR/logs/SCSR_1000_DDP/transformer_120.pth.yml",
+  "checkpoint_config_sha256": "0ffc6ca7554ec54d655932be155064782d9fa20b3ee4d8005dcb89888b849f46",
+  "uad_checkpoint": null,
+  "uad_checkpoint_used_for_on_off": false,
+  "config": {
+    "DATALOADER": {
+      "NUM_INSTANCE": 4,
+      "NUM_WORKERS": 8,
+      "SAMPLER": "PKM"
+    },
+    "DATASETS": {
+      "DATASET_DIR": "WHU-MARS",
+      "FILTER_GD": false,
+      "MODALITIES": [
+        "RGB",
+        "IR",
+        "Thermal"
+      ],
+      "NAMES": "WHU-MARS",
+      "ROOT_DIR": "/project/code/data"
+    },
+    "INPUT": {
+      "PADDING": 10,
+      "PIXEL_MEAN": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "PIXEL_STD": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "PROB": 0.5,
+      "RE_PROB": 0.5,
+      "SIZE_TEST": [
+        256,
+        128
+      ],
+      "SIZE_TRAIN": [
+        256,
+        128
+      ]
+    },
+    "MODEL": {
+      "ATT_DROP_RATE": 0.0,
+      "COS_LAYER": false,
+      "DEVICE": "cuda",
+      "DEVICE_ID": "0",
+      "DEVIDE_LENGTH": 4,
+      "DIST_TRAIN": false,
+      "DROP_OUT": 0.0,
+      "DROP_PATH": 0.1,
+      "GPD_MOMENTUM": 0.2,
+      "ID_LOSS_TYPE": "softmax",
+      "ID_LOSS_WEIGHT": 1.0,
+      "IF_LABELSMOOTH": "off",
+      "IF_WITH_CENTER": "no",
+      "JPM": false,
+      "LAST_STRIDE": 1,
+      "METRIC_LOSS_TYPE": "wrt",
+      "NAME": "transformer",
+      "NECK": "bnneck",
+      "NO_MARGIN": true,
+      "PCA_LOSS_WEIGHT": 0.01,
+      "PRETRAIN_CHOICE": "none",
+      "PRETRAIN_PATH": "jx_vit_base_p16_224-80ecf9dd.pth",
+      "RE_ARRANGE": true,
+      "SHIFT_NUM": 5,
+      "SHUFFLE_GROUP": 2,
+      "SIE_CAMERA": false,
+      "SIE_COE": 3.0,
+      "SIE_VIEW": false,
+      "STRIDE_SIZE": [
+        16,
+        16
+      ],
+      "TRANSFORMER_TYPE": "vit_base_in",
+      "TRIPLET_LOSS_WEIGHT": 1.0
+    },
+    "OUTPUT_DIR": "./logs/SCSR_1000",
+    "SCSR": {
+      "CONDITION_DIM": 64,
+      "ENABLED": true,
+      "EPS": 1e-06,
+      "GATE_AMPLITUDE": 0.5,
+      "INSERT_AFTER_BLOCK": 6,
+      "IN_DIM": 768,
+      "LR_MULTIPLIER": 1.0,
+      "RESIDUAL_SCALE": 0.2,
+      "SPECTRAL_DIM": 192,
+      "TARGET_MODALITY": "Thermal",
+      "WAVELET": "haar",
+      "WAVELET_LEVELS": 1
+    },
+    "SOLVER": {
+      "BASE_LR": 0.008,
+      "BIAS_LR_FACTOR": 2,
+      "CENTER_LOSS_WEIGHT": 0.0005,
+      "CENTER_LR": 0.5,
+      "CHECKPOINT_PERIOD": 120,
+      "COSINE_MARGIN": 0.5,
+      "COSINE_SCALE": 30,
+      "EVAL_PERIOD": 10,
+      "GAMMA": 0.1,
+      "IMS_PER_BATCH": 64,
+      "LARGE_FC_LR": false,
+      "LOG_PERIOD": 50,
+      "LOSS_TYPE": "base+pca+gpd",
+      "MARGIN": 0.3,
+      "MAX_EPOCHS": 120,
+      "MOMENTUM": 0.9,
+      "OPTIMIZER_NAME": "SGD",
+      "SEED": 1234,
+      "STEPS": [
+        40,
+        70
+      ],
+      "WARMUP_EPOCHS": 5,
+      "WARMUP_FACTOR": 0.01,
+      "WARMUP_METHOD": "linear",
+      "WEIGHT_DECAY": 0.0001,
+      "WEIGHT_DECAY_BIAS": 0.0001
+    },
+    "TEST": {
+      "DETAILED_DOMAIN_EVAL": false,
+      "DIST_MAT": "dist_mat.npy",
+      "EVAL": false,
+      "FEAT_NORM": "yes",
+      "IMS_PER_BATCH": 512,
+      "NECK_FEAT": "before",
+      "RE_RANKING": false,
+      "TOP_K_EVAL": 0,
+      "WEIGHT": ""
+    }
+  },
+  "args": {
+    "config_file": "configs/SCSR.yml",
+    "checkpoint": "logs/SCSR_1000_DDP/transformer_120.pth",
+    "uad_checkpoint": "",
+    "output_dir": "logs/SCSR_1000_diagnostics",
+    "experiments": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "device": "cuda:0",
+    "batch_size": 32,
+    "workers": 4,
+    "distance_chunk": 64,
+    "probe_samples_per_modality": 32,
+    "gradient_batches": 2,
+    "gradient_identities": 4,
+    "gradient_loss_scale": null,
+    "seed": 1234,
+    "amp": false,
+    "opts": []
+  },
+  "environment": {
+    "python": "3.8.20 (default, Oct  3 2024, 15:24:27) \n[GCC 11.2.0]",
+    "torch": "1.12.1+cu113",
+    "numpy": "1.24.3",
+    "cuda": "11.3",
+    "cudnn": 8302,
+    "device": "cuda:0",
+    "gpu": "NVIDIA GeForce RTX 3090"
+  },
+  "protocol": {
+    "feature": "768D pre-BN CLS",
+    "normalization": "L2",
+    "exclude": "ALL gallery images from the query camera",
+    "reranking": false,
+    "TTA": false,
+    "top_k": 0,
+    "sorting": "torch.argsort, CPU FP32, existing Euclidean distance",
+    "distance_chunk": 64,
+    "amp": false,
+    "platform": "zero-based cameras 0..4=G; 5..6=A"
+  },
+  "gradient_semantics": "eval-state CE and WRT separately, no optimizer or prototype update",
+  "gpd_probe_skipped": "PrototypeBank is not included in standard UAD model state_dict",
+  "parameters_modified": false,
+  "bn_buffers_modified": false,
+  "data": {
+    "query_count": 6405,
+    "gallery_count": 93609,
+    "query_order_sha256": "81f9108650b38aa262ba9196a4cdd32f95db9d7a2e1c9a5506d3f89d6886b213",
+    "gallery_order_sha256": "fdc89c61817f46a65b06efcaaf61f7b9a784b440ea3a341a0f7d3ddb681229b4",
+    "train_identity_count": 500,
+    "probe_samples": [
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/3194_c3_m1_f004526.jpg",
+        "pid": 3194,
+        "camid": 2,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0532_c6_m1_f004939.jpg",
+        "pid": 532,
+        "camid": 5,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/3331_c2_m1_f008562.jpg",
+        "pid": 3331,
+        "camid": 1,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0310_c6_m1_f000219.jpg",
+        "pid": 310,
+        "camid": 5,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/3038_c2_m1_f001732.jpg",
+        "pid": 3038,
+        "camid": 1,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0140_c6_m1_f002424.jpg",
+        "pid": 140,
+        "camid": 5,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0448_c1_m1_f009679.jpg",
+        "pid": 448,
+        "camid": 0,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0272_c6_m1_f004744.jpg",
+        "pid": 272,
+        "camid": 5,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/1441_c5_m1_f004382.jpg",
+        "pid": 1441,
+        "camid": 4,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0435_c6_m1_f002886.jpg",
+        "pid": 435,
+        "camid": 5,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0474_c1_m1_f010196.jpg",
+        "pid": 474,
+        "camid": 0,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/1356_c7_m1_f002218.jpg",
+        "pid": 1356,
+        "camid": 6,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/3084_c3_m1_f003285.jpg",
+        "pid": 3084,
+        "camid": 2,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/1368_c7_m1_f002459.jpg",
+        "pid": 1368,
+        "camid": 6,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/1284_c4_m1_f000182.jpg",
+        "pid": 1284,
+        "camid": 3,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0518_c6_m1_f004656.jpg",
+        "pid": 518,
+        "camid": 5,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/3036_c3_m1_f001393.jpg",
+        "pid": 3036,
+        "camid": 2,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/1296_c7_m1_f000610.jpg",
+        "pid": 1296,
+        "camid": 6,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/3757_c3_m1_f000148.jpg",
+        "pid": 3757,
+        "camid": 2,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/1302_c7_m1_f000847.jpg",
+        "pid": 1302,
+        "camid": 6,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/1171_c5_m1_f003030.jpg",
+        "pid": 1171,
+        "camid": 4,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0340_c6_m1_f001007.jpg",
+        "pid": 340,
+        "camid": 5,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/3665_c1_m1_f003085.jpg",
+        "pid": 3665,
+        "camid": 0,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0416_c6_m1_f002416.jpg",
+        "pid": 416,
+        "camid": 5,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/1489_c5_m1_f005210.jpg",
+        "pid": 1489,
+        "camid": 4,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/1299_c7_m1_f000753.jpg",
+        "pid": 1299,
+        "camid": 6,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/2751_c1_m1_f004633.jpg",
+        "pid": 2751,
+        "camid": 0,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0340_c6_m1_f001029.jpg",
+        "pid": 340,
+        "camid": 5,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/3272_c2_m1_f006656.jpg",
+        "pid": 3272,
+        "camid": 1,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0145_c6_m1_f002481.jpg",
+        "pid": 145,
+        "camid": 5,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0267_c1_m1_f004768.jpg",
+        "pid": 267,
+        "camid": 0,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/RGB/0348_c6_m1_f004204.jpg",
+        "pid": 348,
+        "camid": 5,
+        "modal_id": 1,
+        "modality_name": "RGB",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/1398_c4_m2_f003164.jpg",
+        "pid": 1398,
+        "camid": 3,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0045_c6_m2_f000515.jpg",
+        "pid": 45,
+        "camid": 5,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/3187_c2_m2_f004591.jpg",
+        "pid": 3187,
+        "camid": 1,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/1080_c7_m2_f003523.jpg",
+        "pid": 1080,
+        "camid": 6,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/1106_c4_m2_f000665.jpg",
+        "pid": 1106,
+        "camid": 3,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/1283_c7_m2_f000269.jpg",
+        "pid": 1283,
+        "camid": 6,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0129_c1_m2_f002266.jpg",
+        "pid": 129,
+        "camid": 0,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0430_c6_m2_f002741.jpg",
+        "pid": 430,
+        "camid": 5,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/3257_c1_m2_f006095.jpg",
+        "pid": 3257,
+        "camid": 0,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/1489_c7_m2_f005001.jpg",
+        "pid": 1489,
+        "camid": 6,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/2569_c1_m2_f001609.jpg",
+        "pid": 2569,
+        "camid": 0,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0412_c6_m2_f002399.jpg",
+        "pid": 412,
+        "camid": 5,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/3147_c1_m2_f002112.jpg",
+        "pid": 3147,
+        "camid": 0,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0487_c6_m2_f004112.jpg",
+        "pid": 487,
+        "camid": 5,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/3519_c1_m2_f000560.jpg",
+        "pid": 3519,
+        "camid": 0,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0435_c6_m2_f002890.jpg",
+        "pid": 435,
+        "camid": 5,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/3696_c2_m2_f003863.jpg",
+        "pid": 3696,
+        "camid": 1,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/1117_c7_m2_f000905.jpg",
+        "pid": 1117,
+        "camid": 6,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/2028_c3_m2_f000050.jpg",
+        "pid": 2028,
+        "camid": 2,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0145_c6_m2_f002469.jpg",
+        "pid": 145,
+        "camid": 5,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0348_c1_m2_f007666.jpg",
+        "pid": 348,
+        "camid": 0,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0165_c6_m2_f002758.jpg",
+        "pid": 165,
+        "camid": 5,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/3640_c1_m2_f002342.jpg",
+        "pid": 3640,
+        "camid": 0,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/1301_c7_m2_f000796.jpg",
+        "pid": 1301,
+        "camid": 6,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0279_c1_m2_f005118.jpg",
+        "pid": 279,
+        "camid": 0,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0416_c6_m2_f002427.jpg",
+        "pid": 416,
+        "camid": 5,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0521_c1_m2_f011283.jpg",
+        "pid": 521,
+        "camid": 0,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/0426_c6_m2_f002691.jpg",
+        "pid": 426,
+        "camid": 5,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/3771_c2_m2_f006350.jpg",
+        "pid": 3771,
+        "camid": 1,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/1137_c7_m2_f001564.jpg",
+        "pid": 1137,
+        "camid": 6,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/2030_c1_m2_f001300.jpg",
+        "pid": 2030,
+        "camid": 0,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/IR/1074_c7_m2_f003340.jpg",
+        "pid": 1074,
+        "camid": 6,
+        "modal_id": 2,
+        "modality_name": "NIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1507_c5_m3_f001840.jpg",
+        "pid": 1507,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1173_c7_m3_f002956.jpg",
+        "pid": 1173,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1294_c4_m3_f000537.jpg",
+        "pid": 1294,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1284_c7_m3_f000224.jpg",
+        "pid": 1284,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1115_c4_m3_f001001.jpg",
+        "pid": 1115,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1507_c7_m3_f001729.jpg",
+        "pid": 1507,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/2314_c2_m3_f000946.jpg",
+        "pid": 2314,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1336_c7_m3_f001484.jpg",
+        "pid": 1336,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/2761_c2_m3_f005204.jpg",
+        "pid": 2761,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0310_c6_m3_f000223.jpg",
+        "pid": 310,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/2306_c3_m3_f002163.jpg",
+        "pid": 2306,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1434_c7_m3_f004080.jpg",
+        "pid": 1434,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0533_c1_m3_f011453.jpg",
+        "pid": 533,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1033_c7_m3_f001570.jpg",
+        "pid": 1033,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/3123_c3_m3_f005025.jpg",
+        "pid": 3123,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0412_c6_m3_f002374.jpg",
+        "pid": 412,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1114_c5_m3_f000968.jpg",
+        "pid": 1114,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1113_c7_m3_f000813.jpg",
+        "pid": 1113,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1257_c5_m3_f005329.jpg",
+        "pid": 1257,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0145_c6_m3_f002483.jpg",
+        "pid": 145,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/3692_c2_m3_f003657.jpg",
+        "pid": 3692,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1297_c7_m3_f000626.jpg",
+        "pid": 1297,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0433_c2_m3_f009268.jpg",
+        "pid": 433,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1375_c7_m3_f002500.jpg",
+        "pid": 1375,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/2751_c3_m3_f000119.jpg",
+        "pid": 2751,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1171_c7_m3_f002795.jpg",
+        "pid": 1171,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1301_c4_m3_f000929.jpg",
+        "pid": 1301,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0426_c6_m3_f002714.jpg",
+        "pid": 426,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/3579_c1_m3_f003413.jpg",
+        "pid": 3579,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1368_c7_m3_f002459.jpg",
+        "pid": 1368,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/2518_c3_m3_f001584.jpg",
+        "pid": 2518,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1059_c7_m3_f002946.jpg",
+        "pid": 1059,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      }
+    ],
+    "gradient_batches": [
+      {
+        "batch": 1,
+        "targets": [
+          332,
+          332,
+          332,
+          332,
+          313,
+          313,
+          313,
+          313,
+          92,
+          92,
+          92,
+          92,
+          108,
+          108,
+          108,
+          108
+        ],
+        "samples": [
+          [
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2826_c2_m1_f009529.jpg",
+              "pid": 332,
+              "camid": 1,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2826_c3_m1_f004577.jpg",
+              "pid": 332,
+              "camid": 2,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2826_c3_m1_f004584.jpg",
+              "pid": 332,
+              "camid": 2,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2826_c1_m1_f009606.jpg",
+              "pid": 332,
+              "camid": 0,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2752_c2_m1_f004736.jpg",
+              "pid": 313,
+              "camid": 1,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2752_c2_m1_f004726.jpg",
+              "pid": 313,
+              "camid": 1,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2752_c1_m1_f004636.jpg",
+              "pid": 313,
+              "camid": 0,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2752_c1_m1_f004635.jpg",
+              "pid": 313,
+              "camid": 0,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0418_c6_m1_f002443.jpg",
+              "pid": 92,
+              "camid": 5,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0418_c6_m1_f002440.jpg",
+              "pid": 92,
+              "camid": 5,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0418_c6_m1_f002460.jpg",
+              "pid": 92,
+              "camid": 5,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0418_c6_m1_f002466.jpg",
+              "pid": 92,
+              "camid": 5,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0480_c1_m1_f010492.jpg",
+              "pid": 108,
+              "camid": 0,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0480_c6_m1_f004051.jpg",
+              "pid": 108,
+              "camid": 5,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0480_c1_m1_f010478.jpg",
+              "pid": 108,
+              "camid": 0,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0480_c1_m1_f010491.jpg",
+              "pid": 108,
+              "camid": 0,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            }
+          ],
+          [
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2826_c1_m2_f009601.jpg",
+              "pid": 332,
+              "camid": 0,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2826_c1_m2_f009610.jpg",
+              "pid": 332,
+              "camid": 0,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2826_c3_m2_f004593.jpg",
+              "pid": 332,
+              "camid": 2,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2826_c2_m2_f009529.jpg",
+              "pid": 332,
+              "camid": 1,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2752_c2_m2_f004744.jpg",
+              "pid": 313,
+              "camid": 1,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2752_c1_m2_f004638.jpg",
+              "pid": 313,
+              "camid": 0,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2752_c1_m2_f004630.jpg",
+              "pid": 313,
+              "camid": 0,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2752_c1_m2_f004633.jpg",
+              "pid": 313,
+              "camid": 0,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0418_c6_m2_f002451.jpg",
+              "pid": 92,
+              "camid": 5,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0418_c6_m2_f002472.jpg",
+              "pid": 92,
+              "camid": 5,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0418_c6_m2_f002459.jpg",
+              "pid": 92,
+              "camid": 5,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0418_c6_m2_f002461.jpg",
+              "pid": 92,
+              "camid": 5,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0480_c1_m2_f010497.jpg",
+              "pid": 108,
+              "camid": 0,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0480_c6_m2_f004038.jpg",
+              "pid": 108,
+              "camid": 5,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0480_c2_m2_f010598.jpg",
+              "pid": 108,
+              "camid": 1,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0480_c6_m2_f004054.jpg",
+              "pid": 108,
+              "camid": 5,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "A"
+            }
+          ],
+          [
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2826_c3_m3_f004587.jpg",
+              "pid": 332,
+              "camid": 2,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2826_c1_m3_f009610.jpg",
+              "pid": 332,
+              "camid": 0,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2826_c2_m3_f009533.jpg",
+              "pid": 332,
+              "camid": 1,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2826_c2_m3_f009538.jpg",
+              "pid": 332,
+              "camid": 1,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2752_c1_m3_f004626.jpg",
+              "pid": 313,
+              "camid": 0,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2752_c2_m3_f004704.jpg",
+              "pid": 313,
+              "camid": 1,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2752_c2_m3_f004743.jpg",
+              "pid": 313,
+              "camid": 1,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2752_c2_m3_f004703.jpg",
+              "pid": 313,
+              "camid": 1,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0418_c6_m3_f002458.jpg",
+              "pid": 92,
+              "camid": 5,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0418_c6_m3_f002449.jpg",
+              "pid": 92,
+              "camid": 5,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0418_c2_m3_f008948.jpg",
+              "pid": 92,
+              "camid": 1,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0418_c6_m3_f002442.jpg",
+              "pid": 92,
+              "camid": 5,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0480_c6_m3_f004041.jpg",
+              "pid": 108,
+              "camid": 5,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0480_c2_m3_f010600.jpg",
+              "pid": 108,
+              "camid": 1,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0480_c6_m3_f004040.jpg",
+              "pid": 108,
+              "camid": 5,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0480_c2_m3_f010599.jpg",
+              "pid": 108,
+              "camid": 1,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            }
+          ]
+        ]
+      },
+      {
+        "batch": 2,
+        "targets": [
+          196,
+          196,
+          196,
+          196,
+          412,
+          412,
+          412,
+          412,
+          323,
+          323,
+          323,
+          323,
+          14,
+          14,
+          14,
+          14
+        ],
+        "samples": [
+          [
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/1383_c5_m1_f002670.jpg",
+              "pid": 196,
+              "camid": 4,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/1383_c5_m1_f002673.jpg",
+              "pid": 196,
+              "camid": 4,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/1383_c5_m1_f002667.jpg",
+              "pid": 196,
+              "camid": 4,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/1383_c5_m1_f002665.jpg",
+              "pid": 196,
+              "camid": 4,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/3542_c3_m1_f000715.jpg",
+              "pid": 412,
+              "camid": 2,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/3542_c3_m1_f000726.jpg",
+              "pid": 412,
+              "camid": 2,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/3542_c3_m1_f000724.jpg",
+              "pid": 412,
+              "camid": 2,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/3542_c2_m1_f000816.jpg",
+              "pid": 412,
+              "camid": 1,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2795_c3_m1_f002687.jpg",
+              "pid": 323,
+              "camid": 2,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2795_c3_m1_f002682.jpg",
+              "pid": 323,
+              "camid": 2,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2795_c3_m1_f002640.jpg",
+              "pid": 323,
+              "camid": 2,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/2795_c3_m1_f002632.jpg",
+              "pid": 323,
+              "camid": 2,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0057_c1_m1_f000678.jpg",
+              "pid": 14,
+              "camid": 0,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0057_c1_m1_f000652.jpg",
+              "pid": 14,
+              "camid": 0,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0057_c6_m1_f000729.jpg",
+              "pid": 14,
+              "camid": 5,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/RGB/0057_c1_m1_f000630.jpg",
+              "pid": 14,
+              "camid": 0,
+              "modal_id": 1,
+              "modality_name": "RGB",
+              "platform": "G"
+            }
+          ],
+          [
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/1383_c4_m2_f002768.jpg",
+              "pid": 196,
+              "camid": 3,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/1383_c5_m2_f002668.jpg",
+              "pid": 196,
+              "camid": 4,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/1383_c4_m2_f002767.jpg",
+              "pid": 196,
+              "camid": 3,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/1383_c5_m2_f002672.jpg",
+              "pid": 196,
+              "camid": 4,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/3542_c3_m2_f000727.jpg",
+              "pid": 412,
+              "camid": 2,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/3542_c2_m2_f000798.jpg",
+              "pid": 412,
+              "camid": 1,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/3542_c3_m2_f000736.jpg",
+              "pid": 412,
+              "camid": 2,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/3542_c3_m2_f000724.jpg",
+              "pid": 412,
+              "camid": 2,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2795_c1_m2_f007326.jpg",
+              "pid": 323,
+              "camid": 0,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2795_c3_m2_f002632.jpg",
+              "pid": 323,
+              "camid": 2,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2795_c3_m2_f002675.jpg",
+              "pid": 323,
+              "camid": 2,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/2795_c3_m2_f002682.jpg",
+              "pid": 323,
+              "camid": 2,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0057_c6_m2_f000725.jpg",
+              "pid": 14,
+              "camid": 5,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0057_c1_m2_f000668.jpg",
+              "pid": 14,
+              "camid": 0,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0057_c1_m2_f000680.jpg",
+              "pid": 14,
+              "camid": 0,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/IR/0057_c6_m2_f000742.jpg",
+              "pid": 14,
+              "camid": 5,
+              "modal_id": 2,
+              "modality_name": "NIR",
+              "platform": "A"
+            }
+          ],
+          [
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/1383_c5_m3_f002667.jpg",
+              "pid": 196,
+              "camid": 4,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/1383_c5_m3_f002673.jpg",
+              "pid": 196,
+              "camid": 4,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/1383_c5_m3_f002671.jpg",
+              "pid": 196,
+              "camid": 4,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/1383_c5_m3_f002669.jpg",
+              "pid": 196,
+              "camid": 4,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/3542_c3_m3_f000743.jpg",
+              "pid": 412,
+              "camid": 2,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/3542_c3_m3_f000744.jpg",
+              "pid": 412,
+              "camid": 2,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/3542_c2_m3_f000801.jpg",
+              "pid": 412,
+              "camid": 1,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/3542_c3_m3_f000717.jpg",
+              "pid": 412,
+              "camid": 2,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2795_c1_m3_f007323.jpg",
+              "pid": 323,
+              "camid": 0,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2795_c3_m3_f002683.jpg",
+              "pid": 323,
+              "camid": 2,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2795_c1_m3_f007333.jpg",
+              "pid": 323,
+              "camid": 0,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/2795_c1_m3_f007331.jpg",
+              "pid": 323,
+              "camid": 0,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0057_c1_m3_f000650.jpg",
+              "pid": 14,
+              "camid": 0,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0057_c6_m3_f000725.jpg",
+              "pid": 14,
+              "camid": 5,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0057_c6_m3_f000731.jpg",
+              "pid": 14,
+              "camid": 5,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "A"
+            },
+            {
+              "path": "/project/code/data/WHU-MARS/train/Thermal/0057_c1_m3_f000654.jpg",
+              "pid": 14,
+              "camid": 0,
+              "modal_id": 3,
+              "modality_name": "TIR",
+              "platform": "G"
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  "model_state_sha256_before": "ed87cc035257fcb67d0f8f561cfe134b635ac9556a8e4d1b4f50d4e0d67cb93e",
+  "parameter_count": 87284584,
+  "scsr_parameter_count": 383616,
+  "classifier_restored": true,
+  "on_off_summary": {
+    "valid_queries": 6405,
+    "invalid_queries": 0,
+    "ranking_changed": 6405,
+    "rank1_gallery_changed": 0,
+    "rank1_identity_changed": 0,
+    "both_correct": 1906,
+    "on_correct_off_wrong": 0,
+    "on_wrong_off_correct": 0,
+    "both_wrong": 4499
+  },
+  "internal_group_summary": [
+    {
+      "group": "TIR",
+      "sample_count": 32,
+      "r_generated_mean": 3.3075619816093936e-08,
+      "r_cast_mean": 3.3075619816093936e-08,
+      "r_effective_mean": 3.332837778780139e-08,
+      "changed_ratio_mean": 0.8488629659016926
+    },
+    {
+      "group": "TIR-A",
+      "sample_count": 16,
+      "r_generated_mean": 2.9490551826925085e-08,
+      "r_cast_mean": 2.9490551826925085e-08,
+      "r_effective_mean": 2.972743728722669e-08,
+      "changed_ratio_mean": 0.840582529703776
+    },
+    {
+      "group": "TIR-G",
+      "sample_count": 16,
+      "r_generated_mean": 3.6660687805262784e-08,
+      "r_cast_mean": 3.6660687805262784e-08,
+      "r_effective_mean": 3.6929318288376094e-08,
+      "changed_ratio_mean": 0.8571434020996094
+    }
+  ],
+  "layer_group_summary": [
+    {
+      "group": "NIR",
+      "sample_count": 32,
+      "layer": "block_12_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999989,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR",
+      "sample_count": 32,
+      "layer": "block_6_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR",
+      "sample_count": 32,
+      "layer": "block_6_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999913,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR",
+      "sample_count": 32,
+      "layer": "block_7_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR",
+      "sample_count": 32,
+      "layer": "block_9_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR",
+      "sample_count": 32,
+      "layer": "final_pre_bn_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR",
+      "sample_count": 32,
+      "layer": "post_scsr_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR",
+      "sample_count": 32,
+      "layer": "post_scsr_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999913,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR",
+      "sample_count": 32,
+      "layer": "retrieval_l2_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000013,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-A",
+      "sample_count": 16,
+      "layer": "block_12_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999989,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-A",
+      "sample_count": 16,
+      "layer": "block_6_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-A",
+      "sample_count": 16,
+      "layer": "block_6_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999925,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-A",
+      "sample_count": 16,
+      "layer": "block_7_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-A",
+      "sample_count": 16,
+      "layer": "block_9_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-A",
+      "sample_count": 16,
+      "layer": "final_pre_bn_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-A",
+      "sample_count": 16,
+      "layer": "post_scsr_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-A",
+      "sample_count": 16,
+      "layer": "post_scsr_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999925,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-A",
+      "sample_count": 16,
+      "layer": "retrieval_l2_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.000000000000001,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-G",
+      "sample_count": 16,
+      "layer": "block_12_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999988,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-G",
+      "sample_count": 16,
+      "layer": "block_6_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-G",
+      "sample_count": 16,
+      "layer": "block_6_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999905,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-G",
+      "sample_count": 16,
+      "layer": "block_7_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-G",
+      "sample_count": 16,
+      "layer": "block_9_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-G",
+      "sample_count": 16,
+      "layer": "final_pre_bn_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000007,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-G",
+      "sample_count": 16,
+      "layer": "post_scsr_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-G",
+      "sample_count": 16,
+      "layer": "post_scsr_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999905,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "NIR-G",
+      "sample_count": 16,
+      "layer": "retrieval_l2_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000016,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB",
+      "sample_count": 32,
+      "layer": "block_12_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999989,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB",
+      "sample_count": 32,
+      "layer": "block_6_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB",
+      "sample_count": 32,
+      "layer": "block_6_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999919,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB",
+      "sample_count": 32,
+      "layer": "block_7_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB",
+      "sample_count": 32,
+      "layer": "block_9_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB",
+      "sample_count": 32,
+      "layer": "final_pre_bn_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB",
+      "sample_count": 32,
+      "layer": "post_scsr_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB",
+      "sample_count": 32,
+      "layer": "post_scsr_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999919,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB",
+      "sample_count": 32,
+      "layer": "retrieval_l2_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000016,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-A",
+      "sample_count": 16,
+      "layer": "block_12_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999989,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-A",
+      "sample_count": 16,
+      "layer": "block_6_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-A",
+      "sample_count": 16,
+      "layer": "block_6_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.999999999999992,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-A",
+      "sample_count": 16,
+      "layer": "block_7_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-A",
+      "sample_count": 16,
+      "layer": "block_9_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000002,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-A",
+      "sample_count": 16,
+      "layer": "final_pre_bn_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-A",
+      "sample_count": 16,
+      "layer": "post_scsr_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-A",
+      "sample_count": 16,
+      "layer": "post_scsr_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.999999999999992,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-A",
+      "sample_count": 16,
+      "layer": "retrieval_l2_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000016,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-G",
+      "sample_count": 16,
+      "layer": "block_12_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.999999999999999,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-G",
+      "sample_count": 16,
+      "layer": "block_6_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-G",
+      "sample_count": 16,
+      "layer": "block_6_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999916,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-G",
+      "sample_count": 16,
+      "layer": "block_7_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-G",
+      "sample_count": 16,
+      "layer": "block_9_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999998,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-G",
+      "sample_count": 16,
+      "layer": "final_pre_bn_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-G",
+      "sample_count": 16,
+      "layer": "post_scsr_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-G",
+      "sample_count": 16,
+      "layer": "post_scsr_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999916,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "RGB-G",
+      "sample_count": 16,
+      "layer": "retrieval_l2_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000013,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "TIR",
+      "sample_count": 32,
+      "layer": "block_12_cls",
+      "abs_diff_mean": 4.093790894020223e-05,
+      "rel_diff_mean": 2.4109652819210825e-07,
+      "cos_sim_mean": 0.9999999999999705,
+      "changed_ratio_mean": 0.9381510416666666
+    },
+    {
+      "group": "TIR",
+      "sample_count": 32,
+      "layer": "block_6_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "TIR",
+      "sample_count": 32,
+      "layer": "block_6_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.999999999999993,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "TIR",
+      "sample_count": 32,
+      "layer": "block_7_cls",
+      "abs_diff_mean": 7.253974307108572e-06,
+      "rel_diff_mean": 1.8254425365166402e-07,
+      "cos_sim_mean": 0.9999999999999839,
+      "changed_ratio_mean": 0.8959554036458333
+    },
+    {
+      "group": "TIR",
+      "sample_count": 32,
+      "layer": "block_9_cls",
+      "abs_diff_mean": 2.1292733561416135e-05,
+      "rel_diff_mean": 3.105161884119497e-07,
+      "cos_sim_mean": 0.9999999999999523,
+      "changed_ratio_mean": 0.9438883463541667
+    },
+    {
+      "group": "TIR",
+      "sample_count": 32,
+      "layer": "final_pre_bn_cls",
+      "abs_diff_mean": 4.530598132241197e-06,
+      "rel_diff_mean": 4.780700181415657e-07,
+      "cos_sim_mean": 0.9999999999998865,
+      "changed_ratio_mean": 0.9213053385416666
+    },
+    {
+      "group": "TIR",
+      "sample_count": 32,
+      "layer": "post_scsr_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "TIR",
+      "sample_count": 32,
+      "layer": "post_scsr_patch",
+      "abs_diff_mean": 8.173891574830434e-05,
+      "rel_diff_mean": 3.332837778780139e-08,
+      "cos_sim_mean": 0.9999999999999933,
+      "changed_ratio_mean": 0.8488629659016926
+    },
+    {
+      "group": "TIR",
+      "sample_count": 32,
+      "layer": "retrieval_l2_cls",
+      "abs_diff_mean": 4.792925524188416e-07,
+      "rel_diff_mean": 4.792920721310549e-07,
+      "cos_sim_mean": 0.9999999999998868,
+      "changed_ratio_mean": 0.9304606119791667
+    },
+    {
+      "group": "TIR-A",
+      "sample_count": 16,
+      "layer": "block_12_cls",
+      "abs_diff_mean": 3.930451163627434e-05,
+      "rel_diff_mean": 2.3414152858215139e-07,
+      "cos_sim_mean": 0.9999999999999719,
+      "changed_ratio_mean": 0.9374186197916667
+    },
+    {
+      "group": "TIR-A",
+      "sample_count": 16,
+      "layer": "block_6_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "TIR-A",
+      "sample_count": 16,
+      "layer": "block_6_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999939,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "TIR-A",
+      "sample_count": 16,
+      "layer": "block_7_cls",
+      "abs_diff_mean": 7.110018783778801e-06,
+      "rel_diff_mean": 1.7662195218717664e-07,
+      "cos_sim_mean": 0.9999999999999849,
+      "changed_ratio_mean": 0.88720703125
+    },
+    {
+      "group": "TIR-A",
+      "sample_count": 16,
+      "layer": "block_9_cls",
+      "abs_diff_mean": 2.0701427269411123e-05,
+      "rel_diff_mean": 2.9785150027590645e-07,
+      "cos_sim_mean": 0.999999999999956,
+      "changed_ratio_mean": 0.94091796875
+    },
+    {
+      "group": "TIR-A",
+      "sample_count": 16,
+      "layer": "final_pre_bn_cls",
+      "abs_diff_mean": 4.368078528855418e-06,
+      "rel_diff_mean": 4.6132545421954987e-07,
+      "cos_sim_mean": 0.9999999999998943,
+      "changed_ratio_mean": 0.918701171875
+    },
+    {
+      "group": "TIR-A",
+      "sample_count": 16,
+      "layer": "post_scsr_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 1.0000000000000004,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "TIR-A",
+      "sample_count": 16,
+      "layer": "post_scsr_patch",
+      "abs_diff_mean": 8.220504362572937e-05,
+      "rel_diff_mean": 2.972743728722669e-08,
+      "cos_sim_mean": 0.9999999999999942,
+      "changed_ratio_mean": 0.840582529703776
+    },
+    {
+      "group": "TIR-A",
+      "sample_count": 16,
+      "layer": "retrieval_l2_cls",
+      "abs_diff_mean": 4.632390061288109e-07,
+      "rel_diff_mean": 4.632385444115581e-07,
+      "cos_sim_mean": 0.9999999999998943,
+      "changed_ratio_mean": 0.922607421875
+    },
+    {
+      "group": "TIR-G",
+      "sample_count": 16,
+      "layer": "block_12_cls",
+      "abs_diff_mean": 4.257130624413012e-05,
+      "rel_diff_mean": 2.4805152780206517e-07,
+      "cos_sim_mean": 0.9999999999999689,
+      "changed_ratio_mean": 0.9388834635416666
+    },
+    {
+      "group": "TIR-G",
+      "sample_count": 16,
+      "layer": "block_6_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999996,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "TIR-G",
+      "sample_count": 16,
+      "layer": "block_6_patch",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.999999999999992,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "TIR-G",
+      "sample_count": 16,
+      "layer": "block_7_cls",
+      "abs_diff_mean": 7.397929830438344e-06,
+      "rel_diff_mean": 1.8846655511615137e-07,
+      "cos_sim_mean": 0.9999999999999827,
+      "changed_ratio_mean": 0.9047037760416666
+    },
+    {
+      "group": "TIR-G",
+      "sample_count": 16,
+      "layer": "block_9_cls",
+      "abs_diff_mean": 2.188403985342115e-05,
+      "rel_diff_mean": 3.23180876547993e-07,
+      "cos_sim_mean": 0.9999999999999486,
+      "changed_ratio_mean": 0.9468587239583334
+    },
+    {
+      "group": "TIR-G",
+      "sample_count": 16,
+      "layer": "final_pre_bn_cls",
+      "abs_diff_mean": 4.693117735626975e-06,
+      "rel_diff_mean": 4.948145820635814e-07,
+      "cos_sim_mean": 0.9999999999998788,
+      "changed_ratio_mean": 0.9239095052083334
+    },
+    {
+      "group": "TIR-G",
+      "sample_count": 16,
+      "layer": "post_scsr_cls",
+      "abs_diff_mean": 0.0,
+      "rel_diff_mean": 0.0,
+      "cos_sim_mean": 0.9999999999999996,
+      "changed_ratio_mean": 0.0
+    },
+    {
+      "group": "TIR-G",
+      "sample_count": 16,
+      "layer": "post_scsr_patch",
+      "abs_diff_mean": 8.127278787087934e-05,
+      "rel_diff_mean": 3.6929318288376094e-08,
+      "cos_sim_mean": 0.9999999999999925,
+      "changed_ratio_mean": 0.8571434020996094
+    },
+    {
+      "group": "TIR-G",
+      "sample_count": 16,
+      "layer": "retrieval_l2_cls",
+      "abs_diff_mean": 4.953460987088722e-07,
+      "rel_diff_mean": 4.953455998505519e-07,
+      "cos_sim_mean": 0.999999999999879,
+      "changed_ratio_mean": 0.9383138020833333
+    }
+  ],
+  "gradient_loss_summary": [
+    {
+      "batch": 1,
+      "loss_type": "CE",
+      "loss": 0.004001297522336245,
+      "diagnostic_loss_scale": 1.0,
+      "global_grad_norm": 0.22515641706320533,
+      "hypothetical_clip_factor": 1.0
+    },
+    {
+      "batch": 1,
+      "loss_type": "WRT",
+      "loss": 0.04784440994262695,
+      "diagnostic_loss_scale": 1.0,
+      "global_grad_norm": 1.479692311735507,
+      "hypothetical_clip_factor": 0.6758157194257486
+    },
+    {
+      "batch": 2,
+      "loss_type": "CE",
+      "loss": 0.00967445969581604,
+      "diagnostic_loss_scale": 1.0,
+      "global_grad_norm": 0.5113799700345794,
+      "hypothetical_clip_factor": 1.0
+    },
+    {
+      "batch": 2,
+      "loss_type": "WRT",
+      "loss": 0.0342366062104702,
+      "diagnostic_loss_scale": 1.0,
+      "global_grad_norm": 0.5677477356684715,
+      "hypothetical_clip_factor": 1.0
+    }
+  ],
+  "gradient_available_rows": 68,
+  "gradient_nonfinite_rows": 0,
+  "model_state_sha256_after": "ed87cc035257fcb67d0f8f561cfe134b635ac9556a8e4d1b4f50d4e0d67cb93e",
+  "state_unchanged": true,
+  "finished_utc": "2026-10-13T12:24:17.304687+00:00"
+}

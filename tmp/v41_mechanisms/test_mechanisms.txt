@@ -1,0 +1,31 @@
+test_01_normal_mirror_and_content_preservation (test_v41_mechanisms.V41MechanismTests) ... D:\CODE\Doing\WHU_base\SCSR\WHU\model\scsr_v41.py:18: FutureWarning: `torch.cpu.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cpu', args...)` instead.
+  return autocast(enabled=False) if autocast is not None else nullcontext()
+ok
+test_02_donor_v_only_and_restore_on_error (test_v41_mechanisms.V41MechanismTests) ... ok
+test_03_all_disabled_equals_complete_off (test_v41_mechanisms.V41MechanismTests) ... ok
+test_04_fixed_sampling_pairs_and_gain_ranking (test_v41_mechanisms.V41MechanismTests) ... ok
+test_05_four_combinations_full_ap_and_fixed_neighbors (test_v41_mechanisms.V41MechanismTests) ... ok
+test_06_initial_reconstruction_provenance (test_v41_mechanisms.V41MechanismTests) ... ok
+test_07_gradient_probe_cosines_without_mutation (test_v41_mechanisms.V41MechanismTests) ... ok
+test_08_cache_rejects_wrong_provenance (test_v41_mechanisms.V41MechanismTests) ... ok
+test_09_protocol_guards_and_training_rejection (test_v41_mechanisms.V41MechanismTests) ... ok
+test_10_small_image_cohort_all_mechanism_outputs (test_v41_mechanisms.V41MechanismTests) ... D:\PROGRAM\Anaconda\lib\site-packages\torch\utils\data\dataloader.py:666: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 61.704s
+
+OK
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+===========building transformer===========
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+===========building transformer===========
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+===========building transformer===========
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+===========building transformer===========

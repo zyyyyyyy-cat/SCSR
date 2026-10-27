@@ -1,0 +1,22 @@
+{
+  "experiment": 2,
+  "status": "complete",
+  "outputs": [
+    "frequency_intervention_calibration.csv",
+    "frequency_intervention_metrics.csv",
+    "frequency_intervention_query_changes.csv",
+    "frequency_intervention_margin.csv",
+    "frequency_intervention_controls.csv",
+    "frequency_official_confirmation_metrics.csv",
+    "frequency_official_confirmation_query_changes.csv",
+    "frequency_official_confirmation_margin.csv"
+  ],
+  "uad_checkpoint_sha256": "9bb3d547b98f80a685a47e1dee1bb633fdadf910d4319912f054db0f63f0b0e9",
+  "fixed_train_split_sha256": "84b619c8c8f7a8898c74f4771ee9c9f24ac96ec09722e23056dd9d67034424a8",
+  "seed": 1234,
+  "precision": "FP32",
+  "haar_precision": "FP32",
+  "optimizer_step": false,
+  "automatic_test_selection": false,
+  "formal_test_confirmation": true
+}

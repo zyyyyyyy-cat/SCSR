@@ -1,0 +1,1253 @@
+PAGE 1
+Seeing Through the Noise: Improving Infrared Small Target Detection and
+Segmentation from Noise Suppression Perspective
+Maoxun Yuan1 Duanni Meng1 Ziteng Xi1 Tianyi Zhao1 Shiji Zhao1 Yimian Dai2 Xingxing Wei1
+1Beihang University 2Nankai University
+{yuanmaoxun,mengduanni,xxwei}@buaa.edu.cn, yimian.dai@gmail.com
+Abstract
+Infrared small target detection and segmentation (IRSTDS)
+is a critical yet challenging task in defense and civilian
+applications, owing to the dim, shapeless appearance of
+targets and severe background clutter. Recent CNN-based
+methods have achieved promising target perception results,
+but they only focus on enhancing feature representation to
+offset the impact of noise, which results in the increased
+false alarm problem. In this paper, through analyzing the
+problem from the frequency domain, we pioneer in improv-
+ing performance from noise suppression perspective and
+propose a novel noise-suppression feature pyramid network
+(NS-FPN), which integrates a low-frequency guided fea-
+ture purification (LFP) module and a spiral-aware feature
+sampling (SFS) module into the original FPN structure.
+The LFP module suppresses the noise features by purify-
+ing high-frequency components to achieve feature enhance-
+ment devoid of noise interference, while the SFS module fur-
+ther adopts spiral sampling to fuse target-relevant features
+in feature fusion process. Our NS-FPN is designed to be
+lightweight yet effective and can be easily plugged into ex-
+isting IRSTDS frameworks. Extensive experiments on the
+IRSTD-1k and NUAA-SIRST datasets demonstrate that our
+method significantly reduces false alarms and achieves su-
+perior performance on IRSTDS task. The codes are avail-
+able at https://github.com/mengduann/NS-FPN.
+1. Introduction
+Infrared small target detection and segmentation (IRSTDS)
+plays a critical role in various defense and civilian appli-
+cations, including bird warning systems [5], sea rescue op-
+erations [27, 28], and aerial surveillance [29, 32]. Due to
+the long imaging distance and lack of sufficient texture or
+structural information, infrared small targets (IRST) often
+appear as dim, shapeless spots, with extremely low signal-
+to-noise ratios (SNR) and signal-to-clutter ratios (SCR)
+[7, 30]. These characteristics severely hinder accurate de-
+12
+MSHNet
+DNANet
+IRSAM
+IoU
+(IRSTD-1k)
+Fa
+(IRSTD-1k)
+IoU
+(NUAA-SIRST)
+89
+91
+93
+95
+63
+65
+67
+20
+15
+10
+5
+0
+99
+98
+97
+96
+71
+74
+77
+18
+15
+9
+6
+69
+100
+80
+87
+61
+68
+Fa
+(NUAA-SIRST)
+Pd
+(NUAA-SIRST)
+MSHNet+NS-FPN (Ours)
+Figure 1. Performance comparison of our method with other meth-
+ods on the IRSTD-1k and NUAA-SIRST datasets. The outer re-
+gions represent superior performance.
+tection, particularly in dynamic environments where targets
+are buried in heavy background clutter and exhibit weak
+thermal signatures. Therefore, developing robust and effi-
+cient IRSTDS methods that can accurately localize small
+targets under diverse and realistic infrared scenarios re-
+mains a challenging problem.
+Recent years have witnessed the focus of IRSTDS re-
+search shifting to CNN-based methods for detection [7, 15,
+36] and segmentation [6, 13, 18, 31], which concentrate on
+designing feature fusion structures to integrate high-level
+features with low-level details. For instance, DNANet [13]
+is explored to mitigate deep information loss caused by
+pooling layers, and Liu et al. [18] design a simple multi-
+scale head for the plain U-Net (MSHNet) to localize targets
+more precisely. In addition, to capture the essential struc-
+tural features of small targets, IRPruneDet [35] proposes a
+wavelet channel pruning method, which believes that high-
+frequency components can discriminate the importance of
+features for IRSTDS. Recently, IRSAM [34] improves the
+Perona-Malik diffusion equation [20] with a wavelet trans-
+form for image denoising and edge preservation, further im-
+proving detection performance. Although these methods
+1
+arXiv:2508.06878v2  [cs.CV]  24 Feb 2026
+
+PAGE 2
+Fa
+(NUAA-SIRST)
+IoU
+(IRSTD-1k)
+IoU
+(NUAA-SIRST)
+Fa
+(NUAA-SIRST)
+80
+85
+90
+95
+40
+50
+60
+40
+30
+20
+10
+0
+95
+90
+85
+80
+50
+60
+70
+40
+30
+20
+10
+0
+70
+100
+80
+70
+30
+40
+MSHNet
+Fa
+(IRSTD-1k)
+IoU
+(IRSTD-1k)
+Fa
+(IRSTD-1k)
+IoU
+(NUAA-SIRST)
+80
+85
+90
+95
+40
+50
+60
+40
+30
+20
+10
+0
+95
+90
+85
+80
+50
+60
+70
+40
+30
+20
+10
+0
+70
+100
+80
+70
+30
+40
+DNANet
+Low-frequency
+Original images
+High-frequency
+Correct Detection
+False Alarm
+DWT
+Figure 2. The discrete haar wavelet transform (DWT) is utilized to
+decompose the original image into low and high frequency com-
+ponents. There is a crossover between the red and blue lines.
+have achieved satisfactory performance improvements by
+designing complex network structures, they primarily focus
+on enhancing the feature representation while neglecting
+the introduced false alarms, especially due to the empha-
+sis on high-frequency components. As shown in Figure 1,
+while the above methods exhibit satisfactory target localiza-
+tion performance in terms of IoU and Pd, they concurrently
+exhibit high false alarm (Fa) rates in IRSTDS task.
+To solve this problem, we explore possible reasons for
+the increase in false alarms from the perspective of fre-
+quency domain. Since different frequency components have
+different functions in the image structure, high- and low-
+frequency components may play different roles in IRSTDS
+tasks. Thus, we decompose the original images as illus-
+trated in Figure 2 and observe the following characteristics:
+➊High-frequency components are crucial for IRSTDS
+tasks while also leading to an increase in false alarm
+rates. Compared to low-frequency components, the Pd and
+IoU metrics of both methods show excellent performance
+on the original images, which indicates the image details
+(high-frequency components) lost in low-frequency compo-
+nents are crucial for improving target localization. How-
+ever, these high-frequency components also contain noise
+interference, leading to an increase in false alarm rates.
+➋Low-frequency components will degrade target lo-
+calization performance but can also serve as valuable
+cues to reduce false alarms.
+As shown in Figure 2,
+while the performance on original images surpasses that on
+low-frequency components, the Fa metric reveals that low-
+frequency components achieve the best false alarm suppres-
+sion performance. This superior performance highlights the
+potential of low-frequency components as effective features
+for suppressing noise in high-frequency components.
+Inspired by the above, we pioneer in suppressing the
+noise in feature fusion to ensure improving target localiza-
+tion performance while reducing false alarm rates. There-
+fore, we firstly propose a low-frequency guided feature
+purification module (LFP) to suppress the noise features
+by purifying high-frequency components. Specifically, LFP
+begins with a 2D discrete wavelet transform (DWT) to de-
+compose features into the frequency domain, then utilizes
+low-frequency features to predict the response at potential
+target locations. This prediction serves as a weighted map to
+refine high-frequency features, followed by gated gaussian
+filtering to further suppress less confident features. Finally,
+inverse DWT transformation yields noise-suppressed fea-
+tures while preserving high-frequency enhancement. Fur-
+thermore, to avoid interference from surrounding back-
+ground noise, we design a spiral-aware feature sampling
+module (SFS) that performs spiral sampling in feature fu-
+sion. Specifically, SFS employs dynamic sampling based on
+the intensity distribution characteristics (spiral shape) and
+calculates similarity to acquire the target-relevant features,
+further mitigating the impact of noise interference.
+Different from previous methods that focus on design-
+ing complex network structures, our paper aims to pro-
+pose a lightweight yet effective way to improve perfor-
+mance. Thus, we integrate the LFP and SFS modules into
+the feature pyramid network (FPN) to construct a noise-
+suppression FPN, named NS-FPN. In this way, the LFP
+module can be used to replace the 1 × 1 convolutions in
+FPN to achieve feature enhancement devoid of noise in-
+terference, while the SFS module substitutes the upsam-
+pling operations to achieve structured sampling and fusion
+of target-relevant features. These efficient designs allow our
+NS-FPN to be easily plugged into existing IRSTDS frame-
+works. Figure 1 shows that our NS-FPN can effectively re-
+duce false alarms and achieve superior target localization
+performance. In summary, our contributions in this paper
+are highlighted as follows:
+➊We reveal the increased false alarm rate faced by cur-
+rent CNN-based IRSTDS methods from a frequency do-
+main and pioneer in improving detection and segmentation
+performance from noise suppression perspective.
+➋We propose a novel feature pyramid network (NS-
+FPN) that suppresses noise interference while enhancing
+target features using a low-frequency guided feature purifi-
+cation module and a spiral-aware feature sampling module.
+➌Extensive experiments on the public IRSTDS datasets
+demonstrate that our NS-FPN can effectively reduce false
+alarms to further improve detection performance.
+2. Related Work
+2.1. IRST Detection and Segmentation Networks
+With the advancement of deep learning techniques, CNN-
+based methods have emerged as the dominant paradigm,
+enabling automatic multi-layered feature learning for
+IRSTDS. For CNN-based detection, Dai et al. [7] proposed
+2
+
+PAGE 3
+a one-stage cascade refinement network (OSCAR) that uses
+the results of high-level heads to modulate the predictions of
+low-level heads, completing the detection of a target from
+coarse to fine, and Yang et al. [25] introduced a dynamic
+head mechanism to adaptively adjust feature responses to
+different spaces and channels, thus improving the ability of
+network to focus on tiny targets. As for CNN-based seg-
+mentation, ISNet [33] improved the accuracy of target shape
+prediction by introducing an edge reconstruction mecha-
+nism, while DNANet [13] maintained the information of
+small targets in deep layers through dense interactions be-
+tween features from the same and different layers. Recently,
+Liu et al. [18] used a novel scale and location sensitive
+(SLS) loss function to correct multi-scale prediction results,
+which can further improve the detection performance of ex-
+isting methods. Concurrently, IRPruneDet [35] proposed a
+wavelet structure-regularized soft channel pruning strategy
+to improve the network inference efficiency.
+Instead of focusing on complex structure design, this pa-
+per achieves feature enhancement devoid of noise interfer-
+ence, thus effectively reduce false alarms to further improve
+detection and segmentation performance.
+2.2. Feature Pyramid Network
+Feature Pyramid Network (FPN) [16] emerged as a funda-
+mental structure for general object detection, which can in-
+tegrate high-level features with low-level details through a
+top-down connection. However, its linear summation may
+not be the most effective method for feature fusion. Based
+on it, path aggregation network (PANet) [19] improved the
+FPN by introducing a bottom-up path enhancement, which
+facilitates the reuse of low-level features and shortens infor-
+mation flow paths. Besides, bidirectional feature pyramid
+network (BiFPN) [22] removed single-input nodes from
+PANet and introduced an adaptive weighted feature fusion
+mechanism to improve detection performance. In contrast
+to above FPNs that rely on manually crafted designs, NAS-
+FPN [11] leveraged neural architecture search to automat-
+ically explore the topological space of feature fusion net-
+works and discovered optimal connection strategies. Re-
+cently, HS-FPN [21] was designed for tiny object detec-
+tion in visible images.
+However, it over-relied on high-
+frequency features determined by a preset spectral range
+and neglected the importance of low-frequency features,
+making it ineffective for IRST task. Unlike above meth-
+ods, our work fully utilizes low-frequency components to
+adaptively guide high-frequency components, thereby ac-
+tively suppressing noise in feature fusion process, which is
+a specific design for the IRSTDS.
+3. Method
+In this section, we introduce our noise-suppression feature
+pyramid network (NS-FPN) and its components. As illus-
+trated in Figure 3, NS-FPN adopts a similar architectural
+design to conventional FPN, extracting hierarchical feature
+maps from the backbone network and employing 1×1 con-
+volutional operations to reduce their channel dimensions to
+64. These channel-reduced features, denoted as {X1, X2,
+X3, X4}, correspond to feature strides of {2, 4, 8, 16} pix-
+els with respect to the original input resolution. The multi-
+scale feature pyramid {Y1, Y2, Y3, Y4} is subsequently con-
+structed by the top-down pathway within NS-FPN. Each lat-
+eral connection in NS-FPN integrates dual specialized mod-
+ules for noise suppression: low-frequency guided feature
+purification (LFP) module and spiral-aware feature sam-
+pling (SFS) module.
+LFP suppresses the noise features
+by purifying high-frequency components in Xi while SFS
+takes {X′
+i, Yi+1} as input, dynamically samples features in
+a spiral shape, and calculates similarity to further eliminate
+the influence of noise interference. Finally, the enhanced
+features {Y1, Y2, Y3, Y4} obtained by feature addition are
+utilized for the subsequent IRSTDS tasks. Note that, all lat-
+erals of NS-FPN contain the LFP module, while only {Y1,
+Y2, Y3} layers contain the SFS module.
+3.1. Low-frequency Guided Feature Purification
+As observed in the introduction, low-frequency components
+can be utilized as valuable cues to suppress noise in high-
+frequency representations. Therefore, we propose the LFP
+module to reduce false alarms caused by noise interfer-
+ence present in high-frequency features. To achieve this,
+we design a two-stage purification mechanism, as shown
+in Figure 3.
+In the first stage, we utilize low-frequency
+features to provide the weighted map of potential target
+locations, which subsequently guides the enhancement of
+target-relevant features while suppressing noise features
+in high-frequency.
+The second stage refines these high-
+frequency features through a gated gaussian filtering, which
+further effectively eliminates noise features.
+Specifically, in the first stage, given the input features
+Xi ∈RB×C×Hi×Wi, we first perform a single-level 2D
+discrete wavelet transform (DWT) to decompose it into low-
+and high-frequency features:
+[Fl, Fh] = DWT(X),
+(1)
+where Fl and Fh denote the low- and high-frequency com-
+ponents, respectively. Then we perform a spatial attention
+to obtain the weighted map from Fl as follows:
+As = Sigmoid (Conv (APool(Fl) ∥MPool(Fl))) ,
+(2)
+where APool and MPool denotes the average and max pool-
+ing. The high-frequency features are then modulated via
+element-wise multiplication:
+ˆ
+Fh = As ⊙Fh.
+(3)
+3
+
+PAGE 4
+Figure 3. The overall structure of our NS-FPN and the details of its conponents. For each scale, the feature is first fed into the LFP
+module, which generates a target-relevant spatial attention map based on low-frequency components to guide two-stage feature purification
+of high-frequency features. Subsequently, the purified feature is fused with the upper-layer feature through the SFS module to achieve
+semantic complementation according with spatial distribution prior of infrared small targets. Note that, convolutions are omitted for better
+visualization and Y4 does not contain SFS module.
+In the second stage, to further purify the modulated high-
+frequency components ˆ
+Fh, we introduce a gated gaussian
+filtering G(·) to adaptively impose stronger suppression on
+less confident features.
+Specifically, we apply gaussian
+smoothing only to those high-frequency components whose
+absolute values fall below an empirically set threshold τ:
+˜
+Fh = G( ˆ
+Fh) · I<τ(| ˆ
+Fh|) + ˆ
+Fh · I≥τ(| ˆ
+Fh|),
+(4)
+where I(·) denotes the indicator function used to impose the
+gating constraint and G(·) is defined as follows:
+G(i, j; σ) = 1
+Z exp
+
+−(i −c)2 + (j −c)2
+2σ2
+
+,
+(5)
+where σ is the learnable standard deviation, (i, j) denotes
+the spatial coordinate in the kernel, c = ⌊k/2⌋is the kernel
+center, and Z is a normalization factor. Finally, the purified
+features are reconstructed by inverse DWT:
+X′ = IDWT(Fl, ˜
+Fh).
+(6)
+3.2. Spiral-aware Feature Sampling
+After purifying each scale feature, we design a spiral-aware
+feature sampling (SFS) to adaptively acquire the target-
+relevant features from upper-layer to lower-layer features,
+thereby further mitigating noise interference in the fusion
+process. To ensure the consistency of feature scales, feature
+sampling becomes inevitable. Thus, we integrate the inten-
+sity distribution characteristics of IRST and design a spiral
+pattern to sample target-relevant features in SFS module.
+Specifically, for each LFP-purified feature map X′
+i ∈
+RB×C×Hi×Wi, we aim to inject higher-level semantic fea-
+tures Yi+1 ∈RB×C×Hi+1×Wi+1 from the deeper layer of
+NS-FPN. A straightforward way is to use DAT [37] to ran-
+domly sample the Yi+1 features to acquire scale-consistent
+features.
+However, since IRST is dim and small, ran-
+dom sampling cannot effectively capture the difference be-
+tween the surrounding area and the target. Thus, we intro-
+duce an initialized pattern to constrain the sampling pro-
+cess. We first generate a uniform grid of reference points
+p ∈RHG×WG×2 for Yi+1, where HG × WG controls the
+spatial sparsity of the sampling. Then, the offsets ∆p are
+generated by combining a basic spiral distribution s and a
+group of learnable biases ϵ:
+Y ′
+i+1 = ϕ(Yi+1; p + ∆p),
+∆p = s + ϵ,
+(7)
+where ϕ denotes the bilinear interpolation, Y ′
+i+1 is the sam-
+pled features. In particular, a spiral pattern is designed to
+4
+
+PAGE 5
+DAT sampling locations
+SFS sampling locations
+Query Center
+Head 8
+Head 1
+Head 2
+Head 6
+Head 4
+Head 5
+Head 3
+Head 7
+𝑿𝒊
+′
+𝒀𝒊+𝟏
+Figure 4. Visualization of DAT and SFS sampling process.
+Table 1. Comparison of segmentation performance and computa-
+tion cost between using SFS and other methods.
+Method
+IoU ↑
+Pd ↑
+Fa ↓
+Flops(G)
+Upsample
+68.82
+94.56
+9.79
+6.80
+DAT [37]
+68.52
+93.54
+10.40
++1.24G
+SFS (Ours)
+69.29
+95.24
+8.58
++1.16G
+construct s, as illustrated in Figure 4. This pattern is for-
+mulated for each attention head h ∈[1, H] within the polar
+coordinate system as follows:
+s(h,k) =ls
+cos(θh,k) sin(θh,k)
+,
+θh,k = 2πk
+P
++ 2πh
+H ,
+ls = l0 + k · ∆l,
+(8)
+where k ∈[1, P] indexes the sampling point, l0 is the initial
+radius, and ∆l is the radial step between consecutive points.
+Based on the generated reference points p, we can per-
+form multi-head attention to calculate similarity and acquire
+the fused features. Typically, we utilize the LFP-purified
+features X′
+i as query, and the upper-layer features Y ′
+i+1 as
+key and value, which can be represented as:
+Fs = Attn(LN(X′
+i), LN(Y ′
+i+1)),
+(9)
+where Attn(·) is the cross attention [3] and LN(·) is Lay-
+erNorm [1]. Finally, the output features Yi are obtained by
+modulating X′
+i with Fs through the residual addition:
+Yi = X′
+i + Fs.
+(10)
+3.3. Why the SFS Module Works?
+Since using upsampling and pixel-by-pixel addition in the
+original FPN lacks spatial perception ability around IRST, a
+straightforward way is to adopt deformable attention (DAT)
+[37] to enhance spatial perception while ensuring compu-
+tational efficiency.
+However, as shown in Table 1, di-
+rectly using DAT cannot effectively improve performance
+but increases computational complexity. The main reason is
+that IRST are typically small, occupy compact and shape-
+consistent regions, which makes the random sampling in
+sparse attention not applicable. Therefore, we propose the
+spiral-aware feature sampling to effectively alleviate the
+above limitations from two aspects:
+➊Spiral spatial perception.
+Since the intensity of
+IRST has the gaussian distribution characteristics, we ex-
+plicitly restrict the sampling locations to satisfy the spi-
+ral distribution, as illustrated in Figure 4. This structured-
+design ensures the network can perceive fine-grained fea-
+tures around the IRST, which yields clearer target contours
+while cooperating with LFP to further suppress background
+noise interference as shown in Table 1.
+➋Shared learnable offsets. As analyzed above, IRST
+are usually characterized by a consistent shape. Thus, dif-
+ferent from obvious methods that using learnable offsets
+individually for each query, SFS module employs a set of
+shared learnable offsets across different querys. This makes
+the sampling process more stable while reducing the com-
+putational complexity as shown in Table 1.
+4. Experiment
+4.1. Datasets and Evaluation Metrics
+Datasets.
+To evaluate the effectiveness of NS-FPN, we
+choose IRSTD-1k [33] and NUAA-SIRST [6] as our exper-
+imental datasets. IRSTD-1k includes 1000 real infrared im-
+ages of 512×512 in size, and NUAA-SIRST contains 427
+infrared images of various sizes. For each dataset, 80% of
+the infrared images are used as training set and the remain-
+ing 20% are used as testing set.
+Evaluation Metrics for Segmentation. For segmentation
+tasks, Intersection over Union (IoU) is used as the pixel-
+level metric to evaluate shape description capability, and the
+probability of detection (Pd) and the false alarms (Fa) rate
+to evaluate localization performance.
+Evaluation Metrics for Detection.
+For detection tasks,
+mean Average Precision (mAP) is utilized as the primary
+metric to evaluate detection performance based on classi-
+fication accuracy and localization precision. Specifically,
+mAP50 and mAP75 denote the mAP at a fixed IoU thresh-
+old of 0.50 and 0.75 respectively, while mAP is the average
+of mAP values calculated over a range of IoU thresholds
+from 0.50 to 0.95 with a step of 0.05.
+4.2. Implementation Details
+All experiments are conducted on NVIDIA GeForce RTX
+4090 GPUs. We integrate NS-FPN into MSHNet [18] for
+segmentation and YOLOv8n-p2 for detection. The Adagrad
+5
+
+PAGE 6
+Table 2. Ablation of LFP and SFS modules with segmentation
+metrics on IRSTD-1k and NUAA-SIRST datasets.
+Module
+IRSTD-1k
+NUAA-SIRST
+LFP
+SFS
+IoU ↑Pd ↑
+Fa ↓
+IoU ↑Pd ↑
+Fa ↓
+67.04 91.16 13.06 76.04 99.08 12.42
+✓
+68.82 94.56 9.79
+76.99 100.0 12.07
+✓
+67.81 93.88 13.66 78.07 100.0 4.61
+✓
+✓
+69.29 95.24 8.58
+78.75 100.0 1.60
+Table 3. LFP at different scale layers are performed on the IRSTD-
+1k dataset. The best results are highlighted in bold.
+LFP at Different Scale Layer
+IRSTD-1k
+X1
+X2
+X3
+X4
+IoU ↑
+Pd ↑
+Fa ↓
+67.81
+93.88
+13.66
+✓
+67.72
+94.56
+6.15
+✓
+✓
+67.66
+94.22
+8.35
+✓
+✓
+✓
+68.45
+94.22
+12.98
+✓
+✓
+✓
+✓
+69.29
+95.24
+8.58
+Table 4.
+Comparison of different FPNs on IRSTD-1k dataset,
+along with parameters and computational cost.
+Method
+Segmentation
+Detection
+Complexity
+IoU Pd
+Fa
+mAP50 mAP
+P(M) F(G)
+FPN[16]
+67.0 91.2 13.1 85.9
+41.8
+3.91
+6.80
+PANet[19]
+68.9 93.5 6.7
+85.0
+41.5
++0.41 +1.41
+BiFPN[22]
+66.9 93.5 12.1 85.8
+41.6
++0.39 +1.33
+HSFPN[21] 66.7 94.9 18.1 85.1
+41.0
++0.17 +0.98
+Ours
+69.2 95.2 8.5
+86.3
+42.1
++0.26 +1.16
+optimizer [9] is used with an initial learning rate of 0.05.
+The models are trained for 500 epochs with a batch size
+of 16. For segmentation tasks, input images are resized to
+256 and then randomly cropped to 224 during training. For
+detection tasks, input images are uniformly resized to 640.
+4.3. Ablation Study
+Ablation on Each Component.
+To evaluate the effec-
+tiveness of the NS-FPN, we conduct ablation on the LFP
+and SFS modules.
+The baseline model is MSHNet and
+YOLOv8n-p2 with FPN and the results are shown in Ta-
+ble 2. Applying LFP or SFS to baseline model individually
+improves the segmentation performance. Specifically, re-
+placing the 1×1 convolution in FPN with the LFP module
+significantly improves all metrics. In particular, on IRSTD-
+1k, IoU increases by 1.78%, Pd increases by 3.40%, and
+Fa decreases by 3.27. The best results are achieved when
+using both LFP and SFS modules, yielding a significant im-
+IR Image
+Input features
+LFP
+LFP+SFS
+Figure 5. Visualization of the features at the X2 level after the
+gradual addition of LFP and SFS in NS-FPN.
+Figure 6. Heatmaps for the ablation results (IoU, Pd, Fa) of H
+(Rows) and P (Columns) in SFS module.
+provement in Fa on both datasets. As shown in Figure 5,
+the combination of LFP and SFS effectively suppress the
+background noise and enhance the target features.
+LFP at Different Scale Layer. We use the proposed LFP
+to replace the 1×1 convolutions of different scale layers in
+FPN. Table 3 presents the results of applying LFP module at
+different layers (from X1 to X4). We observe that applying
+LFP to large-scale layers (X1, X2) significantly reduces Fa
+to 6.15. In contrast, small-scale layers (X3, X4) capture
+more semantic context, improving IoU but with higher Fa.
+When LFP is applied to all scale layers, the best overall
+trade-off of segmentation metrics can be achieved.
+Ablation of the hyperparameters H and P in SFS. To
+determine the optimal hyperparameter group of H and
+P in our SFS modules, we perform ablation studies on
+IRSTD-1k dataset by varying the number of heads H ∈
+{1, 2, 4, 8, 16, 32} and points P ∈{3, 4, 5, 6}, where the
+FPN channel dimensions of 64 should be divisible by H.
+As detailed in Figure 6, increasing H moderately improves
+performance, but excessive H leads to a performance drop
+due to insufficient information per head. Similarly, moder-
+ate increases in P improve Pd, while an overly large P in-
+6
+
+PAGE 7
+Table 5. Comparison with other state-of-the-art methods on IRSTD-1k and NUAA-SIRST datasets. Segmentation results are evaluated by
+IoU(%), Pd(%), and Fa(10−6). Detection results are evaluated by mAP50(%), mAP75(%) and mAP(%). The best results are highlighted
+in bold and the second-place results are highlighted in underline.
+Segmentation
+Method
+Type
+IRSTD-1k
+NUAA-SIRST
+IoU ↑
+Pd ↑
+Fa ↓
+IoU ↑
+Pd ↑
+Fa ↓
+Top-Hat (2010) [2]
+Filtering
+10.06
+75.11
+1432
+7.14
+79.84
+1012
+Max-Median (1999) [8]
+7.00
+65.21
+59.73
+4.17
+69.20
+55.33
+WSLCM (2020) [12]
+Local Contrast
+3.45
+72.44
+6619
+1.16
+77.95
+5446
+TLLCM (2020) [12]
+3.31
+77.39
+6738
+1.03
+79.09
+5899
+IPI (2013) [10]
+Low Rank
+27.92
+81.37
+16.18
+25.67
+85.55
+11.47
+RIPT (2017) [4]
+14.11
+77.55
+28.31
+11.05
+79.08
+22.61
+ACMNet (WACV 21) [6]
+Deep Learning
+59.23
+93.27
+65.28
+70.77
+93.08
+3.70
+ISNet (CVPR 22) [33]
+62.88
+92.59
+27.92
+74.16
+97.99
+8.35
+DNANet (TIP 22) [13]
+65.71
+91.84
+17.61
+74.31
+98.17
+15.97
+UIUNet (TIP 22) [23]
+65.06
+91.16
+12.68
+72.69
+99.08
+26.61
+HCFNet (ICME 24) [24]
+64.26
+92.86
+23.91
+72.74
+98.17
+6.21
+IRPruneDet (AAAI 24) [35]
+64.54
+91.74
+16.04
+75.12
+98.61
+2.96
+IRSAM (ECCV 24) [34]
+64.65
+90.57
+16.61
+71.44
+92.66
+7.53
+SCTransNet (TGRS 24) [31]
+68.64
+91.84
+11.92
+77.09
+98.17
+15.26
+SFCANet (TAES 25) [17]
+66.68
+92.89
+12.69
+78.46
+97.24
+8.02
+PConv (AAAI 25) [26]
+67.08
+92.18
+11.92
+76.25
+99.08
+6.74
+MSHNet (CVPR 24) [18]
+67.16
+93.88
+15.03
+74.60
+99.08
+17.21
+MSHNet + NS-FPN (Ours)
+69.29
+95.24
+8.58
+78.75
+100.0
+1.60
+Detection
+Method
+IRSTD-1k
+NUAA-SIRST
+mAP50
+mAP75
+mAP
+mAP50
+mAP75
+mAP
+EFLNet (TGRS 24) [25]
+86.1
+29.5
+38.0
+98.1
+37.9
+47.1
+DFLMF-ISTD (IPT 25) [14]
+82.7
+–
+38.6
+94.2
+–
+51.1
+PConv (AAAI 25) [26]
+86.1
+34.5
+40.8
+96.4
+49.9
+54.9
+YOLOv8n (2024)
+85.0
+31.9
+41.5
+95.6
+40.3
+49.0
+YOLOv8n + NS-FPN (Ours)
+86.3
+36.9
+42.1
+97.5
+61.6
+58.0
+troduces more computation and false alarms. Finally, we se-
+lect the optimal configuration of H = 8 and P = 4 for SFS
+module, where all metrics achieve the best performance.
+Ablation on Different FPNs. To demonstrate the supe-
+riority of our NS-FPN, we compare it with representative
+alternatives including FPN [16], PANet [19], BiFPN [22]
+and HS-FPN [21], as shown in Table 4.
+For segmenta-
+tion, our method achieves the highest IoU (69.29%) and Pd
+(95.24%), while maintaining acceptable Fa. For detection,
+NS-FPN also achieves the best mAP50 (86.3%) and mAP
+(42.1%). These results demonstrate that NS-FPN is an ef-
+fective plugin designed specifically for the IRSTDS tasks.
+4.4. Comparison with SOTA Methods
+Quantitative Comparisons. For segmentation tasks, we
+select six classical methods and eleven state-of-the-art deep
+learning methods, including several frequency domain-
+based models, for comparisons on the IRSTD-1k and
+NUAA-SIRST datasets. As presented in Table 5, traditional
+methods such as Top-Hat [2] and WSLCM [12] have limited
+performance due to their reliance on handcrafted priors. For
+deep learning-based methods, our method achieves the best
+performance in all evaluation metrics on both datasets, with
+69.29% IoU, 95.24% Pd, and 8.58 Fa on IRSTD-1k, and
+78.75% IoU, 100.0% Pd, and 1.60 Fa on NUAA-SIRST,
+demonstrating superior performance in pixel-level accuracy
+and object-level reliability. As for detection tasks, we fur-
+ther compare with four recent IRSTD methods on IRSTD-
+1k and NUAA-SIRST datasets. Table 5 shows that our ap-
+proach outperforms previous methods in mAP50, mAP75
+and mAP. Specifically, our method achieves the best re-
+sults on both datasets with 86.3% mAP50, 36.9% mAP75
+and 42.1% mAP on IRSTD-1k, and 97.5% mAP50, 61.6%
+mAP75 and 58.0% mAP on NUAA-SIRST. The above re-
+sults demonstrate that our NS-FPN is highly effective for
+small target segmentation and detection tasks in infrared
+scenarios, enabling accurate target localization while sup-
+pressing background noise interference.
+7
+
+PAGE 8
+IR Image
+TopHat
+IPI
+UIUNet
+MSHNet
+SCTransNet
+PConv
+Ours
+GT
+Figure 7. Visual results of different SOTA methods. The boxes in red, blue, and yellow represent correct, missed, and false detections,
+respectively. Close-up views are shown in the bottom corners.
+Table 6. Segmentation performance, FLOPs and parameters com-
+parison for NS-FPN components.
+LFP
+SFS
+IoU ↑Pd ↑
+Fa ↓
+Param
+FLOPs
+67.04
+91.16
+13.06
+3.91M
+6.80G
+✓
+68.82
+94.56
+9.79
++0.01M
++0.01G
+✓
+67.81
+93.88
+13.66
++0.25M
++1.15G
+✓
+✓
+69.29
+95.24
+8.58
++0.26M
++1.16G
+Visual Comparisons. Visual results with closed-up views
+of different methods are shown in Figure 7. By using NS-
+FPN, our method significantly reduces false alarms (the first
+line), achieves more accurate segmentation results of the
+target shape (the third line) and effectively distinguishes tar-
+gets from complex background interference (the fourth line)
+without missing the dim target (the second line). In contrast,
+traditional methods often suffer from numerous false alarms
+and missed detections, while other deep learning-based ap-
+proaches tend to produce ambiguous predictions. Results
+above highlight the effectiveness of our proposed NS-FPN
+in enhancing discriminative features and suppressing inter-
+ference, enabling precise segmentation even under complex
+background interference.
+4.5. Model Complexity Analysis
+Our paper aims to suppress noise interference in feature fu-
+sion process by introducing a lightweight yet effective FPN.
+As shown in Table 4, we can see that NS-FPN has superior
+segmentation and detection performance compared to other
+FPNs while ensuring low computational complexity, which
+verifies the efficiency of NS-FPN. Furthermore, we also an-
+alyze the parameters and computational complexity of in-
+dividual NS-FPN component as shown in Table 6. The pa-
+rameters and FLOPs for LFP module mainly come from the
+few convolution operations, which results in similar com-
+putational costs with the original FPN. Although the SFS
+module adopts a cross-attention mechanism that increases
+FLOPs, the overall NS-FPN framework achieves significant
+performance improvements at an acceptable computational
+cost compared to the original FPN.
+5. Conclusion
+In this paper, we proposed a noise-suppression feature pyra-
+mid network (NS-FPN) to improve the IRSTDS perfor-
+mance. Given the noise interference results in false alarms
+problems, we introduced a low-frequency guided feature
+purification module (LFP) to suppress the noise features by
+purifying high-frequency components. Additionally, we de-
+signed a spiral-aware feature sampling module (SFS) to spi-
+rally sample multi-scale features for feature fusion. These
+two modules are tightly coupled in the FPN framework to
+improve detection and segmentation performance. Exten-
+sive experiments showed that our method surpasses SOTA
+methods in objective metrics and subjective evaluations. We
+believe that NS-FPN paves the way for more robust and
+practical IRSTDS methods in real-world applications.
+8
+
+PAGE 9
+References
+[1] Jimmy Lei Ba, Jamie Ryan Kiros, and Geoffrey E Hin-
+ton. Layer normalization. arXiv preprint arXiv:1607.06450,
+2016. 5
+[2] Xiangzhi Bai and Fugen Zhou.
+Analysis of new top-hat
+transformation and the application for infrared dim small tar-
+get detection. Pattern Recognition, 43(6):2145–2156, 2010.
+7
+[3] Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas
+Usunier, Alexander Kirillov, and Sergey Zagoruyko. End-to-
+end object detection with transformers. In European confer-
+ence on computer vision, pages 213–229. Springer, 2020. 5
+[4] Yimian Dai and Yiquan Wu.
+Reweighted infrared patch-
+tensor model with both nonlocal and local priors for single-
+frame small target detection. IEEE journal of selected top-
+ics in applied earth observations and remote sensing, 10(8):
+3752–3767, 2017. 7
+[5] Yimian Dai, Fabian Gieseke, Stefan Oehmcke, Yiquan Wu,
+and Kobus Barnard. Attentional feature fusion. In Proceed-
+ings of the IEEE/CVF winter conference on applications of
+computer vision, pages 3560–3569, 2021. 1
+[6] Yimian Dai, Yiquan Wu, Fei Zhou, and Kobus Barnard.
+Asymmetric contextual modulation for infrared small tar-
+get detection. In Proceedings of the IEEE/CVF winter con-
+ference on applications of computer vision, pages 950–959,
+2021. 1, 5, 7
+[7] Yimian Dai, Xiang Li, Fei Zhou, Yulei Qian, Yaohong Chen,
+and Jian Yang. One-stage cascade refinement networks for
+infrared small target detection. IEEE transactions on geo-
+science and remote sensing, 61:1–17, 2023. 1, 2
+[8] Suyog D Deshpande, Meng Hwa Er, Ronda Venkateswarlu,
+and Philip Chan. Max-mean and max-median filters for de-
+tection of small targets. In Signal and Data Processing of
+Small Targets 1999, pages 74–83. SPIE, 1999. 7
+[9] John Duchi, Elad Hazan, and Yoram Singer. Adaptive sub-
+gradient methods for online learning and stochastic opti-
+mization. Journal of machine learning research, 12(7), 2011.
+6
+[10] Chenqiang Gao, Deyu Meng, Yi Yang, Yongtao Wang, Xi-
+aofang Zhou, and Alexander G Hauptmann. Infrared patch-
+image model for small target detection in a single image.
+IEEE transactions on image processing, 22(12):4996–5009,
+2013. 7
+[11] Golnaz Ghiasi, Tsung-Yi Lin, and Quoc V Le.
+Nas-fpn:
+Learning scalable feature pyramid architecture for object de-
+tection.
+In Proceedings of the IEEE/CVF conference on
+computer vision and pattern recognition, pages 7036–7045,
+2019. 3
+[12] Jinhui Han, Saed Moradi, Iman Faramarzi, Honghui Zhang,
+Qian Zhao, Xiaojian Zhang, and Nan Li. Infrared small tar-
+get detection based on the weighted strengthened local con-
+trast measure. IEEE Geoscience and Remote Sensing Letters,
+18(9):1670–1674, 2020. 7
+[13] Boyang Li, Chao Xiao, Longguang Wang, Yingqian Wang,
+Zaiping Lin, Miao Li, Wei An, and Yulan Guo. Dense nested
+attention network for infrared small target detection. IEEE
+Transactions on Image Processing, 32:1745–1758, 2022. 1,
+3, 7
+[14] Ning Li, Daozhi Wei, Shucai Huang, and Xirui Xue. Dflmf-
+istd: Infrared small object detection network based on decou-
+pled feature learning and multi-scale feature fusion. Infrared
+Physics & Technology, page 105851, 2025. 7
+[15] Ronghao Li and Ying Shen.
+Yolosr-ist: A deep learning
+method for small target detection in infrared remote sensing
+images based on super-resolution and yolo. Signal Process-
+ing, 208:108962, 2023. 1
+[16] Tsung-Yi Lin, Piotr Doll´ar, Ross Girshick, Kaiming He,
+Bharath Hariharan, and Serge Belongie.
+Feature pyra-
+mid networks for object detection.
+In Proceedings of the
+IEEE conference on computer vision and pattern recogni-
+tion, pages 2117–2125, 2017. 3, 6, 7
+[17] Zijin Lin, Guoheng Huang, Ming Li, Xiaochen Yuan,
+Guanghui Yue, Chi-Man Pun, and Lianglun Cheng. Sfcanet:
+Channel attention in spatial-frequency domain for infrared
+small target detection. IEEE Transactions on Aerospace and
+Electronic Systems, 2025. 7
+[18] Qiankun Liu, Rui Liu, Bolun Zheng, Hongkui Wang, and
+Ying Fu. Infrared small target detection with scale and loca-
+tion sensitivity. In Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition, pages 17490–
+17499, 2024. 1, 3, 5, 7
+[19] Shu Liu, Lu Qi, Haifang Qin, Jianping Shi, and Jiaya Jia.
+Path aggregation network for instance segmentation. In Pro-
+ceedings of the IEEE conference on computer vision and pat-
+tern recognition, pages 8759–8768, 2018. 3, 6, 7
+[20] Pietro
+Perona,
+Takahiro
+Shiota,
+and
+Jitendra
+Malik.
+Anisotropic diffusion. In Geometry-driven diffusion in com-
+puter vision, pages 73–92. Springer, 1994. 1
+[21] Zican Shi, Jing Hu, Jie Ren, Hengkang Ye, Xuyang Yuan,
+Yan Ouyang, Jia He, Bo Ji, and Junyu Guo. Hs-fpn: High
+frequency and spatial perception fpn for tiny object detec-
+tion. In Proceedings of the AAAI Conference on Artificial
+Intelligence, pages 6896–6904, 2025. 3, 6, 7
+[22] Mingxing Tan, Ruoming Pang, and Quoc V Le. Efficientdet:
+Scalable and efficient object detection. In Proceedings of
+the IEEE/CVF conference on computer vision and pattern
+recognition, pages 10781–10790, 2020. 3, 6, 7
+[23] Xin Wu, Danfeng Hong, and Jocelyn Chanussot. Uiu-net: U-
+net in u-net for infrared small object detection. IEEE Trans-
+actions on Image Processing, 32:364–376, 2022. 7
+[24] Shibiao Xu, Shuchen Zheng, Wenhao Xu, Rongtao Xu,
+Changwei Wang, Jiguang Zhang, Xiaoqiang Teng, Ao Li,
+and Li Guo. Hcf-net: Hierarchical context fusion network
+for infrared small object detection. In 2024 IEEE Interna-
+tional Conference on Multimedia and Expo (ICME), pages
+1–6. IEEE, 2024. 7
+[25] Bo Yang, Xinyu Zhang, Jian Zhang, Jun Luo, Mingliang
+Zhou, and Yangjun Pi. Eflnet: Enhancing feature learning
+network for infrared small target detection. IEEE Transac-
+tions on Geoscience and Remote Sensing, 62:1–11, 2024. 3,
+7
+[26] Jiangnan Yang, Shuangli Liu, Jingjun Wu, Xinyu Su, Nan
+Hai, and Xueli Huang.
+Pinwheel-shaped convolution and
+9
+
+PAGE 10
+scale-based dynamic loss for infrared small target detection.
+In Proceedings of the AAAI Conference on Artificial Intelli-
+gence, pages 9202–9210, 2025. 7
+[27] Maoxun Yuan and Xingxing Wei. C 2 former: Calibrated
+and complementary transformer for rgb-infrared object de-
+tection. IEEE Transactions on Geoscience and Remote Sens-
+ing, 2024. 1
+[28] Maoxun Yuan, Yinyan Wang, and Xingxing Wei. Transla-
+tion, scale and rotation: cross-modal alignment meets rgb-
+infrared vehicle detection. In European Conference on Com-
+puter Vision, pages 509–525. Springer, 2022. 1
+[29] Maoxun Yuan, Bo Cui, Tianyi Zhao, Jiayi Wang, Shan Fu,
+and Xingxing Wei. Unirgb-ir: A unified framework for rgb-
+infrared semantic tasks via adapter tuning. arXiv preprint
+arXiv:2404.17360, 2024. 1
+[30] Maoxun Yuan, Xiaorong Shi, Nan Wang, Yinyan Wang, and
+Xingxing Wei. Improving rgb-infrared object detection with
+cascade alignment-guided transformer. Information Fusion,
+105:102246, 2024. 1
+[31] Shuai Yuan, Hanlin Qin, Xiang Yan, Naveed Akhtar, and Aj-
+mal Mian. Sctransnet: Spatial-channel cross transformer net-
+work for infrared small target detection. IEEE Transactions
+on Geoscience and Remote Sensing, 62:1–15, 2024. 1, 7
+[32] Jiaqing Zhang, Mingxiang Cao, Weiying Xie, Jie Lei,
+Daixun Li, Wenbo Huang, Yunsong Li, and Xue Yang. E2e-
+mfd: Towards end-to-end synchronous multimodal fusion
+detection. Advances in Neural Information Processing Sys-
+tems, 37:52296–52322, 2024. 1
+[33] Mingjin Zhang, Rui Zhang, Yuxiang Yang, Haichen Bai,
+Jing Zhang, and Jie Guo. Isnet: Shape matters for infrared
+small target detection. In Proceedings of the IEEE/CVF con-
+ference on computer vision and pattern recognition, pages
+877–886, 2022. 3, 5, 7
+[34] Mingjin Zhang, Yuchun Wang, Jie Guo, Yunsong Li, Xinbo
+Gao, and Jing Zhang. Irsam: Advancing segment anything
+model for infrared small target detection. In European Con-
+ference on Computer Vision, pages 233–249. Springer, 2024.
+1, 7
+[35] Mingjin Zhang, Handi Yang, Jie Guo, Yunsong Li, Xinbo
+Gao, and Jing Zhang. Irprunedet: efficient infrared small tar-
+get detection via wavelet structure-regularized soft channel
+pruning. In Proceedings of the AAAI conference on artificial
+intelligence, pages 7224–7232, 2024. 1, 3, 7
+[36] Tianfang Zhang, Lei Li, Siying Cao, Tian Pu, and Zhenming
+Peng. Attention-guided pyramid context networks for detect-
+ing infrared small target under complex background. IEEE
+Transactions on Aerospace and Electronic Systems, 59(4):
+4250–4261, 2023. 1
+[37] Xizhou Zhu, Weijie Su, Lewei Lu, Bin Li, Xiaogang
+Wang, and Jifeng Dai. Deformable detr: Deformable trans-
+formers for end-to-end object detection.
+arXiv preprint
+arXiv:2010.04159, 2020. 4, 5
+10

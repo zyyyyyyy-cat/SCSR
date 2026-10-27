@@ -1,0 +1,352 @@
+{
+  "status": "complete",
+  "model_version": "SCSR-V4.1",
+  "requested_experiments": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "args": {
+    "config_file": "configs/SCSR_V41.yml",
+    "checkpoint": "./logs/SCSR_V41_1000_DDP/transformer_120.pth",
+    "output_dir": "./logs/SCSR_V41_1000_DDP/mechanisms_fp32",
+    "device": "cuda:0",
+    "experiments": "1,2,3,4",
+    "feature_cache": null,
+    "initial_state": null,
+    "initial_records_dir": null,
+    "training_diagnostics": null,
+    "amp": false,
+    "batch_size": 16,
+    "distance_chunk": 16,
+    "tir_samples": 512,
+    "workers": 4,
+    "gradient_batches": 2,
+    "gradient_identities": 4,
+    "proca_gradient": false,
+    "loss_scale": 1.0,
+    "seed": 1234,
+    "opts": [
+      "DATASETS.ROOT_DIR",
+      "/project/code/data"
+    ]
+  },
+  "config_yaml": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 8\n  SAMPLER: PKM\nDATASETS:\n  DATASET_DIR: WHU-MARS\n  FILTER_GD: false\n  MODALITIES:\n  - RGB\n  - IR\n  - Thermal\n  NAMES: WHU-MARS\n  ROOT_DIR: /project/code/data\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ATT_DROP_RATE: 0.0\n  COS_LAYER: false\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DEVIDE_LENGTH: 4\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  GPD_MOMENTUM: 0.2\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 1.0\n  IF_LABELSMOOTH: 'off'\n  IF_WITH_CENTER: 'no'\n  JPM: false\n  LAST_STRIDE: 1\n  METRIC_LOSS_TYPE: wrt\n  NAME: transformer\n  NECK: bnneck\n  NO_MARGIN: true\n  PCA_LOSS_WEIGHT: 0.01\n  PRETRAIN_CHOICE: none\n  PRETRAIN_PATH: jx_vit_base_p16_224-80ecf9dd.pth\n  RE_ARRANGE: true\n  SHIFT_NUM: 5\n  SHUFFLE_GROUP: 2\n  SIE_CAMERA: false\n  SIE_COE: 3.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: vit_base_in\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ./logs/SCSR_V41_1000\nSCSR_V41:\n  CONDITION_HIDDEN_DIM: 32\n  CONDITION_OUTPUT_INIT_STD: 0.02\n  DIAGNOSTIC_PERIOD: 50\n  EARLY_UPDATES: 200\n  EMBED_DIM: 768\n  ENABLED: true\n  EPS: 1.0e-06\n  GATE_AMPLITUDE: 0.2\n  GRID_H: 16\n  GRID_W: 8\n  HF_SIGNED_DIM: 4\n  INSERT_AT_BLOCK: 7\n  INSERT_POSITION: norm1_after_before_attention\n  LEVELS: 1\n  LL_CONDITION_DIM: 16\n  LOW_RANK: 4\n  PREFLIGHT_UPDATES: 0\n  SCSR_LR_MULTIPLIER: 1.0\n  SCSR_WEIGHT_DECAY: 0.0\n  TARGET_MODALITY: Thermal\n  U_INIT_STD: 0.5\n  WAVELET: haar\nSOLVER:\n  BASE_LR: 0.008\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 120\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 10\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 50\n  LOSS_TYPE: base+pca+gpd\n  MARGIN: 0.3\n  MAX_EPOCHS: 120\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: SGD\n  SEED: 1234\n  STEPS:\n  - 40\n  - 70\n  WARMUP_EPOCHS: 5\n  WARMUP_FACTOR: 0.01\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  DETAILED_DOMAIN_EVAL: false\n  DIST_MAT: dist_mat.npy\n  EVAL: false\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 512\n  NECK_FEAT: before\n  RE_RANKING: false\n  SCSR_V41_RUNTIME_ENABLED: true\n  TOP_K_EVAL: 0\n  WEIGHT: ''\n",
+  "checkpoint": "/project/code/WHU_base/WHU_Fre+NS+PFESA+SFP_SCSR/SCSR_v4/logs/SCSR_V41_1000_DDP/transformer_120.pth",
+  "checkpoint_sha256": "ae92f99119999498354ace3f216b6ac0d012cee18a1d944eb7669ac5e4afffda",
+  "checkpoint_metadata_sha256": "2e9e79accc30f6765776e4bba4790b7b07947a1c60fd44e614d3cabfaa20acac",
+  "environment": {
+    "python": "3.8.20 (default, Oct  3 2024, 15:24:27) \n[GCC 11.2.0]",
+    "torch": "1.12.1+cu113",
+    "cuda": "11.3",
+    "device": "cuda:0"
+  },
+  "protocol": {
+    "feature": "768D pre-BN CLS, then L2 normalization",
+    "distance": "original UAD squared Euclidean, FP32 CPU chunks / torch.argsort",
+    "camera_filter": "exclude ALL query-camera Gallery images",
+    "reranking": false,
+    "TTA": false,
+    "top_k": 0,
+    "amp": false,
+    "tf32": false,
+    "modalities": {
+      "1": "RGB",
+      "2": "NIR",
+      "3": "TIR"
+    },
+    "platform": "camera 0..4 Ground; 5..6 Aerial",
+    "seed": 1234
+  },
+  "combinations": {
+    "A": "Query OFF / Gallery OFF",
+    "B": "Query ON / Gallery ON",
+    "C": "Query ON / Gallery OFF",
+    "D": "Query OFF / Gallery ON"
+  },
+  "source_sha256": {
+    "verify_scsr_v41.py": "82f3edde23ab4524fcabcee97f2ae8215cead22b54d05600dfa5430847734545",
+    "diagnostics/v41_gradients.py": "4f9605ae7458d803dd9e07d87bb8d9f4d6cbc44c8b9ff3beb928253dc0bd014f",
+    "diagnostics/v41_initial.py": "e2bfdd0c0f300dee3d2e2e8ebafd6de575db8d8a082d37ffd7cce6611f4f3842",
+    "diagnostics/v41_mechanisms.py": "ebd346b4657127090570a83729c8a67104bfbccc7688f4214df60d311ed47788",
+    "diagnostics/v41_ranking.py": "320b13b6a0085cd9b69b36a64398e4835afb8c2400c9280d770b62bef1a9a9f7"
+  },
+  "data_identity": {
+    "version": "v41-mechanism-cache-1",
+    "checkpoint_sha256": "ae92f99119999498354ace3f216b6ac0d012cee18a1d944eb7669ac5e4afffda",
+    "checkpoint_metadata_sha256": "2e9e79accc30f6765776e4bba4790b7b07947a1c60fd44e614d3cabfaa20acac",
+    "query_order_sha256": "81f9108650b38aa262ba9196a4cdd32f95db9d7a2e1c9a5506d3f89d6886b213",
+    "gallery_order_sha256": "fdc89c61817f46a65b06efcaaf61f7b9a784b440ea3a341a0f7d3ddb681229b4",
+    "query_count": 6405,
+    "gallery_count": 93609,
+    "model": {
+      "version": "SCSR-V4.1",
+      "architecture": {
+        "ENABLED": true,
+        "TARGET_MODALITY": "Thermal",
+        "INSERT_AT_BLOCK": 7,
+        "INSERT_POSITION": "norm1_after_before_attention",
+        "WAVELET": "haar",
+        "LEVELS": 1,
+        "EMBED_DIM": 768,
+        "GRID_H": 16,
+        "GRID_W": 8,
+        "LL_CONDITION_DIM": 16,
+        "HF_SIGNED_DIM": 4,
+        "CONDITION_HIDDEN_DIM": 32,
+        "LOW_RANK": 4,
+        "GATE_AMPLITUDE": 0.2,
+        "U_INIT_STD": 0.5,
+        "CONDITION_OUTPUT_INIT_STD": 0.02,
+        "SCSR_WEIGHT_DECAY": 0.0,
+        "SCSR_LR_MULTIPLIER": 1.0,
+        "EPS": 1e-06
+      },
+      "modalities": [
+        "RGB",
+        "IR",
+        "Thermal"
+      ],
+      "backbone": "vit_base_in",
+      "input_size": [
+        256,
+        128
+      ],
+      "stride": [
+        16,
+        16
+      ]
+    },
+    "pixel_mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "pixel_std": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "test_size": [
+      256,
+      128
+    ],
+    "neck_feat": "before",
+    "amp": false,
+    "tf32": false,
+    "extraction_batch_size": 16,
+    "torch": "1.12.1+cu113",
+    "backend": {
+      "device_type": "cuda",
+      "cuda": "11.3",
+      "cudnn": 8302,
+      "gpu": "NVIDIA GeForce RTX 3090"
+    },
+    "feature": "L2 normalized FP32 cache of 768D pre-BN CLS",
+    "feature_source_hashes": {
+      "model/make_model.py": "2e8d47656c0788680996fac5f0a1277f0e544c7aa5615ca75592f187bb339e69",
+      "model/backbones/vit_pytorch.py": "75f418eccba901c2b2d72b1e385b74b25dff9b880487770f69252de80c06c926",
+      "model/scsr_v41.py": "a54cfcc687631b38f6b38b9ed3e015a178c71ad84edb6182aa9874a3241a4b57",
+      "diagnostics/data.py": "59d8280b189f0efa08b9fbb27e623a02369e1f930ec89ef45bfaa2e5b48dd24c"
+    }
+  },
+  "state_before_sha256": "f7500d97d6975f2bb40bed5ee1e1170ed1cffc8d3055a87746b71fc366ebf6bc",
+  "feature_cache": {
+    "path": "/project/code/WHU_base/WHU_Fre+NS+PFESA+SFP_SCSR/SCSR_v4/logs/SCSR_V41_1000_DDP/mechanisms_fp32/v41_feature_cache.pth",
+    "reused": false,
+    "sha256": "f4c30e05207e338f5cd41aa410b0b0cec2ea5907b4a24ff5dd5095394e152733",
+    "identity": {
+      "version": "v41-mechanism-cache-1",
+      "checkpoint_sha256": "ae92f99119999498354ace3f216b6ac0d012cee18a1d944eb7669ac5e4afffda",
+      "checkpoint_metadata_sha256": "2e9e79accc30f6765776e4bba4790b7b07947a1c60fd44e614d3cabfaa20acac",
+      "query_order_sha256": "81f9108650b38aa262ba9196a4cdd32f95db9d7a2e1c9a5506d3f89d6886b213",
+      "gallery_order_sha256": "fdc89c61817f46a65b06efcaaf61f7b9a784b440ea3a341a0f7d3ddb681229b4",
+      "query_count": 6405,
+      "gallery_count": 93609,
+      "model": {
+        "version": "SCSR-V4.1",
+        "architecture": {
+          "ENABLED": true,
+          "TARGET_MODALITY": "Thermal",
+          "INSERT_AT_BLOCK": 7,
+          "INSERT_POSITION": "norm1_after_before_attention",
+          "WAVELET": "haar",
+          "LEVELS": 1,
+          "EMBED_DIM": 768,
+          "GRID_H": 16,
+          "GRID_W": 8,
+          "LL_CONDITION_DIM": 16,
+          "HF_SIGNED_DIM": 4,
+          "CONDITION_HIDDEN_DIM": 32,
+          "LOW_RANK": 4,
+          "GATE_AMPLITUDE": 0.2,
+          "U_INIT_STD": 0.5,
+          "CONDITION_OUTPUT_INIT_STD": 0.02,
+          "SCSR_WEIGHT_DECAY": 0.0,
+          "SCSR_LR_MULTIPLIER": 1.0,
+          "EPS": 1e-06
+        },
+        "modalities": [
+          "RGB",
+          "IR",
+          "Thermal"
+        ],
+        "backbone": "vit_base_in",
+        "input_size": [
+          256,
+          128
+        ],
+        "stride": [
+          16,
+          16
+        ]
+      },
+      "pixel_mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "pixel_std": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "test_size": [
+        256,
+        128
+      ],
+      "neck_feat": "before",
+      "amp": false,
+      "tf32": false,
+      "extraction_batch_size": 16,
+      "torch": "1.12.1+cu113",
+      "backend": {
+        "device_type": "cuda",
+        "cuda": "11.3",
+        "cudnn": 8302,
+        "gpu": "NVIDIA GeForce RTX 3090"
+      },
+      "feature": "L2 normalized FP32 cache of 768D pre-BN CLS",
+      "feature_source_hashes": {
+        "model/make_model.py": "2e8d47656c0788680996fac5f0a1277f0e544c7aa5615ca75592f187bb339e69",
+        "model/backbones/vit_pytorch.py": "75f418eccba901c2b2d72b1e385b74b25dff9b880487770f69252de80c06c926",
+        "model/scsr_v41.py": "a54cfcc687631b38f6b38b9ed3e015a178c71ad84edb6182aa9874a3241a4b57",
+        "diagnostics/data.py": "59d8280b189f0efa08b9fbb27e623a02369e1f930ec89ef45bfaa2e5b48dd24c"
+      }
+    }
+  },
+  "retrieval_summary": {
+    "valid_queries": 6405,
+    "invalid_queries": 0,
+    "rank1_gallery_changed": 12,
+    "rank1_identity_changed": 8,
+    "ranking_changed": 6405,
+    "correct_to_correct": 1891,
+    "correct_to_wrong": 0,
+    "wrong_to_correct": 1,
+    "wrong_to_wrong": 4513
+  },
+  "mechanisms": {
+    "cohort_sha256": "dd6e9f8cfe14ee48453b56ae43e8773fccc48b6f7fd94db6234bde7d1a2a4020",
+    "initial_control": {
+      "status": "ready",
+      "exact_original_initialization": false,
+      "note": "No initial tensor hash was recorded by the original training code",
+      "control_type": "reconstructed_initial_control",
+      "model_seed": 1234,
+      "output_scale_factor": 3.730579689694057,
+      "measured_output_std": 0.07494654506444931,
+      "recorded_output_std": 0.07494654506444931,
+      "norm_reference_available": true,
+      "norm_checks": [
+        {
+          "parameter": "U",
+          "reconstructed_norm": 47.80118179321289,
+          "reference_norm": 47.80117416381836,
+          "matches": true
+        },
+        {
+          "parameter": "ll_proj.weight",
+          "reconstructed_norm": 4.001381874084473,
+          "reference_norm": 4.001381874084473,
+          "matches": true
+        },
+        {
+          "parameter": "hf_proj.0.weight",
+          "reconstructed_norm": 2.024860143661499,
+          "reference_norm": 2.024860382080078,
+          "matches": true
+        },
+        {
+          "parameter": "hf_proj.1.weight",
+          "reconstructed_norm": 1.9697822332382202,
+          "reference_norm": 1.9697821140289307,
+          "matches": true
+        },
+        {
+          "parameter": "hf_proj.2.weight",
+          "reconstructed_norm": 2.004929780960083,
+          "reference_norm": 2.004929780960083,
+          "matches": true
+        },
+        {
+          "parameter": "spatial.weight",
+          "reconstructed_norm": 5.654813289642334,
+          "reference_norm": 5.654812812805176,
+          "matches": true
+        },
+        {
+          "parameter": "output.weight",
+          "reconstructed_norm": 1.4687079191207886,
+          "reference_norm": 1.4687079191207886,
+          "matches": true
+        }
+      ],
+      "initial_tensor_sha256": "2c51ce9210c7167062d2c77e8546046adcb0589400bbed17f6bd162fdd0184bf",
+      "initialization_record_sources": [
+        {
+          "path": "logs/SCSR_V41_1000_DDP/scsr_v41_init_rank0.json",
+          "sha256": "1e8f5daafcc9b20fa15a9c2938e49f02650b1096b373d6a02c0b5bbd5b442e78"
+        },
+        {
+          "path": "logs/SCSR_V41_1000_DDP/scsr_v41_init_rank1.json",
+          "sha256": "3cd122fcf0bf8be903dfe75a8a39a0195b0def0243c0191635cce4a405a732c8"
+        },
+        {
+          "path": "logs/SCSR_V41_1000_DDP/scsr_v41_init_rank2.json",
+          "sha256": "c0e311f4611e23e075bb99d26f757915a2b8347223749cfcbe05d307276b39a0"
+        },
+        {
+          "path": "logs/SCSR_V41_1000_DDP/scsr_v41_init_rank3.json",
+          "sha256": "a96ff072e2913c6a2668d086f5eed94d7fa7b45cc700ebe9d143535ab3e947f1"
+        }
+      ],
+      "zero_update_reference_path": "logs/SCSR_V41_1000_DDP/scsr_v41_training_diagnostics.jsonl",
+      "zero_update_reference_sha256": "5e29024d03ab1fcae13943a38f8d3e9c4e5d0910fb7fbcfea3448fe437277118",
+      "statistical_checks_do_not_prove_elementwise_identity": true,
+      "reconstructed_pretrain_load_skipped_because_it_consumes_no_rng": true,
+      "checkpoint_sha256": "ae92f99119999498354ace3f216b6ac0d012cee18a1d944eb7669ac5e4afffda",
+      "fixed_sample_order_sha256": "dd6e9f8cfe14ee48453b56ae43e8773fccc48b6f7fd94db6234bde7d1a2a4020",
+      "source_sha256": {
+        "model/make_model.py": "2e8d47656c0788680996fac5f0a1277f0e544c7aa5615ca75592f187bb339e69",
+        "model/backbones/vit_pytorch.py": "75f418eccba901c2b2d72b1e385b74b25dff9b880487770f69252de80c06c926",
+        "model/scsr_v41.py": "a54cfcc687631b38f6b38b9ed3e015a178c71ad84edb6182aa9874a3241a4b57"
+      },
+      "torch": "1.12.1+cu113",
+      "precision": "FP32",
+      "groups": {
+        "A": "trained U / trained condition",
+        "B": "initial U / initial condition",
+        "C": "initial U / trained condition",
+        "D": "trained U / initial condition"
+      },
+      "semantics": "all groups keep the same final epoch-120 backbone; no independent initialization-model baseline"
+    }
+  },
+  "state_after_sha256": "f7500d97d6975f2bb40bed5ee1e1170ed1cffc8d3055a87746b71fc366ebf6bc",
+  "parameters_and_bn_buffers_unchanged": true,
+  "parameter_grad_buffers_unchanged": true,
+  "state_finally_sha256": "f7500d97d6975f2bb40bed5ee1e1170ed1cffc8d3055a87746b71fc366ebf6bc",
+  "finally_parameters_and_bn_buffers_unchanged": true
+}

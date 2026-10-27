@@ -1,0 +1,9 @@
+test_01_normal_mirror_and_content_preservation (test_v41_mechanisms.V41MechanismTests) ... ok
+test_02_donor_v_only_and_restore_on_error (test_v41_mechanisms.V41MechanismTests) ... ok
+test_07_gradient_probe_cosines_without_mutation (test_v41_mechanisms.V41MechanismTests) ... ok
+test_10_small_image_cohort_all_mechanism_outputs (test_v41_mechanisms.V41MechanismTests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 43.039s
+
+OK

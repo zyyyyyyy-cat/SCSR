@@ -1,0 +1,21 @@
+{
+  "protected_files": 42,
+  "protected_files_changed": [],
+  "added_files": [
+    "WHU/verify_scsr_v41.py",
+    "WHU/diagnostics/v41_ranking.py",
+    "WHU/diagnostics/v41_initial.py",
+    "WHU/diagnostics/v41_mechanisms.py",
+    "WHU/diagnostics/v41_gradients.py",
+    "WHU/tests/test_v41_mechanisms.py",
+    "WHU/SCSR_V41_MECHANISM_VERIFICATION.md"
+  ],
+  "deleted_files": [],
+  "python38_ast_file_count": 54,
+  "one_command_parse_and_yacs": "passed",
+  "cpu_cache_backend_smoke": "passed",
+  "new_tests": 10,
+  "training_regression_tests": 11,
+  "rechecks_after_capture_gradient_fixes": 4,
+  "real_checkpoint_dataset_cuda_not_available": true
+}

@@ -1,0 +1,5229 @@
+{
+  "identity": {
+    "version": "v41-mechanism-cache-1",
+    "checkpoint_sha256": "ae92f99119999498354ace3f216b6ac0d012cee18a1d944eb7669ac5e4afffda",
+    "checkpoint_metadata_sha256": "2e9e79accc30f6765776e4bba4790b7b07947a1c60fd44e614d3cabfaa20acac",
+    "query_order_sha256": "81f9108650b38aa262ba9196a4cdd32f95db9d7a2e1c9a5506d3f89d6886b213",
+    "gallery_order_sha256": "fdc89c61817f46a65b06efcaaf61f7b9a784b440ea3a341a0f7d3ddb681229b4",
+    "query_count": 6405,
+    "gallery_count": 93609,
+    "model": {
+      "version": "SCSR-V4.1",
+      "architecture": {
+        "ENABLED": true,
+        "TARGET_MODALITY": "Thermal",
+        "INSERT_AT_BLOCK": 7,
+        "INSERT_POSITION": "norm1_after_before_attention",
+        "WAVELET": "haar",
+        "LEVELS": 1,
+        "EMBED_DIM": 768,
+        "GRID_H": 16,
+        "GRID_W": 8,
+        "LL_CONDITION_DIM": 16,
+        "HF_SIGNED_DIM": 4,
+        "CONDITION_HIDDEN_DIM": 32,
+        "LOW_RANK": 4,
+        "GATE_AMPLITUDE": 0.2,
+        "U_INIT_STD": 0.5,
+        "CONDITION_OUTPUT_INIT_STD": 0.02,
+        "SCSR_WEIGHT_DECAY": 0.0,
+        "SCSR_LR_MULTIPLIER": 1.0,
+        "EPS": 1e-06
+      },
+      "modalities": [
+        "RGB",
+        "IR",
+        "Thermal"
+      ],
+      "backbone": "vit_base_in",
+      "input_size": [
+        256,
+        128
+      ],
+      "stride": [
+        16,
+        16
+      ]
+    },
+    "pixel_mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "pixel_std": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "test_size": [
+      256,
+      128
+    ],
+    "neck_feat": "before",
+    "amp": false,
+    "tf32": false,
+    "extraction_batch_size": 16,
+    "torch": "1.12.1+cu113",
+    "backend": {
+      "device_type": "cuda",
+      "cuda": "11.3",
+      "cudnn": 8302,
+      "gpu": "NVIDIA GeForce RTX 3090"
+    },
+    "feature": "L2 normalized FP32 cache of 768D pre-BN CLS",
+    "feature_source_hashes": {
+      "model/make_model.py": "2e8d47656c0788680996fac5f0a1277f0e544c7aa5615ca75592f187bb339e69",
+      "model/backbones/vit_pytorch.py": "75f418eccba901c2b2d72b1e385b74b25dff9b880487770f69252de80c06c926",
+      "model/scsr_v41.py": "a54cfcc687631b38f6b38b9ed3e015a178c71ad84edb6182aa9874a3241a4b57",
+      "diagnostics/data.py": "59d8280b189f0efa08b9fbb27e623a02369e1f930ec89ef45bfaa2e5b48dd24c"
+    }
+  },
+  "cohort": {
+    "sample_count": 512,
+    "selection": "fixed seeded identity round-robin, half Ground/half Aerial; no correctness selection",
+    "records": [
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2772_c1_m3_f005954.jpg",
+        "pid": 2772,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2557_c3_m3_f004830.jpg",
+        "pid": 2557,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0433_c2_m3_f009277.jpg",
+        "pid": 433,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0514_c1_m3_f011142.jpg",
+        "pid": 514,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1399_c4_m3_f003158.jpg",
+        "pid": 1399,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3417_c2_m3_f011365.jpg",
+        "pid": 3417,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2597_c2_m3_f002353.jpg",
+        "pid": 2597,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0087_c1_m3_f001124.jpg",
+        "pid": 87,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0319_c1_m3_f006856.jpg",
+        "pid": 319,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3123_c3_m3_f005045.jpg",
+        "pid": 3123,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2553_c2_m3_f004057.jpg",
+        "pid": 2553,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3520_c2_m3_f000528.jpg",
+        "pid": 3520,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0023_c1_m3_f000037.jpg",
+        "pid": 23,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2505_c3_m3_f000077.jpg",
+        "pid": 2505,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3511_c2_m3_f000058.jpg",
+        "pid": 3511,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3609_c3_m3_f004964.jpg",
+        "pid": 3609,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/3798_c2_m3_f007489.jpg",
+        "pid": 3798,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2543_c2_m3_f003136.jpg",
+        "pid": 2543,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3692_c2_m3_f003647.jpg",
+        "pid": 3692,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1447_c4_m3_f004527.jpg",
+        "pid": 1447,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/3621_c3_m3_f000988.jpg",
+        "pid": 3621,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3727_c1_m3_f005370.jpg",
+        "pid": 3727,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2434_c2_m3_f004799.jpg",
+        "pid": 2434,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3526_c3_m3_f000534.jpg",
+        "pid": 3526,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3029_c3_m3_f001177.jpg",
+        "pid": 3029,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3106_c1_m3_f004806.jpg",
+        "pid": 3106,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0538_c1_m3_f011580.jpg",
+        "pid": 538,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2618_c2_m3_f003582.jpg",
+        "pid": 2618,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2598_c2_m3_f002314.jpg",
+        "pid": 2598,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3193_c3_m3_f004522.jpg",
+        "pid": 3193,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2039_c1_m3_f002431.jpg",
+        "pid": 2039,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2304_c3_m3_f001958.jpg",
+        "pid": 2304,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0289_c2_m3_f005182.jpg",
+        "pid": 289,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1005_c5_m3_f000283.jpg",
+        "pid": 1005,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2614_c2_m3_f003600.jpg",
+        "pid": 2614,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3148_c2_m3_f001998.jpg",
+        "pid": 3148,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2404_c3_m3_f007637.jpg",
+        "pid": 2404,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3050_c3_m3_f002109.jpg",
+        "pid": 3050,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3530_c1_m3_f000762.jpg",
+        "pid": 3530,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1342_c4_m3_f001881.jpg",
+        "pid": 1342,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3109_c1_m3_f004923.jpg",
+        "pid": 3109,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2823_c2_m3_f009308.jpg",
+        "pid": 2823,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3272_c2_m3_f006634.jpg",
+        "pid": 3272,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1461_c5_m3_f004830.jpg",
+        "pid": 1461,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2433_c2_m3_f004790.jpg",
+        "pid": 2433,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0145_c1_m3_f002569.jpg",
+        "pid": 145,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0080_c2_m3_f001047.jpg",
+        "pid": 80,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2546_c3_m3_f004018.jpg",
+        "pid": 2546,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1507_c4_m3_f001955.jpg",
+        "pid": 1507,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2418_c3_m3_f009486.jpg",
+        "pid": 2418,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2419_c2_m3_f007986.jpg",
+        "pid": 2419,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2504_c3_m3_f001432.jpg",
+        "pid": 2504,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3665_c3_m3_f002647.jpg",
+        "pid": 3665,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2261_c3_m3_f003267.jpg",
+        "pid": 2261,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1266_c5_m3_f005659.jpg",
+        "pid": 1266,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1416_c5_m3_f003682.jpg",
+        "pid": 1416,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2584_c3_m3_f003325.jpg",
+        "pid": 2584,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3637_c2_m3_f002095.jpg",
+        "pid": 3637,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1089_c4_m3_f000123.jpg",
+        "pid": 1089,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0532_c1_m3_f011461.jpg",
+        "pid": 532,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2011_c1_m3_f000523.jpg",
+        "pid": 2011,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0506_c2_m3_f011016.jpg",
+        "pid": 506,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3722_c1_m3_f005014.jpg",
+        "pid": 3722,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3171_c2_m3_f003771.jpg",
+        "pid": 3171,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3863_c3_m3_f003640.jpg",
+        "pid": 3863,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0430_c1_m3_f009243.jpg",
+        "pid": 430,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1207_c5_m3_f004154.jpg",
+        "pid": 1207,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3806_c2_m3_f007677.jpg",
+        "pid": 3806,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0175_c1_m3_f003057.jpg",
+        "pid": 175,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2306_c2_m3_f000498.jpg",
+        "pid": 2306,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2302_c2_m3_f000047.jpg",
+        "pid": 2302,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3782_c2_m3_f006566.jpg",
+        "pid": 3782,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0146_c1_m3_f002567.jpg",
+        "pid": 146,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3716_c2_m3_f004957.jpg",
+        "pid": 3716,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1410_c4_m3_f003336.jpg",
+        "pid": 1410,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1074_c5_m3_f003491.jpg",
+        "pid": 1074,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/3021_c2_m3_f000929.jpg",
+        "pid": 3021,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0448_c2_m3_f009597.jpg",
+        "pid": 448,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2310_c2_m3_f000511.jpg",
+        "pid": 2310,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3762_c3_m3_f000266.jpg",
+        "pid": 3762,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3889_c2_m3_f010503.jpg",
+        "pid": 3889,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1470_c4_m3_f004927.jpg",
+        "pid": 1470,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1020_c4_m3_f001033.jpg",
+        "pid": 1020,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3640_c1_m3_f002349.jpg",
+        "pid": 3640,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1490_c5_m3_f005403.jpg",
+        "pid": 1490,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0302_c1_m3_f006342.jpg",
+        "pid": 302,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2563_c2_m3_f000879.jpg",
+        "pid": 2563,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0338_c1_m3_f007350.jpg",
+        "pid": 338,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3830_c2_m3_f008100.jpg",
+        "pid": 3830,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3519_c2_m3_f000513.jpg",
+        "pid": 3519,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0139_c1_m3_f002551.jpg",
+        "pid": 139,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3537_c3_m3_f000656.jpg",
+        "pid": 3537,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3572_c2_m3_f003220.jpg",
+        "pid": 3572,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0389_c2_m3_f008476.jpg",
+        "pid": 389,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1299_c4_m3_f000861.jpg",
+        "pid": 1299,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0124_c2_m3_f002309.jpg",
+        "pid": 124,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3051_c2_m3_f002158.jpg",
+        "pid": 3051,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2407_c2_m3_f006389.jpg",
+        "pid": 2407,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1055_c5_m3_f002367.jpg",
+        "pid": 1055,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3687_c2_m3_f003532.jpg",
+        "pid": 3687,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1356_c5_m3_f002365.jpg",
+        "pid": 1356,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3548_c3_m3_f001103.jpg",
+        "pid": 3548,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2565_c2_m3_f001200.jpg",
+        "pid": 2565,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1042_c5_m3_f001722.jpg",
+        "pid": 1042,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1336_c4_m3_f001646.jpg",
+        "pid": 1336,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2377_c2_m3_f003857.jpg",
+        "pid": 2377,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0444_c2_m3_f009576.jpg",
+        "pid": 444,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3199_c1_m3_f005146.jpg",
+        "pid": 3199,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/2844_c2_m3_f010306.jpg",
+        "pid": 2844,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/2007_c2_m3_f000466.jpg",
+        "pid": 2007,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3172_c3_m3_f003453.jpg",
+        "pid": 3172,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0268_c1_m3_f004804.jpg",
+        "pid": 268,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1244_c4_m3_f005040.jpg",
+        "pid": 1244,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2436_c2_m3_f004980.jpg",
+        "pid": 2436,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3034_c3_m3_f001316.jpg",
+        "pid": 3034,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2780_c2_m3_f006320.jpg",
+        "pid": 2780,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0279_c2_m3_f005029.jpg",
+        "pid": 279,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3888_c2_m3_f010350.jpg",
+        "pid": 3888,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1502_c4_m3_f005467.jpg",
+        "pid": 1502,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3141_c2_m3_f001227.jpg",
+        "pid": 3141,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1450_c5_m3_f004591.jpg",
+        "pid": 1450,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0249_c1_m3_f004447.jpg",
+        "pid": 249,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3055_c2_m3_f002145.jpg",
+        "pid": 3055,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2295_c3_m3_f001683.jpg",
+        "pid": 2295,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2446_c2_m3_f006711.jpg",
+        "pid": 2446,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1059_c4_m3_f003093.jpg",
+        "pid": 1059,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2628_c2_m3_f004220.jpg",
+        "pid": 2628,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3060_c3_m3_f002335.jpg",
+        "pid": 3060,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3823_c3_m3_f002156.jpg",
+        "pid": 3823,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3207_c3_m3_f005260.jpg",
+        "pid": 3207,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1271_c4_m3_f005635.jpg",
+        "pid": 1271,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3357_c2_m3_f009342.jpg",
+        "pid": 3357,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2448_c3_m3_f008367.jpg",
+        "pid": 2448,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2571_c1_m3_f001949.jpg",
+        "pid": 2571,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3082_c3_m3_f003293.jpg",
+        "pid": 3082,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1203_c5_m3_f003967.jpg",
+        "pid": 1203,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1319_c5_m3_f001154.jpg",
+        "pid": 1319,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0045_c1_m3_f000464.jpg",
+        "pid": 45,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0533_c1_m3_f011464.jpg",
+        "pid": 533,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1137_c4_m3_f001616.jpg",
+        "pid": 1137,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2797_c3_m3_f002812.jpg",
+        "pid": 2797,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3525_c2_m3_f000807.jpg",
+        "pid": 3525,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0463_c1_m3_f011425.jpg",
+        "pid": 463,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3580_c1_m3_f003438.jpg",
+        "pid": 3580,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1213_c4_m3_f004100.jpg",
+        "pid": 1213,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3824_c1_m3_f008358.jpg",
+        "pid": 3824,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2012_c2_m3_f000442.jpg",
+        "pid": 2012,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1352_c5_m3_f002162.jpg",
+        "pid": 1352,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2300_c2_m3_f000186.jpg",
+        "pid": 2300,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2761_c3_m3_f000546.jpg",
+        "pid": 2761,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1434_c5_m3_f004263.jpg",
+        "pid": 1434,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1307_c4_m3_f001057.jpg",
+        "pid": 1307,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3594_c2_m3_f004189.jpg",
+        "pid": 3594,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2264_c2_m3_f002060.jpg",
+        "pid": 2264,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0225_c1_m3_f004154.jpg",
+        "pid": 225,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/2363_c2_m3_f002870.jpg",
+        "pid": 2363,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1449_c4_m3_f004514.jpg",
+        "pid": 1449,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2392_c2_m3_f005297.jpg",
+        "pid": 2392,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1343_c4_m3_f001844.jpg",
+        "pid": 1343,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0022_c1_m3_f000009.jpg",
+        "pid": 22,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3026_c2_m3_f001348.jpg",
+        "pid": 3026,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1076_c5_m3_f003499.jpg",
+        "pid": 1076,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2786_c2_m3_f006605.jpg",
+        "pid": 2786,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3375_c2_m3_f009988.jpg",
+        "pid": 3375,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1138_c5_m3_f001711.jpg",
+        "pid": 1138,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1054_c4_m3_f002325.jpg",
+        "pid": 1054,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0310_c1_m3_f006555.jpg",
+        "pid": 310,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3773_c2_m3_f006535.jpg",
+        "pid": 3773,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3850_c3_m3_f003243.jpg",
+        "pid": 3850,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3078_c3_m3_f003314.jpg",
+        "pid": 3078,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3036_c2_m3_f001421.jpg",
+        "pid": 3036,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3893_c2_m3_f010802.jpg",
+        "pid": 3893,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3555_c1_m3_f001500.jpg",
+        "pid": 3555,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3037_c3_m3_f001683.jpg",
+        "pid": 3037,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3534_c2_m3_f000966.jpg",
+        "pid": 3534,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/3711_c3_m3_f004271.jpg",
+        "pid": 3711,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0267_c1_m3_f004768.jpg",
+        "pid": 267,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0053_c1_m3_f000670.jpg",
+        "pid": 53,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2549_c2_m3_f003740.jpg",
+        "pid": 2549,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3732_c2_m3_f005585.jpg",
+        "pid": 3732,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0470_c2_m3_f010125.jpg",
+        "pid": 470,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2022_c2_m3_f000928.jpg",
+        "pid": 2022,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2454_c3_m3_f008851.jpg",
+        "pid": 2454,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2558_c3_m3_f004934.jpg",
+        "pid": 2558,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0306_c1_m3_f006379.jpg",
+        "pid": 306,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0297_c1_m3_f005412.jpg",
+        "pid": 297,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2567_c3_m3_f002075.jpg",
+        "pid": 2567,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2354_c3_m3_f004001.jpg",
+        "pid": 2354,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1460_c5_m3_f004802.jpg",
+        "pid": 1460,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1488_c5_m3_f005216.jpg",
+        "pid": 1488,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1086_c4_m3_f000087.jpg",
+        "pid": 1086,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3822_c2_m3_f007977.jpg",
+        "pid": 3822,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0318_c1_m3_f006817.jpg",
+        "pid": 318,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3178_c2_m3_f004277.jpg",
+        "pid": 3178,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0394_c1_m3_f008569.jpg",
+        "pid": 394,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3663_c1_m3_f002987.jpg",
+        "pid": 3663,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2014_c1_m3_f000497.jpg",
+        "pid": 2014,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0412_c2_m3_f008805.jpg",
+        "pid": 412,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2061_c2_m3_f001543.jpg",
+        "pid": 2061,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3791_c3_m3_f001302.jpg",
+        "pid": 3791,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3399_c3_m3_f004821.jpg",
+        "pid": 3399,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3605_c2_m3_f004787.jpg",
+        "pid": 3605,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0095_c1_m3_f001453.jpg",
+        "pid": 95,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2547_c2_m3_f003621.jpg",
+        "pid": 2547,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1368_c4_m3_f002457.jpg",
+        "pid": 1368,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3560_c3_m3_f001936.jpg",
+        "pid": 3560,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0251_c1_m3_f004490.jpg",
+        "pid": 251,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1456_c4_m3_f004859.jpg",
+        "pid": 1456,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3184_c3_m3_f004113.jpg",
+        "pid": 3184,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1115_c4_m3_f001036.jpg",
+        "pid": 1115,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3728_c3_m3_f004989.jpg",
+        "pid": 3728,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1139_c5_m3_f001720.jpg",
+        "pid": 1139,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1284_c4_m3_f000154.jpg",
+        "pid": 1284,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3187_c3_m3_f004235.jpg",
+        "pid": 3187,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3766_c3_m3_f000317.jpg",
+        "pid": 3766,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2525_c2_m3_f002498.jpg",
+        "pid": 2525,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1477_c5_m3_f005339.jpg",
+        "pid": 1477,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2429_c3_m3_f006205.jpg",
+        "pid": 2429,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2590_c3_m3_f001564.jpg",
+        "pid": 2590,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3153_c2_m3_f002180.jpg",
+        "pid": 3153,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1142_c5_m3_f001842.jpg",
+        "pid": 1142,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3160_c2_m3_f002325.jpg",
+        "pid": 3160,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0090_c2_m3_f001233.jpg",
+        "pid": 90,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2030_c2_m3_f001376.jpg",
+        "pid": 2030,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3331_c3_m3_f002901.jpg",
+        "pid": 3331,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3761_c3_m3_f000246.jpg",
+        "pid": 3761,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0027_c2_m3_f000257.jpg",
+        "pid": 27,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2314_c2_m3_f000952.jpg",
+        "pid": 2314,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/2520_c3_m3_f001724.jpg",
+        "pid": 2520,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1257_c5_m3_f005336.jpg",
+        "pid": 1257,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/2309_c3_m3_f002095.jpg",
+        "pid": 2309,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1328_c5_m3_f001349.jpg",
+        "pid": 1328,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3100_c3_m3_f004174.jpg",
+        "pid": 3100,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3709_c2_m3_f004604.jpg",
+        "pid": 3709,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3731_c1_m3_f005523.jpg",
+        "pid": 3731,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1256_c4_m3_f005398.jpg",
+        "pid": 1256,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3818_c1_m3_f007906.jpg",
+        "pid": 3818,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1260_c5_m3_f005654.jpg",
+        "pid": 1260,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1444_c4_m3_f004473.jpg",
+        "pid": 1444,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1019_c5_m3_f001267.jpg",
+        "pid": 1019,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1117_c4_m3_f001217.jpg",
+        "pid": 1117,
+        "camid": 3,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3257_c1_m3_f006097.jpg",
+        "pid": 3257,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1080_c5_m3_f003671.jpg",
+        "pid": 1080,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0231_c1_m3_f004297.jpg",
+        "pid": 231,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3084_c3_m3_f003286.jpg",
+        "pid": 3084,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0424_c1_m3_f009064.jpg",
+        "pid": 424,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3264_c3_m3_f000681.jpg",
+        "pid": 3264,
+        "camid": 2,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1253_c5_m3_f005334.jpg",
+        "pid": 1253,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0436_c2_m3_f009425.jpg",
+        "pid": 436,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3157_c2_m3_f002204.jpg",
+        "pid": 3157,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3360_c2_m3_f009637.jpg",
+        "pid": 3360,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3020_c2_m3_f000915.jpg",
+        "pid": 3020,
+        "camid": 1,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1041_c5_m3_f001741.jpg",
+        "pid": 1041,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1209_c5_m3_f004208.jpg",
+        "pid": 1209,
+        "camid": 4,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3587_c1_m3_f003600.jpg",
+        "pid": 3587,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/3125_c1_m3_f005401.jpg",
+        "pid": 3125,
+        "camid": 0,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "G"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0448_c6_m3_f003120.jpg",
+        "pid": 448,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1171_c7_m3_f002799.jpg",
+        "pid": 1171,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0436_c6_m3_f002923.jpg",
+        "pid": 436,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1471_c7_m3_f004824.jpg",
+        "pid": 1471,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0474_c6_m3_f003754.jpg",
+        "pid": 474,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0395_c6_m3_f002158.jpg",
+        "pid": 395,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0314_c6_m3_f000268.jpg",
+        "pid": 314,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1435_c7_m3_f004181.jpg",
+        "pid": 1435,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0279_c6_m3_f004871.jpg",
+        "pid": 279,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0491_c6_m3_f004172.jpg",
+        "pid": 491,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0462_c6_m3_f003445.jpg",
+        "pid": 462,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0185_c6_m3_f003166.jpg",
+        "pid": 185,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0514_c6_m3_f004628.jpg",
+        "pid": 514,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0124_c6_m3_f002176.jpg",
+        "pid": 124,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0268_c6_m3_f004628.jpg",
+        "pid": 268,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1138_c7_m3_f001607.jpg",
+        "pid": 1138,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0378_c6_m3_f001968.jpg",
+        "pid": 378,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0164_c6_m3_f002759.jpg",
+        "pid": 164,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1054_c7_m3_f002453.jpg",
+        "pid": 1054,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1155_c7_m3_f002446.jpg",
+        "pid": 1155,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0394_c6_m3_f002124.jpg",
+        "pid": 394,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0438_c6_m3_f002986.jpg",
+        "pid": 438,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0538_c6_m3_f005071.jpg",
+        "pid": 538,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1078_c7_m3_f003401.jpg",
+        "pid": 1078,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1498_c7_m3_f005060.jpg",
+        "pid": 1498,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0521_c6_m3_f004726.jpg",
+        "pid": 521,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0225_c6_m3_f004022.jpg",
+        "pid": 225,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1139_c7_m3_f001529.jpg",
+        "pid": 1139,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1266_c7_m3_f005250.jpg",
+        "pid": 1266,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0397_c6_m3_f002155.jpg",
+        "pid": 397,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1256_c7_m3_f005001.jpg",
+        "pid": 1256,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0003_c6_m3_f000120.jpg",
+        "pid": 3,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1477_c7_m3_f004961.jpg",
+        "pid": 1477,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0396_c6_m3_f002174.jpg",
+        "pid": 396,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0093_c6_m3_f001299.jpg",
+        "pid": 93,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1250_c7_m3_f004878.jpg",
+        "pid": 1250,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1368_c7_m3_f002442.jpg",
+        "pid": 1368,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1478_c7_m3_f004910.jpg",
+        "pid": 1478,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0083_c6_m3_f001041.jpg",
+        "pid": 83,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1111_c7_m3_f000852.jpg",
+        "pid": 1111,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1343_c7_m3_f001888.jpg",
+        "pid": 1343,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1488_c7_m3_f005006.jpg",
+        "pid": 1488,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1042_c7_m3_f001721.jpg",
+        "pid": 1042,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0165_c6_m3_f002762.jpg",
+        "pid": 165,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1302_c7_m3_f000799.jpg",
+        "pid": 1302,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0350_c6_m3_f001334.jpg",
+        "pid": 350,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1502_c7_m3_f005302.jpg",
+        "pid": 1502,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0272_c6_m3_f004744.jpg",
+        "pid": 272,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1296_c7_m3_f000528.jpg",
+        "pid": 1296,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1434_c7_m3_f004061.jpg",
+        "pid": 1434,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1055_c7_m3_f002318.jpg",
+        "pid": 1055,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0340_c6_m3_f001016.jpg",
+        "pid": 340,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1257_c7_m3_f005089.jpg",
+        "pid": 1257,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0116_c6_m3_f002018.jpg",
+        "pid": 116,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0232_c6_m3_f004080.jpg",
+        "pid": 232,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1176_c7_m3_f002792.jpg",
+        "pid": 1176,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1352_c7_m3_f002046.jpg",
+        "pid": 1352,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0383_c6_m3_f001986.jpg",
+        "pid": 383,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0288_c6_m3_f004976.jpg",
+        "pid": 288,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1475_c7_m3_f004799.jpg",
+        "pid": 1475,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0281_c6_m3_f004878.jpg",
+        "pid": 281,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0278_c6_m3_f004845.jpg",
+        "pid": 278,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1444_c7_m3_f004197.jpg",
+        "pid": 1444,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0416_c6_m3_f002443.jpg",
+        "pid": 416,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0243_c6_m3_f004262.jpg",
+        "pid": 243,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1260_c7_m3_f005164.jpg",
+        "pid": 1260,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1328_c7_m3_f001328.jpg",
+        "pid": 1328,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0532_c6_m3_f004952.jpg",
+        "pid": 532,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1301_c7_m3_f000803.jpg",
+        "pid": 1301,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0425_c6_m3_f002671.jpg",
+        "pid": 425,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1441_c7_m3_f004182.jpg",
+        "pid": 1441,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1493_c7_m3_f005103.jpg",
+        "pid": 1493,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0045_c6_m3_f000506.jpg",
+        "pid": 45,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1496_c7_m3_f005029.jpg",
+        "pid": 1496,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0095_c6_m3_f001375.jpg",
+        "pid": 95,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1294_c7_m3_f000442.jpg",
+        "pid": 1294,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1110_c7_m3_f000789.jpg",
+        "pid": 1110,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1033_c7_m3_f001533.jpg",
+        "pid": 1033,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0144_c6_m3_f002466.jpg",
+        "pid": 144,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1319_c7_m3_f001151.jpg",
+        "pid": 1319,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0261_c6_m3_f004526.jpg",
+        "pid": 261,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0145_c6_m3_f002471.jpg",
+        "pid": 145,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1470_c7_m3_f004803.jpg",
+        "pid": 1470,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0107_c6_m3_f001773.jpg",
+        "pid": 107,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0251_c6_m3_f004309.jpg",
+        "pid": 251,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1207_c7_m3_f004080.jpg",
+        "pid": 1207,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0306_c6_m3_f000085.jpg",
+        "pid": 306,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1297_c7_m3_f000647.jpg",
+        "pid": 1297,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1108_c7_m3_f000725.jpg",
+        "pid": 1108,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1449_c7_m3_f004414.jpg",
+        "pid": 1449,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1489_c7_m3_f004979.jpg",
+        "pid": 1489,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0385_c6_m3_f001978.jpg",
+        "pid": 385,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0302_c6_m3_f000007.jpg",
+        "pid": 302,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0520_c6_m3_f004718.jpg",
+        "pid": 520,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0386_c6_m3_f002004.jpg",
+        "pid": 386,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1117_c7_m3_f000862.jpg",
+        "pid": 1117,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/1089_c7_m3_f000016.jpg",
+        "pid": 1089,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0200_c6_m3_f003406.jpg",
+        "pid": 200,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0201_c6_m3_f003398.jpg",
+        "pid": 201,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1469_c7_m3_f004695.jpg",
+        "pid": 1469,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1258_c7_m3_f005039.jpg",
+        "pid": 1258,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1173_c7_m3_f002950.jpg",
+        "pid": 1173,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0035_c6_m3_f000638.jpg",
+        "pid": 35,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1209_c7_m3_f003846.jpg",
+        "pid": 1209,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0289_c6_m3_f004987.jpg",
+        "pid": 289,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1213_c7_m3_f004038.jpg",
+        "pid": 1213,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0424_c6_m3_f002554.jpg",
+        "pid": 424,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1336_c7_m3_f001444.jpg",
+        "pid": 1336,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0014_c6_m3_f000219.jpg",
+        "pid": 14,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0248_c6_m3_f004263.jpg",
+        "pid": 248,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1220_c7_m3_f003979.jpg",
+        "pid": 1220,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0023_c6_m3_f000096.jpg",
+        "pid": 23,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0533_c6_m3_f004950.jpg",
+        "pid": 533,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1025_c7_m3_f001135.jpg",
+        "pid": 1025,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1409_c7_m3_f003204.jpg",
+        "pid": 1409,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1450_c7_m3_f004396.jpg",
+        "pid": 1450,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1507_c7_m3_f001682.jpg",
+        "pid": 1507,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1375_c7_m3_f002498.jpg",
+        "pid": 1375,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0487_c6_m3_f004111.jpg",
+        "pid": 487,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1244_c7_m3_f004728.jpg",
+        "pid": 1244,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0192_c6_m3_f003292.jpg",
+        "pid": 192,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0426_c6_m3_f002712.jpg",
+        "pid": 426,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1410_c7_m3_f003224.jpg",
+        "pid": 1410,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1299_c7_m3_f000791.jpg",
+        "pid": 1299,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0517_c6_m3_f004636.jpg",
+        "pid": 517,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1374_c7_m3_f002414.jpg",
+        "pid": 1374,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1074_c7_m3_f003343.jpg",
+        "pid": 1074,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1459_c7_m3_f004637.jpg",
+        "pid": 1459,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1231_c7_m3_f004319.jpg",
+        "pid": 1231,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1077_c7_m3_f003373.jpg",
+        "pid": 1077,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0156_c6_m3_f002686.jpg",
+        "pid": 156,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1137_c7_m3_f001541.jpg",
+        "pid": 1137,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0231_c6_m3_f004068.jpg",
+        "pid": 231,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1106_c7_m3_f000602.jpg",
+        "pid": 1106,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0291_c6_m3_f005040.jpg",
+        "pid": 291,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0146_c6_m3_f002517.jpg",
+        "pid": 146,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0249_c6_m3_f004286.jpg",
+        "pid": 249,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1083_c7_m3_f003565.jpg",
+        "pid": 1083,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1031_c7_m3_f001570.jpg",
+        "pid": 1031,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0033_c6_m3_f000628.jpg",
+        "pid": 33,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0139_c6_m3_f002418.jpg",
+        "pid": 139,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1356_c7_m3_f002218.jpg",
+        "pid": 1356,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0004_c6_m3_f000154.jpg",
+        "pid": 4,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1041_c7_m3_f001679.jpg",
+        "pid": 1041,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0518_c6_m3_f004670.jpg",
+        "pid": 518,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0230_c6_m3_f004089.jpg",
+        "pid": 230,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0207_c6_m3_f003469.jpg",
+        "pid": 207,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1073_c7_m3_f003309.jpg",
+        "pid": 1073,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1490_c7_m3_f005028.jpg",
+        "pid": 1490,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1456_c7_m3_f004594.jpg",
+        "pid": 1456,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0053_c6_m3_f000669.jpg",
+        "pid": 53,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0458_c6_m3_f003329.jpg",
+        "pid": 458,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0348_c6_m3_f001242.jpg",
+        "pid": 348,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1342_c7_m3_f001865.jpg",
+        "pid": 1342,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1271_c7_m3_f005293.jpg",
+        "pid": 1271,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1090_c7_m3_f000888.jpg",
+        "pid": 1090,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0022_c6_m3_f000097.jpg",
+        "pid": 22,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0267_c6_m3_f004623.jpg",
+        "pid": 267,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0444_c6_m3_f003107.jpg",
+        "pid": 444,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0129_c6_m3_f002223.jpg",
+        "pid": 129,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0140_c6_m3_f002427.jpg",
+        "pid": 140,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0472_c6_m3_f003656.jpg",
+        "pid": 472,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1145_c7_m3_f001749.jpg",
+        "pid": 1145,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1447_c7_m3_f004274.jpg",
+        "pid": 1447,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1076_c7_m3_f003390.jpg",
+        "pid": 1076,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0088_c6_m3_f001078.jpg",
+        "pid": 88,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1113_c7_m3_f000795.jpg",
+        "pid": 1113,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1487_c7_m3_f004989.jpg",
+        "pid": 1487,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0373_c6_m3_f001866.jpg",
+        "pid": 373,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1142_c7_m3_f001651.jpg",
+        "pid": 1142,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1203_c7_m3_f003863.jpg",
+        "pid": 1203,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0435_c6_m3_f002892.jpg",
+        "pid": 435,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0412_c6_m3_f002368.jpg",
+        "pid": 412,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1115_c7_m3_f000855.jpg",
+        "pid": 1115,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1114_c7_m3_f000849.jpg",
+        "pid": 1114,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0031_c6_m3_f000448.jpg",
+        "pid": 31,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1461_c7_m3_f004606.jpg",
+        "pid": 1461,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0318_c6_m3_f000500.jpg",
+        "pid": 318,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0310_c6_m3_f000222.jpg",
+        "pid": 310,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1020_c7_m3_f001104.jpg",
+        "pid": 1020,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1080_c7_m3_f003531.jpg",
+        "pid": 1080,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0264_c6_m3_f004568.jpg",
+        "pid": 264,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1398_c7_m3_f003074.jpg",
+        "pid": 1398,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1284_c7_m3_f000210.jpg",
+        "pid": 1284,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0506_c6_m3_f004506.jpg",
+        "pid": 506,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0470_c6_m3_f003583.jpg",
+        "pid": 470,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0262_c6_m3_f004541.jpg",
+        "pid": 262,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1059_c7_m3_f002926.jpg",
+        "pid": 1059,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1019_c7_m3_f001085.jpg",
+        "pid": 1019,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1005_c7_m3_f000207.jpg",
+        "pid": 1005,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0020_c6_m3_f000024.jpg",
+        "pid": 20,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0369_c6_m3_f001769.jpg",
+        "pid": 369,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1416_c7_m3_f003556.jpg",
+        "pid": 1416,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1202_c7_m3_f003795.jpg",
+        "pid": 1202,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1432_c7_m3_f003976.jpg",
+        "pid": 1432,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0492_c6_m3_f004209.jpg",
+        "pid": 492,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0179_c6_m3_f004595.jpg",
+        "pid": 179,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1168_c7_m3_f002786.jpg",
+        "pid": 1168,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0433_c6_m3_f002808.jpg",
+        "pid": 433,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0087_c6_m3_f001094.jpg",
+        "pid": 87,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1253_c7_m3_f004913.jpg",
+        "pid": 1253,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1324_c7_m3_f001267.jpg",
+        "pid": 1324,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0463_c6_m3_f004890.jpg",
+        "pid": 463,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1460_c7_m3_f004607.jpg",
+        "pid": 1460,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0090_c6_m3_f001183.jpg",
+        "pid": 90,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1307_c7_m3_f000882.jpg",
+        "pid": 1307,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0338_c6_m3_f000916.jpg",
+        "pid": 338,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0319_c6_m3_f000474.jpg",
+        "pid": 319,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1109_c7_m3_f000738.jpg",
+        "pid": 1109,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0135_c6_m3_f002353.jpg",
+        "pid": 135,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1399_c7_m3_f003055.jpg",
+        "pid": 1399,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0339_c6_m3_f001007.jpg",
+        "pid": 339,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1283_c7_m3_f000229.jpg",
+        "pid": 1283,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0389_c6_m3_f002045.jpg",
+        "pid": 389,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0027_c6_m3_f000280.jpg",
+        "pid": 27,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0430_c6_m3_f002734.jpg",
+        "pid": 430,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1245_c7_m3_f004708.jpg",
+        "pid": 1245,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0097_c6_m3_f001395.jpg",
+        "pid": 97,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1440_c7_m3_f004165.jpg",
+        "pid": 1440,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0175_c6_m3_f002913.jpg",
+        "pid": 175,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0162_c6_m3_f002714.jpg",
+        "pid": 162,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0080_c6_m3_f001054.jpg",
+        "pid": 80,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0236_c6_m3_f004169.jpg",
+        "pid": 236,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1121_c7_m3_f001101.jpg",
+        "pid": 1121,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0448_c6_m3_f003115.jpg",
+        "pid": 448,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1171_c7_m3_f002794.jpg",
+        "pid": 1171,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0436_c6_m3_f002925.jpg",
+        "pid": 436,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1471_c7_m3_f004839.jpg",
+        "pid": 1471,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0474_c6_m3_f003750.jpg",
+        "pid": 474,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0395_c6_m3_f002153.jpg",
+        "pid": 395,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0314_c6_m3_f000272.jpg",
+        "pid": 314,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1435_c7_m3_f004177.jpg",
+        "pid": 1435,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0279_c6_m3_f004873.jpg",
+        "pid": 279,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0491_c6_m3_f004178.jpg",
+        "pid": 491,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0462_c6_m3_f003442.jpg",
+        "pid": 462,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0185_c6_m3_f003167.jpg",
+        "pid": 185,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0514_c6_m3_f004621.jpg",
+        "pid": 514,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0124_c6_m3_f002182.jpg",
+        "pid": 124,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0268_c6_m3_f004625.jpg",
+        "pid": 268,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1138_c7_m3_f001548.jpg",
+        "pid": 1138,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0378_c6_m3_f001950.jpg",
+        "pid": 378,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0164_c6_m3_f002762.jpg",
+        "pid": 164,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1054_c7_m3_f002485.jpg",
+        "pid": 1054,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1155_c7_m3_f002444.jpg",
+        "pid": 1155,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0394_c6_m3_f002121.jpg",
+        "pid": 394,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0438_c6_m3_f003057.jpg",
+        "pid": 438,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0538_c6_m3_f005073.jpg",
+        "pid": 538,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1078_c7_m3_f003424.jpg",
+        "pid": 1078,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1498_c7_m3_f005083.jpg",
+        "pid": 1498,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0521_c6_m3_f005093.jpg",
+        "pid": 521,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0225_c6_m3_f003995.jpg",
+        "pid": 225,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1139_c7_m3_f001508.jpg",
+        "pid": 1139,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1266_c7_m3_f005243.jpg",
+        "pid": 1266,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/query/Thermal/0397_c6_m3_f002169.jpg",
+        "pid": 397,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/1256_c7_m3_f005016.jpg",
+        "pid": 1256,
+        "camid": 6,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      },
+      {
+        "path": "/project/code/data/WHU-MARS/test/Thermal/0003_c6_m3_f000131.jpg",
+        "pid": 3,
+        "camid": 5,
+        "modal_id": 3,
+        "modality_name": "TIR",
+        "platform": "A"
+      }
+    ],
+    "order_sha256": "dd6e9f8cfe14ee48453b56ae43e8773fccc48b6f7fd94db6234bde7d1a2a4020",
+    "same_platform_donor_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219,
+      220,
+      221,
+      222,
+      223,
+      224,
+      225,
+      226,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      252,
+      253,
+      254,
+      255,
+      0,
+      259,
+      260,
+      261,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      272,
+      273,
+      274,
+      275,
+      276,
+      277,
+      278,
+      279,
+      280,
+      281,
+      282,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288,
+      289,
+      290,
+      290,
+      291,
+      292,
+      293,
+      294,
+      295,
+      296,
+      297,
+      298,
+      299,
+      300,
+      301,
+      302,
+      303,
+      304,
+      305,
+      306,
+      307,
+      308,
+      309,
+      310,
+      311,
+      312,
+      313,
+      314,
+      315,
+      316,
+      317,
+      318,
+      319,
+      320,
+      321,
+      322,
+      323,
+      324,
+      325,
+      326,
+      327,
+      328,
+      329,
+      330,
+      331,
+      332,
+      333,
+      334,
+      335,
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342,
+      343,
+      344,
+      345,
+      346,
+      347,
+      348,
+      349,
+      350,
+      351,
+      352,
+      353,
+      354,
+      355,
+      356,
+      357,
+      358,
+      359,
+      360,
+      361,
+      362,
+      363,
+      364,
+      365,
+      366,
+      367,
+      368,
+      369,
+      370,
+      371,
+      372,
+      373,
+      374,
+      375,
+      376,
+      377,
+      378,
+      379,
+      380,
+      381,
+      382,
+      383,
+      384,
+      385,
+      386,
+      387,
+      388,
+      389,
+      390,
+      391,
+      392,
+      393,
+      394,
+      395,
+      396,
+      397,
+      398,
+      399,
+      400,
+      401,
+      402,
+      403,
+      404,
+      405,
+      406,
+      407,
+      408,
+      409,
+      410,
+      411,
+      412,
+      413,
+      414,
+      415,
+      416,
+      417,
+      418,
+      419,
+      420,
+      421,
+      422,
+      423,
+      424,
+      425,
+      426,
+      427,
+      428,
+      429,
+      430,
+      431,
+      432,
+      433,
+      434,
+      435,
+      436,
+      437,
+      438,
+      439,
+      440,
+      441,
+      442,
+      443,
+      444,
+      445,
+      446,
+      447,
+      448,
+      449,
+      450,
+      451,
+      452,
+      453,
+      454,
+      455,
+      456,
+      457,
+      458,
+      459,
+      460,
+      461,
+      462,
+      463,
+      464,
+      465,
+      466,
+      467,
+      468,
+      469,
+      470,
+      471,
+      472,
+      473,
+      474,
+      475,
+      476,
+      477,
+      478,
+      479,
+      480,
+      481,
+      484,
+      485,
+      486,
+      487,
+      488,
+      489,
+      490,
+      491,
+      492,
+      493,
+      494,
+      495,
+      496,
+      497,
+      498,
+      499,
+      500,
+      501,
+      502,
+      503,
+      504,
+      505,
+      506,
+      507,
+      508,
+      509,
+      510,
+      511,
+      256,
+      257,
+      258,
+      259
+    ],
+    "cross_platform_donor_indices": [
+      256,
+      257,
+      258,
+      259,
+      260,
+      261,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      272,
+      273,
+      274,
+      275,
+      276,
+      277,
+      278,
+      279,
+      280,
+      281,
+      283,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288,
+      289,
+      290,
+      291,
+      292,
+      293,
+      294,
+      295,
+      296,
+      297,
+      298,
+      299,
+      300,
+      301,
+      302,
+      303,
+      304,
+      305,
+      306,
+      307,
+      308,
+      309,
+      311,
+      311,
+      312,
+      313,
+      314,
+      315,
+      316,
+      317,
+      318,
+      319,
+      320,
+      321,
+      322,
+      323,
+      324,
+      325,
+      326,
+      327,
+      328,
+      329,
+      330,
+      331,
+      332,
+      334,
+      334,
+      335,
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342,
+      343,
+      344,
+      345,
+      346,
+      347,
+      348,
+      349,
+      350,
+      352,
+      352,
+      353,
+      355,
+      355,
+      356,
+      357,
+      358,
+      360,
+      360,
+      361,
+      362,
+      363,
+      364,
+      365,
+      366,
+      368,
+      368,
+      369,
+      370,
+      371,
+      373,
+      373,
+      375,
+      375,
+      377,
+      377,
+      378,
+      379,
+      380,
+      381,
+      382,
+      383,
+      384,
+      385,
+      386,
+      387,
+      388,
+      389,
+      390,
+      391,
+      393,
+      394,
+      395,
+      396,
+      396,
+      397,
+      398,
+      399,
+      401,
+      401,
+      402,
+      404,
+      404,
+      405,
+      407,
+      407,
+      408,
+      409,
+      411,
+      411,
+      413,
+      413,
+      415,
+      416,
+      416,
+      417,
+      418,
+      419,
+      421,
+      422,
+      422,
+      423,
+      424,
+      425,
+      426,
+      427,
+      428,
+      429,
+      430,
+      431,
+      433,
+      434,
+      434,
+      435,
+      436,
+      437,
+      438,
+      439,
+      441,
+      441,
+      442,
+      443,
+      444,
+      446,
+      446,
+      447,
+      449,
+      449,
+      451,
+      451,
+      452,
+      454,
+      454,
+      455,
+      456,
+      457,
+      459,
+      459,
+      461,
+      461,
+      463,
+      464,
+      464,
+      466,
+      466,
+      468,
+      469,
+      469,
+      470,
+      471,
+      473,
+      473,
+      474,
+      475,
+      477,
+      477,
+      479,
+      479,
+      480,
+      481,
+      483,
+      483,
+      484,
+      486,
+      486,
+      488,
+      488,
+      489,
+      490,
+      492,
+      492,
+      494,
+      495,
+      496,
+      497,
+      497,
+      499,
+      500,
+      500,
+      502,
+      502,
+      504,
+      506,
+      505,
+      506,
+      507,
+      509,
+      510,
+      510,
+      511,
+      1,
+      1,
+      3,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      9,
+      10,
+      11,
+      14,
+      14,
+      15,
+      16,
+      16,
+      17,
+      19,
+      19,
+      21,
+      21,
+      23,
+      23,
+      24,
+      25,
+      27,
+      28,
+      29,
+      29,
+      31,
+      31,
+      33,
+      33,
+      34,
+      35,
+      37,
+      37,
+      38,
+      39,
+      41,
+      42,
+      43,
+      43,
+      44,
+      45,
+      47,
+      47,
+      48,
+      50,
+      51,
+      51,
+      53,
+      53,
+      54,
+      55,
+      57,
+      57,
+      58,
+      59,
+      60,
+      61,
+      63,
+      63,
+      64,
+      66,
+      67,
+      69,
+      68,
+      69,
+      70,
+      71,
+      73,
+      73,
+      75,
+      75,
+      76,
+      77,
+      78,
+      80,
+      80,
+      83,
+      84,
+      83,
+      85,
+      87,
+      87,
+      87,
+      88,
+      90,
+      90,
+      91,
+      94,
+      93,
+      94,
+      96,
+      98,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      104,
+      106,
+      106,
+      107,
+      109,
+      108,
+      109,
+      110,
+      113,
+      113,
+      113,
+      114,
+      116,
+      118,
+      117,
+      118,
+      121,
+      120,
+      121,
+      124,
+      125,
+      124,
+      125,
+      128,
+      127,
+      128,
+      129,
+      130,
+      132,
+      133,
+      133,
+      134,
+      137,
+      138,
+      137,
+      138,
+      139,
+      142,
+      143,
+      142,
+      144,
+      144,
+      145,
+      146,
+      147,
+      150,
+      150,
+      151,
+      151,
+      152,
+      155,
+      156,
+      155,
+      157,
+      158,
+      160,
+      159,
+      160,
+      161,
+      162,
+      165,
+      166,
+      165,
+      166,
+      167,
+      168,
+      170,
+      172,
+      171,
+      173,
+      174,
+      174,
+      175,
+      178,
+      178,
+      180,
+      181,
+      181,
+      181,
+      182,
+      184,
+      186,
+      187,
+      186,
+      189,
+      189,
+      191,
+      190,
+      191,
+      194,
+      193,
+      194,
+      195,
+      196,
+      197,
+      200,
+      201,
+      201,
+      201,
+      204,
+      205,
+      205,
+      207,
+      208,
+      209,
+      208,
+      209,
+      212,
+      211,
+      212,
+      215,
+      215,
+      217,
+      216,
+      217,
+      218,
+      221,
+      220,
+      223,
+      222,
+      223,
+      226,
+      225,
+      227,
+      227,
+      228,
+      229,
+      230,
+      231,
+      234,
+      233,
+      234,
+      235,
+      238,
+      239,
+      240,
+      241,
+      240,
+      241,
+      244,
+      243,
+      246,
+      245,
+      248,
+      247,
+      248,
+      249,
+      252,
+      253,
+      254,
+      253,
+      0,
+      255
+    ],
+    "seed": 1234
+  },
+  "interventions": [
+    "spatial_mean_v",
+    "donor_same_platform_v",
+    "donor_cross_platform_v",
+    "zero_ll_condition",
+    "disable_lh",
+    "disable_hl",
+    "disable_hh",
+    "disable_all"
+  ],
+  "donor_replacement": "V only, original LL/HF preserved",
+  "zero_ll_condition": "zero W_L(LL), original LL kept for IDWT",
+  "disable_band": "zero applied M for that direction, generated M and original HF unchanged",
+  "disable_all_identity_shortcut": "exact original Patch writeback to avoid Haar roundoff",
+  "gain_order": "descending signed M (equivalent to descending 1+M); tie-averaged Spearman",
+  "normal_mirror_exactly_matches_production": true
+}

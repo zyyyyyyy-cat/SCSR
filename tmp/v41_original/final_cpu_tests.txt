@@ -1,0 +1,29 @@
+test_01_haar_direction_energy_and_inverse (test_scsr_v41.V41Tests) ... ok
+test_02_original_code_and_seed_equivalence (test_scsr_v41.V41Tests) ... ok
+test_03_modalities_bounds_dtype (test_scsr_v41.V41Tests) ... D:\CODE\Doing\WHU_base\SCSR\WHU\model\scsr_v41.py:18: FutureWarning: `torch.cpu.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cpu', args...)` instead.
+  return autocast(enabled=False) if autocast is not None else nullcontext()
+ok
+test_04_block_residual_and_runtime_guard (test_scsr_v41.V41Tests) ... D:\CODE\Doing\WHU_base\SCSR\WHU\utils\scsr_v41_runtime.py:212: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with preserve_rng(), evaluation_mode(model), torch.no_grad(), torch.cuda.amp.autocast(enabled=use_amp):
+ok
+test_05_optimizer_and_fixed_batch_rng (test_scsr_v41.V41Tests) ... ok
+test_06_separate_identity_gradient_probe_no_mutation (test_scsr_v41.V41Tests) ... D:\CODE\Doing\WHU_base\SCSR\WHU\model\scsr_v41.py:18: FutureWarning: `torch.cpu.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cpu', args...)` instead.
+  return autocast(enabled=False) if autocast is not None else nullcontext()
+ok
+test_07_joint_uad_loss_actual_sgd_update (test_scsr_v41.V41Tests) ... ok
+test_08_strict_checkpoint_and_version (test_scsr_v41.V41Tests) ... ok
+test_09_ranking_protocol_and_old_syntax (test_scsr_v41.V41Tests) ... ok
+test_10_amp_overflow_diagnostic_serialization (test_scsr_v41.V41Tests) ... ok
+test_11_one_time_initial_scale_factor (test_scsr_v41.V41Tests) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 43.799s
+
+OK
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+===========building transformer===========
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+Synthetic joint CE/WRT/ProCA/GPD actual relative SGD updates: [{"U": 3.5899347730627973e-12, "ll_proj.weight": 5.130138536202367e-09, "hf_proj.0.weight": 8.743209489736614e-10, "hf_proj.1.weight": 1.0270434502857029e-09, "hf_proj.2.weight": 8.80977402140104e-10, "spatial.weight": 2.653804065388954e-09, "output.weight": 1.4134388948150445e-07}, {"U": 6.607250770812589e-12, "ll_proj.weight": 8.054363398457554e-09, "hf_proj.0.weight": 1.2920889913559108e-09, "hf_proj.1.weight": 1.6191462615111618e-09, "hf_proj.2.weight": 1.1764088592158828e-09, "spatial.weight": 4.339315573531621e-09, "output.weight": 2.431614802844706e-07}]
+Loaded verified SCSR-V4.1 checkpoint: C:\Users\GX\AppData\Local\Temp\tmpltnleb31\transformer_120.pth

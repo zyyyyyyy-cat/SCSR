@@ -1,0 +1,1619 @@
+2026-10-13 11:56:25,729 transreid INFO: Saving model in the path :logs/SCSR_1000_DDP
+2026-10-13 11:56:25,729 transreid INFO: Namespace(config_file='configs/SCSR.yml', local_rank=0, opts=['MODEL.DIST_TRAIN', 'True', 'DATASETS.DATASET_DIR', 'WHU-MARS', 'DATASETS.FILTER_GD', 'False', 'SOLVER.IMS_PER_BATCH', '256', 'SOLVER.BASE_LR', '0.032', 'SOLVER.MAX_EPOCHS', '120', 'SOLVER.SEED', '1234', 'OUTPUT_DIR', 'logs/SCSR_1000_DDP'])
+2026-10-13 11:56:25,729 transreid INFO: DDP initialized with 4 processes; global sampler batch=256, per-GPU sampler batch=64, actual images per GPU=192
+2026-10-13 11:56:25,729 transreid INFO: Loaded configuration file configs/SCSR.yml
+2026-10-13 11:56:25,729 transreid INFO: Running with config:
+DATALOADER:
+  NUM_INSTANCE: 4
+  NUM_WORKERS: 8
+  SAMPLER: PKM
+DATASETS:
+  DATASET_DIR: WHU-MARS
+  FILTER_GD: False
+  MODALITIES: ('RGB', 'IR', 'Thermal')
+  NAMES: WHU-MARS
+  ROOT_DIR: /project/code/data
+INPUT:
+  PADDING: 10
+  PIXEL_MEAN: [0.5, 0.5, 0.5]
+  PIXEL_STD: [0.5, 0.5, 0.5]
+  PROB: 0.5
+  RE_PROB: 0.5
+  SIZE_TEST: [256, 128]
+  SIZE_TRAIN: [256, 128]
+MODEL:
+  ATT_DROP_RATE: 0.0
+  COS_LAYER: False
+  DEVICE: cuda
+  DEVICE_ID: 0
+  DEVIDE_LENGTH: 4
+  DIST_TRAIN: True
+  DROP_OUT: 0.0
+  DROP_PATH: 0.1
+  GPD_MOMENTUM: 0.2
+  ID_LOSS_TYPE: softmax
+  ID_LOSS_WEIGHT: 1.0
+  IF_LABELSMOOTH: off
+  IF_WITH_CENTER: no
+  JPM: False
+  LAST_STRIDE: 1
+  METRIC_LOSS_TYPE: wrt
+  NAME: transformer
+  NECK: bnneck
+  NO_MARGIN: True
+  PCA_LOSS_WEIGHT: 0.01
+  PRETRAIN_CHOICE: imagenet
+  PRETRAIN_PATH: jx_vit_base_p16_224-80ecf9dd.pth
+  RE_ARRANGE: True
+  SHIFT_NUM: 5
+  SHUFFLE_GROUP: 2
+  SIE_CAMERA: False
+  SIE_COE: 3.0
+  SIE_VIEW: False
+  STRIDE_SIZE: [16, 16]
+  TRANSFORMER_TYPE: vit_base_in
+  TRIPLET_LOSS_WEIGHT: 1.0
+OUTPUT_DIR: logs/SCSR_1000_DDP
+SCSR:
+  CONDITION_DIM: 64
+  ENABLED: True
+  EPS: 1e-06
+  GATE_AMPLITUDE: 0.5
+  INSERT_AFTER_BLOCK: 6
+  IN_DIM: 768
+  LR_MULTIPLIER: 1.0
+  RESIDUAL_SCALE: 0.2
+  SPECTRAL_DIM: 192
+  TARGET_MODALITY: Thermal
+  WAVELET: haar
+  WAVELET_LEVELS: 1
+SOLVER:
+  BASE_LR: 0.032
+  BIAS_LR_FACTOR: 2
+  CENTER_LOSS_WEIGHT: 0.0005
+  CENTER_LR: 0.5
+  CHECKPOINT_PERIOD: 120
+  COSINE_MARGIN: 0.5
+  COSINE_SCALE: 30
+  EVAL_PERIOD: 10
+  GAMMA: 0.1
+  IMS_PER_BATCH: 256
+  LARGE_FC_LR: False
+  LOG_PERIOD: 50
+  LOSS_TYPE: base+pca+gpd
+  MARGIN: 0.3
+  MAX_EPOCHS: 120
+  MOMENTUM: 0.9
+  OPTIMIZER_NAME: SGD
+  SEED: 1234
+  STEPS: (40, 70)
+  WARMUP_EPOCHS: 5
+  WARMUP_FACTOR: 0.01
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0.0001
+TEST:
+  DETAILED_DOMAIN_EVAL: False
+  DIST_MAT: dist_mat.npy
+  EVAL: False
+  FEAT_NORM: yes
+  IMS_PER_BATCH: 512
+  NECK_FEAT: before
+  RE_RANKING: False
+  TOP_K_EVAL: 0
+  WEIGHT: 
+2026-10-13 11:56:29,818 transreid.train INFO: start training
+2026-10-13 11:56:29,960 transreid.train INFO: Using 4 GPUs for DDP training
+2026-10-13 11:56:30,270 transreid.train INFO: Feature dimension: 768; identities: 500
+2026-10-13 11:57:31,822 transreid.train INFO: Epoch[1] Iteration[50/114] Loss: 24.892, Acc: 0.002, Base Lr: 6.66e-03
+2026-10-13 11:57:31,823 transreid.train INFO: Epoch[1] 6.213, 12.244, 0.172, 6.433
+2026-10-13 11:57:31,823 transreid.train INFO: SCSR |gate-1| mean=2.317944e-07, max=2.875714e-06; residual/P mean=7.967867e-10
+2026-10-13 11:58:21,283 transreid.train INFO: Epoch[1] Iteration[100/114] Loss: 18.904, Acc: 0.016, Base Lr: 6.66e-03
+2026-10-13 11:58:21,283 transreid.train INFO: Epoch[1] 6.187, 6.654, 0.108, 6.062
+2026-10-13 11:58:21,283 transreid.train INFO: SCSR |gate-1| mean=3.956006e-07, max=3.971267e-06; residual/P mean=1.191182e-09
+2026-10-13 11:58:35,368 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=110, cumulative batches=114, cumulative optimizer updates=110, cumulative AMP-skipped updates=4
+2026-10-13 11:58:35,368 transreid.train INFO: SCSR local CUDA peak allocated memory: 12610.6 MiB
+2026-10-13 11:58:35,369 transreid.train INFO: Epoch 1 done. Time per batch: 1.097[s] Total: 125.1[s]
+2026-10-13 11:59:26,369 transreid.train INFO: Epoch[2] Iteration[50/114] Loss: 13.005, Acc: 0.022, Base Lr: 1.30e-02
+2026-10-13 11:59:26,369 transreid.train INFO: Epoch[2] 5.998, 0.842, 0.068, 6.164
+2026-10-13 11:59:26,369 transreid.train INFO: SCSR |gate-1| mean=6.074855e-07, max=4.648064e-06; residual/P mean=1.468084e-09
+2026-10-13 12:00:15,838 transreid.train INFO: Epoch[2] Iteration[100/114] Loss: 11.976, Acc: 0.040, Base Lr: 1.30e-02
+2026-10-13 12:00:15,838 transreid.train INFO: Epoch[2] 5.757, 0.786, 0.094, 5.432
+2026-10-13 12:00:15,838 transreid.train INFO: SCSR |gate-1| mean=7.808601e-07, max=7.875487e-06; residual/P mean=2.010188e-09
+2026-10-13 12:00:30,053 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=228, cumulative optimizer updates=224, cumulative AMP-skipped updates=4
+2026-10-13 12:00:30,053 transreid.train INFO: SCSR local CUDA peak allocated memory: 12610.6 MiB
+2026-10-13 12:00:30,054 transreid.train INFO: Epoch 2 done. Time per batch: 1.006[s] Total: 114.7[s]
+2026-10-13 12:01:22,460 transreid.train INFO: Epoch[3] Iteration[50/114] Loss: 11.282, Acc: 0.043, Base Lr: 1.93e-02
+2026-10-13 12:01:22,460 transreid.train INFO: Epoch[3] 5.445, 0.738, 0.172, 5.097
+2026-10-13 12:01:22,460 transreid.train INFO: SCSR |gate-1| mean=9.949586e-07, max=1.088738e-05; residual/P mean=2.693202e-09
+2026-10-13 12:02:10,196 transreid.train INFO: Epoch[3] Iteration[100/114] Loss: 10.156, Acc: 0.093, Base Lr: 1.93e-02
+2026-10-13 12:02:10,196 transreid.train INFO: Epoch[3] 5.107, 0.695, 0.203, 4.353
+2026-10-13 12:02:10,196 transreid.train INFO: SCSR |gate-1| mean=1.209902e-06, max=1.161518e-05; residual/P mean=2.871937e-09
+2026-10-13 12:02:24,388 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=342, cumulative optimizer updates=338, cumulative AMP-skipped updates=4
+2026-10-13 12:02:24,389 transreid.train INFO: SCSR local CUDA peak allocated memory: 12610.6 MiB
+2026-10-13 12:02:24,389 transreid.train INFO: Epoch 3 done. Time per batch: 1.003[s] Total: 114.3[s]
+2026-10-13 12:03:17,096 transreid.train INFO: Epoch[4] Iteration[50/115] Loss: 9.832, Acc: 0.087, Base Lr: 2.57e-02
+2026-10-13 12:03:17,097 transreid.train INFO: Epoch[4] 4.987, 0.687, 0.255, 4.156
+2026-10-13 12:03:17,097 transreid.train INFO: SCSR |gate-1| mean=1.521219e-06, max=1.280865e-05; residual/P mean=3.809599e-09
+2026-10-13 12:04:05,505 transreid.train INFO: Epoch[4] Iteration[100/115] Loss: 8.719, Acc: 0.158, Base Lr: 2.57e-02
+2026-10-13 12:04:05,505 transreid.train INFO: Epoch[4] 4.533, 0.648, 0.267, 3.535
+2026-10-13 12:04:05,506 transreid.train INFO: SCSR |gate-1| mean=1.775997e-06, max=1.566710e-05; residual/P mean=4.032544e-09
+2026-10-13 12:04:20,722 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=457, cumulative optimizer updates=453, cumulative AMP-skipped updates=4
+2026-10-13 12:04:20,722 transreid.train INFO: SCSR local CUDA peak allocated memory: 12610.6 MiB
+2026-10-13 12:04:20,722 transreid.train INFO: Epoch 4 done. Time per batch: 1.012[s] Total: 116.3[s]
+2026-10-13 12:05:13,358 transreid.train INFO: Epoch[5] Iteration[50/114] Loss: 8.527, Acc: 0.152, Base Lr: 3.19e-02
+2026-10-13 12:05:13,358 transreid.train INFO: Epoch[5] 4.430, 0.662, 0.292, 3.431
+2026-10-13 12:05:13,358 transreid.train INFO: SCSR |gate-1| mean=2.124608e-06, max=1.798243e-05; residual/P mean=4.948427e-09
+2026-10-13 12:06:01,536 transreid.train INFO: Epoch[5] Iteration[100/114] Loss: 7.423, Acc: 0.256, Base Lr: 3.19e-02
+2026-10-13 12:06:01,536 transreid.train INFO: Epoch[5] 3.900, 0.619, 0.289, 2.901
+2026-10-13 12:06:01,536 transreid.train INFO: SCSR |gate-1| mean=2.382176e-06, max=2.134895e-05; residual/P mean=5.455189e-09
+2026-10-13 12:06:15,638 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=571, cumulative optimizer updates=567, cumulative AMP-skipped updates=4
+2026-10-13 12:06:15,638 transreid.train INFO: SCSR local CUDA peak allocated memory: 12610.6 MiB
+2026-10-13 12:06:15,638 transreid.train INFO: Epoch 5 done. Time per batch: 1.008[s] Total: 114.9[s]
+2026-10-13 12:07:06,523 transreid.train INFO: Epoch[6] Iteration[50/114] Loss: 7.308, Acc: 0.243, Base Lr: 3.18e-02
+2026-10-13 12:07:06,523 transreid.train INFO: Epoch[6] 3.854, 0.609, 0.309, 2.842
+2026-10-13 12:07:06,524 transreid.train INFO: SCSR |gate-1| mean=2.743315e-06, max=2.491201e-05; residual/P mean=5.891848e-09
+2026-10-13 12:07:55,944 transreid.train INFO: Epoch[6] Iteration[100/114] Loss: 6.408, Acc: 0.339, Base Lr: 3.18e-02
+2026-10-13 12:07:55,945 transreid.train INFO: Epoch[6] 3.369, 0.579, 0.297, 2.457
+2026-10-13 12:07:55,945 transreid.train INFO: SCSR |gate-1| mean=3.022067e-06, max=2.712330e-05; residual/P mean=6.475841e-09
+2026-10-13 12:08:09,925 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=685, cumulative optimizer updates=681, cumulative AMP-skipped updates=4
+2026-10-13 12:08:09,925 transreid.train INFO: SCSR local CUDA peak allocated memory: 12610.6 MiB
+2026-10-13 12:08:09,926 transreid.train INFO: Epoch 6 done. Time per batch: 1.003[s] Total: 114.3[s]
+2026-10-13 12:09:01,107 transreid.train INFO: Epoch[7] Iteration[50/114] Loss: 6.424, Acc: 0.312, Base Lr: 3.17e-02
+2026-10-13 12:09:01,108 transreid.train INFO: Epoch[7] 3.372, 0.582, 0.317, 2.467
+2026-10-13 12:09:01,108 transreid.train INFO: SCSR |gate-1| mean=3.402261e-06, max=2.613811e-05; residual/P mean=7.964301e-09
+2026-10-13 12:09:50,574 transreid.train INFO: Epoch[7] Iteration[100/114] Loss: 5.633, Acc: 0.413, Base Lr: 3.17e-02
+2026-10-13 12:09:50,574 transreid.train INFO: Epoch[7] 2.921, 0.556, 0.301, 2.153
+2026-10-13 12:09:50,574 transreid.train INFO: SCSR |gate-1| mean=3.640347e-06, max=2.817863e-05; residual/P mean=7.581473e-09
+2026-10-13 12:10:04,655 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=799, cumulative optimizer updates=795, cumulative AMP-skipped updates=4
+2026-10-13 12:10:04,656 transreid.train INFO: SCSR local CUDA peak allocated memory: 12610.6 MiB
+2026-10-13 12:10:04,656 transreid.train INFO: Epoch 7 done. Time per batch: 1.006[s] Total: 114.7[s]
+2026-10-13 12:10:56,397 transreid.train INFO: Epoch[8] Iteration[50/114] Loss: 5.764, Acc: 0.380, Base Lr: 3.17e-02
+2026-10-13 12:10:56,398 transreid.train INFO: Epoch[8] 3.027, 0.557, 0.323, 2.177
+2026-10-13 12:10:56,398 transreid.train INFO: SCSR |gate-1| mean=3.989232e-06, max=3.491127e-05; residual/P mean=9.147051e-09
+2026-10-13 12:11:44,501 transreid.train INFO: Epoch[8] Iteration[100/114] Loss: 4.982, Acc: 0.483, Base Lr: 3.17e-02
+2026-10-13 12:11:44,501 transreid.train INFO: Epoch[8] 2.553, 0.531, 0.309, 1.895
+2026-10-13 12:11:44,501 transreid.train INFO: SCSR |gate-1| mean=4.347292e-06, max=3.539204e-05; residual/P mean=8.983728e-09
+2026-10-13 12:11:58,586 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=913, cumulative optimizer updates=909, cumulative AMP-skipped updates=4
+2026-10-13 12:11:58,587 transreid.train INFO: SCSR local CUDA peak allocated memory: 12610.6 MiB
+2026-10-13 12:11:58,587 transreid.train INFO: Epoch 8 done. Time per batch: 0.999[s] Total: 113.9[s]
+2026-10-13 12:12:51,452 transreid.train INFO: Epoch[9] Iteration[50/114] Loss: 5.055, Acc: 0.448, Base Lr: 3.16e-02
+2026-10-13 12:12:51,453 transreid.train INFO: Epoch[9] 2.602, 0.524, 0.326, 1.926
+2026-10-13 12:12:51,453 transreid.train INFO: SCSR |gate-1| mean=4.742599e-06, max=3.840774e-05; residual/P mean=1.082486e-08
+2026-10-13 12:13:39,061 transreid.train INFO: Epoch[9] Iteration[100/114] Loss: 4.404, Acc: 0.546, Base Lr: 3.16e-02
+2026-10-13 12:13:39,061 transreid.train INFO: Epoch[9] 2.203, 0.504, 0.308, 1.693
+2026-10-13 12:13:39,062 transreid.train INFO: SCSR |gate-1| mean=4.981097e-06, max=4.081290e-05; residual/P mean=1.149067e-08
+2026-10-13 12:13:53,047 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=1027, cumulative optimizer updates=1023, cumulative AMP-skipped updates=4
+2026-10-13 12:13:53,047 transreid.train INFO: SCSR local CUDA peak allocated memory: 12610.6 MiB
+2026-10-13 12:13:53,047 transreid.train INFO: Epoch 9 done. Time per batch: 1.004[s] Total: 114.5[s]
+2026-10-13 12:14:45,108 transreid.train INFO: Epoch[10] Iteration[50/114] Loss: 4.642, Acc: 0.500, Base Lr: 3.15e-02
+2026-10-13 12:14:45,108 transreid.train INFO: Epoch[10] 2.361, 0.516, 0.319, 1.762
+2026-10-13 12:14:45,108 transreid.train INFO: SCSR |gate-1| mean=5.327885e-06, max=4.445136e-05; residual/P mean=1.257826e-08
+2026-10-13 12:15:32,905 transreid.train INFO: Epoch[10] Iteration[100/114] Loss: 3.991, Acc: 0.596, Base Lr: 3.15e-02
+2026-10-13 12:15:32,905 transreid.train INFO: Epoch[10] 1.964, 0.489, 0.307, 1.534
+2026-10-13 12:15:32,905 transreid.train INFO: SCSR |gate-1| mean=5.630104e-06, max=4.673605e-05; residual/P mean=1.137247e-08
+2026-10-13 12:15:46,976 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=1141, cumulative optimizer updates=1137, cumulative AMP-skipped updates=4
+2026-10-13 12:15:46,976 transreid.train INFO: SCSR local CUDA peak allocated memory: 12610.6 MiB
+2026-10-13 12:15:46,977 transreid.train INFO: Epoch 10 done. Time per batch: 0.999[s] Total: 113.9[s]
+2026-10-13 12:16:45,786 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 12:17:42,110 transreid.train INFO: The test feature is normalized
+2026-10-13 12:17:42,179 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 12:19:08,274 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 12:19:16,253 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 26.14%, mAP: 16.01%, mINP: 2.70%
+2026-10-13 12:19:24,142 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 14.99%, mAP: 8.59%, mINP: 1.21%
+2026-10-13 12:19:32,209 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 3.56%, mAP: 2.83%, mINP: 0.57%
+2026-10-13 12:19:40,570 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 13.21%, mAP: 8.32%, mINP: 1.44%
+2026-10-13 12:19:48,479 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 16.39%, mAP: 9.42%, mINP: 1.40%
+2026-10-13 12:19:56,328 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 3.47%, mAP: 2.53%, mINP: 0.56%
+2026-10-13 12:20:04,164 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 4.03%, mAP: 2.76%, mINP: 0.66%
+2026-10-13 12:20:12,419 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 3.70%, mAP: 2.49%, mINP: 0.58%
+2026-10-13 12:20:20,365 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 9.79%, mAP: 6.60%, mINP: 1.08%
+2026-10-13 12:20:20,365 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 12:20:20,365 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 12:20:20,365 transreid.train INFO:   NIR->RGB    13.21%   8.32%   1.44%
+2026-10-13 12:20:20,365 transreid.train INFO:   TIR->RGB     4.03%   2.76%   0.66%
+2026-10-13 12:20:20,365 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 12:20:20,365 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 12:20:20,365 transreid.train INFO:     RGB     RGB  26.14%  16.01%   2.70%
+2026-10-13 12:20:20,365 transreid.train INFO:     RGB     NIR  14.99%   8.59%   1.21%
+2026-10-13 12:20:20,365 transreid.train INFO:     RGB     TIR   3.56%   2.83%   0.57%
+2026-10-13 12:20:20,365 transreid.train INFO:     NIR     RGB  13.21%   8.32%   1.44%
+2026-10-13 12:20:20,365 transreid.train INFO:     NIR     NIR  16.39%   9.42%   1.40%
+2026-10-13 12:20:20,366 transreid.train INFO:     NIR     TIR   3.47%   2.53%   0.56%
+2026-10-13 12:20:20,366 transreid.train INFO:     TIR     RGB   4.03%   2.76%   0.66%
+2026-10-13 12:20:20,366 transreid.train INFO:     TIR     NIR   3.70%   2.49%   0.58%
+2026-10-13 12:20:20,366 transreid.train INFO:     TIR     TIR   9.79%   6.60%   1.08%
+2026-10-13 12:20:20,366 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 12:20:32,897 transreid.train INFO:   A->G -> mAP: 7.87%, Rank-1: 23.63%, Rank-10: 49.78%
+2026-10-13 12:20:44,978 transreid.train INFO:   G->A -> mAP: 9.61%, Rank-1: 24.90%, Rank-10: 50.26%
+2026-10-13 12:20:45,025 transreid.train INFO: Validation Results - Epoch: 10
+2026-10-13 12:20:45,025 transreid.train INFO: mAP: 5.74%
+2026-10-13 12:20:45,025 transreid.train INFO: CMC curve, Rank-1 : 17.52%
+2026-10-13 12:20:45,025 transreid.train INFO: CMC curve, Rank-5 : 30.80%
+2026-10-13 12:20:45,025 transreid.train INFO: CMC curve, Rank-10: 38.33%
+2026-10-13 12:21:38,915 transreid.train INFO: Epoch[11] Iteration[50/114] Loss: 4.096, Acc: 0.562, Base Lr: 3.13e-02
+2026-10-13 12:21:38,915 transreid.train INFO: Epoch[11] 2.038, 0.488, 0.320, 1.567
+2026-10-13 12:21:38,915 transreid.train INFO: SCSR |gate-1| mean=6.025088e-06, max=5.037298e-05; residual/P mean=1.193334e-08
+2026-10-13 12:22:27,088 transreid.train INFO: Epoch[11] Iteration[100/114] Loss: 3.574, Acc: 0.643, Base Lr: 3.13e-02
+2026-10-13 12:22:27,088 transreid.train INFO: Epoch[11] 1.719, 0.469, 0.306, 1.383
+2026-10-13 12:22:27,088 transreid.train INFO: SCSR |gate-1| mean=6.260891e-06, max=4.804708e-05; residual/P mean=1.216530e-08
+2026-10-13 12:22:41,651 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=1255, cumulative optimizer updates=1251, cumulative AMP-skipped updates=4
+2026-10-13 12:22:41,651 transreid.train INFO: SCSR local CUDA peak allocated memory: 12633.1 MiB
+2026-10-13 12:22:41,652 transreid.train INFO: Epoch 11 done. Time per batch: 1.023[s] Total: 116.6[s]
+2026-10-13 12:23:34,128 transreid.train INFO: Epoch[12] Iteration[50/115] Loss: 3.738, Acc: 0.608, Base Lr: 3.12e-02
+2026-10-13 12:23:34,128 transreid.train INFO: Epoch[12] 1.811, 0.469, 0.316, 1.454
+2026-10-13 12:23:34,128 transreid.train INFO: SCSR |gate-1| mean=6.615840e-06, max=5.481112e-05; residual/P mean=1.345428e-08
+2026-10-13 12:24:23,677 transreid.train INFO: Epoch[12] Iteration[100/115] Loss: 3.287, Acc: 0.672, Base Lr: 3.12e-02
+2026-10-13 12:24:23,678 transreid.train INFO: Epoch[12] 1.553, 0.452, 0.305, 1.279
+2026-10-13 12:24:23,678 transreid.train INFO: SCSR |gate-1| mean=6.933674e-06, max=5.788034e-05; residual/P mean=1.407822e-08
+2026-10-13 12:24:39,088 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=1370, cumulative optimizer updates=1366, cumulative AMP-skipped updates=4
+2026-10-13 12:24:39,088 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 12:24:39,088 transreid.train INFO: Epoch 12 done. Time per batch: 1.021[s] Total: 117.4[s]
+2026-10-13 12:25:31,456 transreid.train INFO: Epoch[13] Iteration[50/114] Loss: 3.644, Acc: 0.630, Base Lr: 3.11e-02
+2026-10-13 12:25:31,456 transreid.train INFO: Epoch[13] 1.694, 0.468, 0.314, 1.480
+2026-10-13 12:25:31,456 transreid.train INFO: SCSR |gate-1| mean=7.168136e-06, max=5.990497e-05; residual/P mean=1.395537e-08
+2026-10-13 12:26:21,328 transreid.train INFO: Epoch[13] Iteration[100/114] Loss: 3.168, Acc: 0.691, Base Lr: 3.11e-02
+2026-10-13 12:26:21,328 transreid.train INFO: Epoch[13] 1.448, 0.448, 0.307, 1.268
+2026-10-13 12:26:21,328 transreid.train INFO: SCSR |gate-1| mean=7.403699e-06, max=5.845483e-05; residual/P mean=1.745873e-08
+2026-10-13 12:26:34,708 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=1484, cumulative optimizer updates=1480, cumulative AMP-skipped updates=4
+2026-10-13 12:26:34,708 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 12:26:34,708 transreid.train INFO: Epoch 13 done. Time per batch: 1.014[s] Total: 115.6[s]
+2026-10-13 12:27:28,401 transreid.train INFO: Epoch[14] Iteration[50/114] Loss: 3.153, Acc: 0.675, Base Lr: 3.09e-02
+2026-10-13 12:27:28,401 transreid.train INFO: Epoch[14] 1.490, 0.436, 0.313, 1.223
+2026-10-13 12:27:28,401 transreid.train INFO: SCSR |gate-1| mean=7.764067e-06, max=6.088182e-05; residual/P mean=1.637192e-08
+2026-10-13 12:28:17,399 transreid.train INFO: Epoch[14] Iteration[100/114] Loss: 2.802, Acc: 0.725, Base Lr: 3.09e-02
+2026-10-13 12:28:17,399 transreid.train INFO: Epoch[14] 1.284, 0.425, 0.304, 1.090
+2026-10-13 12:28:17,399 transreid.train INFO: SCSR |gate-1| mean=7.883348e-06, max=6.010078e-05; residual/P mean=1.445206e-08
+2026-10-13 12:28:31,931 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=1598, cumulative optimizer updates=1594, cumulative AMP-skipped updates=4
+2026-10-13 12:28:31,932 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 12:28:31,933 transreid.train INFO: Epoch 14 done. Time per batch: 1.028[s] Total: 117.2[s]
+2026-10-13 12:29:25,846 transreid.train INFO: Epoch[15] Iteration[50/115] Loss: 2.857, Acc: 0.716, Base Lr: 3.08e-02
+2026-10-13 12:29:25,846 transreid.train INFO: Epoch[15] 1.319, 0.422, 0.313, 1.113
+2026-10-13 12:29:25,847 transreid.train INFO: SCSR |gate-1| mean=8.209153e-06, max=6.116933e-05; residual/P mean=1.657078e-08
+2026-10-13 12:30:14,635 transreid.train INFO: Epoch[15] Iteration[100/115] Loss: 2.542, Acc: 0.760, Base Lr: 3.08e-02
+2026-10-13 12:30:14,636 transreid.train INFO: Epoch[15] 1.137, 0.412, 0.302, 0.991
+2026-10-13 12:30:14,636 transreid.train INFO: SCSR |gate-1| mean=8.409972e-06, max=6.231875e-05; residual/P mean=1.632377e-08
+2026-10-13 12:30:30,061 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=1713, cumulative optimizer updates=1709, cumulative AMP-skipped updates=4
+2026-10-13 12:30:30,061 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 12:30:30,062 transreid.train INFO: Epoch 15 done. Time per batch: 1.027[s] Total: 118.1[s]
+2026-10-13 12:31:22,990 transreid.train INFO: Epoch[16] Iteration[50/115] Loss: 2.829, Acc: 0.724, Base Lr: 3.06e-02
+2026-10-13 12:31:22,991 transreid.train INFO: Epoch[16] 1.264, 0.423, 0.311, 1.139
+2026-10-13 12:31:22,991 transreid.train INFO: SCSR |gate-1| mean=8.718979e-06, max=6.375794e-05; residual/P mean=1.685679e-08
+2026-10-13 12:32:13,022 transreid.train INFO: Epoch[16] Iteration[100/115] Loss: 2.491, Acc: 0.767, Base Lr: 3.06e-02
+2026-10-13 12:32:13,022 transreid.train INFO: Epoch[16] 1.086, 0.409, 0.301, 0.994
+2026-10-13 12:32:13,023 transreid.train INFO: SCSR |gate-1| mean=8.920549e-06, max=6.628229e-05; residual/P mean=1.776767e-08
+2026-10-13 12:32:28,482 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=1828, cumulative optimizer updates=1824, cumulative AMP-skipped updates=4
+2026-10-13 12:32:28,482 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 12:32:28,483 transreid.train INFO: Epoch 16 done. Time per batch: 1.030[s] Total: 118.4[s]
+2026-10-13 12:33:20,531 transreid.train INFO: Epoch[17] Iteration[50/114] Loss: 2.626, Acc: 0.747, Base Lr: 3.04e-02
+2026-10-13 12:33:20,532 transreid.train INFO: Epoch[17] 1.163, 0.410, 0.309, 1.050
+2026-10-13 12:33:20,532 transreid.train INFO: SCSR |gate-1| mean=9.124096e-06, max=7.132735e-05; residual/P mean=1.793239e-08
+2026-10-13 12:34:10,432 transreid.train INFO: Epoch[17] Iteration[100/114] Loss: 2.323, Acc: 0.786, Base Lr: 3.04e-02
+2026-10-13 12:34:10,433 transreid.train INFO: Epoch[17] 1.003, 0.395, 0.299, 0.922
+2026-10-13 12:34:10,433 transreid.train INFO: SCSR |gate-1| mean=9.351761e-06, max=6.928989e-05; residual/P mean=2.101019e-08
+2026-10-13 12:34:23,633 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=1942, cumulative optimizer updates=1938, cumulative AMP-skipped updates=4
+2026-10-13 12:34:23,634 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 12:34:23,634 transreid.train INFO: Epoch 17 done. Time per batch: 1.010[s] Total: 115.2[s]
+2026-10-13 12:35:17,406 transreid.train INFO: Epoch[18] Iteration[50/114] Loss: 2.450, Acc: 0.768, Base Lr: 3.03e-02
+2026-10-13 12:35:17,407 transreid.train INFO: Epoch[18] 1.075, 0.407, 0.310, 0.965
+2026-10-13 12:35:17,407 transreid.train INFO: SCSR |gate-1| mean=9.692219e-06, max=7.125753e-05; residual/P mean=1.867291e-08
+2026-10-13 12:36:06,288 transreid.train INFO: Epoch[18] Iteration[100/114] Loss: 2.125, Acc: 0.808, Base Lr: 3.03e-02
+2026-10-13 12:36:06,308 transreid.train INFO: Epoch[18] 0.904, 0.385, 0.296, 0.833
+2026-10-13 12:36:06,308 transreid.train INFO: SCSR |gate-1| mean=9.835569e-06, max=7.292836e-05; residual/P mean=2.129439e-08
+2026-10-13 12:36:20,795 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=2056, cumulative optimizer updates=2052, cumulative AMP-skipped updates=4
+2026-10-13 12:36:20,796 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 12:36:20,796 transreid.train INFO: Epoch 18 done. Time per batch: 1.028[s] Total: 117.2[s]
+2026-10-13 12:37:14,757 transreid.train INFO: Epoch[19] Iteration[50/114] Loss: 2.228, Acc: 0.793, Base Lr: 3.01e-02
+2026-10-13 12:37:14,758 transreid.train INFO: Epoch[19] 0.961, 0.387, 0.312, 0.878
+2026-10-13 12:37:14,758 transreid.train INFO: SCSR |gate-1| mean=1.018225e-05, max=7.070745e-05; residual/P mean=2.063966e-08
+2026-10-13 12:38:03,219 transreid.train INFO: Epoch[19] Iteration[100/114] Loss: 1.963, Acc: 0.823, Base Lr: 3.01e-02
+2026-10-13 12:38:03,220 transreid.train INFO: Epoch[19] 0.830, 0.367, 0.300, 0.764
+2026-10-13 12:38:03,220 transreid.train INFO: SCSR |gate-1| mean=1.031590e-05, max=7.458845e-05; residual/P mean=1.917151e-08
+2026-10-13 12:38:17,518 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=2170, cumulative optimizer updates=2166, cumulative AMP-skipped updates=4
+2026-10-13 12:38:17,518 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 12:38:17,518 transreid.train INFO: Epoch 19 done. Time per batch: 1.024[s] Total: 116.7[s]
+2026-10-13 12:39:09,893 transreid.train INFO: Epoch[20] Iteration[50/114] Loss: 2.014, Acc: 0.816, Base Lr: 2.99e-02
+2026-10-13 12:39:09,893 transreid.train INFO: Epoch[20] 0.859, 0.370, 0.307, 0.781
+2026-10-13 12:39:09,893 transreid.train INFO: SCSR |gate-1| mean=1.063677e-05, max=7.834368e-05; residual/P mean=1.886704e-08
+2026-10-13 12:39:59,491 transreid.train INFO: Epoch[20] Iteration[100/114] Loss: 1.855, Acc: 0.834, Base Lr: 2.99e-02
+2026-10-13 12:39:59,492 transreid.train INFO: Epoch[20] 0.773, 0.361, 0.298, 0.718
+2026-10-13 12:39:59,492 transreid.train INFO: SCSR |gate-1| mean=1.078050e-05, max=7.487540e-05; residual/P mean=2.618026e-08
+2026-10-13 12:40:13,921 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=2284, cumulative optimizer updates=2280, cumulative AMP-skipped updates=4
+2026-10-13 12:40:13,921 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 12:40:13,921 transreid.train INFO: Epoch 20 done. Time per batch: 1.021[s] Total: 116.4[s]
+2026-10-13 12:41:15,164 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 12:42:08,961 transreid.train INFO: The test feature is normalized
+2026-10-13 12:42:09,014 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 12:43:30,455 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 12:43:38,365 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 32.93%, mAP: 20.63%, mINP: 3.72%
+2026-10-13 12:43:47,203 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 18.74%, mAP: 11.35%, mINP: 1.45%
+2026-10-13 12:43:56,677 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 5.01%, mAP: 3.84%, mINP: 0.68%
+2026-10-13 12:44:05,003 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 18.41%, mAP: 11.35%, mINP: 1.86%
+2026-10-13 12:44:13,126 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 21.64%, mAP: 12.47%, mINP: 1.58%
+2026-10-13 12:44:21,385 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 5.48%, mAP: 3.48%, mINP: 0.69%
+2026-10-13 12:44:30,122 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 4.50%, mAP: 3.54%, mINP: 0.74%
+2026-10-13 12:44:38,221 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 5.20%, mAP: 3.21%, mINP: 0.62%
+2026-10-13 12:44:47,166 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 13.77%, mAP: 9.43%, mINP: 1.45%
+2026-10-13 12:44:47,166 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 12:44:47,166 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 12:44:47,166 transreid.train INFO:   NIR->RGB    18.41%  11.35%   1.86%
+2026-10-13 12:44:47,166 transreid.train INFO:   TIR->RGB     4.50%   3.54%   0.74%
+2026-10-13 12:44:47,166 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 12:44:47,166 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 12:44:47,166 transreid.train INFO:     RGB     RGB  32.93%  20.63%   3.72%
+2026-10-13 12:44:47,166 transreid.train INFO:     RGB     NIR  18.74%  11.35%   1.45%
+2026-10-13 12:44:47,166 transreid.train INFO:     RGB     TIR   5.01%   3.84%   0.68%
+2026-10-13 12:44:47,166 transreid.train INFO:     NIR     RGB  18.41%  11.35%   1.86%
+2026-10-13 12:44:47,166 transreid.train INFO:     NIR     NIR  21.64%  12.47%   1.58%
+2026-10-13 12:44:47,167 transreid.train INFO:     NIR     TIR   5.48%   3.48%   0.69%
+2026-10-13 12:44:47,167 transreid.train INFO:     TIR     RGB   4.50%   3.54%   0.74%
+2026-10-13 12:44:47,167 transreid.train INFO:     TIR     NIR   5.20%   3.21%   0.62%
+2026-10-13 12:44:47,167 transreid.train INFO:     TIR     TIR  13.77%   9.43%   1.45%
+2026-10-13 12:44:47,167 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 12:45:00,322 transreid.train INFO:   A->G -> mAP: 9.72%, Rank-1: 28.44%, Rank-10: 54.52%
+2026-10-13 12:45:12,926 transreid.train INFO:   G->A -> mAP: 11.53%, Rank-1: 28.42%, Rank-10: 53.62%
+2026-10-13 12:45:12,938 transreid.train INFO: Validation Results - Epoch: 20
+2026-10-13 12:45:12,938 transreid.train INFO: mAP: 7.77%
+2026-10-13 12:45:12,938 transreid.train INFO: CMC curve, Rank-1 : 22.51%
+2026-10-13 12:45:12,938 transreid.train INFO: CMC curve, Rank-5 : 37.83%
+2026-10-13 12:45:12,938 transreid.train INFO: CMC curve, Rank-10: 45.07%
+2026-10-13 12:46:06,855 transreid.train INFO: Epoch[21] Iteration[50/114] Loss: 2.039, Acc: 0.812, Base Lr: 2.96e-02
+2026-10-13 12:46:06,855 transreid.train INFO: Epoch[21] 0.852, 0.374, 0.305, 0.811
+2026-10-13 12:46:06,856 transreid.train INFO: SCSR |gate-1| mean=1.105850e-05, max=7.904910e-05; residual/P mean=2.067387e-08
+2026-10-13 12:46:56,180 transreid.train INFO: Epoch[21] Iteration[100/114] Loss: 1.807, Acc: 0.840, Base Lr: 2.96e-02
+2026-10-13 12:46:56,180 transreid.train INFO: Epoch[21] 0.741, 0.358, 0.299, 0.706
+2026-10-13 12:46:56,180 transreid.train INFO: SCSR |gate-1| mean=1.116625e-05, max=7.645976e-05; residual/P mean=2.249779e-08
+2026-10-13 12:47:10,687 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=2398, cumulative optimizer updates=2394, cumulative AMP-skipped updates=4
+2026-10-13 12:47:10,688 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.9 MiB
+2026-10-13 12:47:10,688 transreid.train INFO: Epoch 21 done. Time per batch: 1.031[s] Total: 117.5[s]
+2026-10-13 12:48:04,954 transreid.train INFO: Epoch[22] Iteration[50/114] Loss: 1.889, Acc: 0.835, Base Lr: 2.94e-02
+2026-10-13 12:48:04,955 transreid.train INFO: Epoch[22] 0.766, 0.352, 0.301, 0.769
+2026-10-13 12:48:04,955 transreid.train INFO: SCSR |gate-1| mean=1.140454e-05, max=8.320963e-05; residual/P mean=2.284672e-08
+2026-10-13 12:48:52,982 transreid.train INFO: Epoch[22] Iteration[100/114] Loss: 1.685, Acc: 0.856, Base Lr: 2.94e-02
+2026-10-13 12:48:52,982 transreid.train INFO: Epoch[22] 0.676, 0.339, 0.291, 0.666
+2026-10-13 12:48:52,982 transreid.train INFO: SCSR |gate-1| mean=1.158294e-05, max=7.939505e-05; residual/P mean=2.237137e-08
+2026-10-13 12:49:07,611 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=2512, cumulative optimizer updates=2508, cumulative AMP-skipped updates=4
+2026-10-13 12:49:07,611 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.6 MiB
+2026-10-13 12:49:07,612 transreid.train INFO: Epoch 22 done. Time per batch: 1.026[s] Total: 116.9[s]
+2026-10-13 12:50:01,912 transreid.train INFO: Epoch[23] Iteration[50/114] Loss: 1.766, Acc: 0.848, Base Lr: 2.92e-02
+2026-10-13 12:50:01,913 transreid.train INFO: Epoch[23] 0.714, 0.344, 0.299, 0.705
+2026-10-13 12:50:01,913 transreid.train INFO: SCSR |gate-1| mean=1.172349e-05, max=8.285770e-05; residual/P mean=2.389654e-08
+2026-10-13 12:50:50,364 transreid.train INFO: Epoch[23] Iteration[100/114] Loss: 1.572, Acc: 0.866, Base Lr: 2.92e-02
+2026-10-13 12:50:50,365 transreid.train INFO: Epoch[23] 0.627, 0.331, 0.290, 0.611
+2026-10-13 12:50:50,365 transreid.train INFO: SCSR |gate-1| mean=1.191577e-05, max=8.635734e-05; residual/P mean=2.427680e-08
+2026-10-13 12:51:04,846 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=2626, cumulative optimizer updates=2622, cumulative AMP-skipped updates=4
+2026-10-13 12:51:04,847 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.6 MiB
+2026-10-13 12:51:04,847 transreid.train INFO: Epoch 23 done. Time per batch: 1.028[s] Total: 117.2[s]
+2026-10-13 12:51:58,369 transreid.train INFO: Epoch[24] Iteration[50/114] Loss: 1.661, Acc: 0.853, Base Lr: 2.90e-02
+2026-10-13 12:51:58,369 transreid.train INFO: Epoch[24] 0.678, 0.342, 0.303, 0.638
+2026-10-13 12:51:58,369 transreid.train INFO: SCSR |gate-1| mean=1.213358e-05, max=9.143109e-05; residual/P mean=2.379434e-08
+2026-10-13 12:52:47,842 transreid.train INFO: Epoch[24] Iteration[100/114] Loss: 1.505, Acc: 0.869, Base Lr: 2.90e-02
+2026-10-13 12:52:47,842 transreid.train INFO: Epoch[24] 0.602, 0.330, 0.295, 0.571
+2026-10-13 12:52:47,842 transreid.train INFO: SCSR |gate-1| mean=1.229420e-05, max=9.948085e-05; residual/P mean=2.559420e-08
+2026-10-13 12:53:02,396 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=2740, cumulative optimizer updates=2736, cumulative AMP-skipped updates=4
+2026-10-13 12:53:02,397 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.6 MiB
+2026-10-13 12:53:02,397 transreid.train INFO: Epoch 24 done. Time per batch: 1.031[s] Total: 117.5[s]
+2026-10-13 12:53:55,979 transreid.train INFO: Epoch[25] Iteration[50/114] Loss: 1.657, Acc: 0.854, Base Lr: 2.87e-02
+2026-10-13 12:53:55,980 transreid.train INFO: Epoch[25] 0.670, 0.335, 0.302, 0.649
+2026-10-13 12:53:55,980 transreid.train INFO: SCSR |gate-1| mean=1.239655e-05, max=9.035614e-05; residual/P mean=2.398792e-08
+2026-10-13 12:54:45,573 transreid.train INFO: Epoch[25] Iteration[100/114] Loss: 1.452, Acc: 0.876, Base Lr: 2.87e-02
+2026-10-13 12:54:45,573 transreid.train INFO: Epoch[25] 0.573, 0.316, 0.293, 0.559
+2026-10-13 12:54:45,573 transreid.train INFO: SCSR |gate-1| mean=1.255473e-05, max=9.307090e-05; residual/P mean=2.290846e-08
+2026-10-13 12:55:00,144 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=2854, cumulative optimizer updates=2850, cumulative AMP-skipped updates=4
+2026-10-13 12:55:00,145 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.6 MiB
+2026-10-13 12:55:00,145 transreid.train INFO: Epoch 25 done. Time per batch: 1.033[s] Total: 117.7[s]
+2026-10-13 12:55:54,604 transreid.train INFO: Epoch[26] Iteration[50/115] Loss: 1.589, Acc: 0.860, Base Lr: 2.84e-02
+2026-10-13 12:55:54,605 transreid.train INFO: Epoch[26] 0.644, 0.334, 0.301, 0.608
+2026-10-13 12:55:54,605 transreid.train INFO: SCSR |gate-1| mean=1.274583e-05, max=9.264057e-05; residual/P mean=2.546449e-08
+2026-10-13 12:56:43,199 transreid.train INFO: Epoch[26] Iteration[100/115] Loss: 1.408, Acc: 0.880, Base Lr: 2.84e-02
+2026-10-13 12:56:43,200 transreid.train INFO: Epoch[26] 0.556, 0.313, 0.290, 0.537
+2026-10-13 12:56:43,200 transreid.train INFO: SCSR |gate-1| mean=1.287572e-05, max=9.333779e-05; residual/P mean=2.632259e-08
+2026-10-13 12:56:58,658 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=2969, cumulative optimizer updates=2965, cumulative AMP-skipped updates=4
+2026-10-13 12:56:58,659 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.6 MiB
+2026-10-13 12:56:58,659 transreid.train INFO: Epoch 26 done. Time per batch: 1.031[s] Total: 118.5[s]
+2026-10-13 12:57:53,484 transreid.train INFO: Epoch[27] Iteration[50/114] Loss: 1.533, Acc: 0.867, Base Lr: 2.82e-02
+2026-10-13 12:57:53,484 transreid.train INFO: Epoch[27] 0.618, 0.324, 0.299, 0.588
+2026-10-13 12:57:53,484 transreid.train INFO: SCSR |gate-1| mean=1.306360e-05, max=9.356238e-05; residual/P mean=2.360146e-08
+2026-10-13 12:58:41,911 transreid.train INFO: Epoch[27] Iteration[100/114] Loss: 1.367, Acc: 0.885, Base Lr: 2.82e-02
+2026-10-13 12:58:41,911 transreid.train INFO: Epoch[27] 0.535, 0.310, 0.289, 0.519
+2026-10-13 12:58:41,911 transreid.train INFO: SCSR |gate-1| mean=1.325092e-05, max=9.649354e-05; residual/P mean=2.455147e-08
+2026-10-13 12:58:56,542 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=3083, cumulative optimizer updates=3079, cumulative AMP-skipped updates=4
+2026-10-13 12:58:56,543 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.6 MiB
+2026-10-13 12:58:56,544 transreid.train INFO: Epoch 27 done. Time per batch: 1.034[s] Total: 117.9[s]
+2026-10-13 12:59:49,714 transreid.train INFO: Epoch[28] Iteration[50/114] Loss: 1.362, Acc: 0.881, Base Lr: 2.79e-02
+2026-10-13 12:59:49,715 transreid.train INFO: Epoch[28] 0.538, 0.305, 0.292, 0.516
+2026-10-13 12:59:49,715 transreid.train INFO: SCSR |gate-1| mean=1.344260e-05, max=9.296178e-05; residual/P mean=2.826211e-08
+2026-10-13 13:00:39,298 transreid.train INFO: Epoch[28] Iteration[100/114] Loss: 1.243, Acc: 0.894, Base Lr: 2.79e-02
+2026-10-13 13:00:39,298 transreid.train INFO: Epoch[28] 0.479, 0.295, 0.284, 0.466
+2026-10-13 13:00:39,298 transreid.train INFO: SCSR |gate-1| mean=1.348568e-05, max=9.635181e-05; residual/P mean=2.595918e-08
+2026-10-13 13:00:53,975 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=3197, cumulative optimizer updates=3193, cumulative AMP-skipped updates=4
+2026-10-13 13:00:53,976 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.6 MiB
+2026-10-13 13:00:53,976 transreid.train INFO: Epoch 28 done. Time per batch: 1.030[s] Total: 117.4[s]
+2026-10-13 13:01:47,106 transreid.train INFO: Epoch[29] Iteration[50/114] Loss: 1.350, Acc: 0.883, Base Lr: 2.76e-02
+2026-10-13 13:01:47,106 transreid.train INFO: Epoch[29] 0.533, 0.299, 0.291, 0.516
+2026-10-13 13:01:47,107 transreid.train INFO: SCSR |gate-1| mean=1.384070e-05, max=9.629849e-05; residual/P mean=2.447003e-08
+2026-10-13 13:02:36,675 transreid.train INFO: Epoch[29] Iteration[100/114] Loss: 1.198, Acc: 0.900, Base Lr: 2.76e-02
+2026-10-13 13:02:36,675 transreid.train INFO: Epoch[29] 0.461, 0.286, 0.284, 0.448
+2026-10-13 13:02:36,675 transreid.train INFO: SCSR |gate-1| mean=1.388909e-05, max=9.663383e-05; residual/P mean=2.394617e-08
+2026-10-13 13:02:51,260 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=3311, cumulative optimizer updates=3307, cumulative AMP-skipped updates=4
+2026-10-13 13:02:51,260 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.6 MiB
+2026-10-13 13:02:51,260 transreid.train INFO: Epoch 29 done. Time per batch: 1.029[s] Total: 117.3[s]
+2026-10-13 13:03:45,390 transreid.train INFO: Epoch[30] Iteration[50/114] Loss: 1.270, Acc: 0.893, Base Lr: 2.73e-02
+2026-10-13 13:03:45,390 transreid.train INFO: Epoch[30] 0.491, 0.293, 0.289, 0.483
+2026-10-13 13:03:45,390 transreid.train INFO: SCSR |gate-1| mean=1.403110e-05, max=1.000342e-04; residual/P mean=2.612757e-08
+2026-10-13 13:04:33,913 transreid.train INFO: Epoch[30] Iteration[100/114] Loss: 1.159, Acc: 0.904, Base Lr: 2.73e-02
+2026-10-13 13:04:33,913 transreid.train INFO: Epoch[30] 0.439, 0.285, 0.282, 0.432
+2026-10-13 13:04:33,913 transreid.train INFO: SCSR |gate-1| mean=1.417390e-05, max=1.008070e-04; residual/P mean=2.690490e-08
+2026-10-13 13:04:48,406 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=3425, cumulative optimizer updates=3421, cumulative AMP-skipped updates=4
+2026-10-13 13:04:48,407 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.6 MiB
+2026-10-13 13:04:48,407 transreid.train INFO: Epoch 30 done. Time per batch: 1.028[s] Total: 117.1[s]
+2026-10-13 13:05:49,618 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 13:06:42,336 transreid.train INFO: The test feature is normalized
+2026-10-13 13:06:42,385 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 13:08:03,488 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 13:08:12,113 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 35.46%, mAP: 22.62%, mINP: 4.05%
+2026-10-13 13:08:20,502 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 20.70%, mAP: 12.73%, mINP: 1.74%
+2026-10-13 13:08:28,726 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 5.53%, mAP: 4.30%, mINP: 0.85%
+2026-10-13 13:08:36,751 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 20.19%, mAP: 12.70%, mINP: 2.14%
+2026-10-13 13:08:44,912 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 23.00%, mAP: 13.86%, mINP: 1.89%
+2026-10-13 13:08:52,920 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 4.92%, mAP: 3.85%, mINP: 0.78%
+2026-10-13 13:09:00,865 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 4.96%, mAP: 4.05%, mINP: 0.91%
+2026-10-13 13:09:08,747 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 5.85%, mAP: 3.72%, mINP: 0.74%
+2026-10-13 13:09:16,632 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 15.27%, mAP: 10.79%, mINP: 1.80%
+2026-10-13 13:09:16,632 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 13:09:16,632 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 13:09:16,632 transreid.train INFO:   NIR->RGB    20.19%  12.70%   2.14%
+2026-10-13 13:09:16,632 transreid.train INFO:   TIR->RGB     4.96%   4.05%   0.91%
+2026-10-13 13:09:16,632 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 13:09:16,632 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 13:09:16,633 transreid.train INFO:     RGB     RGB  35.46%  22.62%   4.05%
+2026-10-13 13:09:16,633 transreid.train INFO:     RGB     NIR  20.70%  12.73%   1.74%
+2026-10-13 13:09:16,633 transreid.train INFO:     RGB     TIR   5.53%   4.30%   0.85%
+2026-10-13 13:09:16,633 transreid.train INFO:     NIR     RGB  20.19%  12.70%   2.14%
+2026-10-13 13:09:16,633 transreid.train INFO:     NIR     NIR  23.00%  13.86%   1.89%
+2026-10-13 13:09:16,633 transreid.train INFO:     NIR     TIR   4.92%   3.85%   0.78%
+2026-10-13 13:09:16,633 transreid.train INFO:     TIR     RGB   4.96%   4.05%   0.91%
+2026-10-13 13:09:16,633 transreid.train INFO:     TIR     NIR   5.85%   3.72%   0.74%
+2026-10-13 13:09:16,633 transreid.train INFO:     TIR     TIR  15.27%  10.79%   1.80%
+2026-10-13 13:09:16,633 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 13:09:29,491 transreid.train INFO:   A->G -> mAP: 10.48%, Rank-1: 29.70%, Rank-10: 58.00%
+2026-10-13 13:09:42,153 transreid.train INFO:   G->A -> mAP: 11.99%, Rank-1: 29.45%, Rank-10: 55.38%
+2026-10-13 13:09:42,166 transreid.train INFO: Validation Results - Epoch: 30
+2026-10-13 13:09:42,166 transreid.train INFO: mAP: 8.76%
+2026-10-13 13:09:42,166 transreid.train INFO: CMC curve, Rank-1 : 24.54%
+2026-10-13 13:09:42,167 transreid.train INFO: CMC curve, Rank-5 : 40.58%
+2026-10-13 13:09:42,167 transreid.train INFO: CMC curve, Rank-10: 49.16%
+2026-10-13 13:10:37,225 transreid.train INFO: Epoch[31] Iteration[50/114] Loss: 1.198, Acc: 0.900, Base Lr: 2.70e-02
+2026-10-13 13:10:37,225 transreid.train INFO: Epoch[31] 0.465, 0.289, 0.291, 0.441
+2026-10-13 13:10:37,226 transreid.train INFO: SCSR |gate-1| mean=1.418726e-05, max=9.763800e-05; residual/P mean=2.929420e-08
+2026-10-13 13:11:25,638 transreid.train INFO: Epoch[31] Iteration[100/114] Loss: 1.109, Acc: 0.909, Base Lr: 2.70e-02
+2026-10-13 13:11:25,638 transreid.train INFO: Epoch[31] 0.421, 0.278, 0.282, 0.407
+2026-10-13 13:11:25,638 transreid.train INFO: SCSR |gate-1| mean=1.434271e-05, max=1.011791e-04; residual/P mean=2.873036e-08
+2026-10-13 13:11:40,074 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=3539, cumulative optimizer updates=3535, cumulative AMP-skipped updates=4
+2026-10-13 13:11:40,075 transreid.train INFO: SCSR local CUDA peak allocated memory: 12633.7 MiB
+2026-10-13 13:11:40,075 transreid.train INFO: Epoch 31 done. Time per batch: 1.032[s] Total: 117.7[s]
+2026-10-13 13:12:34,374 transreid.train INFO: Epoch[32] Iteration[50/113] Loss: 1.193, Acc: 0.902, Base Lr: 2.67e-02
+2026-10-13 13:12:34,374 transreid.train INFO: Epoch[32] 0.459, 0.285, 0.290, 0.446
+2026-10-13 13:12:34,374 transreid.train INFO: SCSR |gate-1| mean=1.441537e-05, max=9.838719e-05; residual/P mean=2.904156e-08
+2026-10-13 13:13:22,571 transreid.train INFO: Epoch[32] Iteration[100/113] Loss: 1.063, Acc: 0.914, Base Lr: 2.67e-02
+2026-10-13 13:13:22,571 transreid.train INFO: Epoch[32] 0.398, 0.270, 0.279, 0.391
+2026-10-13 13:13:22,572 transreid.train INFO: SCSR |gate-1| mean=1.443435e-05, max=9.479759e-05; residual/P mean=2.429228e-08
+2026-10-13 13:13:36,152 transreid.train INFO: Training steps (rank 0): epoch batches=113, estimated loader batches=113, epoch optimizer updates=113, cumulative batches=3652, cumulative optimizer updates=3648, cumulative AMP-skipped updates=4
+2026-10-13 13:13:36,153 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:13:36,153 transreid.train INFO: Epoch 32 done. Time per batch: 1.027[s] Total: 116.1[s]
+2026-10-13 13:14:29,626 transreid.train INFO: Epoch[33] Iteration[50/114] Loss: 1.150, Acc: 0.901, Base Lr: 2.64e-02
+2026-10-13 13:14:29,627 transreid.train INFO: Epoch[33] 0.446, 0.279, 0.286, 0.422
+2026-10-13 13:14:29,627 transreid.train INFO: SCSR |gate-1| mean=1.473730e-05, max=1.004131e-04; residual/P mean=2.627732e-08
+2026-10-13 13:15:19,182 transreid.train INFO: Epoch[33] Iteration[100/114] Loss: 1.032, Acc: 0.914, Base Lr: 2.64e-02
+2026-10-13 13:15:19,182 transreid.train INFO: Epoch[33] 0.390, 0.264, 0.276, 0.376
+2026-10-13 13:15:19,182 transreid.train INFO: SCSR |gate-1| mean=1.487996e-05, max=9.868685e-05; residual/P mean=2.675087e-08
+2026-10-13 13:15:34,159 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=3766, cumulative optimizer updates=3762, cumulative AMP-skipped updates=4
+2026-10-13 13:15:34,160 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:15:34,160 transreid.train INFO: Epoch 33 done. Time per batch: 1.035[s] Total: 118.0[s]
+2026-10-13 13:16:26,962 transreid.train INFO: Epoch[34] Iteration[50/114] Loss: 1.111, Acc: 0.907, Base Lr: 2.61e-02
+2026-10-13 13:16:26,962 transreid.train INFO: Epoch[34] 0.428, 0.273, 0.284, 0.406
+2026-10-13 13:16:26,962 transreid.train INFO: SCSR |gate-1| mean=1.492743e-05, max=1.028094e-04; residual/P mean=2.841501e-08
+2026-10-13 13:17:16,270 transreid.train INFO: Epoch[34] Iteration[100/114] Loss: 1.003, Acc: 0.918, Base Lr: 2.61e-02
+2026-10-13 13:17:16,270 transreid.train INFO: Epoch[34] 0.379, 0.257, 0.274, 0.364
+2026-10-13 13:17:16,270 transreid.train INFO: SCSR |gate-1| mean=1.514961e-05, max=1.039558e-04; residual/P mean=2.668514e-08
+2026-10-13 13:17:30,214 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=3880, cumulative optimizer updates=3876, cumulative AMP-skipped updates=4
+2026-10-13 13:17:30,215 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:17:30,215 transreid.train INFO: Epoch 34 done. Time per batch: 1.018[s] Total: 116.1[s]
+2026-10-13 13:18:24,792 transreid.train INFO: Epoch[35] Iteration[50/115] Loss: 1.049, Acc: 0.915, Base Lr: 2.58e-02
+2026-10-13 13:18:24,792 transreid.train INFO: Epoch[35] 0.395, 0.267, 0.281, 0.385
+2026-10-13 13:18:24,792 transreid.train INFO: SCSR |gate-1| mean=1.523983e-05, max=1.041444e-04; residual/P mean=2.718920e-08
+2026-10-13 13:19:13,086 transreid.train INFO: Epoch[35] Iteration[100/115] Loss: 0.959, Acc: 0.923, Base Lr: 2.58e-02
+2026-10-13 13:19:13,086 transreid.train INFO: Epoch[35] 0.355, 0.255, 0.273, 0.346
+2026-10-13 13:19:13,086 transreid.train INFO: SCSR |gate-1| mean=1.527056e-05, max=1.082732e-04; residual/P mean=2.887066e-08
+2026-10-13 13:19:28,578 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=3995, cumulative optimizer updates=3991, cumulative AMP-skipped updates=4
+2026-10-13 13:19:28,579 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:19:28,579 transreid.train INFO: Epoch 35 done. Time per batch: 1.029[s] Total: 118.4[s]
+2026-10-13 13:20:22,853 transreid.train INFO: Epoch[36] Iteration[50/115] Loss: 1.019, Acc: 0.915, Base Lr: 2.54e-02
+2026-10-13 13:20:22,854 transreid.train INFO: Epoch[36] 0.391, 0.260, 0.280, 0.365
+2026-10-13 13:20:22,854 transreid.train INFO: SCSR |gate-1| mean=1.531135e-05, max=1.059413e-04; residual/P mean=2.664779e-08
+2026-10-13 13:21:11,400 transreid.train INFO: Epoch[36] Iteration[100/115] Loss: 0.915, Acc: 0.928, Base Lr: 2.54e-02
+2026-10-13 13:21:11,400 transreid.train INFO: Epoch[36] 0.340, 0.245, 0.271, 0.326
+2026-10-13 13:21:11,400 transreid.train INFO: SCSR |gate-1| mean=1.538904e-05, max=1.064551e-04; residual/P mean=2.576203e-08
+2026-10-13 13:21:27,060 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=4110, cumulative optimizer updates=4106, cumulative AMP-skipped updates=4
+2026-10-13 13:21:27,061 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:21:27,061 transreid.train INFO: Epoch 36 done. Time per batch: 1.030[s] Total: 118.5[s]
+2026-10-13 13:22:20,135 transreid.train INFO: Epoch[37] Iteration[50/114] Loss: 0.992, Acc: 0.919, Base Lr: 2.51e-02
+2026-10-13 13:22:20,135 transreid.train INFO: Epoch[37] 0.374, 0.258, 0.278, 0.358
+2026-10-13 13:22:20,135 transreid.train INFO: SCSR |gate-1| mean=1.558722e-05, max=1.104323e-04; residual/P mean=3.128881e-08
+2026-10-13 13:23:09,621 transreid.train INFO: Epoch[37] Iteration[100/114] Loss: 0.914, Acc: 0.926, Base Lr: 2.51e-02
+2026-10-13 13:23:09,621 transreid.train INFO: Epoch[37] 0.336, 0.246, 0.268, 0.328
+2026-10-13 13:23:09,621 transreid.train INFO: SCSR |gate-1| mean=1.574707e-05, max=1.096280e-04; residual/P mean=2.998041e-08
+2026-10-13 13:23:24,773 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=113, cumulative batches=4224, cumulative optimizer updates=4219, cumulative AMP-skipped updates=5
+2026-10-13 13:23:24,774 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:23:24,774 transreid.train INFO: Epoch 37 done. Time per batch: 1.033[s] Total: 117.7[s]
+2026-10-13 13:24:19,162 transreid.train INFO: Epoch[38] Iteration[50/115] Loss: 0.968, Acc: 0.921, Base Lr: 2.47e-02
+2026-10-13 13:24:19,162 transreid.train INFO: Epoch[38] 0.366, 0.249, 0.275, 0.350
+2026-10-13 13:24:19,162 transreid.train INFO: SCSR |gate-1| mean=1.583124e-05, max=1.101459e-04; residual/P mean=2.763589e-08
+2026-10-13 13:25:09,871 transreid.train INFO: Epoch[38] Iteration[100/115] Loss: 0.876, Acc: 0.930, Base Lr: 2.47e-02
+2026-10-13 13:25:09,871 transreid.train INFO: Epoch[38] 0.324, 0.238, 0.266, 0.311
+2026-10-13 13:25:09,872 transreid.train INFO: SCSR |gate-1| mean=1.591275e-05, max=1.093503e-04; residual/P mean=2.863765e-08
+2026-10-13 13:25:24,173 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=4339, cumulative optimizer updates=4334, cumulative AMP-skipped updates=5
+2026-10-13 13:25:24,173 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:25:24,173 transreid.train INFO: Epoch 38 done. Time per batch: 1.038[s] Total: 119.4[s]
+2026-10-13 13:26:18,746 transreid.train INFO: Epoch[39] Iteration[50/114] Loss: 0.909, Acc: 0.924, Base Lr: 2.44e-02
+2026-10-13 13:26:18,746 transreid.train INFO: Epoch[39] 0.343, 0.243, 0.273, 0.319
+2026-10-13 13:26:18,746 transreid.train INFO: SCSR |gate-1| mean=1.597066e-05, max=1.080017e-04; residual/P mean=2.730660e-08
+2026-10-13 13:27:06,836 transreid.train INFO: Epoch[39] Iteration[100/114] Loss: 0.827, Acc: 0.932, Base Lr: 2.44e-02
+2026-10-13 13:27:06,836 transreid.train INFO: Epoch[39] 0.304, 0.230, 0.262, 0.290
+2026-10-13 13:27:06,836 transreid.train INFO: SCSR |gate-1| mean=1.610156e-05, max=1.094354e-04; residual/P mean=2.708818e-08
+2026-10-13 13:27:21,485 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=4453, cumulative optimizer updates=4448, cumulative AMP-skipped updates=5
+2026-10-13 13:27:21,486 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:27:21,486 transreid.train INFO: Epoch 39 done. Time per batch: 1.029[s] Total: 117.3[s]
+2026-10-13 13:28:16,207 transreid.train INFO: Epoch[40] Iteration[50/114] Loss: 0.924, Acc: 0.924, Base Lr: 2.40e-02
+2026-10-13 13:28:16,207 transreid.train INFO: Epoch[40] 0.342, 0.247, 0.274, 0.332
+2026-10-13 13:28:16,208 transreid.train INFO: SCSR |gate-1| mean=1.618873e-05, max=1.060132e-04; residual/P mean=2.601347e-08
+2026-10-13 13:29:04,517 transreid.train INFO: Epoch[40] Iteration[100/114] Loss: 0.817, Acc: 0.934, Base Lr: 2.40e-02
+2026-10-13 13:29:04,517 transreid.train INFO: Epoch[40] 0.296, 0.230, 0.262, 0.288
+2026-10-13 13:29:04,517 transreid.train INFO: SCSR |gate-1| mean=1.625536e-05, max=1.140969e-04; residual/P mean=2.894636e-08
+2026-10-13 13:29:19,146 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=4567, cumulative optimizer updates=4562, cumulative AMP-skipped updates=5
+2026-10-13 13:29:19,147 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:29:19,147 transreid.train INFO: Epoch 40 done. Time per batch: 1.032[s] Total: 117.7[s]
+2026-10-13 13:30:21,055 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 13:31:14,916 transreid.train INFO: The test feature is normalized
+2026-10-13 13:31:14,980 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 13:32:39,473 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 13:32:47,412 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 36.86%, mAP: 23.03%, mINP: 4.08%
+2026-10-13 13:32:55,738 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 21.45%, mAP: 12.91%, mINP: 1.75%
+2026-10-13 13:33:03,679 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 5.76%, mAP: 4.25%, mINP: 0.82%
+2026-10-13 13:33:11,643 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 21.36%, mAP: 13.21%, mINP: 2.16%
+2026-10-13 13:33:19,717 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 23.75%, mAP: 14.11%, mINP: 1.94%
+2026-10-13 13:33:27,644 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 4.78%, mAP: 3.91%, mINP: 0.80%
+2026-10-13 13:33:35,535 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 5.57%, mAP: 4.44%, mINP: 0.97%
+2026-10-13 13:33:43,859 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 6.32%, mAP: 3.88%, mINP: 0.75%
+2026-10-13 13:33:51,973 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 16.39%, mAP: 11.15%, mINP: 1.84%
+2026-10-13 13:33:51,973 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 13:33:51,974 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 13:33:51,974 transreid.train INFO:   NIR->RGB    21.36%  13.21%   2.16%
+2026-10-13 13:33:51,974 transreid.train INFO:   TIR->RGB     5.57%   4.44%   0.97%
+2026-10-13 13:33:51,974 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 13:33:51,974 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 13:33:51,974 transreid.train INFO:     RGB     RGB  36.86%  23.03%   4.08%
+2026-10-13 13:33:51,974 transreid.train INFO:     RGB     NIR  21.45%  12.91%   1.75%
+2026-10-13 13:33:51,974 transreid.train INFO:     RGB     TIR   5.76%   4.25%   0.82%
+2026-10-13 13:33:51,974 transreid.train INFO:     NIR     RGB  21.36%  13.21%   2.16%
+2026-10-13 13:33:51,974 transreid.train INFO:     NIR     NIR  23.75%  14.11%   1.94%
+2026-10-13 13:33:51,974 transreid.train INFO:     NIR     TIR   4.78%   3.91%   0.80%
+2026-10-13 13:33:51,974 transreid.train INFO:     TIR     RGB   5.57%   4.44%   0.97%
+2026-10-13 13:33:51,974 transreid.train INFO:     TIR     NIR   6.32%   3.88%   0.75%
+2026-10-13 13:33:51,974 transreid.train INFO:     TIR     TIR  16.39%  11.15%   1.84%
+2026-10-13 13:33:51,975 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 13:34:05,650 transreid.train INFO:   A->G -> mAP: 10.55%, Rank-1: 29.93%, Rank-10: 58.00%
+2026-10-13 13:34:18,396 transreid.train INFO:   G->A -> mAP: 12.23%, Rank-1: 30.43%, Rank-10: 54.09%
+2026-10-13 13:34:18,409 transreid.train INFO: Validation Results - Epoch: 40
+2026-10-13 13:34:18,409 transreid.train INFO: mAP: 9.02%
+2026-10-13 13:34:18,409 transreid.train INFO: CMC curve, Rank-1 : 25.31%
+2026-10-13 13:34:18,409 transreid.train INFO: CMC curve, Rank-5 : 41.97%
+2026-10-13 13:34:18,409 transreid.train INFO: CMC curve, Rank-10: 50.15%
+2026-10-13 13:35:13,052 transreid.train INFO: Epoch[41] Iteration[50/114] Loss: 0.850, Acc: 0.930, Base Lr: 2.37e-02
+2026-10-13 13:35:13,052 transreid.train INFO: Epoch[41] 0.310, 0.233, 0.271, 0.305
+2026-10-13 13:35:13,053 transreid.train INFO: SCSR |gate-1| mean=1.632168e-05, max=1.081831e-04; residual/P mean=2.687874e-08
+2026-10-13 13:36:00,843 transreid.train INFO: Epoch[41] Iteration[100/114] Loss: 0.770, Acc: 0.938, Base Lr: 2.37e-02
+2026-10-13 13:36:00,843 transreid.train INFO: Epoch[41] 0.276, 0.219, 0.261, 0.272
+2026-10-13 13:36:00,843 transreid.train INFO: SCSR |gate-1| mean=1.639949e-05, max=1.086679e-04; residual/P mean=2.937432e-08
+2026-10-13 13:36:15,400 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=4681, cumulative optimizer updates=4676, cumulative AMP-skipped updates=5
+2026-10-13 13:36:15,401 transreid.train INFO: SCSR local CUDA peak allocated memory: 12633.7 MiB
+2026-10-13 13:36:15,401 transreid.train INFO: Epoch 41 done. Time per batch: 1.024[s] Total: 116.7[s]
+2026-10-13 13:37:08,611 transreid.train INFO: Epoch[42] Iteration[50/114] Loss: 0.864, Acc: 0.931, Base Lr: 2.33e-02
+2026-10-13 13:37:08,612 transreid.train INFO: Epoch[42] 0.316, 0.239, 0.269, 0.305
+2026-10-13 13:37:08,612 transreid.train INFO: SCSR |gate-1| mean=1.645127e-05, max=1.099522e-04; residual/P mean=3.067892e-08
+2026-10-13 13:37:57,919 transreid.train INFO: Epoch[42] Iteration[100/114] Loss: 0.763, Acc: 0.940, Base Lr: 2.33e-02
+2026-10-13 13:37:57,919 transreid.train INFO: Epoch[42] 0.274, 0.224, 0.259, 0.263
+2026-10-13 13:37:57,919 transreid.train INFO: SCSR |gate-1| mean=1.654063e-05, max=1.093615e-04; residual/P mean=3.015750e-08
+2026-10-13 13:38:12,321 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=4795, cumulative optimizer updates=4790, cumulative AMP-skipped updates=5
+2026-10-13 13:38:12,322 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:38:12,322 transreid.train INFO: Epoch 42 done. Time per batch: 1.026[s] Total: 116.9[s]
+2026-10-13 13:39:05,434 transreid.train INFO: Epoch[43] Iteration[50/114] Loss: 0.828, Acc: 0.931, Base Lr: 2.29e-02
+2026-10-13 13:39:05,434 transreid.train INFO: Epoch[43] 0.306, 0.223, 0.265, 0.295
+2026-10-13 13:39:05,435 transreid.train INFO: SCSR |gate-1| mean=1.667878e-05, max=1.069125e-04; residual/P mean=3.019907e-08
+2026-10-13 13:39:54,559 transreid.train INFO: Epoch[43] Iteration[100/114] Loss: 0.744, Acc: 0.940, Base Lr: 2.29e-02
+2026-10-13 13:39:54,559 transreid.train INFO: Epoch[43] 0.269, 0.213, 0.257, 0.260
+2026-10-13 13:39:54,559 transreid.train INFO: SCSR |gate-1| mean=1.674053e-05, max=1.122895e-04; residual/P mean=3.090126e-08
+2026-10-13 13:40:08,032 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=4909, cumulative optimizer updates=4904, cumulative AMP-skipped updates=5
+2026-10-13 13:40:08,032 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:40:08,032 transreid.train INFO: Epoch 43 done. Time per batch: 1.015[s] Total: 115.7[s]
+2026-10-13 13:41:03,075 transreid.train INFO: Epoch[44] Iteration[50/115] Loss: 0.823, Acc: 0.936, Base Lr: 2.25e-02
+2026-10-13 13:41:03,075 transreid.train INFO: Epoch[44] 0.298, 0.230, 0.262, 0.292
+2026-10-13 13:41:03,075 transreid.train INFO: SCSR |gate-1| mean=1.681774e-05, max=1.077096e-04; residual/P mean=2.679692e-08
+2026-10-13 13:41:51,472 transreid.train INFO: Epoch[44] Iteration[100/115] Loss: 0.725, Acc: 0.945, Base Lr: 2.25e-02
+2026-10-13 13:41:51,472 transreid.train INFO: Epoch[44] 0.258, 0.212, 0.254, 0.252
+2026-10-13 13:41:51,472 transreid.train INFO: SCSR |gate-1| mean=1.692223e-05, max=1.090552e-04; residual/P mean=2.914116e-08
+2026-10-13 13:42:07,045 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=5024, cumulative optimizer updates=5019, cumulative AMP-skipped updates=5
+2026-10-13 13:42:07,046 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:42:07,046 transreid.train INFO: Epoch 44 done. Time per batch: 1.035[s] Total: 119.0[s]
+2026-10-13 13:43:00,725 transreid.train INFO: Epoch[45] Iteration[50/114] Loss: 0.796, Acc: 0.934, Base Lr: 2.21e-02
+2026-10-13 13:43:00,725 transreid.train INFO: Epoch[45] 0.292, 0.222, 0.265, 0.278
+2026-10-13 13:43:00,725 transreid.train INFO: SCSR |gate-1| mean=1.699525e-05, max=1.115849e-04; residual/P mean=3.036460e-08
+2026-10-13 13:43:49,672 transreid.train INFO: Epoch[45] Iteration[100/114] Loss: 0.716, Acc: 0.942, Base Lr: 2.21e-02
+2026-10-13 13:43:49,672 transreid.train INFO: Epoch[45] 0.258, 0.209, 0.257, 0.246
+2026-10-13 13:43:49,672 transreid.train INFO: SCSR |gate-1| mean=1.696960e-05, max=1.110129e-04; residual/P mean=2.722738e-08
+2026-10-13 13:44:04,192 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=5138, cumulative optimizer updates=5133, cumulative AMP-skipped updates=5
+2026-10-13 13:44:04,193 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:44:04,193 transreid.train INFO: Epoch 45 done. Time per batch: 1.028[s] Total: 117.1[s]
+2026-10-13 13:44:57,929 transreid.train INFO: Epoch[46] Iteration[50/114] Loss: 0.772, Acc: 0.940, Base Lr: 2.18e-02
+2026-10-13 13:44:57,929 transreid.train INFO: Epoch[46] 0.277, 0.223, 0.262, 0.269
+2026-10-13 13:44:57,929 transreid.train INFO: SCSR |gate-1| mean=1.709677e-05, max=1.142606e-04; residual/P mean=2.985540e-08
+2026-10-13 13:45:47,437 transreid.train INFO: Epoch[46] Iteration[100/114] Loss: 0.702, Acc: 0.945, Base Lr: 2.18e-02
+2026-10-13 13:45:47,437 transreid.train INFO: Epoch[46] 0.250, 0.208, 0.253, 0.241
+2026-10-13 13:45:47,437 transreid.train INFO: SCSR |gate-1| mean=1.719753e-05, max=1.092689e-04; residual/P mean=3.291231e-08
+2026-10-13 13:46:01,978 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=5252, cumulative optimizer updates=5247, cumulative AMP-skipped updates=5
+2026-10-13 13:46:01,978 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:46:01,978 transreid.train INFO: Epoch 46 done. Time per batch: 1.033[s] Total: 117.8[s]
+2026-10-13 13:46:56,066 transreid.train INFO: Epoch[47] Iteration[50/114] Loss: 0.720, Acc: 0.942, Base Lr: 2.14e-02
+2026-10-13 13:46:56,067 transreid.train INFO: Epoch[47] 0.260, 0.208, 0.257, 0.249
+2026-10-13 13:46:56,067 transreid.train INFO: SCSR |gate-1| mean=1.719912e-05, max=1.171848e-04; residual/P mean=3.196417e-08
+2026-10-13 13:47:44,286 transreid.train INFO: Epoch[47] Iteration[100/114] Loss: 0.657, Acc: 0.948, Base Lr: 2.14e-02
+2026-10-13 13:47:44,286 transreid.train INFO: Epoch[47] 0.233, 0.198, 0.250, 0.224
+2026-10-13 13:47:44,286 transreid.train INFO: SCSR |gate-1| mean=1.737868e-05, max=1.153935e-04; residual/P mean=2.838707e-08
+2026-10-13 13:47:58,905 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=5366, cumulative optimizer updates=5361, cumulative AMP-skipped updates=5
+2026-10-13 13:47:58,906 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:47:58,906 transreid.train INFO: Epoch 47 done. Time per batch: 1.026[s] Total: 116.9[s]
+2026-10-13 13:48:53,194 transreid.train INFO: Epoch[48] Iteration[50/115] Loss: 0.690, Acc: 0.947, Base Lr: 2.10e-02
+2026-10-13 13:48:53,194 transreid.train INFO: Epoch[48] 0.246, 0.203, 0.254, 0.237
+2026-10-13 13:48:53,195 transreid.train INFO: SCSR |gate-1| mean=1.748247e-05, max=1.132703e-04; residual/P mean=2.875667e-08
+2026-10-13 13:49:41,609 transreid.train INFO: Epoch[48] Iteration[100/115] Loss: 0.634, Acc: 0.952, Base Lr: 2.10e-02
+2026-10-13 13:49:41,609 transreid.train INFO: Epoch[48] 0.224, 0.195, 0.246, 0.213
+2026-10-13 13:49:41,609 transreid.train INFO: SCSR |gate-1| mean=1.753227e-05, max=1.147530e-04; residual/P mean=2.784075e-08
+2026-10-13 13:49:57,211 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=5481, cumulative optimizer updates=5476, cumulative AMP-skipped updates=5
+2026-10-13 13:49:57,211 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:49:57,211 transreid.train INFO: Epoch 48 done. Time per batch: 1.029[s] Total: 118.3[s]
+2026-10-13 13:50:50,117 transreid.train INFO: Epoch[49] Iteration[50/115] Loss: 0.686, Acc: 0.948, Base Lr: 2.06e-02
+2026-10-13 13:50:50,117 transreid.train INFO: Epoch[49] 0.247, 0.206, 0.255, 0.230
+2026-10-13 13:50:50,117 transreid.train INFO: SCSR |gate-1| mean=1.756078e-05, max=1.182264e-04; residual/P mean=3.090882e-08
+2026-10-13 13:51:39,389 transreid.train INFO: Epoch[49] Iteration[100/115] Loss: 0.628, Acc: 0.953, Base Lr: 2.06e-02
+2026-10-13 13:51:39,389 transreid.train INFO: Epoch[49] 0.221, 0.193, 0.247, 0.211
+2026-10-13 13:51:39,389 transreid.train INFO: SCSR |gate-1| mean=1.762967e-05, max=1.123952e-04; residual/P mean=3.146942e-08
+2026-10-13 13:51:54,906 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=5596, cumulative optimizer updates=5591, cumulative AMP-skipped updates=5
+2026-10-13 13:51:54,907 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:51:54,907 transreid.train INFO: Epoch 49 done. Time per batch: 1.023[s] Total: 117.7[s]
+2026-10-13 13:52:48,075 transreid.train INFO: Epoch[50] Iteration[50/114] Loss: 0.646, Acc: 0.953, Base Lr: 2.02e-02
+2026-10-13 13:52:48,076 transreid.train INFO: Epoch[50] 0.228, 0.202, 0.252, 0.214
+2026-10-13 13:52:48,076 transreid.train INFO: SCSR |gate-1| mean=1.765919e-05, max=1.152043e-04; residual/P mean=2.699731e-08
+2026-10-13 13:53:37,471 transreid.train INFO: Epoch[50] Iteration[100/114] Loss: 0.591, Acc: 0.956, Base Lr: 2.02e-02
+2026-10-13 13:53:37,471 transreid.train INFO: Epoch[50] 0.203, 0.189, 0.244, 0.196
+2026-10-13 13:53:37,471 transreid.train INFO: SCSR |gate-1| mean=1.767629e-05, max=1.185358e-04; residual/P mean=2.974886e-08
+2026-10-13 13:53:51,924 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=5710, cumulative optimizer updates=5705, cumulative AMP-skipped updates=5
+2026-10-13 13:53:51,925 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 13:53:51,925 transreid.train INFO: Epoch 50 done. Time per batch: 1.026[s] Total: 117.0[s]
+2026-10-13 13:54:53,267 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 13:55:45,819 transreid.train INFO: The test feature is normalized
+2026-10-13 13:55:45,870 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 13:57:07,914 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 13:57:16,298 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 38.27%, mAP: 24.41%, mINP: 4.55%
+2026-10-13 13:57:24,737 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 24.78%, mAP: 14.30%, mINP: 1.86%
+2026-10-13 13:57:33,197 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 5.67%, mAP: 4.77%, mINP: 0.94%
+2026-10-13 13:57:41,408 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 22.44%, mAP: 13.95%, mINP: 2.44%
+2026-10-13 13:57:49,483 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 25.43%, mAP: 14.94%, mINP: 2.07%
+2026-10-13 13:57:57,687 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 5.62%, mAP: 4.45%, mINP: 0.86%
+2026-10-13 13:58:05,926 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 6.28%, mAP: 4.81%, mINP: 1.01%
+2026-10-13 13:58:13,939 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 6.79%, mAP: 4.25%, mINP: 0.78%
+2026-10-13 13:58:22,139 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 17.10%, mAP: 11.91%, mINP: 1.89%
+2026-10-13 13:58:22,140 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 13:58:22,140 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 13:58:22,140 transreid.train INFO:   NIR->RGB    22.44%  13.95%   2.44%
+2026-10-13 13:58:22,140 transreid.train INFO:   TIR->RGB     6.28%   4.81%   1.01%
+2026-10-13 13:58:22,140 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 13:58:22,140 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 13:58:22,140 transreid.train INFO:     RGB     RGB  38.27%  24.41%   4.55%
+2026-10-13 13:58:22,140 transreid.train INFO:     RGB     NIR  24.78%  14.30%   1.86%
+2026-10-13 13:58:22,140 transreid.train INFO:     RGB     TIR   5.67%   4.77%   0.94%
+2026-10-13 13:58:22,140 transreid.train INFO:     NIR     RGB  22.44%  13.95%   2.44%
+2026-10-13 13:58:22,140 transreid.train INFO:     NIR     NIR  25.43%  14.94%   2.07%
+2026-10-13 13:58:22,140 transreid.train INFO:     NIR     TIR   5.62%   4.45%   0.86%
+2026-10-13 13:58:22,140 transreid.train INFO:     TIR     RGB   6.28%   4.81%   1.01%
+2026-10-13 13:58:22,140 transreid.train INFO:     TIR     NIR   6.79%   4.25%   0.78%
+2026-10-13 13:58:22,140 transreid.train INFO:     TIR     TIR  17.10%  11.91%   1.89%
+2026-10-13 13:58:22,141 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 13:58:34,955 transreid.train INFO:   A->G -> mAP: 10.96%, Rank-1: 32.15%, Rank-10: 58.81%
+2026-10-13 13:58:47,414 transreid.train INFO:   G->A -> mAP: 12.80%, Rank-1: 29.24%, Rank-10: 54.09%
+2026-10-13 13:58:47,428 transreid.train INFO: Validation Results - Epoch: 50
+2026-10-13 13:58:47,428 transreid.train INFO: mAP: 9.71%
+2026-10-13 13:58:47,428 transreid.train INFO: CMC curve, Rank-1 : 26.53%
+2026-10-13 13:58:47,428 transreid.train INFO: CMC curve, Rank-5 : 43.12%
+2026-10-13 13:58:47,428 transreid.train INFO: CMC curve, Rank-10: 51.48%
+2026-10-13 13:59:41,353 transreid.train INFO: Epoch[51] Iteration[50/114] Loss: 0.678, Acc: 0.948, Base Lr: 1.98e-02
+2026-10-13 13:59:41,354 transreid.train INFO: Epoch[51] 0.246, 0.202, 0.254, 0.228
+2026-10-13 13:59:41,354 transreid.train INFO: SCSR |gate-1| mean=1.764414e-05, max=1.118656e-04; residual/P mean=2.937261e-08
+2026-10-13 14:00:30,608 transreid.train INFO: Epoch[51] Iteration[100/114] Loss: 0.609, Acc: 0.954, Base Lr: 1.98e-02
+2026-10-13 14:00:30,608 transreid.train INFO: Epoch[51] 0.213, 0.191, 0.244, 0.202
+2026-10-13 14:00:30,608 transreid.train INFO: SCSR |gate-1| mean=1.765771e-05, max=1.118329e-04; residual/P mean=3.017937e-08
+2026-10-13 14:00:44,028 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=5824, cumulative optimizer updates=5819, cumulative AMP-skipped updates=5
+2026-10-13 14:00:44,029 transreid.train INFO: SCSR local CUDA peak allocated memory: 12633.7 MiB
+2026-10-13 14:00:44,029 transreid.train INFO: Epoch 51 done. Time per batch: 1.021[s] Total: 116.4[s]
+2026-10-13 14:01:38,268 transreid.train INFO: Epoch[52] Iteration[50/114] Loss: 0.646, Acc: 0.953, Base Lr: 1.94e-02
+2026-10-13 14:01:38,269 transreid.train INFO: Epoch[52] 0.227, 0.201, 0.249, 0.216
+2026-10-13 14:01:38,269 transreid.train INFO: SCSR |gate-1| mean=1.778136e-05, max=1.188609e-04; residual/P mean=3.198577e-08
+2026-10-13 14:02:26,733 transreid.train INFO: Epoch[52] Iteration[100/114] Loss: 0.590, Acc: 0.956, Base Lr: 1.94e-02
+2026-10-13 14:02:26,734 transreid.train INFO: Epoch[52] 0.206, 0.186, 0.240, 0.196
+2026-10-13 14:02:26,734 transreid.train INFO: SCSR |gate-1| mean=1.777805e-05, max=1.136596e-04; residual/P mean=3.178596e-08
+2026-10-13 14:02:41,306 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=5938, cumulative optimizer updates=5933, cumulative AMP-skipped updates=5
+2026-10-13 14:02:41,307 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:02:41,307 transreid.train INFO: Epoch 52 done. Time per batch: 1.029[s] Total: 117.3[s]
+2026-10-13 14:03:35,782 transreid.train INFO: Epoch[53] Iteration[50/115] Loss: 0.613, Acc: 0.957, Base Lr: 1.89e-02
+2026-10-13 14:03:35,783 transreid.train INFO: Epoch[53] 0.211, 0.197, 0.251, 0.202
+2026-10-13 14:03:35,783 transreid.train INFO: SCSR |gate-1| mean=1.769430e-05, max=1.144986e-04; residual/P mean=3.014159e-08
+2026-10-13 14:04:24,400 transreid.train INFO: Epoch[53] Iteration[100/115] Loss: 0.563, Acc: 0.959, Base Lr: 1.89e-02
+2026-10-13 14:04:24,400 transreid.train INFO: Epoch[53] 0.194, 0.184, 0.240, 0.183
+2026-10-13 14:04:24,400 transreid.train INFO: SCSR |gate-1| mean=1.776054e-05, max=1.145198e-04; residual/P mean=3.080875e-08
+2026-10-13 14:04:39,951 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=6053, cumulative optimizer updates=6048, cumulative AMP-skipped updates=5
+2026-10-13 14:04:39,951 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:04:39,951 transreid.train INFO: Epoch 53 done. Time per batch: 1.032[s] Total: 118.6[s]
+2026-10-13 14:05:33,373 transreid.train INFO: Epoch[54] Iteration[50/115] Loss: 0.612, Acc: 0.956, Base Lr: 1.85e-02
+2026-10-13 14:05:33,373 transreid.train INFO: Epoch[54] 0.219, 0.188, 0.246, 0.203
+2026-10-13 14:05:33,373 transreid.train INFO: SCSR |gate-1| mean=1.779943e-05, max=1.142965e-04; residual/P mean=3.310920e-08
+2026-10-13 14:06:22,864 transreid.train INFO: Epoch[54] Iteration[100/115] Loss: 0.568, Acc: 0.958, Base Lr: 1.85e-02
+2026-10-13 14:06:22,864 transreid.train INFO: Epoch[54] 0.199, 0.180, 0.238, 0.187
+2026-10-13 14:06:22,864 transreid.train INFO: SCSR |gate-1| mean=1.782388e-05, max=1.172164e-04; residual/P mean=3.347425e-08
+2026-10-13 14:06:38,327 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=6168, cumulative optimizer updates=6163, cumulative AMP-skipped updates=5
+2026-10-13 14:06:38,327 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:06:38,327 transreid.train INFO: Epoch 54 done. Time per batch: 1.029[s] Total: 118.4[s]
+2026-10-13 14:07:31,576 transreid.train INFO: Epoch[55] Iteration[50/114] Loss: 0.619, Acc: 0.954, Base Lr: 1.81e-02
+2026-10-13 14:07:31,577 transreid.train INFO: Epoch[55] 0.221, 0.191, 0.246, 0.204
+2026-10-13 14:07:31,577 transreid.train INFO: SCSR |gate-1| mean=1.788591e-05, max=1.183419e-04; residual/P mean=2.895117e-08
+2026-10-13 14:08:21,026 transreid.train INFO: Epoch[55] Iteration[100/114] Loss: 0.557, Acc: 0.958, Base Lr: 1.81e-02
+2026-10-13 14:08:21,027 transreid.train INFO: Epoch[55] 0.195, 0.179, 0.237, 0.180
+2026-10-13 14:08:21,027 transreid.train INFO: SCSR |gate-1| mean=1.792202e-05, max=1.157408e-04; residual/P mean=3.175263e-08
+2026-10-13 14:08:34,426 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=6282, cumulative optimizer updates=6277, cumulative AMP-skipped updates=5
+2026-10-13 14:08:34,427 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:08:34,427 transreid.train INFO: Epoch 55 done. Time per batch: 1.018[s] Total: 116.1[s]
+2026-10-13 14:09:28,904 transreid.train INFO: Epoch[56] Iteration[50/114] Loss: 0.603, Acc: 0.956, Base Lr: 1.77e-02
+2026-10-13 14:09:28,904 transreid.train INFO: Epoch[56] 0.210, 0.190, 0.246, 0.200
+2026-10-13 14:09:28,904 transreid.train INFO: SCSR |gate-1| mean=1.797590e-05, max=1.179218e-04; residual/P mean=2.947885e-08
+2026-10-13 14:10:17,117 transreid.train INFO: Epoch[56] Iteration[100/114] Loss: 0.543, Acc: 0.959, Base Lr: 1.77e-02
+2026-10-13 14:10:17,117 transreid.train INFO: Epoch[56] 0.187, 0.177, 0.236, 0.177
+2026-10-13 14:10:17,117 transreid.train INFO: SCSR |gate-1| mean=1.805398e-05, max=1.234327e-04; residual/P mean=2.823722e-08
+2026-10-13 14:10:31,627 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=6396, cumulative optimizer updates=6391, cumulative AMP-skipped updates=5
+2026-10-13 14:10:31,628 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:10:31,628 transreid.train INFO: Epoch 56 done. Time per batch: 1.028[s] Total: 117.2[s]
+2026-10-13 14:11:25,802 transreid.train INFO: Epoch[57] Iteration[50/114] Loss: 0.596, Acc: 0.955, Base Lr: 1.73e-02
+2026-10-13 14:11:25,802 transreid.train INFO: Epoch[57] 0.211, 0.186, 0.244, 0.196
+2026-10-13 14:11:25,803 transreid.train INFO: SCSR |gate-1| mean=1.807545e-05, max=1.158627e-04; residual/P mean=2.647670e-08
+2026-10-13 14:12:14,017 transreid.train INFO: Epoch[57] Iteration[100/114] Loss: 0.541, Acc: 0.959, Base Lr: 1.73e-02
+2026-10-13 14:12:14,017 transreid.train INFO: Epoch[57] 0.189, 0.176, 0.235, 0.173
+2026-10-13 14:12:14,017 transreid.train INFO: SCSR |gate-1| mean=1.805854e-05, max=1.173587e-04; residual/P mean=2.953147e-08
+2026-10-13 14:12:28,528 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=6510, cumulative optimizer updates=6505, cumulative AMP-skipped updates=5
+2026-10-13 14:12:28,528 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:12:28,528 transreid.train INFO: Epoch 57 done. Time per batch: 1.025[s] Total: 116.9[s]
+2026-10-13 14:13:21,561 transreid.train INFO: Epoch[58] Iteration[50/114] Loss: 0.603, Acc: 0.950, Base Lr: 1.69e-02
+2026-10-13 14:13:21,561 transreid.train INFO: Epoch[58] 0.222, 0.184, 0.244, 0.195
+2026-10-13 14:13:21,561 transreid.train INFO: SCSR |gate-1| mean=1.815028e-05, max=1.175557e-04; residual/P mean=3.274804e-08
+2026-10-13 14:14:11,099 transreid.train INFO: Epoch[58] Iteration[100/114] Loss: 0.545, Acc: 0.957, Base Lr: 1.69e-02
+2026-10-13 14:14:11,099 transreid.train INFO: Epoch[58] 0.196, 0.172, 0.235, 0.176
+2026-10-13 14:14:11,100 transreid.train INFO: SCSR |gate-1| mean=1.818206e-05, max=1.172614e-04; residual/P mean=2.749066e-08
+2026-10-13 14:14:25,620 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=6624, cumulative optimizer updates=6619, cumulative AMP-skipped updates=5
+2026-10-13 14:14:25,620 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:14:25,621 transreid.train INFO: Epoch 58 done. Time per batch: 1.027[s] Total: 117.1[s]
+2026-10-13 14:15:19,497 transreid.train INFO: Epoch[59] Iteration[50/114] Loss: 0.555, Acc: 0.959, Base Lr: 1.64e-02
+2026-10-13 14:15:19,497 transreid.train INFO: Epoch[59] 0.199, 0.177, 0.239, 0.176
+2026-10-13 14:15:19,497 transreid.train INFO: SCSR |gate-1| mean=1.820793e-05, max=1.181650e-04; residual/P mean=2.801131e-08
+2026-10-13 14:16:09,033 transreid.train INFO: Epoch[59] Iteration[100/114] Loss: 0.494, Acc: 0.964, Base Lr: 1.64e-02
+2026-10-13 14:16:09,033 transreid.train INFO: Epoch[59] 0.172, 0.165, 0.232, 0.155
+2026-10-13 14:16:09,034 transreid.train INFO: SCSR |gate-1| mean=1.831845e-05, max=1.212302e-04; residual/P mean=2.926513e-08
+2026-10-13 14:16:22,313 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=6738, cumulative optimizer updates=6733, cumulative AMP-skipped updates=5
+2026-10-13 14:16:22,313 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:16:22,313 transreid.train INFO: Epoch 59 done. Time per batch: 1.024[s] Total: 116.7[s]
+2026-10-13 14:17:16,987 transreid.train INFO: Epoch[60] Iteration[50/114] Loss: 0.555, Acc: 0.958, Base Lr: 1.60e-02
+2026-10-13 14:17:16,987 transreid.train INFO: Epoch[60] 0.199, 0.175, 0.239, 0.179
+2026-10-13 14:17:16,988 transreid.train INFO: SCSR |gate-1| mean=1.832513e-05, max=1.172333e-04; residual/P mean=2.782372e-08
+2026-10-13 14:18:05,393 transreid.train INFO: Epoch[60] Iteration[100/114] Loss: 0.500, Acc: 0.963, Base Lr: 1.60e-02
+2026-10-13 14:18:05,393 transreid.train INFO: Epoch[60] 0.175, 0.164, 0.231, 0.159
+2026-10-13 14:18:05,393 transreid.train INFO: SCSR |gate-1| mean=1.834305e-05, max=1.214747e-04; residual/P mean=2.914075e-08
+2026-10-13 14:18:21,171 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=6852, cumulative optimizer updates=6847, cumulative AMP-skipped updates=5
+2026-10-13 14:18:21,172 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:18:21,172 transreid.train INFO: Epoch 60 done. Time per batch: 1.043[s] Total: 118.9[s]
+2026-10-13 14:19:21,823 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 14:20:14,791 transreid.train INFO: The test feature is normalized
+2026-10-13 14:20:14,862 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 14:21:37,610 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 14:21:45,751 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 38.97%, mAP: 24.81%, mINP: 4.53%
+2026-10-13 14:21:53,686 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 24.82%, mAP: 14.56%, mINP: 1.93%
+2026-10-13 14:22:01,935 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 6.23%, mAP: 4.95%, mINP: 0.95%
+2026-10-13 14:22:10,011 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 22.39%, mAP: 14.33%, mINP: 2.55%
+2026-10-13 14:22:17,977 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 25.43%, mAP: 15.60%, mINP: 2.25%
+2026-10-13 14:22:26,075 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.32%, mAP: 4.62%, mINP: 0.90%
+2026-10-13 14:22:33,965 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 6.42%, mAP: 4.91%, mINP: 1.09%
+2026-10-13 14:22:41,944 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 6.51%, mAP: 4.39%, mINP: 0.85%
+2026-10-13 14:22:49,829 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 18.22%, mAP: 12.27%, mINP: 2.00%
+2026-10-13 14:22:49,829 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 14:22:49,829 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 14:22:49,829 transreid.train INFO:   NIR->RGB    22.39%  14.33%   2.55%
+2026-10-13 14:22:49,829 transreid.train INFO:   TIR->RGB     6.42%   4.91%   1.09%
+2026-10-13 14:22:49,829 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 14:22:49,829 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 14:22:49,829 transreid.train INFO:     RGB     RGB  38.97%  24.81%   4.53%
+2026-10-13 14:22:49,829 transreid.train INFO:     RGB     NIR  24.82%  14.56%   1.93%
+2026-10-13 14:22:49,829 transreid.train INFO:     RGB     TIR   6.23%   4.95%   0.95%
+2026-10-13 14:22:49,829 transreid.train INFO:     NIR     RGB  22.39%  14.33%   2.55%
+2026-10-13 14:22:49,829 transreid.train INFO:     NIR     NIR  25.43%  15.60%   2.25%
+2026-10-13 14:22:49,829 transreid.train INFO:     NIR     TIR   6.32%   4.62%   0.90%
+2026-10-13 14:22:49,830 transreid.train INFO:     TIR     RGB   6.42%   4.91%   1.09%
+2026-10-13 14:22:49,830 transreid.train INFO:     TIR     NIR   6.51%   4.39%   0.85%
+2026-10-13 14:22:49,830 transreid.train INFO:     TIR     TIR  18.22%  12.27%   2.00%
+2026-10-13 14:22:49,830 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 14:23:02,584 transreid.train INFO:   A->G -> mAP: 11.11%, Rank-1: 31.04%, Rank-10: 58.52%
+2026-10-13 14:23:14,911 transreid.train INFO:   G->A -> mAP: 12.78%, Rank-1: 29.04%, Rank-10: 55.54%
+2026-10-13 14:23:14,924 transreid.train INFO: Validation Results - Epoch: 60
+2026-10-13 14:23:14,924 transreid.train INFO: mAP: 10.01%
+2026-10-13 14:23:14,924 transreid.train INFO: CMC curve, Rank-1 : 27.42%
+2026-10-13 14:23:14,924 transreid.train INFO: CMC curve, Rank-5 : 44.04%
+2026-10-13 14:23:14,924 transreid.train INFO: CMC curve, Rank-10: 52.41%
+2026-10-13 14:24:10,289 transreid.train INFO: Epoch[61] Iteration[50/114] Loss: 0.562, Acc: 0.953, Base Lr: 1.56e-02
+2026-10-13 14:24:10,289 transreid.train INFO: Epoch[61] 0.204, 0.179, 0.239, 0.176
+2026-10-13 14:24:10,290 transreid.train INFO: SCSR |gate-1| mean=1.830931e-05, max=1.215120e-04; residual/P mean=2.797974e-08
+2026-10-13 14:24:58,627 transreid.train INFO: Epoch[61] Iteration[100/114] Loss: 0.495, Acc: 0.962, Base Lr: 1.56e-02
+2026-10-13 14:24:58,628 transreid.train INFO: Epoch[61] 0.174, 0.164, 0.229, 0.155
+2026-10-13 14:24:58,628 transreid.train INFO: SCSR |gate-1| mean=1.830563e-05, max=1.268717e-04; residual/P mean=3.356121e-08
+2026-10-13 14:25:13,160 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=6966, cumulative optimizer updates=6961, cumulative AMP-skipped updates=5
+2026-10-13 14:25:13,161 transreid.train INFO: SCSR local CUDA peak allocated memory: 12633.7 MiB
+2026-10-13 14:25:13,161 transreid.train INFO: Epoch 61 done. Time per batch: 1.035[s] Total: 118.0[s]
+2026-10-13 14:26:06,458 transreid.train INFO: Epoch[62] Iteration[50/114] Loss: 0.518, Acc: 0.961, Base Lr: 1.52e-02
+2026-10-13 14:26:06,459 transreid.train INFO: Epoch[62] 0.183, 0.170, 0.235, 0.162
+2026-10-13 14:26:06,459 transreid.train INFO: SCSR |gate-1| mean=1.837001e-05, max=1.216738e-04; residual/P mean=2.883889e-08
+2026-10-13 14:26:56,048 transreid.train INFO: Epoch[62] Iteration[100/114] Loss: 0.483, Acc: 0.964, Base Lr: 1.52e-02
+2026-10-13 14:26:56,048 transreid.train INFO: Epoch[62] 0.168, 0.161, 0.227, 0.152
+2026-10-13 14:26:56,048 transreid.train INFO: SCSR |gate-1| mean=1.840977e-05, max=1.240902e-04; residual/P mean=2.961515e-08
+2026-10-13 14:27:11,176 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=7080, cumulative optimizer updates=7075, cumulative AMP-skipped updates=5
+2026-10-13 14:27:11,178 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:27:11,178 transreid.train INFO: Epoch 62 done. Time per batch: 1.035[s] Total: 118.0[s]
+2026-10-13 14:28:06,942 transreid.train INFO: Epoch[63] Iteration[50/114] Loss: 0.531, Acc: 0.961, Base Lr: 1.48e-02
+2026-10-13 14:28:06,942 transreid.train INFO: Epoch[63] 0.190, 0.171, 0.237, 0.167
+2026-10-13 14:28:06,943 transreid.train INFO: SCSR |gate-1| mean=1.848572e-05, max=1.205931e-04; residual/P mean=3.190273e-08
+2026-10-13 14:28:57,621 transreid.train INFO: Epoch[63] Iteration[100/114] Loss: 0.478, Acc: 0.965, Base Lr: 1.48e-02
+2026-10-13 14:28:57,622 transreid.train INFO: Epoch[63] 0.167, 0.161, 0.226, 0.148
+2026-10-13 14:28:57,623 transreid.train INFO: SCSR |gate-1| mean=1.842040e-05, max=1.229289e-04; residual/P mean=3.049291e-08
+2026-10-13 14:29:12,701 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=7194, cumulative optimizer updates=7189, cumulative AMP-skipped updates=5
+2026-10-13 14:29:12,702 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:29:12,702 transreid.train INFO: Epoch 63 done. Time per batch: 1.066[s] Total: 121.5[s]
+2026-10-13 14:30:08,580 transreid.train INFO: Epoch[64] Iteration[50/115] Loss: 0.512, Acc: 0.963, Base Lr: 1.44e-02
+2026-10-13 14:30:08,581 transreid.train INFO: Epoch[64] 0.180, 0.166, 0.231, 0.163
+2026-10-13 14:30:08,581 transreid.train INFO: SCSR |gate-1| mean=1.850687e-05, max=1.234075e-04; residual/P mean=2.911615e-08
+2026-10-13 14:30:57,888 transreid.train INFO: Epoch[64] Iteration[100/115] Loss: 0.471, Acc: 0.966, Base Lr: 1.44e-02
+2026-10-13 14:30:57,888 transreid.train INFO: Epoch[64] 0.163, 0.155, 0.224, 0.150
+2026-10-13 14:30:57,888 transreid.train INFO: SCSR |gate-1| mean=1.853583e-05, max=1.288830e-04; residual/P mean=3.077371e-08
+2026-10-13 14:31:13,770 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=7309, cumulative optimizer updates=7304, cumulative AMP-skipped updates=5
+2026-10-13 14:31:13,771 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:31:13,771 transreid.train INFO: Epoch 64 done. Time per batch: 1.053[s] Total: 121.1[s]
+2026-10-13 14:32:10,006 transreid.train INFO: Epoch[65] Iteration[50/114] Loss: 0.488, Acc: 0.963, Base Lr: 1.39e-02
+2026-10-13 14:32:10,006 transreid.train INFO: Epoch[65] 0.173, 0.160, 0.231, 0.152
+2026-10-13 14:32:10,006 transreid.train INFO: SCSR |gate-1| mean=1.855240e-05, max=1.239349e-04; residual/P mean=3.049080e-08
+2026-10-13 14:32:58,584 transreid.train INFO: Epoch[65] Iteration[100/114] Loss: 0.453, Acc: 0.966, Base Lr: 1.39e-02
+2026-10-13 14:32:58,584 transreid.train INFO: Epoch[65] 0.158, 0.151, 0.224, 0.142
+2026-10-13 14:32:58,584 transreid.train INFO: SCSR |gate-1| mean=1.853244e-05, max=1.218945e-04; residual/P mean=3.502778e-08
+2026-10-13 14:33:13,402 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=7423, cumulative optimizer updates=7418, cumulative AMP-skipped updates=5
+2026-10-13 14:33:13,402 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:33:13,403 transreid.train INFO: Epoch 65 done. Time per batch: 1.049[s] Total: 119.6[s]
+2026-10-13 14:34:08,330 transreid.train INFO: Epoch[66] Iteration[50/114] Loss: 0.499, Acc: 0.961, Base Lr: 1.35e-02
+2026-10-13 14:34:08,331 transreid.train INFO: Epoch[66] 0.177, 0.163, 0.229, 0.156
+2026-10-13 14:34:08,331 transreid.train INFO: SCSR |gate-1| mean=1.852545e-05, max=1.219738e-04; residual/P mean=3.456705e-08
+2026-10-13 14:34:58,684 transreid.train INFO: Epoch[66] Iteration[100/114] Loss: 0.456, Acc: 0.965, Base Lr: 1.35e-02
+2026-10-13 14:34:58,684 transreid.train INFO: Epoch[66] 0.157, 0.154, 0.222, 0.142
+2026-10-13 14:34:58,684 transreid.train INFO: SCSR |gate-1| mean=1.856407e-05, max=1.295015e-04; residual/P mean=3.039752e-08
+2026-10-13 14:35:13,619 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=7537, cumulative optimizer updates=7532, cumulative AMP-skipped updates=5
+2026-10-13 14:35:13,620 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:35:13,620 transreid.train INFO: Epoch 66 done. Time per batch: 1.055[s] Total: 120.2[s]
+2026-10-13 14:36:08,643 transreid.train INFO: Epoch[67] Iteration[50/114] Loss: 0.465, Acc: 0.967, Base Lr: 1.31e-02
+2026-10-13 14:36:08,643 transreid.train INFO: Epoch[67] 0.160, 0.159, 0.229, 0.144
+2026-10-13 14:36:08,643 transreid.train INFO: SCSR |gate-1| mean=1.862989e-05, max=1.238853e-04; residual/P mean=3.622351e-08
+2026-10-13 14:36:59,229 transreid.train INFO: Epoch[67] Iteration[100/114] Loss: 0.438, Acc: 0.968, Base Lr: 1.31e-02
+2026-10-13 14:36:59,229 transreid.train INFO: Epoch[67] 0.149, 0.151, 0.221, 0.136
+2026-10-13 14:36:59,229 transreid.train INFO: SCSR |gate-1| mean=1.851935e-05, max=1.207015e-04; residual/P mean=2.993413e-08
+2026-10-13 14:37:12,748 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=7651, cumulative optimizer updates=7646, cumulative AMP-skipped updates=5
+2026-10-13 14:37:12,748 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:37:12,748 transreid.train INFO: Epoch 67 done. Time per batch: 1.045[s] Total: 119.1[s]
+2026-10-13 14:38:08,611 transreid.train INFO: Epoch[68] Iteration[50/114] Loss: 0.484, Acc: 0.964, Base Lr: 1.27e-02
+2026-10-13 14:38:08,611 transreid.train INFO: Epoch[68] 0.168, 0.161, 0.227, 0.153
+2026-10-13 14:38:08,611 transreid.train INFO: SCSR |gate-1| mean=1.855068e-05, max=1.200229e-04; residual/P mean=3.239204e-08
+2026-10-13 14:38:58,309 transreid.train INFO: Epoch[68] Iteration[100/114] Loss: 0.438, Acc: 0.968, Base Lr: 1.27e-02
+2026-10-13 14:38:58,310 transreid.train INFO: Epoch[68] 0.150, 0.150, 0.221, 0.137
+2026-10-13 14:38:58,310 transreid.train INFO: SCSR |gate-1| mean=1.855081e-05, max=1.233360e-04; residual/P mean=3.219832e-08
+2026-10-13 14:39:13,335 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=7765, cumulative optimizer updates=7760, cumulative AMP-skipped updates=5
+2026-10-13 14:39:13,336 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:39:13,336 transreid.train INFO: Epoch 68 done. Time per batch: 1.058[s] Total: 120.6[s]
+2026-10-13 14:40:09,768 transreid.train INFO: Epoch[69] Iteration[50/114] Loss: 0.461, Acc: 0.965, Base Lr: 1.23e-02
+2026-10-13 14:40:09,769 transreid.train INFO: Epoch[69] 0.165, 0.151, 0.225, 0.142
+2026-10-13 14:40:09,769 transreid.train INFO: SCSR |gate-1| mean=1.864016e-05, max=1.235137e-04; residual/P mean=3.292328e-08
+2026-10-13 14:40:59,079 transreid.train INFO: Epoch[69] Iteration[100/114] Loss: 0.420, Acc: 0.969, Base Lr: 1.23e-02
+2026-10-13 14:40:59,079 transreid.train INFO: Epoch[69] 0.147, 0.143, 0.217, 0.128
+2026-10-13 14:40:59,079 transreid.train INFO: SCSR |gate-1| mean=1.862197e-05, max=1.232024e-04; residual/P mean=3.695142e-08
+2026-10-13 14:41:14,523 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=7879, cumulative optimizer updates=7874, cumulative AMP-skipped updates=5
+2026-10-13 14:41:14,524 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:41:14,524 transreid.train INFO: Epoch 69 done. Time per batch: 1.063[s] Total: 121.2[s]
+2026-10-13 14:42:09,247 transreid.train INFO: Epoch[70] Iteration[50/114] Loss: 0.462, Acc: 0.967, Base Lr: 1.19e-02
+2026-10-13 14:42:09,248 transreid.train INFO: Epoch[70] 0.161, 0.158, 0.228, 0.141
+2026-10-13 14:42:09,248 transreid.train INFO: SCSR |gate-1| mean=1.865301e-05, max=1.237197e-04; residual/P mean=3.419942e-08
+2026-10-13 14:42:59,809 transreid.train INFO: Epoch[70] Iteration[100/114] Loss: 0.407, Acc: 0.972, Base Lr: 1.19e-02
+2026-10-13 14:42:59,809 transreid.train INFO: Epoch[70] 0.138, 0.144, 0.219, 0.122
+2026-10-13 14:42:59,810 transreid.train INFO: SCSR |gate-1| mean=1.870519e-05, max=1.225341e-04; residual/P mean=3.109265e-08
+2026-10-13 14:43:14,590 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=7993, cumulative optimizer updates=7988, cumulative AMP-skipped updates=5
+2026-10-13 14:43:14,591 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:43:14,591 transreid.train INFO: Epoch 70 done. Time per batch: 1.053[s] Total: 120.1[s]
+2026-10-13 14:44:19,159 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 14:45:10,675 transreid.train INFO: The test feature is normalized
+2026-10-13 14:45:10,734 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 14:46:44,694 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 14:46:53,289 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 39.02%, mAP: 24.81%, mINP: 4.70%
+2026-10-13 14:47:02,056 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 25.76%, mAP: 14.77%, mINP: 2.01%
+2026-10-13 14:47:10,863 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 6.18%, mAP: 4.94%, mINP: 0.95%
+2026-10-13 14:47:20,075 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 21.59%, mAP: 14.29%, mINP: 2.55%
+2026-10-13 14:47:28,508 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 25.90%, mAP: 15.32%, mINP: 2.15%
+2026-10-13 14:47:37,675 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.18%, mAP: 4.67%, mINP: 0.87%
+2026-10-13 14:47:46,416 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 6.23%, mAP: 5.10%, mINP: 1.13%
+2026-10-13 14:47:55,456 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 6.70%, mAP: 4.63%, mINP: 0.83%
+2026-10-13 14:48:04,344 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 18.97%, mAP: 12.51%, mINP: 2.05%
+2026-10-13 14:48:04,345 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 14:48:04,345 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 14:48:04,345 transreid.train INFO:   NIR->RGB    21.59%  14.29%   2.55%
+2026-10-13 14:48:04,345 transreid.train INFO:   TIR->RGB     6.23%   5.10%   1.13%
+2026-10-13 14:48:04,345 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 14:48:04,345 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 14:48:04,345 transreid.train INFO:     RGB     RGB  39.02%  24.81%   4.70%
+2026-10-13 14:48:04,345 transreid.train INFO:     RGB     NIR  25.76%  14.77%   2.01%
+2026-10-13 14:48:04,345 transreid.train INFO:     RGB     TIR   6.18%   4.94%   0.95%
+2026-10-13 14:48:04,345 transreid.train INFO:     NIR     RGB  21.59%  14.29%   2.55%
+2026-10-13 14:48:04,345 transreid.train INFO:     NIR     NIR  25.90%  15.32%   2.15%
+2026-10-13 14:48:04,345 transreid.train INFO:     NIR     TIR   6.18%   4.67%   0.87%
+2026-10-13 14:48:04,345 transreid.train INFO:     TIR     RGB   6.23%   5.10%   1.13%
+2026-10-13 14:48:04,345 transreid.train INFO:     TIR     NIR   6.70%   4.63%   0.83%
+2026-10-13 14:48:04,345 transreid.train INFO:     TIR     TIR  18.97%  12.51%   2.05%
+2026-10-13 14:48:04,346 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 14:48:18,398 transreid.train INFO:   A->G -> mAP: 11.02%, Rank-1: 31.70%, Rank-10: 57.93%
+2026-10-13 14:48:31,846 transreid.train INFO:   G->A -> mAP: 12.71%, Rank-1: 29.45%, Rank-10: 53.73%
+2026-10-13 14:48:31,873 transreid.train INFO: Validation Results - Epoch: 70
+2026-10-13 14:48:31,874 transreid.train INFO: mAP: 10.04%
+2026-10-13 14:48:31,874 transreid.train INFO: CMC curve, Rank-1 : 27.68%
+2026-10-13 14:48:31,874 transreid.train INFO: CMC curve, Rank-5 : 43.78%
+2026-10-13 14:48:31,874 transreid.train INFO: CMC curve, Rank-10: 52.52%
+2026-10-13 14:49:28,486 transreid.train INFO: Epoch[71] Iteration[50/114] Loss: 0.447, Acc: 0.966, Base Lr: 1.15e-02
+2026-10-13 14:49:28,487 transreid.train INFO: Epoch[71] 0.158, 0.148, 0.224, 0.139
+2026-10-13 14:49:28,487 transreid.train INFO: SCSR |gate-1| mean=1.871829e-05, max=1.234118e-04; residual/P mean=2.869973e-08
+2026-10-13 14:50:18,372 transreid.train INFO: Epoch[71] Iteration[100/114] Loss: 0.423, Acc: 0.969, Base Lr: 1.15e-02
+2026-10-13 14:50:18,373 transreid.train INFO: Epoch[71] 0.145, 0.144, 0.218, 0.131
+2026-10-13 14:50:18,373 transreid.train INFO: SCSR |gate-1| mean=1.867390e-05, max=1.236557e-04; residual/P mean=2.766516e-08
+2026-10-13 14:50:33,230 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=8107, cumulative optimizer updates=8102, cumulative AMP-skipped updates=5
+2026-10-13 14:50:33,231 transreid.train INFO: SCSR local CUDA peak allocated memory: 12633.7 MiB
+2026-10-13 14:50:33,231 transreid.train INFO: Epoch 71 done. Time per batch: 1.063[s] Total: 121.2[s]
+2026-10-13 14:51:28,927 transreid.train INFO: Epoch[72] Iteration[50/114] Loss: 0.447, Acc: 0.966, Base Lr: 1.11e-02
+2026-10-13 14:51:28,927 transreid.train INFO: Epoch[72] 0.158, 0.151, 0.225, 0.136
+2026-10-13 14:51:28,928 transreid.train INFO: SCSR |gate-1| mean=1.877382e-05, max=1.257448e-04; residual/P mean=3.543584e-08
+2026-10-13 14:52:17,366 transreid.train INFO: Epoch[72] Iteration[100/114] Loss: 0.422, Acc: 0.969, Base Lr: 1.11e-02
+2026-10-13 14:52:17,366 transreid.train INFO: Epoch[72] 0.145, 0.145, 0.218, 0.130
+2026-10-13 14:52:17,366 transreid.train INFO: SCSR |gate-1| mean=1.870587e-05, max=1.257121e-04; residual/P mean=3.040509e-08
+2026-10-13 14:52:31,925 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=8221, cumulative optimizer updates=8216, cumulative AMP-skipped updates=5
+2026-10-13 14:52:31,925 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:52:31,926 transreid.train INFO: Epoch 72 done. Time per batch: 1.041[s] Total: 118.7[s]
+2026-10-13 14:53:24,929 transreid.train INFO: Epoch[73] Iteration[50/114] Loss: 0.445, Acc: 0.967, Base Lr: 1.07e-02
+2026-10-13 14:53:24,930 transreid.train INFO: Epoch[73] 0.154, 0.157, 0.223, 0.131
+2026-10-13 14:53:24,930 transreid.train INFO: SCSR |gate-1| mean=1.876245e-05, max=1.232182e-04; residual/P mean=2.786722e-08
+2026-10-13 14:54:14,524 transreid.train INFO: Epoch[73] Iteration[100/114] Loss: 0.405, Acc: 0.972, Base Lr: 1.07e-02
+2026-10-13 14:54:14,524 transreid.train INFO: Epoch[73] 0.137, 0.145, 0.217, 0.121
+2026-10-13 14:54:14,524 transreid.train INFO: SCSR |gate-1| mean=1.874457e-05, max=1.239922e-04; residual/P mean=2.997894e-08
+2026-10-13 14:54:29,039 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=112, cumulative batches=8335, cumulative optimizer updates=8328, cumulative AMP-skipped updates=7
+2026-10-13 14:54:29,039 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:54:29,039 transreid.train INFO: Epoch 73 done. Time per batch: 1.027[s] Total: 117.1[s]
+2026-10-13 14:55:21,707 transreid.train INFO: Epoch[74] Iteration[50/114] Loss: 0.431, Acc: 0.969, Base Lr: 1.03e-02
+2026-10-13 14:55:21,707 transreid.train INFO: Epoch[74] 0.146, 0.150, 0.224, 0.133
+2026-10-13 14:55:21,707 transreid.train INFO: SCSR |gate-1| mean=1.877894e-05, max=1.241544e-04; residual/P mean=3.587907e-08
+2026-10-13 14:56:11,883 transreid.train INFO: Epoch[74] Iteration[100/114] Loss: 0.396, Acc: 0.971, Base Lr: 1.03e-02
+2026-10-13 14:56:11,883 transreid.train INFO: Epoch[74] 0.134, 0.139, 0.215, 0.120
+2026-10-13 14:56:11,883 transreid.train INFO: SCSR |gate-1| mean=1.876941e-05, max=1.226631e-04; residual/P mean=3.246779e-08
+2026-10-13 14:56:26,477 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=8449, cumulative optimizer updates=8442, cumulative AMP-skipped updates=7
+2026-10-13 14:56:26,477 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:56:26,477 transreid.train INFO: Epoch 74 done. Time per batch: 1.030[s] Total: 117.4[s]
+2026-10-13 14:57:23,876 transreid.train INFO: Epoch[75] Iteration[50/114] Loss: 0.443, Acc: 0.968, Base Lr: 9.92e-03
+2026-10-13 14:57:23,876 transreid.train INFO: Epoch[75] 0.156, 0.153, 0.224, 0.132
+2026-10-13 14:57:23,877 transreid.train INFO: SCSR |gate-1| mean=1.877123e-05, max=1.242915e-04; residual/P mean=3.272229e-08
+2026-10-13 14:58:15,302 transreid.train INFO: Epoch[75] Iteration[100/114] Loss: 0.401, Acc: 0.971, Base Lr: 9.92e-03
+2026-10-13 14:58:15,303 transreid.train INFO: Epoch[75] 0.138, 0.140, 0.215, 0.121
+2026-10-13 14:58:15,303 transreid.train INFO: SCSR |gate-1| mean=1.880110e-05, max=1.230467e-04; residual/P mean=2.878436e-08
+2026-10-13 14:58:29,885 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=8563, cumulative optimizer updates=8556, cumulative AMP-skipped updates=7
+2026-10-13 14:58:29,886 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 14:58:29,886 transreid.train INFO: Epoch 75 done. Time per batch: 1.083[s] Total: 123.4[s]
+2026-10-13 14:59:24,749 transreid.train INFO: Epoch[76] Iteration[50/114] Loss: 0.426, Acc: 0.966, Base Lr: 9.54e-03
+2026-10-13 14:59:24,749 transreid.train INFO: Epoch[76] 0.150, 0.147, 0.224, 0.126
+2026-10-13 14:59:24,750 transreid.train INFO: SCSR |gate-1| mean=1.876497e-05, max=1.204352e-04; residual/P mean=2.884697e-08
+2026-10-13 15:00:13,146 transreid.train INFO: Epoch[76] Iteration[100/114] Loss: 0.387, Acc: 0.971, Base Lr: 9.54e-03
+2026-10-13 15:00:13,146 transreid.train INFO: Epoch[76] 0.134, 0.136, 0.214, 0.114
+2026-10-13 15:00:13,147 transreid.train INFO: SCSR |gate-1| mean=1.875605e-05, max=1.198345e-04; residual/P mean=3.024067e-08
+2026-10-13 15:00:27,714 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=8677, cumulative optimizer updates=8670, cumulative AMP-skipped updates=7
+2026-10-13 15:00:27,715 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:00:27,715 transreid.train INFO: Epoch 76 done. Time per batch: 1.034[s] Total: 117.8[s]
+2026-10-13 15:01:20,483 transreid.train INFO: Epoch[77] Iteration[50/114] Loss: 0.443, Acc: 0.967, Base Lr: 9.16e-03
+2026-10-13 15:01:20,483 transreid.train INFO: Epoch[77] 0.154, 0.151, 0.225, 0.136
+2026-10-13 15:01:20,484 transreid.train INFO: SCSR |gate-1| mean=1.878366e-05, max=1.202786e-04; residual/P mean=2.924814e-08
+2026-10-13 15:02:09,988 transreid.train INFO: Epoch[77] Iteration[100/114] Loss: 0.400, Acc: 0.971, Base Lr: 9.16e-03
+2026-10-13 15:02:09,989 transreid.train INFO: Epoch[77] 0.136, 0.139, 0.214, 0.123
+2026-10-13 15:02:09,989 transreid.train INFO: SCSR |gate-1| mean=1.879618e-05, max=1.214384e-04; residual/P mean=3.030364e-08
+2026-10-13 15:02:24,605 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=8791, cumulative optimizer updates=8784, cumulative AMP-skipped updates=7
+2026-10-13 15:02:24,605 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:02:24,606 transreid.train INFO: Epoch 77 done. Time per batch: 1.025[s] Total: 116.9[s]
+2026-10-13 15:03:17,752 transreid.train INFO: Epoch[78] Iteration[50/115] Loss: 0.424, Acc: 0.969, Base Lr: 8.78e-03
+2026-10-13 15:03:17,752 transreid.train INFO: Epoch[78] 0.152, 0.144, 0.220, 0.126
+2026-10-13 15:03:17,752 transreid.train INFO: SCSR |gate-1| mean=1.882342e-05, max=1.183197e-04; residual/P mean=3.187854e-08
+2026-10-13 15:04:07,771 transreid.train INFO: Epoch[78] Iteration[100/115] Loss: 0.389, Acc: 0.971, Base Lr: 8.78e-03
+2026-10-13 15:04:07,771 transreid.train INFO: Epoch[78] 0.136, 0.135, 0.212, 0.116
+2026-10-13 15:04:07,772 transreid.train INFO: SCSR |gate-1| mean=1.881869e-05, max=1.191030e-04; residual/P mean=3.241457e-08
+2026-10-13 15:04:22,556 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=8906, cumulative optimizer updates=8899, cumulative AMP-skipped updates=7
+2026-10-13 15:04:22,556 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:04:22,556 transreid.train INFO: Epoch 78 done. Time per batch: 1.026[s] Total: 118.0[s]
+2026-10-13 15:05:17,897 transreid.train INFO: Epoch[79] Iteration[50/114] Loss: 0.413, Acc: 0.970, Base Lr: 8.41e-03
+2026-10-13 15:05:17,898 transreid.train INFO: Epoch[79] 0.145, 0.145, 0.220, 0.121
+2026-10-13 15:05:17,898 transreid.train INFO: SCSR |gate-1| mean=1.881670e-05, max=1.202254e-04; residual/P mean=3.552255e-08
+2026-10-13 15:06:06,372 transreid.train INFO: Epoch[79] Iteration[100/114] Loss: 0.382, Acc: 0.971, Base Lr: 8.41e-03
+2026-10-13 15:06:06,372 transreid.train INFO: Epoch[79] 0.131, 0.135, 0.211, 0.114
+2026-10-13 15:06:06,372 transreid.train INFO: SCSR |gate-1| mean=1.884270e-05, max=1.215791e-04; residual/P mean=3.138188e-08
+2026-10-13 15:06:20,996 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=9020, cumulative optimizer updates=9013, cumulative AMP-skipped updates=7
+2026-10-13 15:06:20,996 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:06:20,997 transreid.train INFO: Epoch 79 done. Time per batch: 1.039[s] Total: 118.4[s]
+2026-10-13 15:07:15,716 transreid.train INFO: Epoch[80] Iteration[50/115] Loss: 0.433, Acc: 0.967, Base Lr: 8.05e-03
+2026-10-13 15:07:15,716 transreid.train INFO: Epoch[80] 0.155, 0.144, 0.221, 0.131
+2026-10-13 15:07:15,716 transreid.train INFO: SCSR |gate-1| mean=1.890301e-05, max=1.218610e-04; residual/P mean=3.098730e-08
+2026-10-13 15:08:03,964 transreid.train INFO: Epoch[80] Iteration[100/115] Loss: 0.375, Acc: 0.972, Base Lr: 8.05e-03
+2026-10-13 15:08:03,964 transreid.train INFO: Epoch[80] 0.131, 0.131, 0.211, 0.111
+2026-10-13 15:08:03,964 transreid.train INFO: SCSR |gate-1| mean=1.894759e-05, max=1.233103e-04; residual/P mean=2.935965e-08
+2026-10-13 15:08:19,499 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=9135, cumulative optimizer updates=9128, cumulative AMP-skipped updates=7
+2026-10-13 15:08:19,500 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:08:19,500 transreid.train INFO: Epoch 80 done. Time per batch: 1.030[s] Total: 118.5[s]
+2026-10-13 15:09:32,136 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 15:10:15,189 transreid.train INFO: The test feature is normalized
+2026-10-13 15:10:15,251 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 15:11:38,511 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 15:11:46,805 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 40.14%, mAP: 25.41%, mINP: 4.72%
+2026-10-13 15:11:55,025 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 25.29%, mAP: 15.08%, mINP: 2.11%
+2026-10-13 15:12:03,153 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 6.79%, mAP: 5.24%, mINP: 1.07%
+2026-10-13 15:12:11,099 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 22.48%, mAP: 14.79%, mINP: 2.63%
+2026-10-13 15:12:19,163 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 26.32%, mAP: 15.87%, mINP: 2.22%
+2026-10-13 15:12:27,120 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.89%, mAP: 4.93%, mINP: 0.94%
+2026-10-13 15:12:35,093 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 7.03%, mAP: 5.37%, mINP: 1.17%
+2026-10-13 15:12:43,001 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 6.93%, mAP: 4.77%, mINP: 0.90%
+2026-10-13 15:12:50,811 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 19.20%, mAP: 12.77%, mINP: 2.19%
+2026-10-13 15:12:50,811 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 15:12:50,811 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 15:12:50,811 transreid.train INFO:   NIR->RGB    22.48%  14.79%   2.63%
+2026-10-13 15:12:50,811 transreid.train INFO:   TIR->RGB     7.03%   5.37%   1.17%
+2026-10-13 15:12:50,811 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 15:12:50,811 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 15:12:50,812 transreid.train INFO:     RGB     RGB  40.14%  25.41%   4.72%
+2026-10-13 15:12:50,812 transreid.train INFO:     RGB     NIR  25.29%  15.08%   2.11%
+2026-10-13 15:12:50,812 transreid.train INFO:     RGB     TIR   6.79%   5.24%   1.07%
+2026-10-13 15:12:50,812 transreid.train INFO:     NIR     RGB  22.48%  14.79%   2.63%
+2026-10-13 15:12:50,812 transreid.train INFO:     NIR     NIR  26.32%  15.87%   2.22%
+2026-10-13 15:12:50,812 transreid.train INFO:     NIR     TIR   6.89%   4.93%   0.94%
+2026-10-13 15:12:50,812 transreid.train INFO:     TIR     RGB   7.03%   5.37%   1.17%
+2026-10-13 15:12:50,812 transreid.train INFO:     TIR     NIR   6.93%   4.77%   0.90%
+2026-10-13 15:12:50,812 transreid.train INFO:     TIR     TIR  19.20%  12.77%   2.19%
+2026-10-13 15:12:50,812 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 15:13:03,375 transreid.train INFO:   A->G -> mAP: 11.03%, Rank-1: 30.52%, Rank-10: 56.67%
+2026-10-13 15:13:15,648 transreid.train INFO:   G->A -> mAP: 12.79%, Rank-1: 27.85%, Rank-10: 55.07%
+2026-10-13 15:13:15,661 transreid.train INFO: Validation Results - Epoch: 80
+2026-10-13 15:13:15,662 transreid.train INFO: mAP: 10.37%
+2026-10-13 15:13:15,662 transreid.train INFO: CMC curve, Rank-1 : 27.95%
+2026-10-13 15:13:15,662 transreid.train INFO: CMC curve, Rank-5 : 44.89%
+2026-10-13 15:13:15,662 transreid.train INFO: CMC curve, Rank-10: 52.80%
+2026-10-13 15:14:10,316 transreid.train INFO: Epoch[81] Iteration[50/114] Loss: 0.395, Acc: 0.971, Base Lr: 7.69e-03
+2026-10-13 15:14:10,317 transreid.train INFO: Epoch[81] 0.139, 0.139, 0.217, 0.116
+2026-10-13 15:14:10,317 transreid.train INFO: SCSR |gate-1| mean=1.893236e-05, max=1.212796e-04; residual/P mean=3.518501e-08
+2026-10-13 15:14:58,917 transreid.train INFO: Epoch[81] Iteration[100/114] Loss: 0.366, Acc: 0.972, Base Lr: 7.69e-03
+2026-10-13 15:14:58,917 transreid.train INFO: Epoch[81] 0.126, 0.130, 0.209, 0.108
+2026-10-13 15:14:58,917 transreid.train INFO: SCSR |gate-1| mean=1.891065e-05, max=1.208956e-04; residual/P mean=3.460862e-08
+2026-10-13 15:15:13,580 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=9249, cumulative optimizer updates=9242, cumulative AMP-skipped updates=7
+2026-10-13 15:15:13,580 transreid.train INFO: SCSR local CUDA peak allocated memory: 12633.7 MiB
+2026-10-13 15:15:13,580 transreid.train INFO: Epoch 81 done. Time per batch: 1.033[s] Total: 117.7[s]
+2026-10-13 15:16:07,246 transreid.train INFO: Epoch[82] Iteration[50/114] Loss: 0.398, Acc: 0.970, Base Lr: 7.34e-03
+2026-10-13 15:16:07,246 transreid.train INFO: Epoch[82] 0.141, 0.140, 0.216, 0.114
+2026-10-13 15:16:07,246 transreid.train INFO: SCSR |gate-1| mean=1.891698e-05, max=1.202705e-04; residual/P mean=3.078746e-08
+2026-10-13 15:16:56,955 transreid.train INFO: Epoch[82] Iteration[100/114] Loss: 0.362, Acc: 0.973, Base Lr: 7.34e-03
+2026-10-13 15:16:56,955 transreid.train INFO: Epoch[82] 0.124, 0.130, 0.208, 0.106
+2026-10-13 15:16:56,955 transreid.train INFO: SCSR |gate-1| mean=1.886739e-05, max=1.244433e-04; residual/P mean=3.256690e-08
+2026-10-13 15:17:11,632 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=9363, cumulative optimizer updates=9356, cumulative AMP-skipped updates=7
+2026-10-13 15:17:11,633 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:17:11,633 transreid.train INFO: Epoch 82 done. Time per batch: 1.036[s] Total: 118.1[s]
+2026-10-13 15:18:05,114 transreid.train INFO: Epoch[83] Iteration[50/114] Loss: 0.398, Acc: 0.971, Base Lr: 6.99e-03
+2026-10-13 15:18:05,114 transreid.train INFO: Epoch[83] 0.139, 0.139, 0.216, 0.118
+2026-10-13 15:18:05,114 transreid.train INFO: SCSR |gate-1| mean=1.886500e-05, max=1.195362e-04; residual/P mean=3.252060e-08
+2026-10-13 15:18:54,822 transreid.train INFO: Epoch[83] Iteration[100/114] Loss: 0.357, Acc: 0.974, Base Lr: 6.99e-03
+2026-10-13 15:18:54,822 transreid.train INFO: Epoch[83] 0.123, 0.126, 0.207, 0.106
+2026-10-13 15:18:54,822 transreid.train INFO: SCSR |gate-1| mean=1.893663e-05, max=1.222262e-04; residual/P mean=3.501945e-08
+2026-10-13 15:19:08,350 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=9477, cumulative optimizer updates=9470, cumulative AMP-skipped updates=7
+2026-10-13 15:19:08,351 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:19:08,351 transreid.train INFO: Epoch 83 done. Time per batch: 1.024[s] Total: 116.7[s]
+2026-10-13 15:20:03,398 transreid.train INFO: Epoch[84] Iteration[50/114] Loss: 0.371, Acc: 0.974, Base Lr: 6.65e-03
+2026-10-13 15:20:03,399 transreid.train INFO: Epoch[84] 0.128, 0.131, 0.213, 0.110
+2026-10-13 15:20:03,399 transreid.train INFO: SCSR |gate-1| mean=1.894440e-05, max=1.221451e-04; residual/P mean=3.147901e-08
+2026-10-13 15:20:52,933 transreid.train INFO: Epoch[84] Iteration[100/114] Loss: 0.346, Acc: 0.975, Base Lr: 6.65e-03
+2026-10-13 15:20:52,934 transreid.train INFO: Epoch[84] 0.118, 0.123, 0.205, 0.103
+2026-10-13 15:20:52,934 transreid.train INFO: SCSR |gate-1| mean=1.894003e-05, max=1.212236e-04; residual/P mean=3.252360e-08
+2026-10-13 15:21:08,419 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=9591, cumulative optimizer updates=9584, cumulative AMP-skipped updates=7
+2026-10-13 15:21:08,420 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:21:08,420 transreid.train INFO: Epoch 84 done. Time per batch: 1.053[s] Total: 120.1[s]
+2026-10-13 15:22:04,994 transreid.train INFO: Epoch[85] Iteration[50/114] Loss: 0.376, Acc: 0.973, Base Lr: 6.31e-03
+2026-10-13 15:22:04,994 transreid.train INFO: Epoch[85] 0.132, 0.134, 0.215, 0.107
+2026-10-13 15:22:04,994 transreid.train INFO: SCSR |gate-1| mean=1.892672e-05, max=1.222999e-04; residual/P mean=3.697907e-08
+2026-10-13 15:22:55,026 transreid.train INFO: Epoch[85] Iteration[100/114] Loss: 0.341, Acc: 0.976, Base Lr: 6.31e-03
+2026-10-13 15:22:55,026 transreid.train INFO: Epoch[85] 0.116, 0.124, 0.206, 0.098
+2026-10-13 15:22:55,026 transreid.train INFO: SCSR |gate-1| mean=1.893084e-05, max=1.220082e-04; residual/P mean=3.360636e-08
+2026-10-13 15:23:10,207 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=9705, cumulative optimizer updates=9698, cumulative AMP-skipped updates=7
+2026-10-13 15:23:10,208 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:23:10,208 transreid.train INFO: Epoch 85 done. Time per batch: 1.068[s] Total: 121.8[s]
+2026-10-13 15:24:05,585 transreid.train INFO: Epoch[86] Iteration[50/114] Loss: 0.392, Acc: 0.970, Base Lr: 5.98e-03
+2026-10-13 15:24:05,585 transreid.train INFO: Epoch[86] 0.140, 0.137, 0.213, 0.114
+2026-10-13 15:24:05,585 transreid.train INFO: SCSR |gate-1| mean=1.890096e-05, max=1.223954e-04; residual/P mean=2.872616e-08
+2026-10-13 15:24:57,052 transreid.train INFO: Epoch[86] Iteration[100/114] Loss: 0.350, Acc: 0.974, Base Lr: 5.98e-03
+2026-10-13 15:24:57,052 transreid.train INFO: Epoch[86] 0.121, 0.126, 0.205, 0.101
+2026-10-13 15:24:57,052 transreid.train INFO: SCSR |gate-1| mean=1.890876e-05, max=1.203002e-04; residual/P mean=2.989597e-08
+2026-10-13 15:25:12,358 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=9819, cumulative optimizer updates=9812, cumulative AMP-skipped updates=7
+2026-10-13 15:25:12,359 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:25:12,359 transreid.train INFO: Epoch 86 done. Time per batch: 1.071[s] Total: 122.1[s]
+2026-10-13 15:26:09,509 transreid.train INFO: Epoch[87] Iteration[50/114] Loss: 0.391, Acc: 0.972, Base Lr: 5.66e-03
+2026-10-13 15:26:09,509 transreid.train INFO: Epoch[87] 0.140, 0.135, 0.214, 0.113
+2026-10-13 15:26:09,509 transreid.train INFO: SCSR |gate-1| mean=1.894261e-05, max=1.219203e-04; residual/P mean=3.336963e-08
+2026-10-13 15:26:59,645 transreid.train INFO: Epoch[87] Iteration[100/114] Loss: 0.355, Acc: 0.975, Base Lr: 5.66e-03
+2026-10-13 15:26:59,645 transreid.train INFO: Epoch[87] 0.124, 0.126, 0.205, 0.103
+2026-10-13 15:26:59,645 transreid.train INFO: SCSR |gate-1| mean=1.891609e-05, max=1.194023e-04; residual/P mean=3.072765e-08
+2026-10-13 15:27:15,017 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=9933, cumulative optimizer updates=9926, cumulative AMP-skipped updates=7
+2026-10-13 15:27:15,018 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:27:15,018 transreid.train INFO: Epoch 87 done. Time per batch: 1.076[s] Total: 122.7[s]
+2026-10-13 15:28:12,344 transreid.train INFO: Epoch[88] Iteration[50/114] Loss: 0.380, Acc: 0.972, Base Lr: 5.35e-03
+2026-10-13 15:28:12,344 transreid.train INFO: Epoch[88] 0.136, 0.132, 0.215, 0.111
+2026-10-13 15:28:12,344 transreid.train INFO: SCSR |gate-1| mean=1.895666e-05, max=1.207634e-04; residual/P mean=3.163364e-08
+2026-10-13 15:29:02,462 transreid.train INFO: Epoch[88] Iteration[100/114] Loss: 0.353, Acc: 0.974, Base Lr: 5.35e-03
+2026-10-13 15:29:02,463 transreid.train INFO: Epoch[88] 0.124, 0.123, 0.207, 0.104
+2026-10-13 15:29:02,463 transreid.train INFO: SCSR |gate-1| mean=1.888138e-05, max=1.209873e-04; residual/P mean=3.715917e-08
+2026-10-13 15:29:17,869 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=10047, cumulative optimizer updates=10040, cumulative AMP-skipped updates=7
+2026-10-13 15:29:17,870 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:29:17,870 transreid.train INFO: Epoch 88 done. Time per batch: 1.078[s] Total: 122.9[s]
+2026-10-13 15:30:13,982 transreid.train INFO: Epoch[89] Iteration[50/114] Loss: 0.364, Acc: 0.975, Base Lr: 5.04e-03
+2026-10-13 15:30:13,982 transreid.train INFO: Epoch[89] 0.126, 0.134, 0.212, 0.101
+2026-10-13 15:30:13,982 transreid.train INFO: SCSR |gate-1| mean=1.898341e-05, max=1.211224e-04; residual/P mean=3.172578e-08
+2026-10-13 15:31:05,307 transreid.train INFO: Epoch[89] Iteration[100/114] Loss: 0.333, Acc: 0.977, Base Lr: 5.04e-03
+2026-10-13 15:31:05,307 transreid.train INFO: Epoch[89] 0.113, 0.122, 0.204, 0.095
+2026-10-13 15:31:05,307 transreid.train INFO: SCSR |gate-1| mean=1.898606e-05, max=1.211483e-04; residual/P mean=3.383326e-08
+2026-10-13 15:31:20,682 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=10161, cumulative optimizer updates=10154, cumulative AMP-skipped updates=7
+2026-10-13 15:31:20,682 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:31:20,683 transreid.train INFO: Epoch 89 done. Time per batch: 1.077[s] Total: 122.8[s]
+2026-10-13 15:32:15,592 transreid.train INFO: Epoch[90] Iteration[50/114] Loss: 0.363, Acc: 0.972, Base Lr: 4.74e-03
+2026-10-13 15:32:15,592 transreid.train INFO: Epoch[90] 0.126, 0.130, 0.208, 0.105
+2026-10-13 15:32:15,593 transreid.train INFO: SCSR |gate-1| mean=1.897076e-05, max=1.196985e-04; residual/P mean=2.872880e-08
+2026-10-13 15:33:07,642 transreid.train INFO: Epoch[90] Iteration[100/114] Loss: 0.338, Acc: 0.974, Base Lr: 4.74e-03
+2026-10-13 15:33:07,643 transreid.train INFO: Epoch[90] 0.116, 0.122, 0.202, 0.098
+2026-10-13 15:33:07,643 transreid.train INFO: SCSR |gate-1| mean=1.894207e-05, max=1.238997e-04; residual/P mean=2.916883e-08
+2026-10-13 15:33:21,742 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=10275, cumulative optimizer updates=10268, cumulative AMP-skipped updates=7
+2026-10-13 15:33:21,742 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:33:21,742 transreid.train INFO: Epoch 90 done. Time per batch: 1.062[s] Total: 121.1[s]
+2026-10-13 15:34:33,918 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 15:35:19,046 transreid.train INFO: The test feature is normalized
+2026-10-13 15:35:19,101 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 15:36:47,284 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 15:36:56,400 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 40.66%, mAP: 26.16%, mINP: 5.04%
+2026-10-13 15:37:05,407 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 26.42%, mAP: 15.72%, mINP: 2.18%
+2026-10-13 15:37:15,366 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 6.74%, mAP: 5.41%, mINP: 1.07%
+2026-10-13 15:37:24,397 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 24.03%, mAP: 15.47%, mINP: 2.81%
+2026-10-13 15:37:33,019 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 27.59%, mAP: 16.57%, mINP: 2.36%
+2026-10-13 15:37:42,472 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.98%, mAP: 5.11%, mINP: 0.97%
+2026-10-13 15:37:51,266 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 7.31%, mAP: 5.63%, mINP: 1.26%
+2026-10-13 15:37:59,900 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 7.63%, mAP: 5.14%, mINP: 0.96%
+2026-10-13 15:38:09,301 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 19.63%, mAP: 13.07%, mINP: 2.21%
+2026-10-13 15:38:09,301 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 15:38:09,301 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 15:38:09,301 transreid.train INFO:   NIR->RGB    24.03%  15.47%   2.81%
+2026-10-13 15:38:09,301 transreid.train INFO:   TIR->RGB     7.31%   5.63%   1.26%
+2026-10-13 15:38:09,301 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 15:38:09,302 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 15:38:09,302 transreid.train INFO:     RGB     RGB  40.66%  26.16%   5.04%
+2026-10-13 15:38:09,302 transreid.train INFO:     RGB     NIR  26.42%  15.72%   2.18%
+2026-10-13 15:38:09,302 transreid.train INFO:     RGB     TIR   6.74%   5.41%   1.07%
+2026-10-13 15:38:09,302 transreid.train INFO:     NIR     RGB  24.03%  15.47%   2.81%
+2026-10-13 15:38:09,302 transreid.train INFO:     NIR     NIR  27.59%  16.57%   2.36%
+2026-10-13 15:38:09,302 transreid.train INFO:     NIR     TIR   6.98%   5.11%   0.97%
+2026-10-13 15:38:09,302 transreid.train INFO:     TIR     RGB   7.31%   5.63%   1.26%
+2026-10-13 15:38:09,302 transreid.train INFO:     TIR     NIR   7.63%   5.14%   0.96%
+2026-10-13 15:38:09,302 transreid.train INFO:     TIR     TIR  19.63%  13.07%   2.21%
+2026-10-13 15:38:09,303 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 15:38:24,198 transreid.train INFO:   A->G -> mAP: 11.48%, Rank-1: 31.85%, Rank-10: 57.70%
+2026-10-13 15:38:37,977 transreid.train INFO:   G->A -> mAP: 13.16%, Rank-1: 29.50%, Rank-10: 54.09%
+2026-10-13 15:38:38,000 transreid.train INFO: Validation Results - Epoch: 90
+2026-10-13 15:38:38,000 transreid.train INFO: mAP: 10.80%
+2026-10-13 15:38:38,000 transreid.train INFO: CMC curve, Rank-1 : 28.84%
+2026-10-13 15:38:38,001 transreid.train INFO: CMC curve, Rank-5 : 45.73%
+2026-10-13 15:38:38,001 transreid.train INFO: CMC curve, Rank-10: 53.33%
+2026-10-13 15:39:37,525 transreid.train INFO: Epoch[91] Iteration[50/114] Loss: 0.365, Acc: 0.974, Base Lr: 4.45e-03
+2026-10-13 15:39:37,526 transreid.train INFO: Epoch[91] 0.130, 0.130, 0.212, 0.104
+2026-10-13 15:39:37,527 transreid.train INFO: SCSR |gate-1| mean=1.898622e-05, max=1.203561e-04; residual/P mean=2.995098e-08
+2026-10-13 15:40:28,794 transreid.train INFO: Epoch[91] Iteration[100/114] Loss: 0.336, Acc: 0.977, Base Lr: 4.45e-03
+2026-10-13 15:40:28,794 transreid.train INFO: Epoch[91] 0.116, 0.121, 0.204, 0.097
+2026-10-13 15:40:28,794 transreid.train INFO: SCSR |gate-1| mean=1.896303e-05, max=1.219456e-04; residual/P mean=3.084631e-08
+2026-10-13 15:40:44,040 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=10389, cumulative optimizer updates=10382, cumulative AMP-skipped updates=7
+2026-10-13 15:40:44,041 transreid.train INFO: SCSR local CUDA peak allocated memory: 12633.7 MiB
+2026-10-13 15:40:44,041 transreid.train INFO: Epoch 91 done. Time per batch: 1.103[s] Total: 125.8[s]
+2026-10-13 15:41:41,435 transreid.train INFO: Epoch[92] Iteration[50/114] Loss: 0.348, Acc: 0.975, Base Lr: 4.17e-03
+2026-10-13 15:41:41,435 transreid.train INFO: Epoch[92] 0.122, 0.126, 0.209, 0.099
+2026-10-13 15:41:41,435 transreid.train INFO: SCSR |gate-1| mean=1.901095e-05, max=1.213560e-04; residual/P mean=2.875963e-08
+2026-10-13 15:42:32,436 transreid.train INFO: Epoch[92] Iteration[100/114] Loss: 0.324, Acc: 0.977, Base Lr: 4.17e-03
+2026-10-13 15:42:32,436 transreid.train INFO: Epoch[92] 0.111, 0.118, 0.203, 0.093
+2026-10-13 15:42:32,436 transreid.train INFO: SCSR |gate-1| mean=1.900498e-05, max=1.228808e-04; residual/P mean=3.097091e-08
+2026-10-13 15:42:47,524 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=10503, cumulative optimizer updates=10496, cumulative AMP-skipped updates=7
+2026-10-13 15:42:47,527 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:42:47,527 transreid.train INFO: Epoch 92 done. Time per batch: 1.083[s] Total: 123.5[s]
+2026-10-13 15:43:43,235 transreid.train INFO: Epoch[93] Iteration[50/114] Loss: 0.379, Acc: 0.972, Base Lr: 3.89e-03
+2026-10-13 15:43:43,235 transreid.train INFO: Epoch[93] 0.135, 0.137, 0.213, 0.105
+2026-10-13 15:43:43,235 transreid.train INFO: SCSR |gate-1| mean=1.897657e-05, max=1.242459e-04; residual/P mean=3.180276e-08
+2026-10-13 15:44:34,986 transreid.train INFO: Epoch[93] Iteration[100/114] Loss: 0.329, Acc: 0.977, Base Lr: 3.89e-03
+2026-10-13 15:44:34,986 transreid.train INFO: Epoch[93] 0.113, 0.123, 0.204, 0.092
+2026-10-13 15:44:34,986 transreid.train INFO: SCSR |gate-1| mean=1.897776e-05, max=1.215812e-04; residual/P mean=3.410281e-08
+2026-10-13 15:44:50,050 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=10617, cumulative optimizer updates=10610, cumulative AMP-skipped updates=7
+2026-10-13 15:44:50,050 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:44:50,050 transreid.train INFO: Epoch 93 done. Time per batch: 1.075[s] Total: 122.5[s]
+2026-10-13 15:45:46,621 transreid.train INFO: Epoch[94] Iteration[50/114] Loss: 0.342, Acc: 0.975, Base Lr: 3.62e-03
+2026-10-13 15:45:46,621 transreid.train INFO: Epoch[94] 0.119, 0.128, 0.209, 0.093
+2026-10-13 15:45:46,621 transreid.train INFO: SCSR |gate-1| mean=1.896555e-05, max=1.284081e-04; residual/P mean=2.938593e-08
+2026-10-13 15:46:35,648 transreid.train INFO: Epoch[94] Iteration[100/114] Loss: 0.317, Acc: 0.977, Base Lr: 3.62e-03
+2026-10-13 15:46:35,649 transreid.train INFO: Epoch[94] 0.108, 0.118, 0.201, 0.088
+2026-10-13 15:46:35,649 transreid.train INFO: SCSR |gate-1| mean=1.900550e-05, max=1.245189e-04; residual/P mean=3.277302e-08
+2026-10-13 15:46:50,224 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=10731, cumulative optimizer updates=10724, cumulative AMP-skipped updates=7
+2026-10-13 15:46:50,224 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:46:50,225 transreid.train INFO: Epoch 94 done. Time per batch: 1.054[s] Total: 120.2[s]
+2026-10-13 15:47:45,309 transreid.train INFO: Epoch[95] Iteration[50/114] Loss: 0.349, Acc: 0.974, Base Lr: 3.36e-03
+2026-10-13 15:47:45,310 transreid.train INFO: Epoch[95] 0.126, 0.123, 0.208, 0.098
+2026-10-13 15:47:45,310 transreid.train INFO: SCSR |gate-1| mean=1.895184e-05, max=1.207498e-04; residual/P mean=3.343745e-08
+2026-10-13 15:48:33,579 transreid.train INFO: Epoch[95] Iteration[100/114] Loss: 0.318, Acc: 0.977, Base Lr: 3.36e-03
+2026-10-13 15:48:33,579 transreid.train INFO: Epoch[95] 0.110, 0.115, 0.201, 0.091
+2026-10-13 15:48:33,579 transreid.train INFO: SCSR |gate-1| mean=1.899679e-05, max=1.209516e-04; residual/P mean=3.433686e-08
+2026-10-13 15:48:48,147 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=10845, cumulative optimizer updates=10838, cumulative AMP-skipped updates=7
+2026-10-13 15:48:48,148 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:48:48,148 transreid.train INFO: Epoch 95 done. Time per batch: 1.034[s] Total: 117.9[s]
+2026-10-13 15:49:41,581 transreid.train INFO: Epoch[96] Iteration[50/115] Loss: 0.359, Acc: 0.974, Base Lr: 3.11e-03
+2026-10-13 15:49:41,581 transreid.train INFO: Epoch[96] 0.128, 0.126, 0.210, 0.103
+2026-10-13 15:49:41,581 transreid.train INFO: SCSR |gate-1| mean=1.901360e-05, max=1.182532e-04; residual/P mean=3.144234e-08
+2026-10-13 15:50:30,930 transreid.train INFO: Epoch[96] Iteration[100/115] Loss: 0.320, Acc: 0.977, Base Lr: 3.11e-03
+2026-10-13 15:50:30,930 transreid.train INFO: Epoch[96] 0.110, 0.116, 0.200, 0.091
+2026-10-13 15:50:30,930 transreid.train INFO: SCSR |gate-1| mean=1.898633e-05, max=1.226553e-04; residual/P mean=3.014103e-08
+2026-10-13 15:50:46,404 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=10960, cumulative optimizer updates=10953, cumulative AMP-skipped updates=7
+2026-10-13 15:50:46,405 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:50:46,405 transreid.train INFO: Epoch 96 done. Time per batch: 1.028[s] Total: 118.3[s]
+2026-10-13 15:51:40,477 transreid.train INFO: Epoch[97] Iteration[50/115] Loss: 0.353, Acc: 0.973, Base Lr: 2.87e-03
+2026-10-13 15:51:40,478 transreid.train INFO: Epoch[97] 0.128, 0.127, 0.209, 0.096
+2026-10-13 15:51:40,478 transreid.train INFO: SCSR |gate-1| mean=1.906912e-05, max=1.212937e-04; residual/P mean=3.528847e-08
+2026-10-13 15:52:29,861 transreid.train INFO: Epoch[97] Iteration[100/115] Loss: 0.323, Acc: 0.975, Base Lr: 2.87e-03
+2026-10-13 15:52:29,861 transreid.train INFO: Epoch[97] 0.114, 0.117, 0.201, 0.090
+2026-10-13 15:52:29,861 transreid.train INFO: SCSR |gate-1| mean=1.894113e-05, max=1.217959e-04; residual/P mean=3.196111e-08
+2026-10-13 15:52:44,234 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=11075, cumulative optimizer updates=11068, cumulative AMP-skipped updates=7
+2026-10-13 15:52:44,235 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:52:44,235 transreid.train INFO: Epoch 97 done. Time per batch: 1.025[s] Total: 117.8[s]
+2026-10-13 15:53:38,810 transreid.train INFO: Epoch[98] Iteration[50/115] Loss: 0.348, Acc: 0.977, Base Lr: 2.64e-03
+2026-10-13 15:53:38,810 transreid.train INFO: Epoch[98] 0.120, 0.128, 0.208, 0.098
+2026-10-13 15:53:38,810 transreid.train INFO: SCSR |gate-1| mean=1.900050e-05, max=1.255802e-04; residual/P mean=3.893862e-08
+2026-10-13 15:54:27,275 transreid.train INFO: Epoch[98] Iteration[100/115] Loss: 0.332, Acc: 0.977, Base Lr: 2.64e-03
+2026-10-13 15:54:27,275 transreid.train INFO: Epoch[98] 0.114, 0.120, 0.200, 0.096
+2026-10-13 15:54:27,275 transreid.train INFO: SCSR |gate-1| mean=1.901445e-05, max=1.270676e-04; residual/P mean=2.932311e-08
+2026-10-13 15:54:42,728 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=11190, cumulative optimizer updates=11183, cumulative AMP-skipped updates=7
+2026-10-13 15:54:42,729 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:54:42,729 transreid.train INFO: Epoch 98 done. Time per batch: 1.030[s] Total: 118.5[s]
+2026-10-13 15:55:37,247 transreid.train INFO: Epoch[99] Iteration[50/115] Loss: 0.344, Acc: 0.976, Base Lr: 2.42e-03
+2026-10-13 15:55:37,248 transreid.train INFO: Epoch[99] 0.120, 0.125, 0.209, 0.097
+2026-10-13 15:55:37,248 transreid.train INFO: SCSR |gate-1| mean=1.905269e-05, max=1.220274e-04; residual/P mean=3.285017e-08
+2026-10-13 15:56:25,792 transreid.train INFO: Epoch[99] Iteration[100/115] Loss: 0.317, Acc: 0.977, Base Lr: 2.42e-03
+2026-10-13 15:56:25,792 transreid.train INFO: Epoch[99] 0.109, 0.116, 0.200, 0.090
+2026-10-13 15:56:25,792 transreid.train INFO: SCSR |gate-1| mean=1.900487e-05, max=1.217868e-04; residual/P mean=3.309578e-08
+2026-10-13 15:56:41,330 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=11305, cumulative optimizer updates=11298, cumulative AMP-skipped updates=7
+2026-10-13 15:56:41,331 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:56:41,331 transreid.train INFO: Epoch 99 done. Time per batch: 1.031[s] Total: 118.6[s]
+2026-10-13 15:57:35,601 transreid.train INFO: Epoch[100] Iteration[50/114] Loss: 0.354, Acc: 0.975, Base Lr: 2.20e-03
+2026-10-13 15:57:35,601 transreid.train INFO: Epoch[100] 0.126, 0.128, 0.209, 0.097
+2026-10-13 15:57:35,601 transreid.train INFO: SCSR |gate-1| mean=1.900498e-05, max=1.242839e-04; residual/P mean=3.104251e-08
+2026-10-13 15:58:24,790 transreid.train INFO: Epoch[100] Iteration[100/114] Loss: 0.318, Acc: 0.978, Base Lr: 2.20e-03
+2026-10-13 15:58:24,790 transreid.train INFO: Epoch[100] 0.110, 0.118, 0.201, 0.088
+2026-10-13 15:58:24,790 transreid.train INFO: SCSR |gate-1| mean=1.902210e-05, max=1.241702e-04; residual/P mean=3.068211e-08
+2026-10-13 15:58:39,230 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=11419, cumulative optimizer updates=11412, cumulative AMP-skipped updates=7
+2026-10-13 15:58:39,231 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 15:58:39,231 transreid.train INFO: Epoch 100 done. Time per batch: 1.034[s] Total: 117.9[s]
+2026-10-13 15:59:57,836 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 16:00:33,508 transreid.train INFO: The test feature is normalized
+2026-10-13 16:00:33,540 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 16:01:52,537 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 16:02:00,794 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 41.08%, mAP: 26.16%, mINP: 4.96%
+2026-10-13 16:02:08,871 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 26.09%, mAP: 15.72%, mINP: 2.16%
+2026-10-13 16:02:17,075 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 7.17%, mAP: 5.52%, mINP: 1.08%
+2026-10-13 16:02:26,208 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 23.00%, mAP: 15.33%, mINP: 2.78%
+2026-10-13 16:02:35,320 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 27.63%, mAP: 16.40%, mINP: 2.33%
+2026-10-13 16:02:44,558 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.70%, mAP: 5.10%, mINP: 0.99%
+2026-10-13 16:02:53,091 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 7.07%, mAP: 5.75%, mINP: 1.28%
+2026-10-13 16:03:02,040 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 7.73%, mAP: 5.14%, mINP: 0.97%
+2026-10-13 16:03:11,305 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 20.09%, mAP: 13.28%, mINP: 2.28%
+2026-10-13 16:03:11,305 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 16:03:11,305 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 16:03:11,305 transreid.train INFO:   NIR->RGB    23.00%  15.33%   2.78%
+2026-10-13 16:03:11,305 transreid.train INFO:   TIR->RGB     7.07%   5.75%   1.28%
+2026-10-13 16:03:11,306 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 16:03:11,306 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 16:03:11,306 transreid.train INFO:     RGB     RGB  41.08%  26.16%   4.96%
+2026-10-13 16:03:11,306 transreid.train INFO:     RGB     NIR  26.09%  15.72%   2.16%
+2026-10-13 16:03:11,306 transreid.train INFO:     RGB     TIR   7.17%   5.52%   1.08%
+2026-10-13 16:03:11,306 transreid.train INFO:     NIR     RGB  23.00%  15.33%   2.78%
+2026-10-13 16:03:11,306 transreid.train INFO:     NIR     NIR  27.63%  16.40%   2.33%
+2026-10-13 16:03:11,306 transreid.train INFO:     NIR     TIR   6.70%   5.10%   0.99%
+2026-10-13 16:03:11,306 transreid.train INFO:     TIR     RGB   7.07%   5.75%   1.28%
+2026-10-13 16:03:11,306 transreid.train INFO:     TIR     NIR   7.73%   5.14%   0.97%
+2026-10-13 16:03:11,306 transreid.train INFO:     TIR     TIR  20.09%  13.28%   2.28%
+2026-10-13 16:03:11,306 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 16:03:26,009 transreid.train INFO:   A->G -> mAP: 11.38%, Rank-1: 31.26%, Rank-10: 58.00%
+2026-10-13 16:03:40,425 transreid.train INFO:   G->A -> mAP: 13.08%, Rank-1: 30.02%, Rank-10: 54.50%
+2026-10-13 16:03:40,449 transreid.train INFO: Validation Results - Epoch: 100
+2026-10-13 16:03:40,450 transreid.train INFO: mAP: 10.81%
+2026-10-13 16:03:40,450 transreid.train INFO: CMC curve, Rank-1 : 29.24%
+2026-10-13 16:03:40,450 transreid.train INFO: CMC curve, Rank-5 : 45.36%
+2026-10-13 16:03:40,450 transreid.train INFO: CMC curve, Rank-10: 53.72%
+2026-10-13 16:04:36,658 transreid.train INFO: Epoch[101] Iteration[50/115] Loss: 0.350, Acc: 0.976, Base Lr: 2.00e-03
+2026-10-13 16:04:36,658 transreid.train INFO: Epoch[101] 0.122, 0.125, 0.208, 0.100
+2026-10-13 16:04:36,658 transreid.train INFO: SCSR |gate-1| mean=1.901715e-05, max=1.228933e-04; residual/P mean=3.392105e-08
+2026-10-13 16:05:28,124 transreid.train INFO: Epoch[101] Iteration[100/115] Loss: 0.317, Acc: 0.978, Base Lr: 2.00e-03
+2026-10-13 16:05:28,124 transreid.train INFO: Epoch[101] 0.109, 0.115, 0.199, 0.091
+2026-10-13 16:05:28,125 transreid.train INFO: SCSR |gate-1| mean=1.900756e-05, max=1.235957e-04; residual/P mean=3.220512e-08
+2026-10-13 16:05:44,457 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=11534, cumulative optimizer updates=11527, cumulative AMP-skipped updates=7
+2026-10-13 16:05:44,457 transreid.train INFO: SCSR local CUDA peak allocated memory: 12633.0 MiB
+2026-10-13 16:05:44,457 transreid.train INFO: Epoch 101 done. Time per batch: 1.078[s] Total: 124.0[s]
+2026-10-13 16:06:41,675 transreid.train INFO: Epoch[102] Iteration[50/114] Loss: 0.362, Acc: 0.973, Base Lr: 1.80e-03
+2026-10-13 16:06:41,675 transreid.train INFO: Epoch[102] 0.127, 0.132, 0.209, 0.101
+2026-10-13 16:06:41,676 transreid.train INFO: SCSR |gate-1| mean=1.899110e-05, max=1.197603e-04; residual/P mean=3.476379e-08
+2026-10-13 16:07:32,857 transreid.train INFO: Epoch[102] Iteration[100/114] Loss: 0.324, Acc: 0.977, Base Lr: 1.80e-03
+2026-10-13 16:07:32,857 transreid.train INFO: Epoch[102] 0.111, 0.120, 0.201, 0.091
+2026-10-13 16:07:32,858 transreid.train INFO: SCSR |gate-1| mean=1.903247e-05, max=1.278471e-04; residual/P mean=3.190332e-08
+2026-10-13 16:07:48,294 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=11648, cumulative optimizer updates=11641, cumulative AMP-skipped updates=7
+2026-10-13 16:07:48,295 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.5 MiB
+2026-10-13 16:07:48,295 transreid.train INFO: Epoch 102 done. Time per batch: 1.086[s] Total: 123.8[s]
+2026-10-13 16:08:45,045 transreid.train INFO: Epoch[103] Iteration[50/114] Loss: 0.368, Acc: 0.971, Base Lr: 1.62e-03
+2026-10-13 16:08:45,046 transreid.train INFO: Epoch[103] 0.133, 0.127, 0.208, 0.106
+2026-10-13 16:08:45,046 transreid.train INFO: SCSR |gate-1| mean=1.902069e-05, max=1.233360e-04; residual/P mean=3.170539e-08
+2026-10-13 16:09:35,731 transreid.train INFO: Epoch[103] Iteration[100/114] Loss: 0.332, Acc: 0.974, Base Lr: 1.62e-03
+2026-10-13 16:09:35,732 transreid.train INFO: Epoch[103] 0.118, 0.116, 0.199, 0.096
+2026-10-13 16:09:35,732 transreid.train INFO: SCSR |gate-1| mean=1.902309e-05, max=1.228163e-04; residual/P mean=3.136876e-08
+2026-10-13 16:09:51,136 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=11762, cumulative optimizer updates=11755, cumulative AMP-skipped updates=7
+2026-10-13 16:09:51,137 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.5 MiB
+2026-10-13 16:09:51,137 transreid.train INFO: Epoch 103 done. Time per batch: 1.078[s] Total: 122.8[s]
+2026-10-13 16:10:47,435 transreid.train INFO: Epoch[104] Iteration[50/115] Loss: 0.357, Acc: 0.973, Base Lr: 1.44e-03
+2026-10-13 16:10:47,436 transreid.train INFO: Epoch[104] 0.126, 0.126, 0.208, 0.102
+2026-10-13 16:10:47,436 transreid.train INFO: SCSR |gate-1| mean=1.904588e-05, max=1.246238e-04; residual/P mean=3.330393e-08
+2026-10-13 16:11:38,919 transreid.train INFO: Epoch[104] Iteration[100/115] Loss: 0.322, Acc: 0.976, Base Lr: 1.44e-03
+2026-10-13 16:11:38,919 transreid.train INFO: Epoch[104] 0.112, 0.116, 0.199, 0.093
+2026-10-13 16:11:38,920 transreid.train INFO: SCSR |gate-1| mean=1.905872e-05, max=1.229909e-04; residual/P mean=3.595776e-08
+2026-10-13 16:11:55,245 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=11877, cumulative optimizer updates=11870, cumulative AMP-skipped updates=7
+2026-10-13 16:11:55,245 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.5 MiB
+2026-10-13 16:11:55,245 transreid.train INFO: Epoch 104 done. Time per batch: 1.079[s] Total: 124.1[s]
+2026-10-13 16:12:52,268 transreid.train INFO: Epoch[105] Iteration[50/114] Loss: 0.340, Acc: 0.976, Base Lr: 1.28e-03
+2026-10-13 16:12:52,268 transreid.train INFO: Epoch[105] 0.118, 0.126, 0.205, 0.093
+2026-10-13 16:12:52,268 transreid.train INFO: SCSR |gate-1| mean=1.902365e-05, max=1.219297e-04; residual/P mean=3.267598e-08
+2026-10-13 16:13:43,508 transreid.train INFO: Epoch[105] Iteration[100/114] Loss: 0.314, Acc: 0.978, Base Lr: 1.28e-03
+2026-10-13 16:13:43,509 transreid.train INFO: Epoch[105] 0.108, 0.115, 0.198, 0.089
+2026-10-13 16:13:43,509 transreid.train INFO: SCSR |gate-1| mean=1.898791e-05, max=1.227728e-04; residual/P mean=3.165876e-08
+2026-10-13 16:13:58,516 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=11991, cumulative optimizer updates=11984, cumulative AMP-skipped updates=7
+2026-10-13 16:13:58,517 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.5 MiB
+2026-10-13 16:13:58,517 transreid.train INFO: Epoch 105 done. Time per batch: 1.081[s] Total: 123.3[s]
+2026-10-13 16:14:56,466 transreid.train INFO: Epoch[106] Iteration[50/114] Loss: 0.335, Acc: 0.975, Base Lr: 1.12e-03
+2026-10-13 16:14:56,466 transreid.train INFO: Epoch[106] 0.120, 0.121, 0.206, 0.093
+2026-10-13 16:14:56,466 transreid.train INFO: SCSR |gate-1| mean=1.902125e-05, max=1.230278e-04; residual/P mean=3.005106e-08
+2026-10-13 16:15:47,462 transreid.train INFO: Epoch[106] Iteration[100/114] Loss: 0.301, Acc: 0.979, Base Lr: 1.12e-03
+2026-10-13 16:15:47,462 transreid.train INFO: Epoch[106] 0.104, 0.112, 0.198, 0.083
+2026-10-13 16:15:47,462 transreid.train INFO: SCSR |gate-1| mean=1.900706e-05, max=1.235414e-04; residual/P mean=3.200675e-08
+2026-10-13 16:16:02,778 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=12105, cumulative optimizer updates=12098, cumulative AMP-skipped updates=7
+2026-10-13 16:16:02,779 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.5 MiB
+2026-10-13 16:16:02,779 transreid.train INFO: Epoch 106 done. Time per batch: 1.090[s] Total: 124.3[s]
+2026-10-13 16:16:59,767 transreid.train INFO: Epoch[107] Iteration[50/115] Loss: 0.323, Acc: 0.976, Base Lr: 9.80e-04
+2026-10-13 16:16:59,768 transreid.train INFO: Epoch[107] 0.112, 0.119, 0.204, 0.090
+2026-10-13 16:16:59,768 transreid.train INFO: SCSR |gate-1| mean=1.904621e-05, max=1.224045e-04; residual/P mean=3.021978e-08
+2026-10-13 16:17:50,612 transreid.train INFO: Epoch[107] Iteration[100/115] Loss: 0.310, Acc: 0.977, Base Lr: 9.80e-04
+2026-10-13 16:17:50,612 transreid.train INFO: Epoch[107] 0.107, 0.113, 0.198, 0.088
+2026-10-13 16:17:50,612 transreid.train INFO: SCSR |gate-1| mean=1.903071e-05, max=1.267708e-04; residual/P mean=3.663357e-08
+2026-10-13 16:18:06,738 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=12220, cumulative optimizer updates=12213, cumulative AMP-skipped updates=7
+2026-10-13 16:18:06,739 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.5 MiB
+2026-10-13 16:18:06,739 transreid.train INFO: Epoch 107 done. Time per batch: 1.078[s] Total: 124.0[s]
+2026-10-13 16:19:03,020 transreid.train INFO: Epoch[108] Iteration[50/115] Loss: 0.328, Acc: 0.978, Base Lr: 8.46e-04
+2026-10-13 16:19:03,021 transreid.train INFO: Epoch[108] 0.113, 0.123, 0.206, 0.089
+2026-10-13 16:19:03,021 transreid.train INFO: SCSR |gate-1| mean=1.900829e-05, max=1.262123e-04; residual/P mean=3.128888e-08
+2026-10-13 16:19:54,312 transreid.train INFO: Epoch[108] Iteration[100/115] Loss: 0.308, Acc: 0.979, Base Lr: 8.46e-04
+2026-10-13 16:19:54,312 transreid.train INFO: Epoch[108] 0.104, 0.117, 0.199, 0.085
+2026-10-13 16:19:54,312 transreid.train INFO: SCSR |gate-1| mean=1.897078e-05, max=1.239892e-04; residual/P mean=3.135008e-08
+2026-10-13 16:20:10,470 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=12335, cumulative optimizer updates=12328, cumulative AMP-skipped updates=7
+2026-10-13 16:20:10,471 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.5 MiB
+2026-10-13 16:20:10,471 transreid.train INFO: Epoch 108 done. Time per batch: 1.076[s] Total: 123.7[s]
+2026-10-13 16:21:07,801 transreid.train INFO: Epoch[109] Iteration[50/114] Loss: 0.326, Acc: 0.976, Base Lr: 7.22e-04
+2026-10-13 16:21:07,801 transreid.train INFO: Epoch[109] 0.116, 0.121, 0.205, 0.087
+2026-10-13 16:21:07,801 transreid.train INFO: SCSR |gate-1| mean=1.901377e-05, max=1.234888e-04; residual/P mean=3.458000e-08
+2026-10-13 16:21:58,767 transreid.train INFO: Epoch[109] Iteration[100/114] Loss: 0.302, Acc: 0.978, Base Lr: 7.22e-04
+2026-10-13 16:21:58,767 transreid.train INFO: Epoch[109] 0.105, 0.112, 0.197, 0.083
+2026-10-13 16:21:58,767 transreid.train INFO: SCSR |gate-1| mean=1.902402e-05, max=1.209552e-04; residual/P mean=3.031776e-08
+2026-10-13 16:22:13,749 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=12449, cumulative optimizer updates=12442, cumulative AMP-skipped updates=7
+2026-10-13 16:22:13,750 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.5 MiB
+2026-10-13 16:22:13,750 transreid.train INFO: Epoch 109 done. Time per batch: 1.081[s] Total: 123.3[s]
+2026-10-13 16:23:10,749 transreid.train INFO: Epoch[110] Iteration[50/114] Loss: 0.341, Acc: 0.976, Base Lr: 6.08e-04
+2026-10-13 16:23:10,749 transreid.train INFO: Epoch[110] 0.120, 0.125, 0.206, 0.094
+2026-10-13 16:23:10,750 transreid.train INFO: SCSR |gate-1| mean=1.899363e-05, max=1.219890e-04; residual/P mean=3.201113e-08
+2026-10-13 16:24:00,024 transreid.train INFO: Epoch[110] Iteration[100/114] Loss: 0.295, Acc: 0.979, Base Lr: 6.08e-04
+2026-10-13 16:24:00,024 transreid.train INFO: Epoch[110] 0.100, 0.111, 0.197, 0.082
+2026-10-13 16:24:00,024 transreid.train INFO: SCSR |gate-1| mean=1.900412e-05, max=1.206008e-04; residual/P mean=2.886934e-08
+2026-10-13 16:24:14,404 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=12563, cumulative optimizer updates=12556, cumulative AMP-skipped updates=7
+2026-10-13 16:24:14,405 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.5 MiB
+2026-10-13 16:24:14,405 transreid.train INFO: Epoch 110 done. Time per batch: 1.058[s] Total: 120.7[s]
+2026-10-13 16:25:17,477 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 16:26:10,547 transreid.train INFO: The test feature is normalized
+2026-10-13 16:26:10,586 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 16:27:32,026 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 16:27:40,868 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 42.11%, mAP: 26.61%, mINP: 5.08%
+2026-10-13 16:27:49,223 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 26.60%, mAP: 16.04%, mINP: 2.23%
+2026-10-13 16:27:57,547 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 7.31%, mAP: 5.59%, mINP: 1.10%
+2026-10-13 16:28:05,762 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 24.40%, mAP: 15.70%, mINP: 2.90%
+2026-10-13 16:28:13,931 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 28.10%, mAP: 16.81%, mINP: 2.45%
+2026-10-13 16:28:22,121 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.65%, mAP: 5.22%, mINP: 1.03%
+2026-10-13 16:28:30,296 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 7.31%, mAP: 5.85%, mINP: 1.33%
+2026-10-13 16:28:38,404 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 7.82%, mAP: 5.26%, mINP: 0.97%
+2026-10-13 16:28:46,514 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 20.66%, mAP: 13.44%, mINP: 2.27%
+2026-10-13 16:28:46,514 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 16:28:46,514 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 16:28:46,514 transreid.train INFO:   NIR->RGB    24.40%  15.70%   2.90%
+2026-10-13 16:28:46,514 transreid.train INFO:   TIR->RGB     7.31%   5.85%   1.33%
+2026-10-13 16:28:46,514 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 16:28:46,514 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 16:28:46,514 transreid.train INFO:     RGB     RGB  42.11%  26.61%   5.08%
+2026-10-13 16:28:46,515 transreid.train INFO:     RGB     NIR  26.60%  16.04%   2.23%
+2026-10-13 16:28:46,515 transreid.train INFO:     RGB     TIR   7.31%   5.59%   1.10%
+2026-10-13 16:28:46,515 transreid.train INFO:     NIR     RGB  24.40%  15.70%   2.90%
+2026-10-13 16:28:46,515 transreid.train INFO:     NIR     NIR  28.10%  16.81%   2.45%
+2026-10-13 16:28:46,515 transreid.train INFO:     NIR     TIR   6.65%   5.22%   1.03%
+2026-10-13 16:28:46,515 transreid.train INFO:     TIR     RGB   7.31%   5.85%   1.33%
+2026-10-13 16:28:46,515 transreid.train INFO:     TIR     NIR   7.82%   5.26%   0.97%
+2026-10-13 16:28:46,515 transreid.train INFO:     TIR     TIR  20.66%  13.44%   2.27%
+2026-10-13 16:28:46,515 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 16:29:00,299 transreid.train INFO:   A->G -> mAP: 11.48%, Rank-1: 31.93%, Rank-10: 57.93%
+2026-10-13 16:29:12,926 transreid.train INFO:   G->A -> mAP: 13.24%, Rank-1: 30.38%, Rank-10: 54.30%
+2026-10-13 16:29:12,943 transreid.train INFO: Validation Results - Epoch: 110
+2026-10-13 16:29:12,943 transreid.train INFO: mAP: 11.02%
+2026-10-13 16:29:12,943 transreid.train INFO: CMC curve, Rank-1 : 29.80%
+2026-10-13 16:29:12,943 transreid.train INFO: CMC curve, Rank-5 : 46.32%
+2026-10-13 16:29:12,944 transreid.train INFO: CMC curve, Rank-10: 54.21%
+2026-10-13 16:30:07,213 transreid.train INFO: Epoch[111] Iteration[50/114] Loss: 0.344, Acc: 0.977, Base Lr: 5.05e-04
+2026-10-13 16:30:07,214 transreid.train INFO: Epoch[111] 0.119, 0.128, 0.207, 0.095
+2026-10-13 16:30:07,214 transreid.train INFO: SCSR |gate-1| mean=1.901676e-05, max=1.212148e-04; residual/P mean=3.281403e-08
+2026-10-13 16:30:56,241 transreid.train INFO: Epoch[111] Iteration[100/114] Loss: 0.315, Acc: 0.978, Base Lr: 5.05e-04
+2026-10-13 16:30:56,242 transreid.train INFO: Epoch[111] 0.107, 0.117, 0.199, 0.088
+2026-10-13 16:30:56,242 transreid.train INFO: SCSR |gate-1| mean=1.902304e-05, max=1.275586e-04; residual/P mean=2.890627e-08
+2026-10-13 16:31:10,646 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=113, cumulative batches=12677, cumulative optimizer updates=12669, cumulative AMP-skipped updates=8
+2026-10-13 16:31:10,646 transreid.train INFO: SCSR local CUDA peak allocated memory: 12633.7 MiB
+2026-10-13 16:31:10,646 transreid.train INFO: Epoch 111 done. Time per batch: 1.031[s] Total: 117.5[s]
+2026-10-13 16:32:03,917 transreid.train INFO: Epoch[112] Iteration[50/114] Loss: 0.334, Acc: 0.976, Base Lr: 4.13e-04
+2026-10-13 16:32:03,917 transreid.train INFO: Epoch[112] 0.118, 0.122, 0.208, 0.093
+2026-10-13 16:32:03,917 transreid.train INFO: SCSR |gate-1| mean=1.906702e-05, max=1.235498e-04; residual/P mean=3.291560e-08
+2026-10-13 16:32:53,296 transreid.train INFO: Epoch[112] Iteration[100/114] Loss: 0.298, Acc: 0.979, Base Lr: 4.13e-04
+2026-10-13 16:32:53,296 transreid.train INFO: Epoch[112] 0.101, 0.112, 0.198, 0.083
+2026-10-13 16:32:53,296 transreid.train INFO: SCSR |gate-1| mean=1.902723e-05, max=1.229749e-04; residual/P mean=3.390782e-08
+2026-10-13 16:33:07,761 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=12791, cumulative optimizer updates=12783, cumulative AMP-skipped updates=8
+2026-10-13 16:33:07,762 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 16:33:07,762 transreid.train INFO: Epoch 112 done. Time per batch: 1.027[s] Total: 117.1[s]
+2026-10-13 16:34:01,925 transreid.train INFO: Epoch[113] Iteration[50/114] Loss: 0.351, Acc: 0.975, Base Lr: 3.31e-04
+2026-10-13 16:34:01,925 transreid.train INFO: Epoch[113] 0.127, 0.123, 0.206, 0.099
+2026-10-13 16:34:01,926 transreid.train INFO: SCSR |gate-1| mean=1.903465e-05, max=1.247686e-04; residual/P mean=3.034020e-08
+2026-10-13 16:34:50,150 transreid.train INFO: Epoch[113] Iteration[100/114] Loss: 0.306, Acc: 0.978, Base Lr: 3.31e-04
+2026-10-13 16:34:50,150 transreid.train INFO: Epoch[113] 0.106, 0.113, 0.197, 0.086
+2026-10-13 16:34:50,150 transreid.train INFO: SCSR |gate-1| mean=1.905973e-05, max=1.247416e-04; residual/P mean=3.146187e-08
+2026-10-13 16:35:00,763 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=12905, cumulative optimizer updates=12897, cumulative AMP-skipped updates=8
+2026-10-13 16:35:00,764 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 16:35:00,764 transreid.train INFO: Epoch 113 done. Time per batch: 0.991[s] Total: 113.0[s]
+2026-10-13 16:35:38,157 transreid.train INFO: Epoch[114] Iteration[50/114] Loss: 0.318, Acc: 0.976, Base Lr: 2.61e-04
+2026-10-13 16:35:38,157 transreid.train INFO: Epoch[114] 0.112, 0.115, 0.202, 0.088
+2026-10-13 16:35:38,157 transreid.train INFO: SCSR |gate-1| mean=1.904442e-05, max=1.231656e-04; residual/P mean=3.219306e-08
+2026-10-13 16:36:10,680 transreid.train INFO: Epoch[114] Iteration[100/114] Loss: 0.302, Acc: 0.978, Base Lr: 2.61e-04
+2026-10-13 16:36:10,680 transreid.train INFO: Epoch[114] 0.104, 0.110, 0.197, 0.086
+2026-10-13 16:36:10,680 transreid.train INFO: SCSR |gate-1| mean=1.905350e-05, max=1.241916e-04; residual/P mean=3.024292e-08
+2026-10-13 16:36:18,753 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=13019, cumulative optimizer updates=13011, cumulative AMP-skipped updates=8
+2026-10-13 16:36:18,753 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 16:36:18,753 transreid.train INFO: Epoch 114 done. Time per batch: 0.684[s] Total: 78.0[s]
+2026-10-13 16:36:59,100 transreid.train INFO: Epoch[115] Iteration[50/114] Loss: 0.318, Acc: 0.977, Base Lr: 2.01e-04
+2026-10-13 16:36:59,101 transreid.train INFO: Epoch[115] 0.112, 0.116, 0.206, 0.087
+2026-10-13 16:36:59,101 transreid.train INFO: SCSR |gate-1| mean=1.904172e-05, max=1.269004e-04; residual/P mean=3.430258e-08
+2026-10-13 16:37:40,019 transreid.train INFO: Epoch[115] Iteration[100/114] Loss: 0.300, Acc: 0.978, Base Lr: 2.01e-04
+2026-10-13 16:37:40,019 transreid.train INFO: Epoch[115] 0.103, 0.111, 0.197, 0.084
+2026-10-13 16:37:40,019 transreid.train INFO: SCSR |gate-1| mean=1.907757e-05, max=1.281112e-04; residual/P mean=3.249618e-08
+2026-10-13 16:37:51,219 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=13133, cumulative optimizer updates=13125, cumulative AMP-skipped updates=8
+2026-10-13 16:37:51,220 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 16:37:51,220 transreid.train INFO: Epoch 115 done. Time per batch: 0.811[s] Total: 92.5[s]
+2026-10-13 16:38:29,201 transreid.train INFO: Epoch[116] Iteration[50/114] Loss: 0.350, Acc: 0.976, Base Lr: 1.51e-04
+2026-10-13 16:38:29,202 transreid.train INFO: Epoch[116] 0.124, 0.126, 0.206, 0.098
+2026-10-13 16:38:29,202 transreid.train INFO: SCSR |gate-1| mean=1.902783e-05, max=1.203904e-04; residual/P mean=3.384741e-08
+2026-10-13 16:39:02,417 transreid.train INFO: Epoch[116] Iteration[100/114] Loss: 0.316, Acc: 0.977, Base Lr: 1.51e-04
+2026-10-13 16:39:02,417 transreid.train INFO: Epoch[116] 0.111, 0.116, 0.198, 0.087
+2026-10-13 16:39:02,417 transreid.train INFO: SCSR |gate-1| mean=1.894973e-05, max=1.230740e-04; residual/P mean=3.386826e-08
+2026-10-13 16:39:11,406 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=13247, cumulative optimizer updates=13239, cumulative AMP-skipped updates=8
+2026-10-13 16:39:11,407 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 16:39:11,407 transreid.train INFO: Epoch 116 done. Time per batch: 0.703[s] Total: 80.2[s]
+2026-10-13 16:39:53,202 transreid.train INFO: Epoch[117] Iteration[50/114] Loss: 0.313, Acc: 0.978, Base Lr: 1.13e-04
+2026-10-13 16:39:53,202 transreid.train INFO: Epoch[117] 0.108, 0.117, 0.203, 0.086
+2026-10-13 16:39:53,202 transreid.train INFO: SCSR |gate-1| mean=1.902425e-05, max=1.223592e-04; residual/P mean=3.149982e-08
+2026-10-13 16:40:21,718 transreid.train INFO: Epoch[117] Iteration[100/114] Loss: 0.297, Acc: 0.979, Base Lr: 1.13e-04
+2026-10-13 16:40:21,718 transreid.train INFO: Epoch[117] 0.101, 0.111, 0.196, 0.083
+2026-10-13 16:40:21,718 transreid.train INFO: SCSR |gate-1| mean=1.904994e-05, max=1.238565e-04; residual/P mean=3.206305e-08
+2026-10-13 16:40:29,799 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=113, cumulative batches=13361, cumulative optimizer updates=13352, cumulative AMP-skipped updates=9
+2026-10-13 16:40:29,800 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 16:40:29,800 transreid.train INFO: Epoch 117 done. Time per batch: 0.688[s] Total: 78.4[s]
+2026-10-13 16:41:02,903 transreid.train INFO: Epoch[118] Iteration[50/115] Loss: 0.321, Acc: 0.977, Base Lr: 8.59e-05
+2026-10-13 16:41:02,903 transreid.train INFO: Epoch[118] 0.113, 0.119, 0.206, 0.087
+2026-10-13 16:41:02,903 transreid.train INFO: SCSR |gate-1| mean=1.907490e-05, max=1.211844e-04; residual/P mean=3.030159e-08
+2026-10-13 16:41:31,072 transreid.train INFO: Epoch[118] Iteration[100/115] Loss: 0.300, Acc: 0.978, Base Lr: 8.59e-05
+2026-10-13 16:41:31,072 transreid.train INFO: Epoch[118] 0.104, 0.111, 0.197, 0.083
+2026-10-13 16:41:31,072 transreid.train INFO: SCSR |gate-1| mean=1.901004e-05, max=1.244627e-04; residual/P mean=3.256424e-08
+2026-10-13 16:41:39,724 transreid.train INFO: Training steps (rank 0): epoch batches=115, estimated loader batches=115, epoch optimizer updates=115, cumulative batches=13476, cumulative optimizer updates=13467, cumulative AMP-skipped updates=9
+2026-10-13 16:41:39,725 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 16:41:39,725 transreid.train INFO: Epoch 118 done. Time per batch: 0.608[s] Total: 69.9[s]
+2026-10-13 16:42:12,857 transreid.train INFO: Epoch[119] Iteration[50/114] Loss: 0.345, Acc: 0.975, Base Lr: 6.95e-05
+2026-10-13 16:42:12,857 transreid.train INFO: Epoch[119] 0.125, 0.123, 0.206, 0.095
+2026-10-13 16:42:12,858 transreid.train INFO: SCSR |gate-1| mean=1.907121e-05, max=1.227215e-04; residual/P mean=3.160285e-08
+2026-10-13 16:42:41,301 transreid.train INFO: Epoch[119] Iteration[100/114] Loss: 0.306, Acc: 0.977, Base Lr: 6.95e-05
+2026-10-13 16:42:41,301 transreid.train INFO: Epoch[119] 0.107, 0.112, 0.197, 0.085
+2026-10-13 16:42:41,301 transreid.train INFO: SCSR |gate-1| mean=1.903100e-05, max=1.226123e-04; residual/P mean=3.427643e-08
+2026-10-13 16:42:49,524 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=13590, cumulative optimizer updates=13581, cumulative AMP-skipped updates=9
+2026-10-13 16:42:49,525 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 16:42:49,525 transreid.train INFO: Epoch 119 done. Time per batch: 0.612[s] Total: 69.8[s]
+2026-10-13 16:43:22,984 transreid.train INFO: Epoch[120] Iteration[50/114] Loss: 0.318, Acc: 0.977, Base Lr: 6.40e-05
+2026-10-13 16:43:22,984 transreid.train INFO: Epoch[120] 0.111, 0.119, 0.204, 0.086
+2026-10-13 16:43:22,985 transreid.train INFO: SCSR |gate-1| mean=1.902277e-05, max=1.223400e-04; residual/P mean=3.013841e-08
+2026-10-13 16:43:51,242 transreid.train INFO: Epoch[120] Iteration[100/114] Loss: 0.290, Acc: 0.979, Base Lr: 6.40e-05
+2026-10-13 16:43:51,243 transreid.train INFO: Epoch[120] 0.099, 0.110, 0.197, 0.078
+2026-10-13 16:43:51,243 transreid.train INFO: SCSR |gate-1| mean=1.904231e-05, max=1.252993e-04; residual/P mean=3.303833e-08
+2026-10-13 16:43:59,327 transreid.train INFO: Training steps (rank 0): epoch batches=114, estimated loader batches=114, epoch optimizer updates=114, cumulative batches=13704, cumulative optimizer updates=13695, cumulative AMP-skipped updates=9
+2026-10-13 16:43:59,328 transreid.train INFO: SCSR local CUDA peak allocated memory: 12632.3 MiB
+2026-10-13 16:43:59,328 transreid.train INFO: Epoch 120 done. Time per batch: 0.612[s] Total: 69.8[s]
+2026-10-13 16:45:02,145 transreid.train INFO: => Split mode 1: query 2135, total query 2135
+2026-10-13 16:45:03,646 transreid.train INFO: The test feature is normalized
+2026-10-13 16:45:03,682 transreid.train INFO: => Computing DistMat in q-chunks (chunk=4000)
+2026-10-13 16:46:21,062 transreid.train INFO: Starting modality-pair specific evaluation. Query mods: [1, 2, 3], Gallery mods: [1, 2, 3]
+2026-10-13 16:46:29,287 transreid.train INFO:   Pair (Q:1, G:1) -> Rank-1: 42.20%, mAP: 26.65%, mINP: 5.09%
+2026-10-13 16:46:37,606 transreid.train INFO:   Pair (Q:1, G:2) -> Rank-1: 26.46%, mAP: 16.09%, mINP: 2.24%
+2026-10-13 16:46:45,605 transreid.train INFO:   Pair (Q:1, G:3) -> Rank-1: 7.35%, mAP: 5.57%, mINP: 1.11%
+2026-10-13 16:46:53,574 transreid.train INFO:   Pair (Q:2, G:1) -> Rank-1: 24.73%, mAP: 15.78%, mINP: 2.92%
+2026-10-13 16:47:01,643 transreid.train INFO:   Pair (Q:2, G:2) -> Rank-1: 28.15%, mAP: 16.90%, mINP: 2.45%
+2026-10-13 16:47:09,644 transreid.train INFO:   Pair (Q:2, G:3) -> Rank-1: 6.70%, mAP: 5.23%, mINP: 1.04%
+2026-10-13 16:47:17,486 transreid.train INFO:   Pair (Q:3, G:1) -> Rank-1: 7.49%, mAP: 5.87%, mINP: 1.33%
+2026-10-13 16:47:25,274 transreid.train INFO:   Pair (Q:3, G:2) -> Rank-1: 7.73%, mAP: 5.27%, mINP: 0.97%
+2026-10-13 16:47:33,190 transreid.train INFO:   Pair (Q:3, G:3) -> Rank-1: 20.56%, mAP: 13.47%, mINP: 2.29%
+2026-10-13 16:47:33,190 transreid.train INFO: VI-ReID results (Table 5 protocol):
+2026-10-13 16:47:33,190 transreid.train INFO:   Setting   Rank-1     mAP    mINP
+2026-10-13 16:47:33,190 transreid.train INFO:   NIR->RGB    24.73%  15.78%   2.92%
+2026-10-13 16:47:33,190 transreid.train INFO:   TIR->RGB     7.49%   5.87%   1.33%
+2026-10-13 16:47:33,190 transreid.train INFO: Modality-pair results (Table 6 protocol):
+2026-10-13 16:47:33,190 transreid.train INFO:   Query Gallery  Rank-1     mAP    mINP
+2026-10-13 16:47:33,190 transreid.train INFO:     RGB     RGB  42.20%  26.65%   5.09%
+2026-10-13 16:47:33,190 transreid.train INFO:     RGB     NIR  26.46%  16.09%   2.24%
+2026-10-13 16:47:33,191 transreid.train INFO:     RGB     TIR   7.35%   5.57%   1.11%
+2026-10-13 16:47:33,191 transreid.train INFO:     NIR     RGB  24.73%  15.78%   2.92%
+2026-10-13 16:47:33,191 transreid.train INFO:     NIR     NIR  28.15%  16.90%   2.45%
+2026-10-13 16:47:33,191 transreid.train INFO:     NIR     TIR   6.70%   5.23%   1.04%
+2026-10-13 16:47:33,191 transreid.train INFO:     TIR     RGB   7.49%   5.87%   1.33%
+2026-10-13 16:47:33,191 transreid.train INFO:     TIR     NIR   7.73%   5.27%   0.97%
+2026-10-13 16:47:33,191 transreid.train INFO:     TIR     TIR  20.56%  13.47%   2.29%
+2026-10-13 16:47:33,191 transreid.train INFO: AG-ReID results (Table 4 protocol; all modalities):
+2026-10-13 16:47:45,818 transreid.train INFO:   A->G -> mAP: 11.46%, Rank-1: 31.63%, Rank-10: 58.59%
+2026-10-13 16:47:58,094 transreid.train INFO:   G->A -> mAP: 13.23%, Rank-1: 30.18%, Rank-10: 55.07%
+2026-10-13 16:47:58,109 transreid.train INFO: Validation Results - Epoch: 120
+2026-10-13 16:47:58,110 transreid.train INFO: mAP: 11.05%
+2026-10-13 16:47:58,110 transreid.train INFO: CMC curve, Rank-1 : 29.76%
+2026-10-13 16:47:58,110 transreid.train INFO: CMC curve, Rank-5 : 46.18%
+2026-10-13 16:47:58,110 transreid.train INFO: CMC curve, Rank-10: 54.55%

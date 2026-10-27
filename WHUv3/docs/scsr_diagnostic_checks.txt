@@ -1,0 +1,98 @@
+test_192_image_feature_contract (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+D:\CODE\Doing\WHU_base\SCSR\WHU\model\scsr.py:21: FutureWarning: `torch.cpu.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cpu', args...)` instead.
+  return autocast(enabled=False) if autocast is not None else nullcontext()
+ok
+test_checkpoint_roundtrip_and_mismatch (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+Loading SCSR model from C:\Users\GX\AppData\Local\Temp\tmpjqqf6i6h\model.pth
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+ok
+test_frozen_smooth_formula_ratios_and_radial_gradients (test_scsr.SCSRTests) ... ok
+test_haar_inverse_energy_signed_orientation (test_scsr.SCSRTests) ... ok
+test_l6_route_cls_and_batch_order (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+ok
+test_mapping_invalid_ids_and_inference_mode (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+ok
+test_no_unified_autocast_dependency (test_scsr.SCSRTests) ... ok
+test_original_backbone_and_initialized_full_vit_equivalence (test_scsr.SCSRTests) ... using stride: 16, and patch number is num_y16 * num_x8
+using stride: 16, and patch number is num_y16 * num_x8
+using stride: 16, and patch number is num_y16 * num_x8
+ok
+test_parameters_identity_and_gradient_startup (test_scsr.SCSRTests) ... ok
+test_training_checkpoint_validation_with_legacy_optimizer (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+D:\CODE\Doing\WHU_base\SCSR\WHU\tests\test_scsr.py:242: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  GradScaler=lambda: torch.cuda.amp.GradScaler(enabled=False),
+Note: number of gallery samples is quite small, got 30
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+Note: number of gallery samples is quite small, got 10
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+Loading SCSR model from C:\Users\GX\AppData\Local\Temp\tmp69at09n7\transformer_1.pth
+ok
+test_uad_losses_reach_scsr_and_optimizer_policy (test_scsr.SCSRTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+ok
+test_zero_ll_bound_and_amp_dtype (test_scsr.SCSRTests) ... D:\CODE\Doing\WHU_base\SCSR\WHU\tests\test_scsr.py:107: FutureWarning: `torch.cpu.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cpu', args...)` instead.
+  context = autocast(dtype=torch.bfloat16) if autocast is not None else nullcontext()
+ok
+test_capture_matches_actual_output_and_cleans_up (test_scsr_diagnostics.DiagnosticTests) ... using stride: 8, and patch number is num_y4 * num_x4
+ok
+test_fixed_selections_and_full_classifier_load (test_scsr_diagnostics.DiagnosticTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+ok
+test_gradients_without_step_or_bn_update (test_scsr_diagnostics.DiagnosticTests) ... using stride: 8, and patch number is num_y4 * num_x4
+ok
+test_protocol_matches_original_and_noop_on_off (test_scsr_diagnostics.DiagnosticTests) ... ok
+test_rounding_is_measured_after_actual_addition (test_scsr_diagnostics.DiagnosticTests) ... using stride: 8, and patch number is num_y4 * num_x4
+ok
+test_six_artifact_pipeline_on_synthetic_images (test_scsr_diagnostics.DiagnosticTests) ... using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+using Transformer_type: vit_base_in as a backbone
+using stride: [16, 16], and patch number is num_y16 * num_x8
+Experiment 1: paired ON/OFF full query and gallery extraction
+D:\PROGRAM\Anaconda\lib\site-packages\torch\utils\data\dataloader.py:666: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+Overall ON/OFF ranking queries 2/6
+Overall ON/OFF ranking queries 4/6
+Overall ON/OFF ranking queries 6/6
+overall ALL -> ALL: valid queries 6
+modality_pair RGB -> RGB: valid queries 2
+modality_pair RGB -> NIR: valid queries 2
+modality_pair RGB -> TIR: valid queries 2
+modality_pair NIR -> RGB: valid queries 2
+modality_pair NIR -> NIR: valid queries 2
+modality_pair NIR -> TIR: valid queries 2
+modality_pair TIR -> RGB: valid queries 2
+modality_pair TIR -> NIR: valid queries 2
+modality_pair TIR -> TIR: valid queries 2
+tir_platform TIR-G -> TIR-G: valid queries 1
+tir_platform TIR-G -> TIR-A: valid queries 0
+tir_platform TIR-A -> TIR-G: valid queries 0
+tir_platform TIR-A -> TIR-A: valid queries 1
+Experiments 2/3: bounded capture on fixed representative queries
+Experiment 4: fixed eval-state CE/WRT gradients, no parameter update
+Completed; model parameters/BN buffers unchanged. Output: C:\Users\GX\AppData\Local\Temp\tmp0ooepn7z\report
+ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 76.240s
+
+OK

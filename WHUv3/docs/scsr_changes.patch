@@ -1,0 +1,385 @@
+--- original/model/make_model.py
++++ model/make_model.py
+@@ -1,5 +1,7 @@
+ import torch
+ import torch.nn as nn
++import os
++import yaml
+ from .backbones.vit_pytorch import vit_base_in, vit_ics_lup
+ 
+ def weights_init_kaiming(m):
+@@ -34,6 +36,16 @@
+         self.neck = cfg.MODEL.NECK
+         self.neck_feat = cfg.TEST.NECK_FEAT
+         self.in_planes = 768
++        self.modalities = tuple(cfg.DATASETS.MODALITIES)
++        self.scsr_enabled = cfg.SCSR.ENABLED
++        self.experiment_cfg = cfg.clone()
++        target_id = None
++        if self.scsr_enabled:
++            if len(set(self.modalities)) != len(self.modalities):
++                raise ValueError('DATASETS.MODALITIES must contain unique names')
++            if cfg.SCSR.TARGET_MODALITY not in self.modalities:
++                raise ValueError('SCSR.TARGET_MODALITY must appear in DATASETS.MODALITIES')
++            target_id = self.modalities.index(cfg.SCSR.TARGET_MODALITY) + 1
+ 
+         print('using Transformer_type: {} as a backbone'.format(cfg.MODEL.TRANSFORMER_TYPE))
+ 
+@@ -49,7 +61,9 @@
+         self.base=factory[cfg.MODEL.TRANSFORMER_TYPE](img_size=cfg.INPUT.SIZE_TRAIN, sie_xishu=cfg.MODEL.SIE_COE,
+                                                         camera=camera_num, view=view_num, stride_size=cfg.MODEL.STRIDE_SIZE, drop_path_rate=cfg.MODEL.DROP_PATH,
+                                                         drop_rate= cfg.MODEL.DROP_OUT,
+-                                                        attn_drop_rate=cfg.MODEL.ATT_DROP_RATE)
++                                                        attn_drop_rate=cfg.MODEL.ATT_DROP_RATE,
++                                                        scsr_cfg=cfg.SCSR, scsr_target_id=target_id,
++                                                        num_modalities=len(self.modalities))
+ 
+         if pretrain_choice == 'imagenet':
+             self.base.load_param(model_path)
+@@ -64,15 +78,25 @@
+         self.bottleneck.bias.requires_grad_(False)
+         self.bottleneck.apply(weights_init_kaiming)
+         
+-    def forward(self, x=None, label=None, camids=None, mode=0):
++    def forward(self, x=None, label=None, camids=None, mode=0, modal_ids=None):
+         if mode==0:
++            if self.scsr_enabled:
++                if not isinstance(x, (list, tuple)) or len(x) != len(self.modalities):
++                    raise ValueError('Training requires one image batch per configured modality')
++                if len({batch.shape[0] for batch in x}) != 1:
++                    raise ValueError('PKM modality batches must have equal sizes for UAD losses')
++                if modal_ids is not None:
++                    raise ValueError('Training modal_ids are derived from the PKM modality order')
++                modal_ids = torch.cat([
++                    torch.full((batch.shape[0],), i, dtype=torch.long, device=batch.device)
++                    for i, batch in enumerate(x, start=1)])
+             x = torch.cat(list(x), dim=0)
+-            global_feat = self.base(x)
++            global_feat = self.base(x, modal_label=modal_ids)
+             feat = self.bottleneck(global_feat)
+             cls_score = self.classifier(feat)
+             return cls_score, global_feat, feat
+         else:
+-            global_feat = self.base(x)
++            global_feat = self.base(x, modal_label=modal_ids)
+             feat = self.bottleneck(global_feat)
+             if self.neck_feat == 'after':
+                 return feat
+@@ -81,7 +105,20 @@
+ 
+ 
+     def load_param(self, trained_path):
+-        param_dict = torch.load(trained_path)
++        self._check_checkpoint_config(trained_path)
++        try:
++            param_dict = torch.load(trained_path, map_location='cpu', weights_only=True)
++        except TypeError:
++            param_dict = torch.load(trained_path, map_location='cpu')
++        param_dict = {k.replace('module.', ''): v for k, v in param_dict.items()}
++        self._check_scsr_weights(param_dict)
++        if self.scsr_enabled:
++            state = {k: v for k, v in param_dict.items() if 'classifier' not in k}
++            result = self.load_state_dict(state, strict=False)
++            if set(result.missing_keys) != {'classifier.weight'} or result.unexpected_keys:
++                raise ValueError('Incomplete or incompatible SCSR checkpoint: {}'.format(result))
++            print('Loading SCSR model from {}'.format(trained_path))
++            return
+         for i in param_dict:
+             if 'classifier' in i:
+                 continue
+@@ -89,10 +126,42 @@
+         print('Loading pretrained model from {}'.format(trained_path))
+ 
+     def load_param_finetune(self, model_path):
+-        param_dict = torch.load(model_path)
++        self._check_checkpoint_config(model_path)
++        try:
++            param_dict = torch.load(model_path, map_location='cpu', weights_only=True)
++        except TypeError:
++            param_dict = torch.load(model_path, map_location='cpu')
++        self._check_scsr_weights(param_dict)
++        if self.scsr_enabled:
++            self.load_state_dict(param_dict, strict=True)
++            return
+         for i in param_dict:
+             self.state_dict()[i].copy_(param_dict[i])
+         print('Loading pretrained model for finetuning from {}'.format(model_path))
++
++    def _check_scsr_weights(self, state):
++        found = {k for k in state if k.startswith('base.scsr.')}
++        expected = {k for k in self.state_dict() if k.startswith('base.scsr.')}
++        if found != expected:
++            raise ValueError('SCSR checkpoint/architecture mismatch; use the matching experiment config')
++
++    def _check_checkpoint_config(self, path):
++        if not self.scsr_enabled:
++            return
++        sidecar = str(path) + '.yml'
++        if not os.path.isfile(sidecar):
++            raise ValueError('SCSR checkpoint requires its saved configuration: ' + sidecar)
++        with open(sidecar, encoding='utf-8') as stream:
++            saved = yaml.safe_load(stream)
++        current = yaml.safe_load(self.experiment_cfg.dump())
++        checks = [('SCSR', k) for k in current['SCSR'] if k != 'LR_MULTIPLIER']
++        checks += [('DATASETS', 'MODALITIES'), ('MODEL', 'TRANSFORMER_TYPE'),
++                   ('MODEL', 'STRIDE_SIZE'), ('INPUT', 'SIZE_TRAIN'),
++                   ('INPUT', 'SIZE_TEST'), ('MODEL', 'SIE_CAMERA'), ('MODEL', 'SIE_VIEW'),
++                   ('MODEL', 'SIE_COE')]
++        for section, key in checks:
++            if saved.get(section, {}).get(key) != current[section][key]:
++                raise ValueError('Checkpoint config mismatch: {}.{}'.format(section, key))
+ 
+ 
+ __factory_T_type = {
+--- original/model/backbones/vit_pytorch.py
++++ model/backbones/vit_pytorch.py
+@@ -28,6 +28,7 @@
+ import torch.nn as nn
+ import torch.nn.functional as F
+ import collections.abc as container_abcs
++from ..scsr import SCSR
+ 
+ 
+ # From PyTorch internals
+@@ -239,7 +240,8 @@
+     """
+     def __init__(self, img_size=224, patch_size=16, stride_size=16, in_chans=3, num_classes=1000, embed_dim=768, depth=12,
+                  num_heads=12, mlp_ratio=4., qkv_bias=False, qk_scale=None, drop_rate=0., attn_drop_rate=0., camera=0, view=0,
+-                 drop_path_rate=0., ics_embedding=False, norm_layer=nn.LayerNorm, local_feature=False, sie_xishu=1.0, hw_ratio=1):
++                 drop_path_rate=0., ics_embedding=False, norm_layer=nn.LayerNorm, local_feature=False, sie_xishu=1.0, hw_ratio=1,
++                 scsr_cfg=None, scsr_target_id=None, num_modalities=None):
+         super().__init__()
+         self.num_classes = num_classes
+         self.num_features = self.embed_dim = embed_dim  # num_features for consistency with other models
+@@ -294,6 +296,40 @@
+ 
+         self.apply(self._init_weights)
+ 
++        # Register AFTER generic initialization (and preserve baseline RNG draws).
++        self.scsr = None
++        self.scsr_runtime_enabled = True
++        self.diagnostic_callback = None
++        if scsr_cfg is not None and scsr_cfg.ENABLED:
++            if scsr_cfg.WAVELET != 'haar' or scsr_cfg.WAVELET_LEVELS != 1:
++                raise ValueError('SCSR-V3 supports only one-level Haar DWT')
++            if scsr_cfg.IN_DIM != embed_dim:
++                raise ValueError('SCSR.IN_DIM must match the backbone embedding dimension')
++            if not 1 <= scsr_cfg.INSERT_AFTER_BLOCK < depth:
++                raise ValueError('SCSR must be inserted after a block and before the last block')
++            if scsr_target_id is None or num_modalities is None:
++                raise ValueError('SCSR requires a dataset-derived modality mapping')
++            self.scsr_target_id = scsr_target_id
++            self.num_modalities = num_modalities
++            self.scsr_insert_after = scsr_cfg.INSERT_AFTER_BLOCK
++            # Leave seeded UAD classifier initialization unchanged as well.
++            with torch.random.fork_rng(devices=[]):
++                self.scsr = SCSR(
++                    grid_size=(self.patch_embed.num_y, self.patch_embed.num_x),
++                    in_dim=embed_dim, spectral_dim=scsr_cfg.SPECTRAL_DIM,
++                    condition_dim=scsr_cfg.CONDITION_DIM,
++                    gate_amplitude=scsr_cfg.GATE_AMPLITUDE,
++                    residual_scale=scsr_cfg.RESIDUAL_SCALE, eps=scsr_cfg.EPS)
++
++    def _route_scsr(self, tokens, modal_ids):
++        indices = (modal_ids == self.scsr_target_id).nonzero(as_tuple=True)[0]
++        if indices.numel() == 0:
++            return tokens
++        selected = tokens.index_select(0, indices)
++        updated = torch.cat((selected[:, :1], self.scsr(selected[:, 1:])), dim=1)
++        # Out-of-place scatter: identity order and autograd both remain intact.
++        return tokens.index_copy(0, indices, updated)
++
+     def _init_weights(self, m):
+         if isinstance(m, nn.Linear):
+             trunc_normal_(m.weight, std=.02)
+@@ -316,6 +352,18 @@
+ 
+     def forward_features(self, x, camera_id, modal_id, view_id):
+         B = x.shape[0]
++        if not self.scsr_runtime_enabled and self.training:
++            raise RuntimeError('SCSR runtime bypass is only allowed in eval mode')
++        if self.scsr is not None:
++            if modal_id is None:
++                raise ValueError('SCSR inference requires true per-image modal_ids')
++            modal_id = torch.as_tensor(modal_id, device=x.device)
++            if modal_id.ndim != 1 or modal_id.shape[0] != B:
++                raise ValueError('modal_ids must be a vector matching the image batch')
++            if modal_id.dtype == torch.bool or modal_id.is_floating_point() or modal_id.is_complex():
++                raise ValueError('modal_ids must contain integer dataset modality IDs')
++            if ((modal_id < 1) | (modal_id > self.num_modalities)).any():
++                raise ValueError('modal_ids are outside DATASETS.MODALITIES mapping')
+         x = self.patch_embed(x)
+ 
+         cls_tokens = self.cls_token.expand(B, -1, -1)  # stole cls_tokens impl from Phil Wang, thanks
+@@ -333,12 +381,22 @@
+ 
+         x = self.pos_drop(x)
+  
+-        for blk in self.blocks:
++        for block_number, blk in enumerate(self.blocks, start=1):
+             x = blk(x)
++            if self.diagnostic_callback is not None and block_number in (6, 7, 9, 12):
++                self.diagnostic_callback('block_{}'.format(block_number), x)
++            if self.scsr is not None and block_number == self.scsr_insert_after:
++                if self.scsr_runtime_enabled:
++                    x = self._route_scsr(x, modal_id)
++                if self.diagnostic_callback is not None:
++                    self.diagnostic_callback('post_scsr', x)
+ 
+         x = self.norm(x)
+ 
+-        return x[:, 0]
++        global_feat = x[:, 0]
++        if self.diagnostic_callback is not None:
++            self.diagnostic_callback('final_cls', global_feat)
++        return global_feat
+ 
+     def forward(self, x, cam_label=None, modal_label=None, view_label=None):
+         x = self.forward_features(x, cam_label, modal_label, view_label)
+--- original/config/defaults.py
++++ config/defaults.py
+@@ -202,3 +202,18 @@
+ # ---------------------------------------------------------------------------- #
+ # Path to checkpoint and saved log of trained model
+ _C.OUTPUT_DIR = ""
++
++# SCSR-V3 experiment A; disabled preserves the original UAD architecture.
++_C.SCSR = CN()
++_C.SCSR.ENABLED = False
++_C.SCSR.TARGET_MODALITY = 'Thermal'
++_C.SCSR.INSERT_AFTER_BLOCK = 6
++_C.SCSR.IN_DIM = 768
++_C.SCSR.SPECTRAL_DIM = 192
++_C.SCSR.CONDITION_DIM = 64
++_C.SCSR.WAVELET = 'haar'
++_C.SCSR.WAVELET_LEVELS = 1
++_C.SCSR.GATE_AMPLITUDE = 0.5
++_C.SCSR.RESIDUAL_SCALE = 0.2
++_C.SCSR.EPS = 1e-6
++_C.SCSR.LR_MULTIPLIER = 1.0
+--- original/processor/processor.py
++++ processor/processor.py
+@@ -162,6 +162,13 @@
+ 
+     group_size = cfg.DATALOADER.NUM_INSTANCE
+ 
++    # This loop steps one optimizer with the default dynamic GradScaler policy.
++    # A reduced scale means AMP skipped that step; equal/increased means success.
++    # Use the longstanding get_scale API, not newer optimizer hook APIs.
++    optimizer_updates = 0
++    total_batches = 0
++    previous_amp_scale = scaler.get_scale()
++
+     for epoch in range(1, epochs + 1):
+         start_time = time.time()
+         loss_meter.reset()
+@@ -171,9 +178,15 @@
+         evaluator.reset()
+         scheduler.step(epoch)
+         model.train()
++        if cfg.SCSR.ENABLED:
++            torch.cuda.reset_peak_memory_stats(local_rank)
+ 
+         n_iter = 0
++        epoch_batches = 0
++        updates_at_epoch_start = optimizer_updates
+         for n_iter, (imgs, vid, camids) in enumerate(train_loader):
++            epoch_batches += 1
++            total_batches += 1
+             optimizer.zero_grad()
+             optimizer_center.zero_grad()
+ 
+@@ -221,6 +234,10 @@
+             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+             scaler.step(optimizer)
+             scaler.update()
++            current_amp_scale = scaler.get_scale()
++            if current_amp_scale >= previous_amp_scale:
++                optimizer_updates += 1
++            previous_amp_scale = current_amp_scale
+ 
+             if use_aux_modules:
+                 with torch.no_grad():
+@@ -246,9 +263,24 @@
+                 metrics = [f'{m.avg:.3f}' for m in meter_ls]
+                 metrics_str = ', '.join(metrics)
+                 logger.info(f'Epoch[{epoch}] {metrics_str}')
++                if cfg.SCSR.ENABLED and model_meta.base.scsr.last_stats is not None:
++                    gate_mean, gate_max, residual_ratio = model_meta.base.scsr.last_stats.tolist()
++                    logger.info(
++                        'SCSR |gate-1| mean={:.6e}, max={:.6e}; residual/P mean={:.6e}'.format(
++                            gate_mean, gate_max, residual_ratio))
+ 
+         end_time = time.time()
+-        time_per_batch = (end_time - start_time) / (n_iter + 1)
++        time_per_batch = (end_time - start_time) / max(1, epoch_batches)
++        if is_main:
++            logger.info(
++                'Training steps (rank 0): epoch batches={}, estimated loader batches={}, '
++                'epoch optimizer updates={}, cumulative batches={}, '
++                'cumulative optimizer updates={}, cumulative AMP-skipped updates={}'.format(
++                    epoch_batches, len(train_loader), optimizer_updates - updates_at_epoch_start,
++                    total_batches, optimizer_updates, total_batches - optimizer_updates))
++        if cfg.SCSR.ENABLED and is_main:
++            logger.info('SCSR local CUDA peak allocated memory: {:.1f} MiB'.format(
++                torch.cuda.max_memory_allocated(local_rank) / (1024 ** 2)))
+         if dist_on:
+             if is_main:
+                 logger.info(
+@@ -272,6 +304,11 @@
+                         cfg.OUTPUT_DIR, cfg.MODEL.NAME + '_{}.pth'.format(epoch)
+                     ),
+                 )
++                if cfg.SCSR.ENABLED:
++                    with open(os.path.join(
++                            cfg.OUTPUT_DIR, cfg.MODEL.NAME + '_{}.pth.yml'.format(epoch)),
++                            'w', encoding='utf-8') as stream:
++                        stream.write(cfg.dump())
+ 
+         if epoch % eval_period == 0:
+             model.eval()
+@@ -298,7 +335,8 @@
+                 for img, vid, camid, camidt, modid, _ in val_loader:
+                     with torch.no_grad():
+                         img = img.to(device)
+-                        feat = eval_model(img, mode=mode)
++                        modal_ids = torch.as_tensor(modid, dtype=torch.long, device=img.device)
++                        feat = eval_model(img, mode=mode, modal_ids=modal_ids)
+                         evaluator.update((feat, vid, camid, modid), mode)
+ 
+             evaluator.split_all()
+@@ -310,7 +348,6 @@
+                 for r in (1, 5, 10):
+                     logger.info(f'CMC curve, Rank-{r:<2}: {cmc[r-1]:.2%}')
+             torch.cuda.empty_cache()
+-
+ 
+ def do_inference(cfg,
+                  model,
+@@ -352,7 +389,8 @@
+             with torch.no_grad():
+                 img = img.to(device)
+ 
+-                feat = model(img, mode=mode)
++                modal_ids = torch.as_tensor(modid, dtype=torch.long, device=img.device)
++                feat = model(img, mode=mode, modal_ids=modal_ids)
+                 evaluator.update((feat, vid, camid, modid), mode)
+                 img_path_list.extend(imgpath)
+ 
+--- original/solver/make_optimizer.py
++++ solver/make_optimizer.py
+@@ -16,6 +16,14 @@
+                 lr = cfg.SOLVER.BASE_LR * 2
+                 print('Using two times learning rate for fc ')
+ 
++        # Experiment A requires ALL SCSR parameters at backbone LR, including bias.
++        # Keep original UAD bias/classifier policies for every other parameter.
++        if cfg.SCSR.ENABLED and 'base.scsr.' in key:
++            if cfg.SCSR.LR_MULTIPLIER != 1.0:
++                raise ValueError('SCSR experiment A requires LR_MULTIPLIER=1.0')
++            lr = cfg.SOLVER.BASE_LR
++            weight_decay = cfg.SOLVER.WEIGHT_DECAY
++
+         params += [{"params": [value], "lr": lr, "weight_decay": weight_decay}]
+ 
+     if cfg.SOLVER.OPTIMIZER_NAME == 'SGD':

@@ -1,0 +1,80 @@
+{
+  "document_commands_yacs_validated": [
+    {
+      "script": "train.py",
+      "opts_pairs": 8,
+      "scsr": true,
+      "ddp": true,
+      "sampler_batch": 256,
+      "base_lr": 0.032,
+      "preflight_updates": 0
+    },
+    {
+      "script": "train.py",
+      "opts_pairs": 4,
+      "scsr": true,
+      "ddp": false,
+      "sampler_batch": 64,
+      "base_lr": 0.008,
+      "preflight_updates": 0
+    },
+    {
+      "script": "train.py",
+      "opts_pairs": 9,
+      "scsr": true,
+      "ddp": true,
+      "sampler_batch": 256,
+      "base_lr": 0.032,
+      "preflight_updates": 200
+    },
+    {
+      "script": "test.py",
+      "opts_pairs": 9,
+      "scsr": true,
+      "ddp": false,
+      "sampler_batch": 64,
+      "base_lr": 0.008,
+      "preflight_updates": 0
+    }
+  ],
+  "changed": [
+    "WHU/train.py",
+    "WHU/config/defaults.py",
+    "WHU/model/make_model.py",
+    "WHU/model/backbones/vit_pytorch.py",
+    "WHU/processor/processor.py",
+    "WHU/solver/make_optimizer.py"
+  ],
+  "added": [
+    "WHU/SCSR_V41_IMPLEMENTATION.md",
+    "WHU/SCSR_V41_VALIDATION.md",
+    "WHU/configs/SCSR_V41.yml",
+    "WHU/diagnose_scsr_v41.py",
+    "WHU/diagnostics/__init__.py",
+    "WHU/diagnostics/core.py",
+    "WHU/diagnostics/data.py",
+    "WHU/diagnostics/retrieval.py",
+    "WHU/model/scsr_v41.py",
+    "WHU/tests/fixtures/uad_make_model_original.py",
+    "WHU/tests/fixtures/uad_vit_original.py",
+    "WHU/tests/test_scsr_v41.py",
+    "WHU/utils/scsr_v41_checkpoint.py",
+    "WHU/utils/scsr_v41_monitor.py",
+    "WHU/utils/scsr_v41_runtime.py"
+  ],
+  "v3_unchanged": true,
+  "baseline_preserved_files": {
+    "WHU/configs/UAD.yml": true,
+    "WHU/loss/make_loss.py": true,
+    "WHU/loss/wrt_loss.py": true,
+    "WHU/datasets/sampler.py": true,
+    "WHU/datasets/sampler_ddp.py": true,
+    "WHU/datasets/make_dataloader.py": true,
+    "WHU/utils/metrics.py": true,
+    "WHU/solver/scheduler_factory.py": true,
+    "WHU/test.py": true
+  },
+  "python38_ast_file_count": 48,
+  "deleted": [],
+  "original_fixtures_match_archive": true
+}
